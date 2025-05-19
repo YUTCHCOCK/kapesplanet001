@@ -172,13 +172,14 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .loader-logo {
-    width: 100%;
-    max-width: 120px;
-    height: auto;
-    aspect-ratio: 1/1;
+    width: 120px;
+    height: 120px;
     margin: 0 auto 20px;
     position: relative;
     animation: glow 2s infinite;
@@ -196,13 +197,14 @@ body {
 
 .loader-text {
     font-family: 'Montserrat', sans-serif;
-    font-size: clamp(20px, 5vw, 24px);
+    font-size: 24px;
     font-weight: 700;
     letter-spacing: 2px;
     display: flex;
     justify-content: center;
     gap: 8px;
     color: var(--text-color);
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .loader-text .kapes {
@@ -212,6 +214,7 @@ body {
 
 .loader-text .planet {
     color: var(--light-color);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
 @keyframes glow {
@@ -356,6 +359,7 @@ nav a:hover::after {
     justify-content: center;
     text-align: center;
     color: var(--light-color);
+    background-color: var(--dark-color);
 }
 
 .video-background {
@@ -399,10 +403,16 @@ nav a:hover::after {
     z-index: 1;
     max-width: 1200px;
     padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
 }
 
 .hero-text {
     margin-bottom: 40px;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .hero-text h1 {
@@ -949,6 +959,15 @@ footer {
         display: flex;
     }
 
+    .loader-logo {
+        width: 100px;
+        height: 100px;
+    }
+
+    .loader-text {
+        font-size: 20px;
+    }
+
     .hero-text h1 {
         font-size: 36px;
     }
@@ -977,9 +996,22 @@ footer {
     .career-item .description {
         grid-column: 1;
     }
+
+    .hero-logo img {
+        max-width: 250px;
+    }
 }
 
 @media (max-width: 480px) {
+    .loader-logo {
+        width: 80px;
+        height: 80px;
+    }
+
+    .loader-text {
+        font-size: 18px;
+    }
+
     .hero-text h1 {
         font-size: 28px;
     }
@@ -1002,6 +1034,10 @@ footer {
 
     .contact-message h3 {
         font-size: 20px;
+    }
+
+    .hero-logo img {
+        max-width: 200px;
     }
 }
 
