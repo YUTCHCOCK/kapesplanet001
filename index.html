@@ -4,17 +4,77 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KAPES PLANET - K크리에이터들의 트랜스 미디어 스튜디오</title>
+<<<<<<< HEAD
     <meta name="description" content="케이프스플래닛 - K크리에이터들의 트랜스 미디어 스튜디오. 원천 IP 기획부터 섭외, 제작, 커머스까지">
+=======
+    <meta name="description" content="케이프스플래닛 - K크리에이터들의 트랜스 미디어 스튜디오">
+>>>>>>> 7dabb1e9794322862607970cb4c6f6e8d6521e09
     <link rel="stylesheet" href="css/style.css">
     <!-- Google Fonts 사용 -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700;900&display=swap">
+<<<<<<< HEAD
     <!-- 파비콘 -->
     <link rel="icon" href="img/favicon.ico" type="image/x-icon">
 </head>
 <body>
     <!-- 로딩 애니메이션 -->
     <div class="loading-screen">
+=======
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+    <style>
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .video-background iframe {
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: white;
+            text-align: center;
+        }
+
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 1s ease;
+        }
+
+        .loading-screen.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- 1. 로딩 애니메이션 -->
+    <div class="loading-screen" id="loading-screen">
+>>>>>>> 7dabb1e9794322862607970cb4c6f6e8d6521e09
         <div class="loader">
             <div class="loader-logo">
                 <img src="img/kapes_logo_circle.png" alt="KAPES PLANET Logo">
@@ -26,6 +86,7 @@
         </div>
     </div>
 
+<<<<<<< HEAD
     <!-- 헤더 -->
     <header>
         <div class="logo">
@@ -66,9 +127,20 @@
                 <div class="video-fallback"></div>
                 <div class="video-overlay"></div>
             </div>
+=======
+    <!-- 2. 히어로 섹션 -->
+    <section id="home" class="hero">
+        <div class="video-background">
+            <iframe src="https://www.youtube.com/embed/sbEYTBXJb4I?autoplay=1&mute=1&controls=0&loop=1&playlist=sbEYTBXJb4I&modestbranding=1&showinfo=0" 
+                    frameborder="0" 
+                    allow="autoplay; encrypted-media" 
+                    allowfullscreen>
+            </iframe>
+>>>>>>> 7dabb1e9794322862607970cb4c6f6e8d6521e09
         </div>
-        
+
         <div class="hero-content">
+<<<<<<< HEAD
             <div class="hero-text">
                 <h1>
                     <span class="animate-text">K크리에이터들의</span>
@@ -83,6 +155,17 @@
             <div class="hero-logo">
                 <img src="img/kapes_logo_full.png" alt="KAPES PLANET Full Logo" class="main-logo">
             </div>
+=======
+            <h1>
+                <span class="animate-text">K크리에이터들의</span><br>
+                <span class="animate-text delay-1">트랜스 미디어</span><br>
+                <span class="animate-text delay-2">스튜디오</span>
+            </h1>
+            <p class="tagline animate-text delay-3">
+                미래를 선도하는 케이프스 플래닛<br>
+                원천 IP 기획부터 섭외, 제작, 커머스까지
+            </p>
+>>>>>>> 7dabb1e9794322862607970cb4c6f6e8d6521e09
             <div class="scroll-indicator">
                 <span>SCROLL</span>
                 <div class="scroll-arrow"></div>
@@ -90,6 +173,7 @@
         </div>
     </section>
 
+<<<<<<< HEAD
     <!-- 회사 소개 섹션 -->
     <section id="about" class="about">
         <div class="section-header">
@@ -273,6 +357,22 @@
     </footer>
 
     <!-- 스크립트 -->
+=======
+    <!-- 이후 섹션 생략 (ABOUT, WORK, CONTACT 등) -->
+
+    <!-- 스크립트 -->
+    <script>
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loading-screen');
+            if (loader) {
+                loader.classList.add('hidden');
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                }, 1000);
+            }
+        });
+    </script>
+>>>>>>> 7dabb1e9794322862607970cb4c6f6e8d6521e09
     <script src="js/main.js"></script>
 </body>
 </html>
