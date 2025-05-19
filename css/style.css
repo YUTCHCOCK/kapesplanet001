@@ -164,11 +164,16 @@ body {
 
 .loader {
     text-align: center;
+    width: 100%;
+    max-width: 300px;
+    padding: 0 20px;
 }
 
 .loader-logo {
-    width: 120px;
-    height: 120px;
+    width: 100%;
+    max-width: 120px;
+    height: auto;
+    aspect-ratio: 1/1;
     margin: 0 auto 20px;
     position: relative;
     animation: glow 2s infinite;
@@ -183,6 +188,24 @@ body {
     padding: 10px;
 }
 
+.loader-text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(20px, 5vw, 24px);
+    font-weight: 700;
+    letter-spacing: 2px;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+.loader-text .kapes {
+    color: var(--primary-color);
+}
+
+.loader-text .planet {
+    color: var(--light-color);
+}
+
 @keyframes glow {
     0% {
         box-shadow: 0 0 5px var(--primary-color);
@@ -193,21 +216,6 @@ body {
     100% {
         box-shadow: 0 0 5px var(--primary-color);
     }
-}
-
-.loader-text {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 24px;
-    font-weight: 700;
-    letter-spacing: 2px;
-}
-
-.loader-text .kapes {
-    color: var(--primary-color);
-}
-
-.loader-text .planet {
-    color: var(--light-color);
 }
 
 /* 헤더 */
