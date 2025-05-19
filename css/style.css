@@ -121,11 +121,11 @@
 :root {
     --primary-color: #FF6B00;
     --secondary-color: #111111;
-    --text-color: #333333;
-    --light-color: #ffffff;
+    --text-color: #E0E0E0;
+    --light-color: #FFFFFF;
     --dark-color: #000000;
-    --gray-color: #666666;
-    --light-gray: #f5f5f5;
+    --gray-color: #CCCCCC;
+    --light-gray: #F5F5F5;
     --transition: all 0.3s ease;
 }
 
@@ -167,6 +167,10 @@ body {
     width: 100%;
     max-width: 300px;
     padding: 0 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .loader-logo {
@@ -186,6 +190,7 @@ body {
     border: 3px solid var(--primary-color);
     border-radius: 50%;
     padding: 10px;
+    box-shadow: 0 0 15px var(--primary-color);
 }
 
 .loader-text {
@@ -196,10 +201,12 @@ body {
     display: flex;
     justify-content: center;
     gap: 8px;
+    color: var(--text-color);
 }
 
 .loader-text .kapes {
     color: var(--primary-color);
+    text-shadow: 0 0 10px rgba(255, 107, 0, 0.5);
 }
 
 .loader-text .planet {
@@ -208,13 +215,19 @@ body {
 
 @keyframes glow {
     0% {
-        box-shadow: 0 0 5px var(--primary-color);
+        box-shadow: 0 0 5px var(--primary-color),
+                    0 0 10px var(--primary-color),
+                    0 0 15px var(--primary-color);
     }
     50% {
-        box-shadow: 0 0 20px var(--primary-color);
+        box-shadow: 0 0 20px var(--primary-color),
+                    0 0 30px var(--primary-color),
+                    0 0 40px var(--primary-color);
     }
     100% {
-        box-shadow: 0 0 5px var(--primary-color);
+        box-shadow: 0 0 5px var(--primary-color),
+                    0 0 10px var(--primary-color),
+                    0 0 15px var(--primary-color);
     }
 }
 
@@ -395,6 +408,7 @@ nav a:hover::after {
     font-size: 48px;
     font-weight: 700;
     margin-bottom: 20px;
+    color: var(--light-color);
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
@@ -409,6 +423,7 @@ nav a:hover::after {
 .hero-text .tagline {
     font-size: 20px;
     line-height: 1.8;
+    color: var(--text-color);
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
@@ -494,12 +509,12 @@ section {
     font-size: 36px;
     font-weight: 700;
     margin-bottom: 20px;
-    color: var(--secondary-color);
+    color: var(--light-color);
 }
 
 .section-subheader {
     font-size: 18px;
-    color: var(--gray-color);
+    color: var(--text-color);
 }
 
 /* About 섹션 */
@@ -530,12 +545,12 @@ section {
     font-size: 32px;
     font-weight: 700;
     margin-bottom: 20px;
-    color: var(--secondary-color);
+    color: var(--light-color);
 }
 
 .company-philosophy p {
     font-size: 18px;
-    color: var(--gray-color);
+    color: var(--text-color);
     max-width: 800px;
     margin: 0 auto;
 }
@@ -554,7 +569,7 @@ section {
 .company-description p {
     font-size: 16px;
     line-height: 1.8;
-    color: var(--gray-color);
+    color: var(--text-color);
 }
 
 .about-ceo {
@@ -574,7 +589,7 @@ section {
     font-size: 24px;
     font-weight: 700;
     margin-bottom: 10px;
-    color: var(--secondary-color);
+    color: var(--light-color);
 }
 
 .ceo-info .nickname {
@@ -584,7 +599,7 @@ section {
 
 .ceo-info h4 {
     font-size: 18px;
-    color: var(--gray-color);
+    color: var(--text-color);
     margin-bottom: 30px;
 }
 
@@ -615,7 +630,7 @@ section {
 
 .career-item .description {
     grid-column: 2;
-    color: var(--gray-color);
+    color: var(--text-color);
 }
 
 /* Work 섹션 */
@@ -689,7 +704,7 @@ section {
     font-size: 24px;
     font-weight: 700;
     margin-bottom: 20px;
-    color: var(--secondary-color);
+    color: var(--light-color);
 }
 
 .work-meta {
@@ -710,7 +725,7 @@ section {
 .work-desc {
     font-size: 16px;
     line-height: 1.8;
-    color: var(--gray-color);
+    color: var(--text-color);
 }
 
 /* 비디오 모달 */
@@ -789,7 +804,7 @@ section {
 /* Contact 섹션 */
 .contact {
     background: var(--secondary-color);
-    color: var(--light-color);
+    color: var(--text-color);
 }
 
 .contact-container {
@@ -825,12 +840,12 @@ section {
 
 .contact-item p {
     font-size: 16px;
-    color: var(--light-color);
+    color: var(--text-color);
     margin-bottom: 5px;
 }
 
 .contact-item a {
-    color: var(--light-color);
+    color: var(--text-color);
     text-decoration: none;
     transition: var(--transition);
 }
@@ -845,7 +860,7 @@ section {
 }
 
 .social-link {
-    color: var(--light-color);
+    color: var(--text-color);
     text-decoration: none;
     font-size: 16px;
     transition: var(--transition);
@@ -867,6 +882,7 @@ section {
     font-weight: 700;
     margin-bottom: 20px;
     line-height: 1.4;
+    color: var(--light-color);
 }
 
 .contact-message .tagline {
@@ -877,7 +893,7 @@ section {
 /* 푸터 */
 footer {
     background: var(--dark-color);
-    color: var(--light-color);
+    color: var(--text-color);
     padding: 20px 0;
     text-align: center;
 }
