@@ -1,90 +1,15 @@
-/* 기본 텍스트 색상을 더 밝게 변경 */
-body {
-    font-family: 'Noto Sans KR', 'Montserrat', sans-serif;
-    color: #f5f5f5; /* 더 밝은 색상으로 변경 (기존: var(--text-color)) */
-    background-color: var(--secondary-color);
-    line-height: 1.6;
-    overflow-x: hidden;
-    font-size: 16px;
+/* 기본 스타일 및 리셋 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/* 섹션별 텍스트 색상 조정 */
-
-/* 회사 소개 섹션의 텍스트 */
-.about {
-    background-color: var(--secondary-color);
-    color: #ffffff; /* 흰색으로 변경 */
-    padding: 120px 0;
-}
-
-.company-description p {
-    font-size: 16px;
-    line-height: 1.7;
-    color: #ffffff; /* 흰색으로 명시적 설정 */
-}
-
-/* 작업 포트폴리오 섹션 텍스트 */
-.work-desc {
-    font-size: 16px;
-    line-height: 1.7;
-    margin-bottom: 20px;
-    color: #ffffff; /* 흰색으로 변경 */
-}
-
-.meta-item {
-    margin-right: 20px;
-    margin-bottom: 10px;
-    font-size: 14px;
-    color: #cccccc; /* 더 밝은 회색으로 변경 (기존: opacity: 0.7) */
-    opacity: 1; /* 투명도 제거 */
-}
-
-/* CEO 정보 섹션 */
-.career-item .description {
-    display: block;
-    font-size: 14px;
-    color: #cccccc; /* 더 밝은 색상으로 변경 (기존: opacity: 0.8) */
-    opacity: 1; /* 투명도 제거 */
-}
-
-/* 글자에 텍스트 그림자 추가하여 가독성 향상 */
-.about p, .work-desc, .company-description p, .career-item, .section-subheader {
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-}
-
-/* 섹션 헤더 서브헤더 색상 변경 */
-.section-subheader {
-    font-size: 18px;
-    color: #dddddd; /* 더 밝은 색상으로 변경 (기존: #999) */
-    margin-top: 20px;
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-/* 명함 정보 강화 */
-.contact-item p {
-    font-size: 16px;
-    line-height: 1.5;
-    color: #ffffff; /* 흰색으로 명시적 설정 */
-}
-
-/* 링크 강조 */
-.contact-item a {
-    color: #ffffff;
-    text-decoration: underline; /* 링크 강조를 위한 밑줄 추가 */
-    transition: color 0.3s ease;
-}
-
-.contact-item a:hover {
-    color: var(--primary-color);
-}
-/* 배경색을 약간 밝게 조정 (선택 사항) */
 :root {
     --primary-color: #FF6B00; /* 오렌지 기본 컬러 */
     --primary-dark: #DD5B00;
-    --secondary-color: #121212; /* 완전 검은색(#000000)에서 약간 밝은 검은색으로 변경 */
-    --text-color: #f5f5f5;
+    --secondary-color: #000000; /* 검은색 */
+    --text-color: #333333;
     --light-color: #FFFFFF;
     --gray-color: #F5F5F5;
     --dark-gray: #222222;
@@ -92,3 +17,1066 @@ body {
     --transition: all 0.3s ease;
     --section-padding: 100px 0;
 }
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Noto Sans KR', 'Montserrat', sans-serif;
+    color: var(--text-color);
+    background-color: var(--secondary-color);
+    line-height: 1.6;
+    overflow-x: hidden;
+    font-size: 16px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul, li {
+    list-style: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', 'Noto Sans KR', sans-serif;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.btn {
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: var(--primary-color);
+    color: var(--light-color);
+    border: none;
+    font-family: 'Montserrat', 'Noto Sans KR', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    transition: all 0.4s ease;
+}
+
+.btn:hover::after {
+    left: 100%;
+}
+
+.btn:hover {
+    background-color: var(--primary-dark);
+}
+
+section {
+    padding: var(--section-padding);
+    position: relative;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 60px;
+    position: relative;
+}
+
+.section-header h2 {
+    font-size: 48px;
+    margin-bottom: 15px;
+    color: var(--light-color);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+    display: inline-block;
+}
+
+.section-header h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background-color: var(--primary-color);
+}
+
+.section-subheader {
+    font-size: 18px;
+    color: #999;
+    margin-top: 20px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* 애니메이션 */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { transform: translateY(50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slideLeft {
+    from { transform: translateX(50px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideRight {
+    from { transform: translateX(-50px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* 로딩 애니메이션 */
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--secondary-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.loading-screen.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.loader-logo {
+    width: 180px;
+    height: 180px;
+    margin-bottom: 20px;
+    animation: pulse 2s infinite;
+}
+
+.loader-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.loader-text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 42px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    display: flex;
+    overflow: hidden;
+}
+
+.loader-text .kapes {
+    color: var(--light-color);
+    margin-right: 8px;
+    animation: slideRight 0.8s forwards;
+}
+
+.loader-text .planet {
+    color: var(--primary-color);
+    animation: slideLeft 0.8s forwards;
+}
+
+/* 헤더 */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 30px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    transition: all 0.4s ease;
+}
+
+header.scrolled {
+    background-color: rgba(0, 0, 0, 0.95);
+    padding: 15px 50px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+.logo {
+    position: relative;
+    z-index: 101;
+}
+
+.logo-img {
+    height: 40px;
+    transition: var(--transition);
+}
+
+header.scrolled .logo-img {
+    height: 30px;
+}
+
+nav ul {
+    display: flex;
+}
+
+nav ul li {
+    margin-left: 40px;
+}
+
+nav ul li a {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--light-color);
+    letter-spacing: 1px;
+    transition: var(--transition);
+    position: relative;
+}
+
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-color);
+    transition: var(--transition);
+}
+
+nav ul li a:hover {
+    color: var(--primary-color);
+}
+
+nav ul li a:hover::after {
+    width: 100%;
+}
+
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    z-index: 101;
+}
+
+.menu-toggle span {
+    width: 30px;
+    height: 3px;
+    background-color: var(--light-color);
+    margin-bottom: 6px;
+    transition: var(--transition);
+}
+
+.menu-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(7px, 7px);
+}
+
+.menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--secondary-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition);
+}
+
+.mobile-menu.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.mobile-menu ul {
+    text-align: center;
+}
+
+.mobile-menu ul li {
+    margin-bottom: 30px;
+}
+
+.mobile-menu ul li a {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 24px;
+    color: var(--light-color);
+    font-weight: 700;
+    letter-spacing: 2px;
+    transition: var(--transition);
+}
+
+.mobile-menu ul li a:hover {
+    color: var(--primary-color);
+}
+
+/* 히어로 섹션 */
+.hero {
+    height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    overflow: hidden;
+}
+
+.video-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.video-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.video-fallback {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #111;
+    background-image: url('https://via.placeholder.com/1920x1080/222222/FF6B00/?text=KAPES+PLANET');
+    background-size: cover;
+    background-position: center;
+    z-index: -2;
+}
+
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.9) 0%,
+        rgba(0, 0, 0, 0.6) 50%,
+        rgba(0, 0, 0, 0.9) 100%
+    );
+    z-index: -1;
+}
+
+.hero-content {
+    text-align: center;
+    z-index: 1;
+    padding: 0 20px;
+    max-width: 1200px;
+    width: 100%;
+}
+
+.hero-text h1 {
+    font-size: 60px;
+    font-weight: 900;
+    line-height: 1.2;
+    color: var(--light-color);
+    margin-bottom: 30px;
+}
+
+.hero-text .tagline {
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--light-color);
+    margin-bottom: 40px;
+    opacity: 0.9;
+}
+
+.hero-logo {
+    margin: 40px 0;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-logo img {
+    width: 100%;
+}
+
+.animate-text {
+    display: block;
+    opacity: 0;
+    animation: slideUp 0.8s forwards;
+}
+
+.delay-1 {
+    animation-delay: 0.3s;
+}
+
+.delay-2 {
+    animation-delay: 0.6s;
+}
+
+.delay-3 {
+    animation-delay: 0.9s;
+}
+
+.scroll-indicator {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: fadeIn 1s forwards;
+    animation-delay: 1.5s;
+    opacity: 0;
+}
+
+.scroll-indicator span {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;.scroll-indicator span {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+    color: var(--light-color);
+}
+
+.scroll-arrow {
+    width: 20px;
+    height: 20px;
+    border-right: 2px solid var(--primary-color);
+    border-bottom: 2px solid var(--primary-color);
+    transform: rotate(45deg);
+    animation: scrollArrow 2s infinite;
+}
+
+@keyframes scrollArrow {
+    0% { transform: rotate(45deg) translate(0, 0); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: rotate(45deg) translate(10px, 10px); opacity: 0; }
+}
+
+/* 회사 소개 섹션 */
+.about {
+    background-color: var(--secondary-color);
+    color: var(--light-color);
+    padding: 120px 0;
+}
+
+.about-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.about-company {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 80px;
+}
+
+.company-philosophy {
+    padding: 40px;
+    background-color: var(--primary-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.company-philosophy h3 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.company-philosophy p {
+    font-size: 16px;
+    opacity: 0.9;
+}
+
+.company-image {
+    overflow: hidden;
+}
+
+.company-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.company-image:hover img {
+    transform: scale(1.05);
+}
+
+.company-description {
+    padding: 40px;
+    background-color: #111;
+    display: flex;
+    align-items: center;
+}
+
+.company-description p {
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+.about-ceo {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 50px;
+    background-color: #111;
+    padding: 50px;
+}
+
+.ceo-image {
+    position: relative;
+    overflow: hidden;
+}
+
+.ceo-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.ceo-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.ceo-info h3 {
+    font-size: 28px;
+    margin-bottom: 5px;
+    color: var(--light-color);
+}
+
+.ceo-info h4 {
+    font-size: 18px;
+    margin-bottom: 30px;
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+.nickname {
+    font-size: 18px;
+    opacity: 0.7;
+    font-weight: 400;
+}
+
+.ceo-career {
+    margin-bottom: 30px;
+}
+
+.career-item {
+    margin-bottom: 20px;
+    position: relative;
+    padding-left: 20px;
+    border-left: 2px solid var(--primary-color);
+}
+
+.career-item .year {
+    display: block;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 5px;
+}
+
+.career-item .company {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.career-item .description {
+    display: block;
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+/* 작업 포트폴리오 섹션 */
+.work {
+    background-color: #0A0A0A;
+    padding: 120px 0;
+}
+
+.work-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.work-item {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 80px;
+    position: relative;
+}
+
+.work-item:last-child {
+    margin-bottom: 0;
+}
+
+.work-video {
+    position: relative;
+    overflow: hidden;
+    border-radius: 5px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.video-thumbnail {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%; /* 16:9 비율 */
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.video-thumbnail img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.video-thumbnail:hover img {
+    transform: scale(1.05);
+}
+
+.play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80px;
+    height: 80px;
+    background-color: rgba(255, 107, 0, 0.8);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.play-button::after {
+    content: '';
+    width: 0;
+    height: 0;
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+    border-left: 25px solid white;
+    margin-left: 5px;
+}
+
+.video-thumbnail:hover .play-button {
+    background-color: var(--primary-color);
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+.work-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: var(--light-color);
+}
+
+.work-info h3 {
+    font-size: 28px;
+    margin-bottom: 15px;
+    color: var(--light-color);
+}
+
+.work-meta {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.meta-item {
+    margin-right: 20px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    opacity: 0.7;
+}
+
+.work-desc {
+    font-size: 16px;
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+
+/* Video modal */
+.video-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.video-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    position: relative;
+    width: 90%;
+    max-width: 1000px;
+}
+
+.modal-close {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    color: var(--light-color);
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.modal-iframe {
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%; /* 16:9 비율 */
+    position: relative;
+}
+
+.modal-iframe iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* 연락처 섹션 */
+.contact {
+    background-color: var(--secondary-color);
+    color: var(--light-color);
+    padding: 120px 0;
+}
+
+.contact-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+}
+
+.contact-logo {
+    margin-bottom: 40px;
+    max-width: 200px;
+}
+
+.contact-details {
+    margin-bottom: 40px;
+}
+
+.contact-item {
+    margin-bottom: 30px;
+}
+
+.contact-item h3 {
+    font-size: 18px;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.contact-item p {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.contact-item a {
+    color: var(--light-color);
+    transition: color 0.3s ease;
+}
+
+.contact-item a:hover {
+    color: var(--primary-color);
+}
+
+.social-links {
+    display: flex;
+    gap: 20px;
+}
+
+.social-link {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--light-color);
+    font-size: 16px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    position: relative;
+}
+
+.social-link::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+.social-link:hover {
+    color: var(--primary-color);
+}
+
+.social-link:hover::after {
+    width: 100%;
+}
+
+.contact-message {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    text-align: right;
+}
+
+.contact-message h3 {
+    font-size: 28px;
+    line-height: 1.3;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+
+.contact-message .tagline {
+    font-size: 18px;
+    color: var(--primary-color);
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+/* 푸터 */
+footer {
+    background-color: #0A0A0A;
+    color: #777;
+    padding: 30px 0;
+    text-align: center;
+    font-size: 14px;
+}
+
+/* 스크롤 애니메이션 */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.animate-on-scroll.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 반응형 */
+@media (max-width: 1200px) {
+    .hero-text h1 {
+        font-size: 50px;
+    }
+    
+    .about-company {
+        grid-template-columns: 1fr;
+    }
+    
+    .about-ceo {
+        grid-template-columns: 1fr;
+    }
+    
+    .section-header h2 {
+        font-size: 40px;
+    }
+}
+
+@media (max-width: 992px) {
+    .hero-text h1 {
+        font-size: 40px;
+    }
+    
+    .hero-text .tagline {
+        font-size: 18px;
+    }
+    
+    .work-item {
+        grid-template-columns: 1fr;
+    }
+    
+    .contact-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .contact-message {
+        align-items: flex-start;
+        text-align: left;
+    }
+    
+    .section-header h2 {
+        font-size: 36px;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        padding: 20px 30px;
+    }
+    
+    header.scrolled {
+        padding: 15px 30px;
+    }
+    
+    nav {
+        display: none;
+    }
+    
+    .menu-toggle {
+        display: flex;
+    }
+    
+    .hero-text h1 {
+        font-size: 32px;
+    }
+    
+    .hero-text .tagline {
+        font-size: 16px;
+    }
+    
+    .section-header h2 {
+        font-size: 32px;
+    }
+    
+    .company-philosophy,
+    .company-description {
+        padding: 30px;
+    }
+    
+    .about-ceo {
+        padding: 30px;
+    }
+    
+    .loader-text {
+        font-size: 32px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-text h1 {
+        font-size: 28px;
+    }
+    
+    .hero-text .tagline {
+        font-size: 14px;
+    }
+    
+    .section-header h2 {
+        font-size: 28px;
+    }
+    
+    .company-philosophy h3 {
+        font-size: 26px;
+    }
+    
+    .loader-text {
+        font-size: 26px;
+    }
+    
+    .play-button {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .play-button::after {
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent;
+        border-left: 18px solid white;
+    }
+}
+// 웹사이트 기능 구현
+document.addEventListener('DOMContentLoaded', function() {
+    // 로딩 애니메이션 - 수정된 부분
+    const loadingScreen = document.querySelector('.loading-screen');
+    
+    // 확실히 로딩 화면이 사라지도록 수정
+    if(loadingScreen) {
+        setTimeout(function() {
+            loadingScreen.style.opacity = '0';
+            loadingScreen.style.visibility = 'hidden';
+            
+            setTimeout(function() {
+                loadingScreen.style.display = 'none';
+            }, 500);
+        }, 2000);
+    }
+
+    // 나머지 코드는 그대로 유지...
+});
