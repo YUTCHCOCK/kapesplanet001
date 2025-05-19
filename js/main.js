@@ -115,11 +115,11 @@ let player;
 function onYouTubeIframeAPIReady() {
     // 히어로 섹션 배경 비디오
     player = new YT.Player('youtube-player', {
-        videoId: 'YOUR_VIDEO_ID', // 실제 쇼릴 영상 ID로 변경 필요
+        videoId: 'sbEYTBXJb4I', // 실제 쇼릴 영상 ID로 변경 필요
         playerVars: {
             autoplay: 1,
             loop: 1,
-            playlist: 'YOUR_VIDEO_ID', // 같은 ID 입력하여 반복 재생
+            playlist: 'sbEYTBXJb4I', // 같은 ID 입력하여 반복 재생
             controls: 0,
             showinfo: 0,
             rel: 0,
