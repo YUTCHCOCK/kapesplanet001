@@ -484,3 +484,141 @@ nav ul li a:hover::after {
 .scroll-indicator span {
     font-family: 'Montserrat', sans-serif;
     font-size: 12px;
+    // 웹사이트 기능 구현
+document.addEventListener('DOMContentLoaded', function() {
+    // 로딩 애니메이션 - 수정된 부분
+    const loadingScreen = document.querySelector('.loading-screen');
+    
+    // 확실히 로딩 화면이 사라지도록 수정
+    if(loadingScreen) {
+        setTimeout(function() {
+            loadingScreen.style.opacity = '0';
+            loadingScreen.style.visibility = 'hidden';
+            
+            setTimeout(function() {
+                loadingScreen.style.display = 'none';
+            }, 500);
+        }, 2000);
+    }
+
+    // 헤더 스크롤 효과
+    const header = document.querySelector('header');
+    const scrollThreshold = 100;
+
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > scrollThreshold) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+
+    // 모바일 메뉴 토글
+    const menuToggle = document.querySelector('.menu-toggle');
+    const mobileMenu = document.querySelector('.mobile-menu');
+
+    menuToggle.addEventListener('click', function() {
+        menuToggle.classList.toggle('active');
+        mobileMenu.classList.toggle('active');
+        document.body.classList.toggle('no-scroll');
+    });
+
+    // 모바일 메뉴 링크 클릭 시 메뉴 닫기
+    const mobileMenuLinks = document.querySelectorAll('.mobile-menu a');
+    mobileMenuLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            menuToggle.classList.remove('active');
+            mobileMenu.classList.remove('active');
+            document.body.classList.remove('no-scroll');
+        });
+    });
+
+    // 비디오 모달 기능
+    const videoThumbnails = document.querySelectorAll('.video-thumbnail');
+    
+    // 비디오 모달이 아직 없으면 생성
+    if(!document.querySelector('.video-modal')) {
+        // 비디오 모달 생성
+        const videoModal = document.createElement('div');
+        videoModal.className = 'video-modal';
+        videoModal.innerHTML = `
+            <div class="modal-content">
+                <div class="modal-close">&times;</div>
+                <div class="modal-iframe"></div>
+            </div>
+        `;
+        document.body.appendChild(videoModal);
+
+        const modalClose = videoModal.querySelector('.modal-close');
+        const modalIframe = videoModal.querySelector('.modal-iframe');
+
+        // 썸네일 클릭 시 모달 열기
+        videoThumbnails.forEach(thumbnail => {
+            thumbnail.addEventListener('click', function() {
+                const videoUrl = this.getAttribute('data-video');
+                modalIframe.innerHTML = `<iframe src="${videoUrl}?autoplay=1" frameborder="0" allowfullscreen></iframe>`;
+                videoModal.classList.add('active');
+                document.body.classList.add('no-scroll');
+            });
+        });
+
+        // 모달 닫기 버튼
+        modalClose.addEventListener('click', function() {
+            videoModal.classList.remove('active');
+            document.body.classList.remove('no-scroll');
+            setTimeout(() => {
+                modalIframe.innerHTML = '';
+            }, 300);
+        });
+
+        // 모달 바깥 클릭 시 닫기
+        videoModal.addEventListener('click', function(e) {
+            if (e.target === videoModal) {
+                videoModal.classList.remove('active');
+                document.body.classList.remove('no-scroll');
+                setTimeout(() => {
+                    modalIframe.innerHTML = '';
+                }, 300);
+            }
+        });
+    }
+
+    // 스크롤 애니메이션
+    const animateOnScroll = function() {
+        const elements = document.querySelectorAll('.animate-on-scroll');
+        
+        elements.forEach(element => {
+            const elementTop = element.getBoundingClientRect().top;
+            const elementVisible = 150;
+            
+            if (elementTop < window.innerHeight - elementVisible) {
+                element.classList.add('active');
+            }
+        });
+    };
+
+    // 애니메이션이 필요한 요소들에 클래스 추가
+    const sections = document.querySelectorAll('section:not(.hero)');
+    sections.forEach(section => {
+        const header = section.querySelector('.section-header');
+        if (header) {
+            header.classList.add('animate-on-scroll');
+        }
+    });
+    
+    const aboutSections = document.querySelectorAll('.about-section, .company-philosophy, .company-image, .company-description');
+    aboutSections.forEach(section => {
+        section.classList.add('animate-on-scroll');
+    });
+    
+    const workItems = document.querySelectorAll('.work-item');
+    workItems.forEach(item => {
+        item.classList.add('animate-on-scroll');
+    });
+
+    // 스크롤 이벤트에 애니메이션 함수 연결
+    window.addEventListener('scroll', animateOnScroll);
+    
+    // 초기 실행
+    animateOnScroll();
+});
