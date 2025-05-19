@@ -1003,3 +1003,100 @@ footer {
         font-size: 20px;
     }
 }
+
+/* Forced Colors Mode (High Contrast) */
+@media (forced-colors: active) {
+    .loader-logo {
+        border: 2px solid CanvasText;
+    }
+
+    .loader-text .kapes {
+        color: CanvasText;
+    }
+
+    .loader-text .planet {
+        color: CanvasText;
+    }
+
+    .hero-text h1 {
+        color: CanvasText;
+    }
+
+    .hero-text .planet-name {
+        color: CanvasText;
+    }
+
+    .hero-text .tagline {
+        color: CanvasText;
+    }
+
+    .section-header h2 {
+        color: CanvasText;
+    }
+
+    .section-header .section-subheader {
+        color: CanvasText;
+    }
+
+    .about-company h3 {
+        color: CanvasText;
+    }
+
+    .about-company p {
+        color: CanvasText;
+    }
+
+    .about-ceo h3 {
+        color: CanvasText;
+    }
+
+    .about-ceo h4 {
+        color: CanvasText;
+    }
+
+    .about-ceo .career-item {
+        border-color: CanvasText;
+    }
+
+    .work-item {
+        border-color: CanvasText;
+    }
+
+    .work-info h3 {
+        color: CanvasText;
+    }
+
+    .work-meta .meta-item {
+        color: CanvasText;
+    }
+
+    .work-desc {
+        color: CanvasText;
+    }
+
+    .contact-info h3 {
+        color: CanvasText;
+    }
+
+    .contact-info p {
+        color: CanvasText;
+    }
+
+    .contact-message h3 {
+        color: CanvasText;
+    }
+
+    .contact-message .tagline {
+        color: CanvasText;
+    }
+
+    .social-link {
+        color: CanvasText;
+        border-color: CanvasText;
+    }
+
+    .social-link:hover {
+        background-color: CanvasText;
+        color: Canvas;
+    }
+}
