@@ -1,294 +1,85 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KAPES PLANET - K크리에이터들의 트랜스 미디어 스튜디오</title>
-    <meta name="description" content="케이프스플래닛 - K크리에이터들의 트랜스 미디어 스튜디오. 원천 IP 기획부터 섭외, 제작, 커머스까지">
-    <link rel="stylesheet" href="css/style.css">
-    <!-- Google Fonts 사용 -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700;900&display=swap">
-    <!-- 파비콘 -->
-    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AI 기반 콘텐츠 제작사 KAPES PLANET 공식 홈페이지입니다." />
+  <meta property="og:title" content="KAPES PLANET" />
+  <meta property="og:description" content="AI + 영상 + 웹소설 + IP 제작의 미래" />
+  <meta property="og:image" content="/img/og-image.jpg" />
+  <meta property="og:url" content="https://kapesplanet.com" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <title>KAPES PLANET</title>
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Noto Sans KR', sans-serif;
+      background: #000;
+      color: #fff;
+    }
+    .video-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: -1;
+    }
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 0;
+    }
+    .headline {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      z-index: 1;
+      animation: fadeInUp 2s ease-out forwards;
+      opacity: 0;
+    }
+    .headline h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      letter-spacing: 2px;
+    }
+    .headline p {
+      font-size: 1.2rem;
+      color: #ccc;
+    }
+    @keyframes fadeInUp {
+      0% {
+        transform: translate(-50%, 20%);
+        opacity: 0;
+      }
+      100% {
+        transform: translate(-50%, -50%);
+        opacity: 1;
+      }
+    }
+  </style>
 </head>
 <body>
-    <!-- 로딩 애니메이션 - style 속성 추가 -->
-<div class="loading-screen" style="display: none;">
-    <div class="loader">
-        <div class="loader-logo">
-            <img src="img/kapes_logo_circle.png" alt="KAPES PLANET Logo" onerror="this.src='https://via.placeholder.com/200x200/FF6B00/FFFFFF/?text=K'">
-        </div>
-        <div class="loader-text">
-            <span class="kapes">KAPES</span>
-            <span class="planet">PLANET</span>
-        </div>
-    </div>
-</div>
-
-    <!-- 헤더 -->
-    <header>
-        <div class="logo">
-            <a href="#home">
-                <img src="img/kapes_text_logo.png" alt="KAPES PLANET" class="logo-img">
-            </a>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="#home">HOME</a></li>
-                <li><a href="#about">ABOUT</a></li>
-                <li><a href="#work">WORK</a></li>
-                <li><a href="#contact">CONTACT</a></li>
-            </ul>
-        </nav>
-        <div class="menu-toggle">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-<meta name="description" content="AI 기반 콘텐츠 제작사 KAPES PLANET 공식 홈페이지입니다.">
-<meta property="og:title" content="KAPES PLANET">
-<meta property="og:description" content="AI + 영상 + 웹소설 + IP 제작의 미래">
-<meta property="og:image" content="https://kapesplanet.com/og-image.jpg">
-<meta property="og:url" content="https://kapesplanet.com">
-<meta name="twitter:card" content="summary_large_image">
-    </header>
-
-    <!-- 모바일 메뉴 -->
-    <div class="mobile-menu">
-        <ul>
-            <li><a href="#home">HOME</a></li>
-            <li><a href="#about">ABOUT</a></li>
-            <li><a href="#work">WORK</a></li>
-            <li><a href="#contact">CONTACT</a></li>
-        </ul>
-    </div>
-
-    <!-- 히어로 섹션 -->
-    <section id="home" class="hero">
-        <div class="video-background">
-            <!-- 이미지 배경으로 대체 (유튜브 API 오류 방지) -->
-            <div class="video-wrapper">
-                <div class="video-fallback"></div>
-                <div class="video-overlay"></div>
-            </div>
-        </div>
-        
-        <div class="hero-content">
-            <div class="hero-text">
-                <h1>
-                    <span class="animate-text">K크리에이터들의</span>
-                    <span class="animate-text delay-1">트랜스 미디어</span>
-                    <span class="animate-text delay-2">스튜디오</span>
-                </h1>
-                <p class="tagline animate-text delay-3">
-                    미래를 선도하는 케이프스 플래닛<br>
-                    원천 IP 기획부터 섭외, 제작, 커머스까지
-                </p>
-            </div>
-            <div class="hero-logo">
-                <img src="img/kapes_logo_full.png" alt="KAPES PLANET Full Logo" class="main-logo">
-            </div>
-            <div class="scroll-indicator">
-                <span>SCROLL</span>
-                <div class="scroll-arrow"></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 회사 소개 섹션 -->
-    <section id="about" class="about">
-        <div class="section-header">
-            <h2>ABOUT US</h2>
-            <p class="section-subheader">업계 최고의 크리에이터들이 모여 사는 외계 행성</p>
-        </div>
-        
-        <div class="about-container">
-            <div class="about-company">
-                <div class="company-philosophy">
-                    <h3>Mix & Match<br>Make Great!</h3>
-                    <p>"혁신은 이미 존재하는 두 가지를 새로운 방식으로 결합하는 것이다"<br>케이프스플래닛은 믹스매치를 통해 혁신적인 콘텐츠를 만듭니다</p>
-                </div>
-                <div class="company-image">
-                    <img src="https://via.placeholder.com/600x400/111111/FF6B00/?text=KAPES+PLANET" alt="케이프스플래닛 소개 이미지">
-                </div>
-                <div class="company-description">
-                    <p>케이프스플래닛은 19년차 콘텐츠 전문가 CEO와 업계 최고 작가들이 모인 트랜스미디어 콘텐츠 스튜디오입니다. TV부터 유튜브까지 다양한 미디어를 아우르며, 원천 IP 기획부터 제작 그리고 커머스 연계를 통해 새로운 가치를 창출합니다.</p>
-                </div>
-            </div>
-            
-            <div class="about-ceo">
-                <div class="ceo-image">
-                    <img src="https://via.placeholder.com/400x500/111111/FF6B00/?text=CEO" alt="유일한 대표">
-                </div>
-                <div class="ceo-info">
-                    <h3>대표 유일한 <span class="nickname">(a.k.a. 유치콕)</span></h3>
-                    <h4>20년 경력의 콘텐츠 스페셜리스트 C.E.O</h4>
-                    
-                    <div class="ceo-career">
-                        <div class="career-item">
-                            <span class="year">2006 ~ 2015</span>
-                            <span class="company">CJ ENM / Mnet PD</span>
-                            <span class="description">
-                                <슈퍼스타K>, <MAMA>, <쇼미더머니> 등 다수 히트작 연출
-                            </span>
-                        </div>
-                        <div class="career-item">
-                            <span class="year">2015 ~ 2018</span>
-                            <span class="company">메이크어스 / dingo CP</span>
-                            <span class="description">
-                                국내 최초 디지털 콘텐츠 브랜드 'dingo' 론칭 책임자
-                            </span>
-                        </div>
-                        <div class="career-item">
-                            <span class="year">2018 ~ 2023</span>
-                            <span class="company">hello82 / 제작 이사</span>
-                            <span class="description">
-                                최초이자 최고 K팝 글로벌 팬덤 플랫폼 운영
-                            </span>
-                        </div>
-                        <div class="career-item">
-                            <span class="year">2023 ~</span>
-                            <span class="company">케이프스플래닛 / 파운더</span>
-                            <span class="description">
-                                트랜스미디어 콘텐츠 스튜디오로 새로운 도약
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 작업 포트폴리오 섹션 -->
-    <section id="work" class="work">
-        <div class="section-header">
-            <h2>WORK</h2>
-            <p class="section-subheader">포트폴리오 및 레퍼런스</p>
-        </div>
-        
-        <div class="work-container">
-            <!-- 작업물 1: ADT 캡스 -->
-            <div class="work-item">
-                <div class="work-video">
-                    <div class="video-thumbnail" data-video="https://www.youtube.com/embed/sbEYTBXJb4I">
-                        <img src="https://via.placeholder.com/800x450/111111/FF6B00/?text=ADT+캡스" alt="ADT 캡스">
-                        <div class="play-button"></div>
-                    </div>
-                </div>
-                <div class="work-info">
-                    <h3>ADT 캡스 디지털 필름</h3>
-                    <div class="work-meta">
-                        <span class="meta-item">포맷: 디지털 필름 시리즈</span>
-                        <span class="meta-item">매출: 1억원</span>
-                        <span class="meta-item">출연: 표창원, 이수지, 조진세</span>
-                    </div>
-                    <p class="work-desc">인간 CCTV 표창원이 ADT 캡스의 보안 서비스를 실험하는 콘셉트의 디지털 필름. 범죄 전문가 시점으로 보안의 중요성을 강조하는 브랜디드 콘텐츠.</p>
-                </div>
-            </div>
-            
-            <!-- 작업물 2: 한글과 컴퓨터 -->
-            <div class="work-item">
-                <div class="work-video">
-                    <div class="video-thumbnail" data-video="https://www.youtube.com/embed/sbEYTBXJb4I">
-                        <img src="https://via.placeholder.com/800x450/111111/FF6B00/?text=한글과+컴퓨터" alt="한글과 컴퓨터">
-                        <div class="play-button"></div>
-                    </div>
-                </div>
-                <div class="work-info">
-                    <h3>한글과 컴퓨터 유튜브 웹예능</h3>
-                    <div class="work-meta">
-                        <span class="meta-item">포맷: 유튜브 웹예능 시리즈</span>
-                        <span class="meta-item">매출: 6000만원</span>
-                        <span class="meta-item">출연: 이수지, 지예은, 김원훈</span>
-                    </div>
-                    <p class="work-desc">"MZ 꼰대 지예은"이 한글과 컴퓨터 제품을 활용하는 유쾌한 웹예능. 직장 생활에서의 소통 문제를 한글 제품으로 해결하는 코믹한 콘텐츠로 높은 호응 획득.</p>
-                </div>
-            </div>
-            
-            <!-- 작업물 3: 솔비로운 탐구생활 -->
-            <div class="work-item">
-                <div class="work-video">
-                    <div class="video-thumbnail" data-video="https://www.youtube.com/embed/sbEYTBXJb4I">
-                        <img src="https://via.placeholder.com/800x450/111111/FF6B00/?text=솔비로운+탐구생활" alt="솔비로운 탐구생활">
-                        <div class="play-button"></div>
-                    </div>
-                </div>
-                <div class="work-info">
-                    <h3>원숭이행성: 솔비로운 탐구생활</h3>
-                    <div class="work-meta">
-                        <span class="meta-item">포맷: 음악 웹예능 채널</span>
-                        <span class="meta-item">구독자: 1.5만명</span>
-                        <span class="meta-item">출연: 솔비, 김구라, 가비, 김종민</span>
-                    </div>
-                    <p class="work-desc">3055 세대를 위한 레트로 음악 전문 콘텐츠 채널. 90~00년대 음악의 황금기를 경험한 세대를 타겟으로 한 음악 예능으로, PPL과 음원 커머스 비즈니스 모델 구축.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 연락처 섹션 -->
-    <section id="contact" class="contact">
-        <div class="section-header">
-            <h2>CONTACT US</h2>
-            <p class="section-subheader">당신의 이야기를 함께 만들어보세요</p>
-        </div>
-        
-        <div class="contact-container">
-            <div class="contact-info">
-                <div class="contact-logo">
-                    <img src="img/kapes_logo_full.png" alt="KAPES PLANET Logo" onerror="this.src='https://via.placeholder.com/300x200/000000/FF6B00/?text=KAPES+PLANET'">
-                </div>
-                
-                <div class="contact-details">
-                    <div class="contact-item">
-                        <h3>홈페이지</h3>
-                        <p><a href="http://www.kapesplanet.com" target="_blank">www.kapesplanet.com</a></p>
-                    </div>
-                    <div class="contact-item">
-                        <h3>대표</h3>
-                        <p>유일한 / Founder and CEO</p>
-                        <p><a href="mailto:yutchcock@gmail.com">yutchcock@gmail.com</a></p>
-                    </div>
-                    <div class="contact-item">
-                        <h3>회사</h3>
-                        <p>케이프스 플래닛(공용) / Business Office</p>
-                        <p><a href="mailto:official@kapesplanet.com">official@kapesplanet.com</a></p>
-                    </div>
-                </div>
-                
-                <div class="social-links">
-                    <a href="#" target="_blank" class="social-link">Instagram</a>
-                    <a href="#" target="_blank" class="social-link">YouTube</a>
-                    <a href="#" target="_blank" class="social-link">LinkedIn</a>
-                </div>
-            </div>
-            
-            <div class="contact-message">
-                <h3>EXCEPTIONAL PRODUCTION AND<br>UNIQUE CREATIVITY</h3>
-                <p class="tagline">FOR GLOBAL K-CULTURE INVASIONS</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- 푸터 -->
-    <footer>
-        <div class="footer-content">
-            <p>&copy; 2025 KAPES PLANET Inc. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <!-- 스크립트 -->
-    <script src="js/main.js"></script>
+  <video autoplay muted loop class="video-bg">
+    <source src="https://cdn.coverr.co/videos/coverr-working-late-in-the-studio-3893/1080p.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+  <div class="overlay"></div>
+  <div class="headline">
+    <h1>KAPES PLANET</h1>
+    <p>AI x 콘텐츠 제작의 미래를 연결합니다</p>
+  </div>
 </body>
 </html>
-                                    <!-- 추가 보장책: 로딩 애니메이션 즉시 제거 -->
-<script>
-    // 즉시 실행 함수
-    (function() {
-        var loadingScreen = document.querySelector('.loading-screen');
-        if(loadingScreen) {
-            loadingScreen.style.display = 'none';
-        }
-    })();
-</script>
