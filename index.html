@@ -13,18 +13,18 @@
     <link rel="icon" href="img/favicon.ico" type="image/x-icon">
 </head>
 <body>
-    <!-- 로딩 애니메이션 -->
-    <div class="loading-screen">
-        <div class="loader">
-            <div class="loader-logo">
-                <img src="img/kapes_logo_circle.png" alt="KAPES PLANET Logo">
-            </div>
-            <div class="loader-text">
-                <span class="kapes">KAPES</span>
-                <span class="planet">PLANET</span>
-            </div>
+    <!-- 로딩 애니메이션 - style 속성 추가 -->
+<div class="loading-screen" style="display: none;">
+    <div class="loader">
+        <div class="loader-logo">
+            <img src="img/kapes_logo_circle.png" alt="KAPES PLANET Logo" onerror="this.src='https://via.placeholder.com/200x200/FF6B00/FFFFFF/?text=K'">
+        </div>
+        <div class="loader-text">
+            <span class="kapes">KAPES</span>
+            <span class="planet">PLANET</span>
         </div>
     </div>
+</div>
 
     <!-- 헤더 -->
     <header>
