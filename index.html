@@ -282,3 +282,13 @@
     <script src="js/main.js"></script>
 </body>
 </html>
+                                    <!-- 추가 보장책: 로딩 애니메이션 즉시 제거 -->
+<script>
+    // 즉시 실행 함수
+    (function() {
+        var loadingScreen = document.querySelector('.loading-screen');
+        if(loadingScreen) {
+            loadingScreen.style.display = 'none';
+        }
+    })();
+</script>
