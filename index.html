@@ -4,30 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KAPES PLANET - K크리에이터들의 트랜스 미디어 스튜디오</title>
-    <meta name="description" content="케이프스플래닛 - K크리에이터들의 트랜스 미디어 스튜디오">
-
-    <!-- Open Graph Tags for Social Sharing -->
-    <meta property="og:title" content="KAPES PLANET - K크리에이터들의 트랜스 미디어 스튜디오">
-    <meta property="og:description" content="케이프스플래닛 - K크리에이터들의 트랜스 미디어 스튜디오">
-    <meta property="og:image" content="https://yutchcock.github.io/kapesplanet001/img/kapes_logo_full.png"> <!-- 이미지 경로 확인 필요 -->
-    <meta property="og:url" content="https://kapesplanet.com/"> <!-- 사용자 지정 도메인으로 변경 -->
-    <meta property="og:type" content="website">
-    <!-- End Open Graph Tags -->
-
+    <meta name="description" content="케이프스플래닛 - K크리에이터들의 트랜스 미디어 스튜디오. 원천 IP 기획부터 섭외, 제작, 커머스까지">
     <link rel="stylesheet" href="css/style.css">
+    <!-- Google Fonts 사용 -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700;900&display=swap">
     <!-- 파비콘 -->
-    <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png">
-    <link rel="manifest" href="img/favicon/site.webmanifest">
-    <link rel="mask-icon" href="img/favicon/safari-pinned-tab.svg" color="#5bbad5">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="theme-color" content="#ffffff">
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
 </head>
 <body>
-    <!-- 1. 로딩 애니메이션 -->
+    <!-- 로딩 애니메이션 -->
     <div class="loading-screen">
         <div class="loader">
             <div class="loader-logo">
@@ -72,12 +58,12 @@
         </ul>
     </div>
 
-    <!-- 2. 히어로 섹션 -->
+    <!-- 히어로 섹션 -->
     <section id="home" class="hero">
         <div class="video-background">
-            <!-- 유튜브 쇼릴 영상 자동재생 (배경으로) -->
+            <!-- 이미지 배경으로 대체 (유튜브 API 오류 방지) -->
             <div class="video-wrapper">
-                <div id="youtube-player"></div>
+                <div class="video-fallback"></div>
                 <div class="video-overlay"></div>
             </div>
         </div>
@@ -94,6 +80,9 @@
                     원천 IP 기획부터 섭외, 제작, 커머스까지
                 </p>
             </div>
+            <div class="hero-logo">
+                <img src="img/kapes_logo_full.png" alt="KAPES PLANET Full Logo" class="main-logo">
+            </div>
             <div class="scroll-indicator">
                 <span>SCROLL</span>
                 <div class="scroll-arrow"></div>
@@ -101,7 +90,7 @@
         </div>
     </section>
 
-    <!-- 3. 회사 소개 섹션 -->
+    <!-- 회사 소개 섹션 -->
     <section id="about" class="about">
         <div class="section-header">
             <h2>ABOUT US</h2>
@@ -115,7 +104,7 @@
                     <p>"혁신은 이미 존재하는 두 가지를 새로운 방식으로 결합하는 것이다"<br>케이프스플래닛은 믹스매치를 통해 혁신적인 콘텐츠를 만듭니다</p>
                 </div>
                 <div class="company-image">
-                    <img src="img/monkey_text_logo.png" alt="케이프스플래닛 소개 이미지">
+                    <img src="https://via.placeholder.com/600x400/111111/FF6B00/?text=KAPES+PLANET" alt="케이프스플래닛 소개 이미지">
                 </div>
                 <div class="company-description">
                     <p>케이프스플래닛은 19년차 콘텐츠 전문가 CEO와 업계 최고 작가들이 모인 트랜스미디어 콘텐츠 스튜디오입니다. TV부터 유튜브까지 다양한 미디어를 아우르며, 원천 IP 기획부터 제작 그리고 커머스 연계를 통해 새로운 가치를 창출합니다.</p>
@@ -124,7 +113,7 @@
             
             <div class="about-ceo">
                 <div class="ceo-image">
-                    <img src="img/ceo.png" alt="유일한 대표">
+                    <img src="https://via.placeholder.com/400x500/111111/FF6B00/?text=CEO" alt="유일한 대표">
                 </div>
                 <div class="ceo-info">
                     <h3>대표 유일한 <span class="nickname">(a.k.a. 유치콕)</span></h3>
@@ -165,7 +154,7 @@
         </div>
     </section>
 
-    <!-- 4. 작업 포트폴리오 섹션 -->
+    <!-- 작업 포트폴리오 섹션 -->
     <section id="work" class="work">
         <div class="section-header">
             <h2>WORK</h2>
@@ -176,8 +165,8 @@
             <!-- 작업물 1: ADT 캡스 -->
             <div class="work-item">
                 <div class="work-video">
-                    <div class="video-thumbnail" data-video="https://www.youtube.com/embed//pqDtXGHiqEE">
-                        <img src="img/work_caps.png" alt="ADT 캡스">
+                    <div class="video-thumbnail" data-video="https://www.youtube.com/embed/sbEYTBXJb4I">
+                        <img src="https://via.placeholder.com/800x450/111111/FF6B00/?text=ADT+캡스" alt="ADT 캡스">
                         <div class="play-button"></div>
                     </div>
                 </div>
@@ -195,8 +184,8 @@
             <!-- 작업물 2: 한글과 컴퓨터 -->
             <div class="work-item">
                 <div class="work-video">
-                    <div class="video-thumbnail" data-video="https://www.youtube.com/embed/-ZQ2FUDAZe02">
-                        <img src="img/work_hangul.png" alt="한글과 컴퓨터">
+                    <div class="video-thumbnail" data-video="https://www.youtube.com/embed/sbEYTBXJb4I">
+                        <img src="https://via.placeholder.com/800x450/111111/FF6B00/?text=한글과+컴퓨터" alt="한글과 컴퓨터">
                         <div class="play-button"></div>
                     </div>
                 </div>
@@ -214,8 +203,8 @@
             <!-- 작업물 3: 솔비로운 탐구생활 -->
             <div class="work-item">
                 <div class="work-video">
-                    <div class="video-thumbnail" data-video="https://www.youtube.com/embed/UGfz4VKEd9U">
-                        <img src="img/work_solbi.png" alt="솔비로운 탐구생활">
+                    <div class="video-thumbnail" data-video="https://www.youtube.com/embed/sbEYTBXJb4I">
+                        <img src="https://via.placeholder.com/800x450/111111/FF6B00/?text=솔비로운+탐구생활" alt="솔비로운 탐구생활">
                         <div class="play-button"></div>
                     </div>
                 </div>
@@ -232,7 +221,7 @@
         </div>
     </section>
 
-    <!-- 5. 연락처 섹션 -->
+    <!-- 연락처 섹션 -->
     <section id="contact" class="contact">
         <div class="section-header">
             <h2>CONTACT US</h2>
@@ -242,7 +231,7 @@
         <div class="contact-container">
             <div class="contact-info">
                 <div class="contact-logo">
-                    <img src="img/kapes_logo_full.png" alt="KAPES PLANET Logo">
+                    <img src="img/kapes_logo_full.png" alt="KAPES PLANET Logo" onerror="this.src='https://via.placeholder.com/300x200/000000/FF6B00/?text=KAPES+PLANET'">
                 </div>
                 
                 <div class="contact-details">
@@ -283,8 +272,7 @@
         </div>
     </footer>
 
-    <!-- JavaScript 파일 및 YouTube API -->
-    <script src="https://www.youtube.com/iframe_api"></script>
-    <script src="main-js.js"></script>
+    <!-- 스크립트 -->
+    <script src="js/main.js"></script>
 </body>
 </html>
