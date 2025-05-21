@@ -1,5 +1,6 @@
 // 로딩 스크린
-window.addEventListener('load', () => {
+// window.addEventListener('load', ...) 대신
+document.addEventListener('DOMContentLoaded', () => {
     const loadingScreen = document.getElementById('loading-screen');
     if (loadingScreen) {
         loadingScreen.style.opacity = '0';
