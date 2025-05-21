@@ -992,3 +992,93 @@ footer {
     }
     /* (아래에 더 반응형 규칙이 있을 수 있으니, HTML의 <style> 끝까지 모두 복사해서 붙여넣으세요!) */
 }
+@media screen and (max-width: 900px) {
+  .section {
+    padding: 40px 10px;
+  }
+  .about-content,
+  .contact-content,
+  .footer-content {
+    flex-direction: column;
+    gap: 24px;
+  }
+  .about-image img,
+  .portfolio-item img,
+  .portfolio-item,
+  .map-container iframe {
+    width: 100% !important;
+    height: auto !important;
+    min-width: 0;
+  }
+  .portfolio-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .form-control,
+  .newsletter-input {
+    font-size: 1.1rem;
+    padding: 14px;
+  }
+  .cta-btn,
+  .submit-btn,
+  .newsletter-btn {
+    font-size: 1.1rem;
+    padding: 14px 20px;
+  }
+  .footer-logo,
+  .footer-links,
+  .footer-newsletter {
+    width: 100%;
+    margin-bottom: 24px;
+  }
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .mobile-menu-btn {
+    display: block;
+  }
+  nav {
+    position: fixed;
+    top: 0; right: -100%;
+    width: 80%; max-width: 300px;
+    height: 100vh;
+    background-color: var(--dark-color);
+    padding: 100px 30px;
+    z-index: 99;
+    transition: right 0.3s;
+    box-shadow: -5px 0 30px rgba(0,0,0,0.3);
+  }
+  nav.active {
+    right: 0;
+  }
+  nav ul {
+    flex-direction: column;
+  }
+  nav ul li {
+    margin: 0 0 20px 0;
+  }
+  nav ul li a {
+    font-size: 1.2rem;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .hero-title,
+  .section-title {
+    font-size: 1.5rem;
+  }
+  .about-title,
+  .contact-title {
+    font-size: 1.3rem;
+  }
+  .portfolio-item {
+    height: 180px;
+  }
+  .map-container {
+    height: 220px;
+  }
+}
