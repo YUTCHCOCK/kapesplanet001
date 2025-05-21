@@ -1,17 +1,32 @@
 // 로딩 스크린
 window.addEventListener('load', () => {
-    setTimeout(() => {
-        const loadingScreen = document.getElementById('loading-screen');
-        if (loadingScreen) {
-            loadingScreen.style.opacity = '0';
-            setTimeout(() => {
-                loadingScreen.style.display = 'none';
-            }, 500);
-        }
-    }, 2500);
+    const loadingScreen = document.getElementById('loading-screen');
+    if (loadingScreen) {
+        loadingScreen.style.opacity = '0';
+        setTimeout(() => {
+            loadingScreen.style.display = 'none';
+        }, 500);
+    }
+});
+
+// 비디오 지연 로딩
+document.addEventListener('DOMContentLoaded', () => {
+    const videoIframe = document.querySelector('.video-background iframe');
+    if (videoIframe) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    videoIframe.src = videoIframe.getAttribute('data-src');
+                    observer.disconnect();
+                }
+            });
+        });
+        observer.observe(videoIframe);
+    }
 });
 
 // 스크롤 애니메이션
+let ticking = false;
 const animateOnScroll = () => {
     const elements = document.querySelectorAll('.animate-text');
     
@@ -25,45 +40,78 @@ const animateOnScroll = () => {
     });
 };
 
-window.addEventListener('scroll', animateOnScroll);
+window.addEventListener('scroll', () => {
+    if (!ticking) {
+        window.requestAnimationFrame(() => {
+            animateOnScroll();
+            ticking = false;
+        });
+        ticking = true;
+    }
+});
 window.addEventListener('load', animateOnScroll);
 
 // 비디오 썸네일 클릭 이벤트
 document.querySelectorAll('.video-thumbnail').forEach(thumbnail => {
+    // 클릭 이벤트
     thumbnail.addEventListener('click', () => {
-        const videoUrl = thumbnail.getAttribute('data-video');
-        const modal = document.createElement('div');
-        modal.className = 'video-modal';
-        
-        modal.innerHTML = `
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <iframe src="${videoUrl}?autoplay=1" frameborder="0" allowfullscreen></iframe>
-            </div>
-        `;
-        
-        document.body.appendChild(modal);
-        
-        modal.querySelector('.close-button').addEventListener('click', () => {
-            modal.remove();
-        });
-        
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.remove();
+        try {
+            const videoUrl = thumbnail.getAttribute('data-video');
+            if (!videoUrl) {
+                console.error('비디오 URL이 없습니다.');
+                return;
             }
-        });
+            
+            const modal = document.createElement('div');
+            modal.className = 'video-modal';
+            
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <span class="close-button" aria-label="비디오 닫기">&times;</span>
+                    <iframe src="${videoUrl}?autoplay=1" frameborder="0" allowfullscreen></iframe>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+            
+            modal.querySelector('.close-button').addEventListener('click', () => {
+                modal.remove();
+            });
+            
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.remove();
+                }
+            });
+        } catch (error) {
+            console.error('비디오 모달 생성 중 오류 발생:', error);
+        }
+    });
+
+    // 키보드 이벤트
+    thumbnail.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            thumbnail.click();
+        }
     });
 });
 
 // 스크롤 인디케이터
 const scrollIndicator = document.querySelector('.scroll-indicator');
 if (scrollIndicator) {
+    let ticking = false;
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 100) {
-            scrollIndicator.style.opacity = '0';
-        } else {
-            scrollIndicator.style.opacity = '1';
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                if (window.scrollY > 100) {
+                    scrollIndicator.style.opacity = '0';
+                } else {
+                    scrollIndicator.style.opacity = '1';
+                }
+                ticking = false;
+            });
+            ticking = true;
         }
     });
 }
