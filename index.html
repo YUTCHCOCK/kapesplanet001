@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KapesPlanet - KAPES PLANET </title>
     <title>KapesPlanet - 원숭이행성 </title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
@@ -309,3 +310,18 @@
     <script src="js/main.js"></script>
 </body>
 </html>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const menuBtn = document.querySelector('.mobile-menu-btn');
+  const nav = document.querySelector('header nav');
+  menuBtn.addEventListener('click', function () {
+    nav.classList.toggle('active');
+  });
+  // 메뉴 클릭 시 닫힘
+  document.querySelectorAll('nav ul li a').forEach(function(link){
+    link.addEventListener('click', function(){
+      nav.classList.remove('active');
+    });
+  });
+});
+</script>
