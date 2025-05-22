@@ -69,6 +69,7 @@ header.scrolled {
 .header-logo img {
     height: 40px;
     margin-right: 10px;
+    filter: invert(1);  /* 색 반전 효과 */
 }
 
 .header-logo span {
