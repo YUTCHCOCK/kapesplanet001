@@ -95,35 +95,29 @@
     </header>
 
     <!-- 히어로 섹션 -->
-    <section class="hero" id="hero" style="position:relative;">
-        <div class="hero-video-wrapper">
-          <iframe 
-            width="560" 
-            height="315" 
-            src="https://www.youtube.com/embed/sbEYTBXJb4I?autoplay=1&mute=1&loop=1&playlist=영상ID" 
-            title="YouTube video player" 
-            frameborder="0"
-            allow="autoplay; encrypted-media"
-            allowfullscreen>
-          </iframe>
-            <div 
-</div>
-        <div class="hero-overlay">
-            <div class="hero-content">
-                <div class="hero-tagline">매일 진화하는 크리에이터들의 행성</div>
-                <div class="hero-title">원숭이행성</div>
-                <div class="hero-description">
-                    AI를 통해 빠르게 진화하는 콘텐츠 기획 <br> B급 감성과 A급 실력으로 완성합니다 
-                </div>
-                <a href="#work" class="cta-btn">포트폴리오 보기</a>
-            </div>
-            <div class="hero-logo">
-                <img src="img/kapes_logo_full.png" alt="KAPES PLANET Full Logo" class="main-logo">
-            </div>
-        </div>
-        <!-- monkey 텍스트 로고 워터마크 -->
-        <img class="monkey-watermark" src="img/monkey_text_logo.png" alt="Monkey Text Logo Watermark">
-    </section>
+    <section class="hero" id="hero" style="position:relative; width:100vw; height:60vw; max-height:70vh; overflow:hidden;">
+      <!-- 유튜브 배경 영상 (ID는 sbEYTBXJb4I로 대체, loop시 playlist에도 동일 ID) -->
+      <iframe 
+        src="https://www.youtube.com/embed/sbEYTBXJb4I?autoplay=1&mute=1&controls=0&showinfo=0&loop=1&playlist=sbEYTBXJb4I&modestbranding=1"
+        style="position:absolute; top:0; left:0; width:100%; height:100%; z-index:1; pointer-events:none; border:0;"
+        frameborder="0"
+        allow="autoplay; encrypted-media"
+        allowfullscreen>
+      </iframe>
+        
+  <!-- 오버레이 텍스트 -->
+    <div style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); z-index:2; color:white; text-align:center; text-shadow:0 0 12px #000;">
+    <div class="hero-tagline">매일 진화하는 크리에이터들의 행성</div>
+    <div class="hero-title" style="font-size:3rem; font-weight:bold;">원숭이행성</div>
+    <div class="hero-description" style="font-size:1.2rem;">
+      AI를 통해 빠르게 진화하는 콘텐츠 기획<br>
+      B급 감성과 A급 실력으로 완성합니다
+    </div>
+    <a href="#work" class="cta-btn" style="margin-top:2rem; display:inline-block;">포트폴리오 보기</a>
+  </div>
+      <!-- monkey 텍스트 로고 워터마크 (필요하면 유지) -->
+      <img class="monkey-watermark" src="img/monkey_text_logo.png" alt="Monkey Text Logo Watermark">
+</section>
 
     <!-- About 섹션 -->
     <section class="section about" id="about" style="position:relative;">
