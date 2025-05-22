@@ -125,6 +125,7 @@ nav ul li a.active {
 }
 
 /* 히어로 섹션 */
+/* 히어로 섹션 전체 컨테이너 */
 .hero {
     position: relative;
     width: 100%;
@@ -132,6 +133,7 @@ nav ul li a.active {
     overflow: hidden;
 }
 
+/* 배경 비디오 */
 .hero-video {
     position: absolute;
     top: 0;
@@ -139,25 +141,31 @@ nav ul li a.active {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    z-index: 1;
 }
 
+/* 어두운 오버레이 */
 .hero-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9));
+    background: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.9));
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding: 0 100px;
+    z-index: 2;
 }
 
+/* 컨텐츠 래퍼 */
 .hero-content {
     max-width: 800px;
+    z-index: 3;
 }
 
+/* 태그라인(간단한 소개) */
 .hero-tagline {
     font-size: 1.2rem;
     font-weight: 500;
@@ -168,6 +176,7 @@ nav ul li a.active {
     animation: fadeInUp 1s forwards 0.5s;
 }
 
+/* 메인 타이틀 */
 .hero-title {
     font-size: 4rem;
     font-weight: 700;
@@ -178,6 +187,7 @@ nav ul li a.active {
     animation: fadeInUp 1s forwards 0.7s;
 }
 
+/* 설명 */
 .hero-description {
     font-size: 1.2rem;
     line-height: 1.6;
@@ -187,6 +197,7 @@ nav ul li a.active {
     animation: fadeInUp 1s forwards 0.9s;
 }
 
+/* CTA 버튼 */
 .cta-btn {
     display: inline-block;
     padding: 15px 30px;
@@ -206,6 +217,7 @@ nav ul li a.active {
     transform: translateY(-3px);
 }
 
+/* 페이드 인 업 애니메이션 */
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -216,7 +228,6 @@ nav ul li a.active {
         transform: translateY(0);
     }
 }
-
 /* About 섹션 */
 .section {
     padding: 120px 100px;
