@@ -139,7 +139,7 @@ nav ul li a.active {
 /* 한 화면 한 섹션용 레이아웃 */
 .hero,
 .about,
-.work,
+.portfolio,
 .contact,
 .section {
     min-height: 100vh;
@@ -246,7 +246,7 @@ nav ul li a.active {
 }
 
 /* 작업 섹션 */
-.work {
+.portfolio {
     background-color: #0a0a0a;
 }
 
