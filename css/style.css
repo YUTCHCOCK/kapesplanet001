@@ -209,14 +209,14 @@ nav ul li a.active {
 }
 .about-stats {
   display: flex;
-  flex-direction: row;
-  gap: 16px; /* 줄 간격, 필요시 조정 */
-  align-items: flex-start; /* 왼쪽 정렬. 가운데 정렬은 center */
+  flex-direction:  column;
+  gap: 16px; 
+  align-items: flex-start;
 }
 .stat-item {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   gap: 12px; /* 숫자와 라벨 사이 간격, 필요시 조정 */
 }
 
