@@ -38,15 +38,8 @@ html, body {
     min-height: 100vh;
     height: 100%;
     scroll-snap-type: y mandatory;
-    padding-left: clamp(16px, 5vw, 80px);
-    padding-right: clamp(16px, 5vw, 80px);
-    padding-top: clamp(30px, 5vw, 100px); 
-    padding-bottom: clamp(30px, 5vw, 100px); 
-    font-size: clamp(14px, 1.5vw, 18px);
 }
 
-}
-}
 .section-title {
     font-size: 3rem;
     font-weight: 700;
@@ -150,9 +143,7 @@ nav ul li a.active {
 .contact,
 .section {
     min-height: 100vh;
-    min*
-
-      padding: 120px 100px;
+    padding: 120px 100px;
     position: relative;
 }
 
@@ -375,6 +366,24 @@ nav ul li a.active {
 
 .portfolio-item:hover .portfolio-view {
     opacity: 1;
+}
+.video-modal {
+  position: fixed; left: 0; top: 0; width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.7); display: flex; justify-content: center; align-items: center;
+  z-index: 9999;
+}
+.video-modal .modal-content {
+  position: relative; background: #000; padding: 0; border-radius: 10px;
+}
+.video-modal iframe {
+  width: 70vw; height: 40vw; max-width: 900px; max-height: 500px; border: none; background: #000;
+}
+.video-modal .close-button {
+  position: absolute; top: -30px; right: 0; font-size: 2rem; color: #fff; cursor: pointer;
+  z-index: 2;
+}
+@media (max-width: 600px) {
+  .video-modal iframe { width: 95vw; height: 55vw; }
 }
 
 /* 콘택트 섹션 */
