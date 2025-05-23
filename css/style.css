@@ -207,18 +207,17 @@ nav ul li a.active {
     line-height: 1.8;
     margin-bottom: 30px;
 }
-
 .about-stats {
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* 줄 간격, 필요시 조정 */
+  align-items: flex-start; /* 왼쪽 정렬. 가운데 정렬은 center */
 }
-
 .stat-item {
-    flex: 1;
-    min-width: 120px;
-    margin-right: 20px;
-    margin-bottom: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px; /* 숫자와 라벨 사이 간격, 필요시 조정 */
 }
 
 .stat-value {
