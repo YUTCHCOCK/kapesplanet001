@@ -919,7 +919,6 @@ footer {
   .map-container {
     height: 220px;
   }
-      @media (max-width: 600px) {
   .about-stats {
     display: flex;
     flex-direction: row;
@@ -935,12 +934,12 @@ footer {
     margin: 0 2px;
   }
   .stat-value {
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: bold;
     white-space: nowrap;
   }
   .stat-label {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     opacity: 0.8;
     margin-top: 2px;
     white-space: nowrap;
@@ -976,12 +975,12 @@ footer {
     margin: 0 2px;
   }
   .stat-value {
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: bold;
     white-space: nowrap;
   }
   .stat-label {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     opacity: 0.8;
     margin-top: 2px;
     white-space: nowrap;
