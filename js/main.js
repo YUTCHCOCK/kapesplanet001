@@ -34,37 +34,41 @@ document.addEventListener('DOMContentLoaded', () => {
         window.addEventListener('load', animateOnScroll);
 
         // 비디오 썸네일 클릭 이벤트 (포트폴리오 섹션)
-        document.querySelectorAll('.video-thumbnail').forEach(thumbnail => {
-            thumbnail.addEventListener('click', () => {
-                try {
-                    const videoUrl = thumbnail.getAttribute('data-video');
-                    if (!videoUrl) return;
-                    const modal = document.createElement('div');
-                    modal.className = 'video-modal';
-                    modal.innerHTML = `
-                        <div class="modal-content">
-                            <span class="close-button" aria-label="비디오 닫기">&times;</span>
-                            <iframe src="${videoUrl}?autoplay=1" frameborder="0" allowfullscreen></iframe>
-                        </div>
-                    `;
-                    document.body.appendChild(modal);
 
-                    modal.querySelector('.close-button').addEventListener('click', () => modal.remove());
-                    modal.addEventListener('click', (e) => {
-                        if (e.target === modal) modal.remove();
-                    });
-                } catch (error) {
-                    console.error('비디오 모달 생성 중 오류 발생:', error);
-                }
-            });
+    document.addEventListener('DOMContentLoaded', function () {
+          // 썸네일 클릭 시 모달 오픈
+      document.querySelectorAll('.video-thumbnail').forEach(function(thumbnail) {
+        thumbnail.addEventListener('click', function(e) {
+          e.preventDefault();
+          const videoUrl = thumbnail.getAttribute('data-video');
+          if (!videoUrl) return;
+          const modal = document.getElementById('video-modal');
+          const iframe = document.getElementById('modal-iframe');
+          iframe.src = videoUrl + "?autoplay=1";
+          modal.style.display = 'flex';
+          document.body.style.overflow = "hidden"; // 스크롤 방지
+    });
+  });
 
-            thumbnail.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    thumbnail.click();
-                }
-            });
-        });
+      // 닫기 버튼 또는 바깥 클릭 시 모달 닫기
+      const modal = document.getElementById('video-modal');
+      if (modal) {
+        modal.querySelector('.close-button').addEventListener('click', function() {
+        closeModal();
+    });
+        modal.addEventListener('click', function(e) {
+          if (e.target === modal) closeModal();
+    });
+  }
+
+      function closeModal() {
+        const modal = document.getElementById('video-modal');
+        const iframe = document.getElementById('modal-iframe');
+        modal.style.display = 'none';
+        iframe.src = ""; // 재생 중지
+        document.body.style.overflow = ""; // 스크롤 복구
+  }
+});
 
         // 스크롤 인디케이터
         const scrollIndicator = document.querySelector('.scroll-indicator');
