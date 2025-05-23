@@ -907,7 +907,7 @@ footer {
 @media screen and (max-width: 576px) {
   .hero-title,
   .section-title {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
   }
   .about-title,
   .contact-title {
@@ -921,6 +921,12 @@ footer {
   }
 }
 @media screen and (max-width: 480px) {
+ nav ul li a {
+    font-size: 0.9rem;
+ hero-title {
+    font-size: 1.3rem;   /* 더 작게 */
+    white-space: nowrap; /* 한 줄로 강제 */
+  }
   body {
     font-size: 90%;
     padding: 4px;
