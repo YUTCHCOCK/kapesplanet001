@@ -217,7 +217,7 @@ nav ul li a.active {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-
+)
 .stat-value {
     font-size: 2.5rem;
     font-weight: 700;
@@ -840,12 +840,12 @@ footer {
   .portfolio-item img,
   .portfolio-item,
   .map-container iframe {
-    width: 100% !important;
-    height: auto !important;
+    width: 100% ;
+    height: auto;
     min-width: 0;
   }
   .portfolio-grid {
-    grid-template-columns: 1fr !important;
+    grid-template-columns: 1fr 
   }
 
     .form-control,
