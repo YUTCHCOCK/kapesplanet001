@@ -74,13 +74,6 @@
         }
     </style>
 </head>
-    <!-- 유튜브 비디오 모달 -->
-<div id="video-modal" class="video-modal" style="display:none;">
-  <div class="modal-content">
-    <span class="close-button" aria-label="비디오 닫기">&times;</span>
-    <iframe id="modal-iframe" src="" frameborder="0" allowfullscreen allow="autoplay; encrypted-media"></iframe>
-  </div>
-</div>
 <body>
     <!-- 헤더 -->
     <header>
@@ -167,8 +160,8 @@
     <!-- Work 섹션 -->
     <section class="section work" id="portfolio">
         <div class="section-header">
-            <div class="section-title">Our Work</div>
-            <div class="section-subtitle">원숭이행성 제작 콘텐츠</div>
+            <div class="section-title">Portfolio</div>
+            <div class="section-subtitle">원숭이행성 제작</div>
         </div>
         <div class="portfolio-filter">
             <button class="filter-btn active" data-filter="all">전체</button>
@@ -326,7 +319,8 @@
         </div>
     </footer>
 
-        <!-- 유튜브 비디오 모달 -->        
+        <!-- 유튜브 비디오 모달 -->    
+        
     <div id="video-modal" class="video-modal" style="display:none;">
     <div class="modal-content">
         <span class="close-button" aria-label="비디오 닫기">&times;</span>
@@ -353,5 +347,12 @@
       });
     });
 </script>
+<!-- 유튜브 비디오 모달 (반드시 body 맨 마지막에 위치) -->
+<div id="video-modal" class="video-modal" style="display:none;">
+  <div class="modal-content">
+    <span class="close-button" aria-label="비디오 닫기">&times;</span>
+    <iframe id="modal-iframe" src="" frameborder="0" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+  </div>
+</div>
 </body>
 </html>
