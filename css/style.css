@@ -913,3 +913,22 @@ footer {
     padding: 40px 6px;
   }
 }
+.video-modal {
+    position: fixed; left: 0; top: 0; width: 100vw; height: 100vh;
+    background: rgba(0,0,0,0.7); display: flex; justify-content: center; align-items: center;
+    z-index: 9999;
+}
+.video-modal .modal-content {
+    position: relative; background: #000; padding: 0; border-radius: 10px;
+}
+.video-modal iframe {
+    width: 70vw; height: 40vw; max-width: 900px; max-height: 500px; border: none;
+    background: #000;
+}
+.video-modal .close-button {
+    position: absolute; top: -30px; right: 0; font-size: 2rem; color: #fff; cursor: pointer;
+    z-index: 2;
+}
+@media (max-width: 600px) {
+    .video-modal iframe { width: 95vw; height: 55vw; }
+}
