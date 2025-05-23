@@ -144,3 +144,97 @@ nav ul li a.active {
     min-height: 100vh;
     min*
 
+.about {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: var(--dark-color);
+    padding: 80px 20px 60px 20px;
+}
+
+.about-content {
+    max-width: 700px;
+    text-align: center;
+    color: var(--light-color);
+    font-size: 1.25rem;
+    line-height: 1.7;
+}
+    .work {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: var(--light-color);
+    padding: 80px 20px 60px 20px;
+}
+
+.work-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.work-item {
+    background: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 6px 32px rgba(0,0,0,0.08);
+    padding: 2rem 1.5rem;
+    width: 300px;
+    text-align: left;
+    color: #222;
+    transition: transform 0.2s;
+}
+.work-item:hover {
+    transform: translateY(-8px) scale(1.03);
+}
+.contact {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: var(--primary-color);
+    padding: 80px 20px 60px 20px;
+}
+
+.contact-form {
+    background: #fff;
+    padding: 2rem 2.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+    max-width: 400px;
+    width: 100%;
+    margin-top: 2rem;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid #ddd;
+    font-size: 1rem;
+    resize: none;
+}
+
+.contact-form button {
+    width: 100%;
+    background: var(--primary-color);
+    color: #fff;
+    font-weight: 700;
+    padding: 0.9rem 0;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: background 0.2s;
+}
+.contact-form button:hover {
+    background: #e14b00;
+}
