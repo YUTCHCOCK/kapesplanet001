@@ -209,13 +209,13 @@ nav ul li a.active {
 }
 .about-stats {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 16px; /* 줄 간격, 필요시 조정 */
   align-items: flex-start; /* 왼쪽 정렬. 가운데 정렬은 center */
 }
 .stat-item {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   gap: 12px; /* 숫자와 라벨 사이 간격, 필요시 조정 */
 }
@@ -225,7 +225,6 @@ nav ul li a.active {
     font-weight: 700;
     color: var(--primary-color);
 }
-
 .stat-label {
     font-size: 1rem;
     color: var(--text-color);
@@ -850,7 +849,8 @@ footer {
   .portfolio-grid {
     grid-template-columns: 1fr !important;
   }
-  .form-control,
+
+    .form-control,
   .newsletter-input {
     font-size: 1.1rem;
     padding: 14px;
@@ -873,7 +873,6 @@ footer {
     gap: 10px;
   }
 }
-
 @media screen and (max-width: 768px) {
   .mobile-menu-btn {
     display: block;
@@ -904,13 +903,15 @@ footer {
 }
 
 @media screen and (max-width: 576px) {
-  .hero-title,
-  .section-title {
-    font-size: 1.3rem;
+  nav ul li a {
+       font-size: 0.8rem;
+  hero-title,
+  section-title {
+    font-size: 1.2rem;
   }
   .about-title,
   .contact-title {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
   }
   .portfolio-item {
     height: 180px;
@@ -918,12 +919,39 @@ footer {
   .map-container {
     height: 220px;
   }
+      @media (max-width: 600px) {
+  .about-stats {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+  .stat-item {
+    display: flex;
+    flex-direction: column;   /* value와 label을 세로로 */
+    align-items: center;
+    flex: 1 1 0;
+    min-width: 0;
+    margin: 0 2px;
+  }
+  .stat-value {
+    font-size: 1.1rem;
+    font-weight: bold;
+    white-space: nowrap;
+  }
+  .stat-label {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin-top: 2px;
+    white-space: nowrap;
+  }
+}
 }
 @media screen and (max-width: 480px) {
  nav ul li a {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
  hero-title {
-    font-size: 1.3rem;   /* 더 작게 */
+    font-size: 1.2rem;   /* 더 작게 */
     white-space: nowrap; /* 한 줄로 강제 */
   }
   body {
@@ -933,6 +961,32 @@ footer {
   .section {
     padding: 40px 6px;
   }
+  .about-stats {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+  .stat-item {
+    display: flex;
+    flex-direction: column;   /* value와 label을 세로로 */
+    align-items: center;
+    flex: 1 1 0;
+    min-width: 0;
+    margin: 0 2px;
+  }
+  .stat-value {
+    font-size: 1.1rem;
+    font-weight: bold;
+    white-space: nowrap;
+  }
+  .stat-label {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin-top: 2px;
+    white-space: nowrap;
+  }
+}
 }
 .video-modal {
     position: fixed; left: 0; top: 0; width: 100vw; height: 100vh;
