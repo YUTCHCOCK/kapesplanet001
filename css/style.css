@@ -38,6 +38,9 @@ html, body {
     min-height: 100vh;
     height: 100%;
     scroll-snap-type: y mandatory;
+    padding: 40px 24px; /* 위아래 40px, 좌우 24px 여백 */
+    box-sizing: border-box;
+}
 }
 .section-title {
     font-size: 3rem;
