@@ -210,15 +210,13 @@ nav ul li a.active {
 .about-stats {
   display: flex;
   flex-direction:  column;
-  gap: 16px; 
+  gap: 12px; 
   align-items: flex-start;
 }
 .stat-item {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 12px; /* 숫자와 라벨 사이 간격, 필요시 조정 */
-}
 
 .stat-value {
     font-size: 2.5rem;
