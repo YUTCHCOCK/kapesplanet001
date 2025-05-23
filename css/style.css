@@ -38,6 +38,13 @@ html, body {
     min-height: 100vh;
     height: 100%;
     scroll-snap-type: y mandatory;
+    padding-left: clamp(16px, 5vw, 80px);
+    padding-right: clamp(16px, 5vw, 80px);
+    padding-top: clamp(30px, 5vw, 100px); 
+    padding-bottom: clamp(30px, 5vw, 100px); 
+    font-size: clamp(14px, 1.5vw, 18px);
+}
+
 }
 }
 .section-title {
