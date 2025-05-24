@@ -32,7 +32,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
         
-document.addEventListener('DOMContentLoaded', function () {
   // 비디오 썸네일 클릭 시 모달 오픈
   document.querySelectorAll('.video-thumbnail').forEach(function(thumbnail) {
     thumbnail.addEventListener('click', function(e) {
