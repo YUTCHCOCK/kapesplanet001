@@ -208,10 +208,9 @@ nav ul li a.active {
     margin-bottom: 30px;
 }
 .about-stats {
-  display: flex;
-  flex-direction:  column;
-  gap: 12px; 
-  align-items: flex-start;
+  flex-direction: row;
+  gap: 16px; /* 줄 간격, 필요시 조정 */
+  align-items: flex-start; /* 왼쪽 정렬. 가운데 정렬은 center */display: flex;
 }
 .stat-item {
   display: flex;
