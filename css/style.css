@@ -1095,89 +1095,13 @@ footer {
         margin: 0 10px;
     }
 
-    /* About 섹션 768px - 모바일 세로 정렬 */
-    .about {
-        padding: 80px 15px;
-    }
-
-    .about-title {
-        font-size: 2rem;
-    }
-
-    .about-description {
-        font-size: 1rem;
-        line-height: 1.6;
-    }
-
-    /* 모바일에서 Stats 세로 정렬 */
-    .about-stats {
-        flex-direction: column;
-        gap: 25px;
-        align-items: center;
-    }
-
-    .stat-item {
-        width: 100%;
-        max-width: 350px;
-        min-width: auto;
-    }
-
-    .stat-value {
-        font-size: 1.6rem;
-    }
-
-    .stat-label {
-        font-size: 0.9rem;
-    }
-    
-    .about-image img {
-        width: 80px;
-    }
-    
-    .about-image {
-        bottom: 15px;
-        right: 15px;
-    }
-
-    /* 포트폴리오 필터 모바일 최적화 */
-    .portfolio-filter {
-        gap: 3px;
-        margin-bottom: 40px;
-        padding: 0 5px;
-        flex-wrap: nowrap;
-        overflow-x: auto;
-    }
-
-    .filter-btn {
-        padding: 8px 12px;
-        font-size: 0.8rem;
-        border-radius: 15px;
-        white-space: nowrap;
-        flex-shrink: 0;
-    }
-}
-
-/* 세로 화면 대응 (720px부터) - 오버레이 영상 위로 복원 */
+/* 세로 화면 대응 (720px부터) - 오버레이 강화 */
 @media screen and (max-width: 720px) and (orientation: portrait) {
     .hero {
         height: 100vh;
         position: relative;
         padding: 0;
-    }
-
-    .hero-overlay {
-        position: absolute;
-        top: 50%; /* 영상 위 중앙으로 복원 */
-        left: 50%;
-        transform: translate(-50%, -50%);
-        z-index: 2;
-        color: white;
-        text-align: center;
-        text-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
-        padding: 30px 20px;
-        background: rgba(0, 0, 0, 0.4);
-        border-radius: 10px;
-        backdrop-filter: blur(5px);
+        display: block; /* flex 제거 */
     }
 
     .hero iframe {
@@ -1189,22 +1113,43 @@ footer {
         z-index: 1;
     }
 
+    .hero-overlay {
+        position: absolute !important;
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%) !important;
+        z-index: 10 !important; /* z-index 높임 */
+        color: white !important;
+        text-align: center;
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 1) !important; /* 그림자 강화 */
+        padding: 30px 20px;
+        background: rgba(0, 0, 0, 0.7) !important; /* 배경 진하게 */
+        border-radius: 15px;
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
     .monkey-watermark {
         position: absolute;
         bottom: 10px;
         right: 10px;
         width: 80px;
-        z-index: 3;
+        z-index: 5;
     }
 
     .hero-title {
-        font-size: 2.5rem;
+        font-size: 2.5rem !important;
         margin-bottom: 8px;
+        color: white !important;
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 1) !important;
     }
     
     .hero-tagline {
-        font-size: 1.2rem;
+        font-size: 1.2rem !important;
         margin-bottom: 5px;
+        color: white !important;
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 1) !important;
     }
 
     /* About 세로화면에서 stats 세로 정렬 */
@@ -1214,145 +1159,49 @@ footer {
     }
 }
 
-@media screen and (max-width: 600px) {
-    .video-modal iframe {
-        width: 95vw;
-        height: 55vw;
-    }
-
-    .hero-overlay {
-        top: 50%; /* 영상 위 중앙 유지 */
-        padding: 0 10px;
-    }
-
-    .hero-title {
-        font-size: 1.4rem;
-    }
-
-    .hero-tagline {
-        font-size: 0.77rem;
-    }
-}
-
-/* 세로 화면 600px 이하 */
+/* 세로 화면 600px 이하 - 강화 */
 @media screen and (max-width: 600px) and (orientation: portrait) {
     .hero-overlay {
-        padding: 25px 15px;
-        background: rgba(0, 0, 0, 0.5);
-        border-radius: 8px;
-    }
-
-    .hero-title {
-        font-size: 2rem;
-        margin-bottom: 6px;
-    }
-    
-    .hero-tagline {
-        font-size: 1rem;
-        margin-bottom: 4px;
-    }
-}
-
-@media screen and (max-width: 576px) {
-    .hero-overlay {
-        top: 50%; /* 영상 위 중앙 유지 */
-        padding: 0 10px;
-    }
-
-    .hero-title {
-        font-size: 1.54rem;
-        white-space: nowrap;
-    }
-    
-    .hero-tagline {
-        font-size: 0.77rem;
-        white-space: nowrap;
-    }
-
-    .section-title {
-        font-size: 1.8rem;
-    }
-
-    .about-title,
-    .contact-title {
-        font-size: 1.8rem;
-    }
-
-    .portfolio-item {
-        height: 180px;
-    }
-
-    .map-container {
-        height: 220px;
-    }
-
-    /* About 섹션 576px 최적화 */
-    .about {
-        padding: 60px 10px;
-    }
-
-    .about-title {
-        font-size: 1.6rem;
-        line-height: 1.3;
-    }
-
-    .about-description {
-        font-size: 0.9rem;
-        line-height: 1.5;
-    }
-
-    .about-stats {
-        gap: 20px;
-    }
-
-    .stat-value {
-        font-size: 1.4rem;
-    }
-
-    .stat-label {
-        font-size: 0.85rem;
-    }
-    
-    .about-image img {
-        width: 70px;
-    }
-    
-    .about-image {
-        bottom: 12px;
-        right: 12px;
-    }
-
-    /* 포트폴리오 필터 576px 최적화 */
-    .portfolio-filter {
-        gap: 2px;
-        padding: 0 3px;
-    }
-
-    .filter-btn {
-        padding: 6px 10px;
-        font-size: 0.75rem;
+        padding: 25px 15px !important;
+        background: rgba(0, 0, 0, 0.8) !important;
         border-radius: 12px;
+        z-index: 15 !important;
+    }
+
+    .hero-title {
+        font-size: 2rem !important;
+        margin-bottom: 6px;
+        text-shadow: 3px 3px 10px rgba(0, 0, 0, 1) !important;
+    }
+    
+    .hero-tagline {
+        font-size: 1rem !important;
+        margin-bottom: 4px;
+        text-shadow: 3px 3px 10px rgba(0, 0, 0, 1) !important;
     }
 }
 
-/* 세로 화면 576px 이하 */
+/* 세로 화면 576px 이하 - 강화 */
 @media screen and (max-width: 576px) and (orientation: portrait) {
     .hero-overlay {
-        padding: 20px 10px;
-        background: rgba(0, 0, 0, 0.55);
-        border-radius: 6px;
+        padding: 20px 12px !important;
+        background: rgba(0, 0, 0, 0.85) !important;
+        border-radius: 10px;
+        z-index: 20 !important;
     }
 
     .hero-title {
-        font-size: 1.8rem;
+        font-size: 1.8rem !important;
         white-space: normal;
         margin-bottom: 5px;
+        text-shadow: 4px 4px 12px rgba(0, 0, 0, 1) !important;
     }
     
     .hero-tagline {
-        font-size: 0.9rem;
+        font-size: 0.9rem !important;
         white-space: normal;
         margin-bottom: 3px;
+        text-shadow: 4px 4px 12px rgba(0, 0, 0, 1) !important;
     }
 
     /* About 세로화면 stats 세로 정렬 유지 */
@@ -1369,91 +1218,30 @@ footer {
     }
 }
 
-@media screen and (max-width: 480px) {
-    nav ul li a {
-        font-size: 0.8rem;
-    }
-
-    .hero-overlay {
-        top: 50%; /* 영상 위 중앙 유지 */
-    }
-
-    .hero-title {
-        font-size: 1.26rem;
-        white-space: nowrap;
-    }
-    
-    .hero-tagline {
-        font-size: 0.63rem;
-        white-space: nowrap;
-    }
-
-    body {
-        font-size: 90%;
-        padding: 4px;
-    }
-
-    .section {
-        padding: 40px 6px;
-    }
-
-    /* About 섹션 480px 최적화 */
-    .about {
-        padding: 40px 8px;
-    }
-
-    .about-stats {
-        gap: 18px;
-    }
-
-    .stat-value {
-        font-size: 1.3rem;
-    }
-
-    .stat-label {
-        font-size: 0.8rem;
-    }
-    
-    .about-image img {
-        width: 60px;
-    }
-    
-    .about-image {
-        bottom: 10px;
-        right: 10px;
-    }
-
-    /* 포트폴리오 필터 480px 최적화 */
-    .portfolio-filter {
-        gap: 1px;
-        padding: 0 2px;
-    }
-
-    .filter-btn {
-        padding: 5px 8px;
-        font-size: 0.7rem;
-        border-radius: 10px;
-    }
-}
-
-/* 세로 화면 480px 이하 */
+/* 세로 화면 480px 이하 - 최대 강화 */
 @media screen and (max-width: 480px) and (orientation: portrait) {
     .hero-overlay {
-        padding: 15px 8px;
-        background: rgba(0, 0, 0, 0.6);
-        border-radius: 5px;
+        padding: 18px 10px !important;
+        background: rgba(0, 0, 0, 0.9) !important;
+        border-radius: 8px;
+        z-index: 25 !important;
+        border: 1px solid rgba(255, 255, 255, 0.2);
     }
 
     .hero-title {
-        font-size: 1.5rem;
+        font-size: 1.5rem !important;
         white-space: normal;
         margin-bottom: 4px;
+        text-shadow: 5px 5px 15px rgba(0, 0, 0, 1) !important;
+        font-weight: 900 !important;
     }
     
     .hero-tagline {
-        font-size: 0.8rem;
+        font-size: 0.8rem !important;
         white-space: normal;
         margin-bottom: 2px;
+        text-shadow: 5px 5px 15px rgba(0, 0, 0, 1) !important;
+        font-weight: 600 !important;
     }
 
     .monkey-watermark {
@@ -1476,21 +1264,29 @@ footer {
     }
 }
 
-/* 세로 화면 400px 이하 */
+/* 세로 화면 400px 이하 - 극강화 */
 @media screen and (max-width: 400px) and (orientation: portrait) {
     .hero-overlay {
-        padding: 12px 5px;
-        background: rgba(0, 0, 0, 0.65);
-        border-radius: 4px;
+        padding: 15px 8px !important;
+        background: rgba(0, 0, 0, 0.95) !important;
+        border-radius: 6px;
+        z-index: 30 !important;
+        border: 2px solid rgba(255, 107, 61, 0.3);
     }
 
     .hero-title {
-        font-size: 1.3rem;
+        font-size: 1.3rem !important;
         margin-bottom: 3px;
+        text-shadow: 6px 6px 18px rgba(0, 0, 0, 1) !important;
+        font-weight: 900 !important;
+        color: #ffffff !important;
     }
     
     .hero-tagline {
-        font-size: 0.7rem;
+        font-size: 0.7rem !important;
         margin-bottom: 1px;
+        text-shadow: 6px 6px 18px rgba(0, 0, 0, 1) !important;
+        font-weight: 600 !important;
+        color: #ffffff !important;
     }
 }
