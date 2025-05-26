@@ -889,7 +889,6 @@ footer {
    cursor: pointer;
    z-index: 2;
 }
-
 /* 반응형 디자인 - 완전 수정됨 */
 @media screen and (max-width: 1200px) {
     .section {
@@ -906,6 +905,24 @@ footer {
     
     .hero-tagline {
         font-size: 1.4rem; /* 2rem의 70% */
+    }
+
+    /* About 섹션 1200px */
+    .about {
+        padding: 100px 50px;
+    }
+    
+    .about-stats {
+        gap: 40px;
+    }
+    
+    .about-image img {
+        width: 100px;
+    }
+    
+    .about-image {
+        bottom: 25px;
+        right: 25px;
     }
 }
 
@@ -930,15 +947,6 @@ footer {
         font-size: 1.26rem; /* 1.8rem의 70% */
     }
 
-    .about-text {
-        padding-right: 0;
-        margin-bottom: 50px;
-    }
-
-    .about-content {
-        flex-direction: column;
-    }
-
     .portfolio-grid {
         grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     }
@@ -950,6 +958,36 @@ footer {
 
     .contact-content {
         flex-direction: column;
+    }
+
+    /* About 섹션 992px */
+    .about-title {
+        font-size: 2.4rem;
+    }
+    
+    .about-description {
+        font-size: 1.1rem;
+    }
+    
+    .about-stats {
+        gap: 30px;
+    }
+    
+    .stat-value {
+        font-size: 1.6rem;
+    }
+    
+    .stat-label {
+        font-size: 0.9rem;
+    }
+    
+    .about-image img {
+        width: 90px;
+    }
+    
+    .about-image {
+        bottom: 20px;
+        right: 20px;
     }
 }
 
@@ -968,7 +1006,6 @@ footer {
         top: 60%;
     }
 
-    .about-content,
     .contact-content,
     .footer-content {
         flex-direction: column;
@@ -1033,16 +1070,16 @@ footer {
     }
 
     .hero-overlay {
-        top: 60%;
+        top: 50%; /* 영상 위 중앙으로 복원 */
     }
 
     .hero-title {
-        font-size: 1.96rem; /* 2.8rem의 70% */
+        font-size: 1.96rem;
         white-space: nowrap;
     }
     
     .hero-tagline {
-        font-size: 0.98rem; /* 1.4rem의 70% */
+        font-size: 0.98rem;
         white-space: nowrap;
     }
 
@@ -1058,42 +1095,48 @@ footer {
         margin: 0 10px;
     }
 
-    /* About 섹션 모바일 최적화 */
+    /* About 섹션 768px - 모바일 세로 정렬 */
     .about {
-        padding: 80px 15px; /* 좌우 패딩 줄임 */
-    }
-
-    .about-content {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        gap: 30px;
-    }
-
-    .about-text {
-        padding-right: 0;
-        margin-bottom: 30px;
-        width: 100%;
+        padding: 80px 15px;
     }
 
     .about-title {
-        font-size: 2rem; /* 크기 줄임 */
+        font-size: 2rem;
     }
 
     .about-description {
-        font-size: 1rem; /* 크기 줄임 */
+        font-size: 1rem;
         line-height: 1.6;
     }
 
-    .about-image {
-        order: -1;
-        margin-bottom: 20px;
-        width: 100%;
+    /* 모바일에서 Stats 세로 정렬 */
+    .about-stats {
+        flex-direction: column;
+        gap: 25px;
+        align-items: center;
     }
 
+    .stat-item {
+        width: 100%;
+        max-width: 350px;
+        min-width: auto;
+    }
+
+    .stat-value {
+        font-size: 1.6rem;
+    }
+
+    .stat-label {
+        font-size: 0.9rem;
+    }
+    
     .about-image img {
-        width: 200px; /* 로고 크기 조정 */
-        max-width: 80%;
+        width: 80px;
+    }
+    
+    .about-image {
+        bottom: 15px;
+        right: 15px;
     }
 
     /* 포트폴리오 필터 모바일 최적화 */
@@ -1114,46 +1157,36 @@ footer {
     }
 }
 
-/* 세로 화면 대응 (720px부터) - 수정됨 */
+/* 세로 화면 대응 (720px부터) - 오버레이 영상 위로 복원 */
 @media screen and (max-width: 720px) and (orientation: portrait) {
     .hero {
         height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: stretch;
         position: relative;
         padding: 0;
     }
 
     .hero-overlay {
-        position: relative;
-        top: auto;
-        left: auto;
-        transform: none;
+        position: absolute;
+        top: 50%; /* 영상 위 중앙으로 복원 */
+        left: 50%;
+        transform: translate(-50%, -50%);
         z-index: 2;
         color: white;
         text-align: center;
         text-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
-        padding: 20px 20px 10px 20px; /* 최소 패딩으로 영상에 가깝게 */
-        order: 2; /* 영상 위에 위치 */
-        flex-shrink: 0;
-        background: rgba(0, 0, 0, 0.3);
-        border-radius: 0;
-        backdrop-filter: blur(3px);
-        margin-top: auto; /* 아래쪽으로 밀어서 영상 바로 위에 위치 */
+        padding: 30px 20px;
+        background: rgba(0, 0, 0, 0.4);
+        border-radius: 10px;
+        backdrop-filter: blur(5px);
     }
 
     .hero iframe {
-        position: relative;
+        position: absolute;
         top: 0;
         left: 0;
         width: 100%;
-        flex: 1;
-        min-height: 300px;
+        height: 100%;
         z-index: 1;
-        order: 3; /* 텍스트 아래에 위치 */
-        margin-top: 0;
     }
 
     .monkey-watermark {
@@ -1161,45 +1194,23 @@ footer {
         bottom: 10px;
         right: 10px;
         width: 80px;
-        z-index: 4;
+        z-index: 3;
     }
 
     .hero-title {
         font-size: 2.5rem;
-        margin-bottom: 5px;
+        margin-bottom: 8px;
     }
     
     .hero-tagline {
         font-size: 1.2rem;
-        margin-bottom: 3px;
+        margin-bottom: 5px;
     }
 
     /* About 세로화면에서 stats 세로 정렬 */
     .about-stats {
-        display: flex;
-        flex-direction: column; /* 세로 정렬로 변경 */
-        gap: 25px;
-        align-items: center;
-        text-align: center;
-    }
-
-    .stat-item {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-        max-width: 300px;
-    }
-
-    .stat-value {
-        font-size: 1.8rem;
-        margin-bottom: 8px;
-    }
-
-    .stat-label {
-        font-size: 0.95rem;
-        text-align: center;
-        line-height: 1.4;
+        flex-direction: column !important;
+        gap: 25px !important;
     }
 }
 
@@ -1210,54 +1221,51 @@ footer {
     }
 
     .hero-overlay {
-        top: 60%;
+        top: 50%; /* 영상 위 중앙 유지 */
         padding: 0 10px;
     }
 
     .hero-title {
-        font-size: 1.4rem; /* 2rem의 70% */
+        font-size: 1.4rem;
     }
 
     .hero-tagline {
-        font-size: 0.77rem; /* 1.1rem의 70% */
+        font-size: 0.77rem;
     }
 }
 
-/* 세로 화면 600px 이하 - 수정됨 */
+/* 세로 화면 600px 이하 */
 @media screen and (max-width: 600px) and (orientation: portrait) {
     .hero-overlay {
-        padding: 15px 15px 8px 15px; /* 패딩 최소화 */
-        background: rgba(0, 0, 0, 0.4);
+        padding: 25px 15px;
+        background: rgba(0, 0, 0, 0.5);
+        border-radius: 8px;
     }
 
     .hero-title {
         font-size: 2rem;
-        margin-bottom: 4px;
+        margin-bottom: 6px;
     }
     
     .hero-tagline {
         font-size: 1rem;
-        margin-bottom: 2px;
-    }
-
-    .hero iframe {
-        min-height: 250px;
+        margin-bottom: 4px;
     }
 }
 
 @media screen and (max-width: 576px) {
     .hero-overlay {
-        top: 60%;
+        top: 50%; /* 영상 위 중앙 유지 */
         padding: 0 10px;
     }
 
     .hero-title {
-        font-size: 1.54rem; /* 2.2rem의 70% */
+        font-size: 1.54rem;
         white-space: nowrap;
     }
     
     .hero-tagline {
-        font-size: 0.77rem; /* 1.1rem의 70% */
+        font-size: 0.77rem;
         white-space: nowrap;
     }
 
@@ -1278,35 +1286,6 @@ footer {
         height: 220px;
     }
 
-    .about-stats {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        gap: 0.5rem;
-    }
-
-    .stat-item {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        flex: 1 1 0;
-        min-width: 0;
-        margin: 0 2px;
-    }
-
-    .stat-value {
-        font-size: 1rem;
-        font-weight: bold;
-        white-space: nowrap;
-    }
-
-    .stat-label {
-        font-size: 0.8rem;
-        opacity: 0.8;
-        margin-top: 2px;
-        white-space: nowrap;
-    }
-
     /* About 섹션 576px 최적화 */
     .about {
         padding: 60px 10px;
@@ -1322,8 +1301,25 @@ footer {
         line-height: 1.5;
     }
 
+    .about-stats {
+        gap: 20px;
+    }
+
+    .stat-value {
+        font-size: 1.4rem;
+    }
+
+    .stat-label {
+        font-size: 0.85rem;
+    }
+    
     .about-image img {
-        width: 150px;
+        width: 70px;
+    }
+    
+    .about-image {
+        bottom: 12px;
+        right: 12px;
     }
 
     /* 포트폴리오 필터 576px 최적화 */
@@ -1339,41 +1335,37 @@ footer {
     }
 }
 
-/* 세로 화면 576px 이하 - 수정됨 */
+/* 세로 화면 576px 이하 */
 @media screen and (max-width: 576px) and (orientation: portrait) {
     .hero-overlay {
-        padding: 12px 10px 6px 10px; /* 최소 패딩 */
-        background: rgba(0, 0, 0, 0.45);
+        padding: 20px 10px;
+        background: rgba(0, 0, 0, 0.55);
+        border-radius: 6px;
     }
 
     .hero-title {
         font-size: 1.8rem;
         white-space: normal;
-        margin-bottom: 3px;
+        margin-bottom: 5px;
     }
     
     .hero-tagline {
         font-size: 0.9rem;
         white-space: normal;
-        margin-bottom: 2px;
-    }
-
-    .hero iframe {
-        min-height: 200px;
+        margin-bottom: 3px;
     }
 
     /* About 세로화면 stats 세로 정렬 유지 */
     .about-stats {
-        flex-direction: column;
-        gap: 20px;
+        gap: 20px !important;
     }
 
     .stat-value {
-        font-size: 1.5rem;
+        font-size: 1.4rem !important;
     }
 
     .stat-label {
-        font-size: 0.85rem;
+        font-size: 0.85rem !important;
     }
 }
 
@@ -1383,16 +1375,16 @@ footer {
     }
 
     .hero-overlay {
-        top: 60%;
+        top: 50%; /* 영상 위 중앙 유지 */
     }
 
     .hero-title {
-        font-size: 1.26rem; /* 1.8rem의 70% */
+        font-size: 1.26rem;
         white-space: nowrap;
     }
     
     .hero-tagline {
-        font-size: 0.63rem; /* 0.9rem의 70% */
+        font-size: 0.63rem;
         white-space: nowrap;
     }
 
@@ -1410,6 +1402,27 @@ footer {
         padding: 40px 8px;
     }
 
+    .about-stats {
+        gap: 18px;
+    }
+
+    .stat-value {
+        font-size: 1.3rem;
+    }
+
+    .stat-label {
+        font-size: 0.8rem;
+    }
+    
+    .about-image img {
+        width: 60px;
+    }
+    
+    .about-image {
+        bottom: 10px;
+        right: 10px;
+    }
+
     /* 포트폴리오 필터 480px 최적화 */
     .portfolio-filter {
         gap: 1px;
@@ -1423,27 +1436,24 @@ footer {
     }
 }
 
-/* 세로 화면 480px 이하 - 수정됨 */
+/* 세로 화면 480px 이하 */
 @media screen and (max-width: 480px) and (orientation: portrait) {
     .hero-overlay {
-        padding: 10px 8px 5px 8px; /* 최소 패딩 */
-        background: rgba(0, 0, 0, 0.5);
+        padding: 15px 8px;
+        background: rgba(0, 0, 0, 0.6);
+        border-radius: 5px;
     }
 
     .hero-title {
         font-size: 1.5rem;
         white-space: normal;
-        margin-bottom: 2px;
+        margin-bottom: 4px;
     }
     
     .hero-tagline {
         font-size: 0.8rem;
         white-space: normal;
-        margin-bottom: 1px;
-    }
-
-    .hero iframe {
-        min-height: 180px;
+        margin-bottom: 2px;
     }
 
     .monkey-watermark {
@@ -1454,36 +1464,33 @@ footer {
 
     /* About 세로화면에서 stats 세로 정렬 유지 */
     .about-stats {
-        gap: 20px;
+        gap: 18px !important;
     }
 
     .stat-value {
-        font-size: 1.5rem;
+        font-size: 1.3rem !important;
     }
 
     .stat-label {
-        font-size: 0.85rem;
+        font-size: 0.8rem !important;
     }
 }
 
-/* 세로 화면 400px 이하 - 수정됨 */
+/* 세로 화면 400px 이하 */
 @media screen and (max-width: 400px) and (orientation: portrait) {
     .hero-overlay {
-        padding: 8px 5px 3px 5px; /* 극소 패딩 */
-        background: rgba(0, 0, 0, 0.55);
+        padding: 12px 5px;
+        background: rgba(0, 0, 0, 0.65);
+        border-radius: 4px;
     }
 
     .hero-title {
         font-size: 1.3rem;
-        margin-bottom: 1px;
+        margin-bottom: 3px;
     }
     
     .hero-tagline {
         font-size: 0.7rem;
         margin-bottom: 1px;
-    }
-
-    .hero iframe {
-        min-height: 160px;
     }
 }
