@@ -159,7 +159,7 @@ nav ul li a.active {
     opacity: 0.8;
 }
 
-/* 히어로 섹션 */
+/* 히어로 섹션 - 애니메이션 추가 */
 .hero {
     position: relative;
     width: 100vw;
@@ -171,7 +171,7 @@ nav ul li a.active {
 
 .hero-overlay {
     position: absolute;
-    top: 50%;
+    top: 60%; /* 50%에서 60%로 변경 - 위치를 아래로 이동 */
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 2;
@@ -181,42 +181,89 @@ nav ul li a.active {
 }
 
 .hero-tagline {
-    font-size: 2.4rem; /* 기존 1.2rem의 2배 */
+    font-size: 2.4rem;
     margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeInUp 1.5s ease-out 0.5s forwards;
 }
 
 .hero-title {
-    font-size: 6rem; /* 기존 3rem의 2배 */
+    font-size: 6rem;
     font-weight: bold;
     margin-bottom: 30px;
+    opacity: 0;
+    animation: fadeInUp 1.5s ease-out 1s forwards;
+    background: linear-gradient(45deg, #FF6B3D, #F9D923, #FF6B3D);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: fadeInUp 1.5s ease-out 1s forwards, gradientShift 3s ease-in-out infinite;
 }
 
-.cta-btn {
-    display: inline-block;
-    padding: 15px 30px;
-    background-color: var(--primary-color);
-    color: var(--text-color);
-    font-size: 1rem;
-    font-weight: 600;
-    border-radius: 5px;
-    transition: background-color 0.3s, transform 0.3s;
-    margin-top: 2rem;
+/* 페이드인 업 애니메이션 */
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.cta-btn:hover {
-    background-color: #e65100;
-    transform: translateY(-3px);
+/* 그라데이션 이동 애니메이션 */
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
-/* About 섹션 워터마크 */
+/* 텍스트 글로우 효과 */
+.hero-tagline {
+    animation: fadeInUp 1.5s ease-out 0.5s forwards, textGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes textGlow {
+    0% {
+        text-shadow: 0 0 12px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 107, 61, 0.3);
+    }
+    100% {
+        text-shadow: 0 0 12px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 107, 61, 0.6);
+    }
+}
+
+/* 배경 비디오에 살짝 줌 인 효과 */
+.hero iframe {
+    animation: slowZoom 20s ease-in-out infinite alternate;
+}
+
+@keyframes slowZoom {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.05);
+    }
+}
+
+/* 워터마크 애니메이션 */
 .monkey-watermark {
     position: absolute;
     right: 20px;
     bottom: 20px;
-    opacity: 0.5;
+    opacity: 0.3;
     width: 220px;
     z-index: 0;
     pointer-events: none;
+    animation: floatAnimation 6s ease-in-out infinite;
 }
 
 /* About 섹션 */
