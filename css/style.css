@@ -423,18 +423,18 @@ nav ul li a.active {
 /* 로고를 섹션 최하단에 배치 */
 .about-image {
     position: absolute;
-    bottom: 30px;
+    bottom: 100px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 1;
 }
 
 .about-image img {
-    width: 150px; /* 작은 크기 */
+    width: 200px; /* 작은 크기 */
     height: auto;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    opacity: 0.7;
+    opacity: 0.9;
 }
 
 
