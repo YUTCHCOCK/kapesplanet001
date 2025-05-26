@@ -345,15 +345,17 @@ nav ul li a.active {
     overflow: hidden;
     height: 250px;
     transition: transform 0.3s;
-}
-
-.portfolio-item:hover {
-    transform: translateY(-10px);
+    cursor: pointer; /* 추가 */
 }
 
 .portfolio-thumbnail {
     width: 100%;
     height: 100%;
+    cursor: pointer; /* 추가 */
+}
+
+.portfolio-item:hover {
+    transform: translateY(-10px);
 }
 
 .portfolio-thumbnail iframe {
