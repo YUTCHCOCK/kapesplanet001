@@ -16,62 +16,9 @@
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KapesPlanet - 원숭이행성 </title>
+    <title>KapesPlanet - 원숭이행성</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
-    <style>
-        /* About 섹션 CEO 사진 스타일 */
-        .about-container {
-            position: relative;
-            margin-top: 40px;
-            text-align: right;
-        }
-        .about-ceo-photo {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            object-fit: cover;
-            vertical-align: middle;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-            margin-right: 10px;
-            background: #fff;
-        }
-        .about-ceo-label {
-            display: inline-block;
-            font-size: 1rem;
-            color: #888;
-            vertical-align: middle;
-        }
-        /* monkey_text_logo 이미지 은은하게 */
-        .monkey-watermark {
-            position: absolute;
-            right: 20px;
-            bottom: 20px;
-            opacity: 0.5;
-            width: 220px;
-            z-index: 0;
-            pointer-events: none;
-        }
-        @media (max-width:900px){
-            .monkey-watermark { width: 120px; right: 10px; bottom: 10px;}
-        }
-
-        /* 원형 로고(로딩 화면)의 크기 조정 */
-        .logo-container img {
-            width: 60%;
-            max-width: 360px;
-            min-width: 120px;
-            height: auto;
-            display: block;
-            margin: 0 auto;
-        }
-        /* 로딩 화면에서 로고 컨테이너의 중앙 정렬 유지 */
-        .loading-logo .logo-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-    </style>
 </head>
 <body>
     <!-- 헤더 -->
@@ -94,32 +41,32 @@
     </header>
 
     <!-- 히어로 섹션 -->
-    <section class="hero" id="hero" style="position:relative; width:100vw; height:60vw; max-height:70vh; overflow:hidden;">
-      <!-- 유튜브 배경 영상 (ID는 sbEYTBXJb4I로 대체, loop시 playlist에도 동일 ID) -->
-      <iframe 
-        src="https://www.youtube.com/embed/sbEYTBXJb4I?autoplay=1&mute=1&controls=0&showinfo=0&loop=1&playlist=sbEYTBXJb4I&modestbranding=1"
-        style="position:absolute; top:0; left:0; width:100%; height:100%; z-index:1; pointer-events:none; border:0;"
-        frameborder="0"
-        allow="autoplay; encrypted-media"
-        allowfullscreen>
-      </iframe>
+    <section class="hero" id="hero">
+        <!-- 유튜브 배경 영상 -->
+        <iframe 
+            src="https://www.youtube.com/embed/sbEYTBXJb4I?autoplay=1&mute=1&controls=0&showinfo=0&loop=1&playlist=sbEYTBXJb4I&modestbranding=1"
+            style="position:absolute; top:0; left:0; width:100%; height:100%; z-index:1; pointer-events:none; border:0;"
+            frameborder="0"
+            allow="autoplay; encrypted-media"
+            allowfullscreen>
+        </iframe>
         
-  <!-- 오버레이 텍스트 -->
-    <div style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); z-index:2; color:white; text-align:center; text-shadow:0 0 12px #000;">
-    <div class="hero-tagline">매일 진화하는 크리에이터들의 세상</div>
-    <div class="hero-title" style="font-size:3rem; font-weight:bold;">원숭이행성</div>
-    </div>
-    <a href="#portfolio" class="cta-btn" style="margin-top:2rem; display:inline-block;">포트폴리오 보기</a>
-  </div>
-      <!-- monkey 텍스트 로고 워터마크 (필요하면 유지) -->
-      <img class="monkey-watermark" src="img/monkey_text_logo.png" alt="Monkey Text Logo Watermark">
-</section>
+        <!-- 오버레이 텍스트 -->
+        <div class="hero-overlay">
+            <div class="hero-tagline">매일 진화하는 크리에이터들의 세상</div>
+            <div class="hero-title">원숭이행성</div>
+            <a href="#portfolio" class="cta-btn">포트폴리오 보기</a>
+        </div>
+
+        <!-- monkey 텍스트 로고 워터마크 -->
+        <img class="monkey-watermark" src="img/monkey_text_logo.png" alt="Monkey Text Logo Watermark">
+    </section>
 
     <!-- About 섹션 -->
-    <section class="section about" id="about" style="position:relative;">
+    <section class="section about" id="about">
         <div class="section-header">
             <div class="section-title">About Us</div>
-            <div class="section-subtitle">AI와 상상력이 만나는 곳, 원숭이행성 </div>
+            <div class="section-subtitle">AI와 상상력이 만나는 곳, 원숭이행성</div>
         </div>
         <div class="about-content">
             <div class="about-text">
@@ -127,7 +74,7 @@
                 <div class="about-description">
                     CJ ENM, dingo, hello82 출신의 유일한(유치콕PD) 대표와 크리에이터 크루<br>
                     원숭이행성은 지금껏 경험할 수 없는 새로운 기획과 제작 퍼포먼스를 통하여<br>
-                    광고, 숏폼, 드라마, 예능 등 차원이 다른 콘텐츠를 여러분께 보여드립니다. 
+                    광고, 숏폼, 드라마, 예능 등 차원이 다른 콘텐츠를 여러분께 보여드립니다.
                 </div>
                 <div class="about-stats">
                     <div class="stat-item">
@@ -136,25 +83,23 @@
                     </div>
                     <div class="stat-item">
                         <div class="stat-value">TOP CREATOR</div>
-                        <div class="stat-label">K콘텐츠의 트렌드를 이끈 스타 작가, PD 군단 </div>
+                        <div class="stat-label">K콘텐츠의 트렌드를 이끈 스타 작가, PD 군단</div>
                     </div>
                     <div class="stat-item">
                         <div class="stat-value">MIX & MATCH</div>
                         <div class="stat-label">디지털부터 리니어까지, 장르 불문 유연한 확장성</div>
                     </div>
                 </div>
-                           <!-- CEO 사진 및 라벨 -->
-                <div class="about-ceo-container">
             </div>
-            <div class="about-image" style="position:relative;">
+            <div class="about-image">
                 <img src="img/kapes_logo_full.png" alt="KAPES PLANET 소개 이미지">
             </div>
         </div>
-        <!-- monkey 텍스트 로고 워터마크 (About에도 은은하게) -->
+        <!-- monkey 텍스트 로고 워터마크 -->
         <img class="monkey-watermark" src="img/monkey_text_logo.png" alt="Monkey Text Logo Watermark">
     </section>
 
-    <!-- portfolio 섹션 -->
+    <!-- Portfolio 섹션 -->
     <section class="section portfolio" id="portfolio">
         <div class="section-header">
             <div class="section-title">Portfolio</div>
@@ -167,52 +112,49 @@
             <button class="filter-btn" data-filter="Youtube">유튜브</button>
         </div>
         <div class="portfolio-grid">
-    <div class="portfolio-item" data-category="Digital Film">
-        <div class="portfolio-thumbnail">
-            <iframe 
-                src="https://www.youtube.com/embed/pqDtXGHiqEE"
-                frameborder="0"
-                allow="autoplay; encrypted-media"
-                allowfullscreen
-                style="width:100%; aspect-ratio:16/9; border-radius:12px;">
-            </iframe>
+            <div class="portfolio-item" data-category="Digital Film">
+                <div class="portfolio-thumbnail">
+                    <iframe 
+                        src="https://www.youtube.com/embed/pqDtXGHiqEE"
+                        frameborder="0"
+                        allow="autoplay; encrypted-media"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                <div class="portfolio-overlay">
+                    <div class="portfolio-title">디지털 필름</div>
+                    <div class="portfolio-category">Digital Film</div>
+                </div>
+            </div>
+            <div class="portfolio-item" data-category="Short Form">
+                <div class="portfolio-thumbnail">
+                    <iframe 
+                        src="https://www.youtube.com/embed/-ZQ2FUDAZe0"
+                        frameborder="0"
+                        allow="autoplay; encrypted-media"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                <div class="portfolio-overlay">
+                    <div class="portfolio-title">웹예능</div>
+                    <div class="portfolio-category">Short Form</div>
+                </div>
+            </div>
+            <div class="portfolio-item" data-category="Youtube">
+                <div class="portfolio-thumbnail">
+                    <iframe 
+                        src="https://www.youtube.com/embed/UGfz4VKEd9U"
+                        frameborder="0"
+                        allow="autoplay; encrypted-media"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                <div class="portfolio-overlay">
+                    <div class="portfolio-title">유튜브 채널</div>
+                    <div class="portfolio-category">Youtube</div>
+                </div>
+            </div>
         </div>
-        <div class="portfolio-overlay">
-            <div class="portfolio-title">디지털 필름</div>
-            <div class="portfolio-category">Digital Film</div>
-        </div>
-    </div>
-    <div class="portfolio-item" data-category="Web Series">
-        <div class="portfolio-thumbnail">
-            <iframe 
-                src="https://www.youtube.com/embed/-ZQ2FUDAZe0"
-                frameborder="0"
-                allow="autoplay; encrypted-media"
-                allowfullscreen
-                style="width:100%; aspect-ratio:16/9; border-radius:12px;">
-            </iframe>
-        </div>
-        <div class="portfolio-overlay">
-            <div class="portfolio-title">웹예능</div>
-            <div class="portfolio-category">Short Form</div>
-        </div>
-    </div>
-    <div class="portfolio-item" data-category="Youtube Channel">
-        <div class="portfolio-thumbnail">
-            <iframe 
-                src="https://www.youtube.com/embed/UGfz4VKEd9U"
-                frameborder="0"
-                allow="autoplay; encrypted-media"
-                allowfullscreen
-                style="width:100%; aspect-ratio:16/9; border-radius:12px;">
-            </iframe>
-        </div>
-        <div class="portfolio-overlay">
-            <div class="portfolio-title">유튜브0 채널</div>
-            <div class="portfolio-category">Youtube Channel</div>
-        </div>
-    </div>
-</div>
     </section>
 
     <!-- Contact 섹션 -->
@@ -225,7 +167,7 @@
             <div class="contact-info">
                 <div class="contact-title">Contact Info</div>
                 <div class="contact-description">
-                    새로운 광고, 콘테츠를 함께 만들고 싶으신가요?<br>
+                    새로운 광고, 콘텐츠를 함께 만들고 싶으신가요?<br>
                     창작, 비즈니스, 제휴 등 다양한 문의를 기다립니다.
                 </div>
                 <ul class="contact-list">
@@ -243,7 +185,7 @@
                         <span class="contact-text">
                             <div class="contact-label">Youtube</div>
                             <div class="contact-value">
-                                <a href="https://www.youtube.com/@tlqkdSOLBI" target="_blank" rel="noopener">youtube.com/tlqkdsolbi</a>
+                                <a href="https://www.youtube.com/@tlqkdSOLBI" target="_blank" rel="noopener">youtube.com/@tlqkdsolbi</a>
                             </div>
                         </span>
                     </li>
@@ -279,7 +221,11 @@
             </form>
         </div>
         <div class="map-container">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3164.0969251943883!2d127.02758331531043!3d37.4979419798107!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca158b7[...]
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3163.5634567288895!2d126.9021837153106!3d37.55662537979837!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357c989228d6c717%3A0x934c8ca8b8c4b89b!2z7ISc7Jq47Yq567OE7IucIOuniO2PrOq1rCDsm5TrnpzsubXrs7Tro5wgNDAy!5e0!3m2!1sko!2skr!4v1640995200000!5m2!1sko!2skr"
+                allowfullscreen
+                loading="lazy">
+            </iframe>
         </div>
     </section>
 
@@ -290,7 +236,7 @@
                 <img src="img/kapes_text_logo.png" alt="KAPES PLANET 로고">
                 <div class="footer-description">
                     원숭이행성만의 감각으로 당신의 브랜드를 바이럴합니다.<br>
-                    우리와 함께 인상적이고, 성과 있는 콘텐츠를 만드세요. 
+                    우리와 함께 인상적이고, 성과 있는 콘텐츠를 만드세요.
                 </div>
             </div>
             <div class="footer-links">
@@ -305,7 +251,7 @@
                     <a href="https://instagram.com/kapesplanet" class="social-link" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
                     <a href="https://www.facebook.com/" class="social-link" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
                     <a href="https://twitter.com/" class="social-link" target="_blank" rel="noopener"><i class="fab fa-twitter"></i></a>
-                    <a href="https://youtube.com/tlqkdsolbi" class="social-link" target="_blank" rel="noopener"><i class="fab fa-youtube"></i></a>
+                    <a href="https://www.youtube.com/@tlqkdSOLBI" class="social-link" target="_blank" rel="noopener"><i class="fab fa-youtube"></i></a>
                 </div>
             </div>
             <div class="footer-newsletter">
@@ -325,31 +271,15 @@
         </div>
     </footer>
 
-    <!-- JS 파일 연결 -->
+    <!-- 유튜브 비디오 모달 -->
+    <div id="video-modal" class="video-modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close-button" aria-label="비디오 닫기">&times;</span>
+            <iframe id="modal-iframe" src="" frameborder="0" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
     <script src="js/main.js"></script>
-</body>
-</html>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const menuBtn = document.querySelector('.mobile-menu-btn');
-      const nav = document.querySelector('header nav');
-      menuBtn.addEventListener('click', function () {
-        nav.classList.toggle('active');
-      });
-      // 메뉴 클릭 시 닫힘
-      document.querySelectorAll('nav ul li a').forEach(function(link){
-        link.addEventListener('click', function(){
-          nav.classList.remove('active');
-        });
-      });
-    });
-</script>
-<!-- 유튜브 비디오 모달 (반드시 body 맨 마지막에 위치) -->
-<div id="video-modal" class="video-modal" style="display:none;">
-  <div class="modal-content">
-    <span class="close-button" aria-label="비디오 닫기">&times;</span>
-    <iframe id="modal-iframe" src="" frameborder="0" allowfullscreen allow="autoplay; encrypted-media"></iframe>
-  </div>
-</div>
 </body>
 </html>
