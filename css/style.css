@@ -181,12 +181,12 @@ nav ul li a.active {
 }
 
 .hero-tagline {
-    font-size: 1.2rem;
+    font-size: 2.4rem; /* 기존 1.2rem의 2배 */
     margin-bottom: 20px;
 }
 
 .hero-title {
-    font-size: 3rem;
+    font-size: 6rem; /* 기존 3rem의 2배 */
     font-weight: bold;
     margin-bottom: 30px;
 }
@@ -746,10 +746,12 @@ footer {
    .section {
        padding: 100px 50px;
    }
-
-   .hero-title {
-       font-size: 3.5rem;
-   }
+    .hero-title {
+        font-size: 5rem; /* 수정 */
+    }
+    .hero-tagline {
+        font-size: 2rem; /* 추가 */
+    }
 }
 
 @media screen and (max-width: 992px) {
