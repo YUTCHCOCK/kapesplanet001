@@ -158,7 +158,6 @@ nav ul li a.active {
     color: var(--text-color);
     opacity: 0.8;
 }
-
 /* 히어로 섹션 - 개선된 애니메이션 */
 .hero {
     position: relative;
@@ -182,7 +181,7 @@ nav ul li a.active {
 
 .hero-tagline {
     font-size: 1.68rem; /* 2.4rem의 70% */
-    margin-bottom: 20px;
+    margin-bottom: 10px; /* 20px에서 10px로 간격 줄임 */
     opacity: 0;
     white-space: nowrap;
     overflow: hidden;
@@ -203,7 +202,7 @@ nav ul li a.active {
     position: relative;
     animation: typewriter2 2s steps(10) 3s forwards, 
                blink 1s infinite 5s,
-               colorWave 1s linear 6s infinite;
+               colorCycle 6.5s linear 6s infinite;
 }
 
 /* 타이핑 애니메이션 - 태그라인 */
@@ -248,61 +247,26 @@ nav ul li a.active {
     }
 }
 
-/* 색상 웨이브 효과 - 왼쪽에서 오른쪽으로 */
-@keyframes colorWave {
+/* 색상 변화 애니메이션 - 수정됨 */
+@keyframes colorCycle {
+    /* 0-3초: 흰색 유지 */
     0% {
-        background: linear-gradient(90deg, white 0%, white 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
+        color: #ffffff;
     }
-    5% {
-        background: linear-gradient(90deg, #FF6B3D 0%, white 10%, white 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
+    46.15% { /* 3초 지점 */
+        color: #ffffff;
     }
-    20% {
-        background: linear-gradient(90deg, #FF6B3D 0%, #FF6B3D 50%, white 60%, white 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
+    /* 3-3.25초: 주황색으로 변화 (15프레임) */
+    50% { /* 3.25초 지점 */
+        color: #ff5a00;
     }
-    35% {
-        background: linear-gradient(90deg, #FF6B3D 0%, #FF6B3D 80%, white 90%, white 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
+    /* 3.25-6.25초: 주황색 유지 (3초) */
+    96.15% { /* 6.25초 지점 */
+        color: #ff5a00;
     }
-    50% {
-        background: linear-gradient(90deg, #FF6B3D 0%, #FF6B3D 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-    }
-    65% {
-        background: linear-gradient(90deg, white 0%, white 10%, #FF6B3D 20%, #FF6B3D 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-    }
-    80% {
-        background: linear-gradient(90deg, white 0%, white 40%, #FF6B3D 50%, #FF6B3D 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-    }
-    95% {
-        background: linear-gradient(90deg, white 0%, white 90%, #FF6B3D 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-    }
-    100% {
-        background: linear-gradient(90deg, white 0%, white 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
+    /* 6.25-6.5초: 흰색으로 변화 (15프레임) */
+    100% { /* 6.5초 지점 */
+        color: #ffffff;
     }
 }
 
