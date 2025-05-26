@@ -73,21 +73,65 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // 비디오 모달 기능
+    // 비디오 모달 기능 - 수정됨
     const modal = document.getElementById('video-modal');
     const closeButton = modal ? modal.querySelector('.close-button') : null;
     const modalIframe = document.getElementById('modal-iframe');
 
-    // 비디오 썸네일 클릭 시 모달 열기
-    document.querySelectorAll('.video-thumbnail').forEach(function(thumbnail) {
+    // 포트폴리오 비디오 썸네일 클릭 시 모달 열기
+    document.querySelectorAll('.portfolio-thumbnail').forEach(function(thumbnail) {
         thumbnail.addEventListener('click', function(e) {
             e.preventDefault();
+            e.stopPropagation();
+            
             const iframe = this.querySelector('iframe');
             if (iframe && modal && modalIframe) {
-                const videoSrc = iframe.src;
-                modalIframe.src = videoSrc + (videoSrc.includes('?') ? '&' : '?') + 'autoplay=1';
-                modal.style.display = 'flex';
-                document.body.style.overflow = 'hidden';
+                let videoSrc = iframe.src;
+                
+                // YouTube URL에서 비디오 ID 추출
+                let videoId = '';
+                if (videoSrc.includes('youtube.com/embed/')) {
+                    videoId = videoSrc.split('youtube.com/embed/')[1].split('?')[0];
+                } else if (videoSrc.includes('youtu.be/')) {
+                    videoId = videoSrc.split('youtu.be/')[1].split('?')[0];
+                }
+                
+                if (videoId) {
+                    // 모달용 YouTube URL 생성 (autoplay 포함)
+                    const modalVideoSrc = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=0&controls=1&rel=0`;
+                    modalIframe.src = modalVideoSrc;
+                    modal.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                }
+            }
+        });
+    });
+
+    // 포트폴리오 아이템 전체 클릭 시 모달 열기 (대안)
+    document.querySelectorAll('.portfolio-item').forEach(function(item) {
+        item.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const iframe = this.querySelector('iframe');
+            if (iframe && modal && modalIframe) {
+                let videoSrc = iframe.src;
+                
+                // YouTube URL에서 비디오 ID 추출
+                let videoId = '';
+                if (videoSrc.includes('youtube.com/embed/')) {
+                    videoId = videoSrc.split('youtube.com/embed/')[1].split('?')[0];
+                } else if (videoSrc.includes('youtu.be/')) {
+                    videoId = videoSrc.split('youtu.be/')[1].split('?')[0];
+                }
+                
+                if (videoId) {
+                    // 모달용 YouTube URL 생성 (autoplay 포함)
+                    const modalVideoSrc = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=0&controls=1&rel=0`;
+                    modalIframe.src = modalVideoSrc;
+                    modal.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                }
             }
         });
     });
@@ -103,7 +147,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 닫기 버튼 클릭
     if (closeButton) {
-        closeButton.addEventListener('click', closeModal);
+        closeButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            closeModal();
+        });
     }
 
     // 모달 바깥 클릭 시 닫기
