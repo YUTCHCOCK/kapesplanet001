@@ -1001,12 +1001,13 @@ footer {
 /* 세로 화면 대응 (720px부터) - 수정됨 */
 @media screen and (max-width: 720px) and (orientation: portrait) {
     .hero {
-        height: auto;
-        min-height: 100vh;
+        height: 100vh;
         display: flex;
         flex-direction: column;
-        justify-content: flex-end; /* space-between에서 flex-end로 변경 */
+        justify-content: flex-start;
         align-items: stretch;
+        position: relative;
+        padding: 0;
     }
 
     .hero-overlay {
@@ -1014,18 +1015,28 @@ footer {
         top: auto;
         left: auto;
         transform: none;
-        padding: 30px 20px 10px 20px; /* 하단 패딩 줄임 */
+        z-index: 2;
+        color: white;
+        text-align: center;
+        text-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+        padding: 80px 20px 15px 20px; /* 상단 패딩을 늘려서 헤더 아래 위치 */
         order: 1;
         flex-shrink: 0;
-        margin-bottom: 0; /* 마진 제거로 비디오와 붙게 함 */
+        background: transparent;
+        border-radius: 0;
+        backdrop-filter: none;
     }
 
     .hero iframe {
         position: relative;
-        order: 2;
-        flex: 1;
+        top: 0;
+        left: 0;
+        width: 100%;
+        flex: 1; /* 남은 공간을 모두 차지 */
         min-height: 300px;
-        margin-top: 0; /* 마진 제거로 텍스트와 붙게 함 */
+        z-index: 1;
+        order: 2;
+        margin-top: 0;
     }
 
     .monkey-watermark {
@@ -1038,29 +1049,29 @@ footer {
 
     .hero-title {
         font-size: 2.5rem;
-        margin-bottom: 15px; /* 간격 더 줄임 */
+        margin-bottom: 8px;
     }
     
     .hero-tagline {
         font-size: 1.2rem;
-        margin-bottom: 8px; /* 간격 더 줄임 */
+        margin-bottom: 5px;
     }
 }
 
 /* 세로 화면 600px 이하 - 수정됨 */
 @media screen and (max-width: 600px) and (orientation: portrait) {
     .hero-overlay {
-        padding: 25px 15px 8px 15px; /* 패딩 더 줄임 */
+        padding: 70px 15px 12px 15px;
     }
 
     .hero-title {
         font-size: 2rem;
-        margin-bottom: 12px;
+        margin-bottom: 6px;
     }
     
     .hero-tagline {
         font-size: 1rem;
-        margin-bottom: 6px;
+        margin-bottom: 4px;
     }
 
     .hero iframe {
@@ -1071,19 +1082,19 @@ footer {
 /* 세로 화면 576px 이하 - 수정됨 */
 @media screen and (max-width: 576px) and (orientation: portrait) {
     .hero-overlay {
-        padding: 20px 10px 5px 10px; /* 패딩 최소화 */
+        padding: 60px 10px 10px 10px;
     }
 
     .hero-title {
         font-size: 1.8rem;
         white-space: normal;
-        margin-bottom: 10px;
+        margin-bottom: 5px;
     }
     
     .hero-tagline {
         font-size: 0.9rem;
         white-space: normal;
-        margin-bottom: 5px;
+        margin-bottom: 3px;
     }
 
     .hero iframe {
@@ -1094,19 +1105,19 @@ footer {
 /* 세로 화면 480px 이하 - 수정됨 */
 @media screen and (max-width: 480px) and (orientation: portrait) {
     .hero-overlay {
-        padding: 15px 8px 3px 8px; /* 최소 패딩 */
+        padding: 50px 8px 8px 8px;
     }
 
     .hero-title {
         font-size: 1.5rem;
         white-space: normal;
-        margin-bottom: 8px;
+        margin-bottom: 4px;
     }
     
     .hero-tagline {
         font-size: 0.8rem;
         white-space: normal;
-        margin-bottom: 3px;
+        margin-bottom: 2px;
     }
 
     .hero iframe {
@@ -1117,5 +1128,26 @@ footer {
         width: 60px;
         bottom: 5px;
         right: 5px;
+    }
+}
+
+/* 세로 화면 400px 이하 - 추가 */
+@media screen and (max-width: 400px) and (orientation: portrait) {
+    .hero-overlay {
+        padding: 45px 5px 5px 5px;
+    }
+
+    .hero-title {
+        font-size: 1.3rem;
+        margin-bottom: 3px;
+    }
+    
+    .hero-tagline {
+        font-size: 0.7rem;
+        margin-bottom: 2px;
+    }
+
+    .hero iframe {
+        min-height: 160px;
     }
 }
