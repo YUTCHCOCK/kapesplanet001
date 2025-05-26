@@ -181,18 +181,18 @@ nav ul li a.active {
 }
 
 .hero-tagline {
-    font-size: 1.68rem; /* 2.4rem의 70% */
+    font-size: 1.7rem; 
     margin-bottom: 10px;
     opacity: 0;
     white-space: nowrap;
     overflow: hidden;
     border-right: 2px solid rgba(255, 255, 255, 0.7);
-    animation: typewriter1 2s steps(20) 2s forwards, /* 1.5초 지연 */
-               hideCursor1 0.1s linear 4s forwards; /* 타이핑 완료 후 커서 숨김 */
+    animation: typewriter1 1.5s steps(20) 1.5s forwards, 
+               hideCursor1 0.1s linear 3.5s forwards; /* 타이핑 완료 후 커서 숨김 */
 }
 
 .hero-title {
-    font-size: 4.2rem; /* 6rem의 70% */
+    font-size: 4.2rem; 
     font-weight: bold;
     margin-bottom: 30px;
     opacity: 0;
@@ -202,7 +202,7 @@ nav ul li a.active {
     color: white;
     display: inline-block;
     position: relative;
-    animation: typewriter2 2s steps(10) 4.5s forwards, /* 4.5초 지연 (1.5초 + 태그라인 2초 + 0.5초 간격) */
+    animation: typewriter2 1.5s steps(10) 4s forwards, /* 4초 지연 
                hideCursor2 0.1s linear 6.5s forwards, /* 타이핑 완료 후 커서 숨김 */
                colorCycle 6.5s linear 7s infinite; /* 색상 변화는 타이핑 완료 후 시작 */
 }
@@ -424,12 +424,13 @@ nav ul li a.active {
 .about-image {
     position: absolute;
     bottom: 30px;
-    right: 30px;
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 1;
 }
 
 .about-image img {
-    width: 120px; /* 작은 크기 */
+    width: 150px; /* 작은 크기 */
     height: auto;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
