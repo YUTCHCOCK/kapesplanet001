@@ -430,7 +430,7 @@ nav ul li a.active {
 }
 
 .about-image img {
-    width: 200px; /* 작은 크기 */
+    width: 300px; /* 작은 크기 */
     height: auto;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
