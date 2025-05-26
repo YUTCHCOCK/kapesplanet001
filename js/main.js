@@ -168,8 +168,13 @@ document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
             closeModal();
         }
     });
+    
+// EmailJS 초기화 
+(function() {
+    emailjs.init(GnCf85iVH7vsa-xKr); // 4단계에서 복사한 Public Key
+})();
 
-// 폼 제출 처리 - mailto 방식
+// 폼 제출 처리
 const contactForm = document.querySelector('.contact-form');
 const newsletterForm = document.querySelector('.newsletter-form');
 
@@ -178,17 +183,33 @@ if (contactForm) {
         e.preventDefault();
         
         const formData = new FormData(this);
-        const name = formData.get('name') || '이름 없음';
-        const email = formData.get('email') || '';
-        const message = formData.get('message') || '';
+        const submitBtn = this.querySelector('.submit-btn');
+        const originalText = submitBtn.textContent;
         
-        const subject = `[원숭이행성 문의] ${name}님의 문의`;
-        const body = `이름: ${name}\n이메일: ${email}\n\n문의내용:\n${message}`;
+        // 전송 중 표시
+        submitBtn.textContent = '전송 중...';
+        submitBtn.disabled = true;
         
-        window.location.href = `mailto:official@kapesplanet.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        const templateParams = {
+            from_name: formData.get('name') || '이름 없음',
+            from_email: formData.get('email') || '',
+            message: formData.get('message') || ''
+        };
         
-        this.reset();
-        alert('기본 메일 앱이 열립니다. 메일을 확인하고 전송해주세요.');
+        emailjs.send('service_x1zvv5a', 'template_lujx42n', templateParams)
+            .then(function(response) {
+                alert('문의가 성공적으로 전송되었습니다!');
+                contactForm.reset();
+                console.log('SUCCESS!', response.status, response.text);
+            })
+            .catch(function(error) {
+                alert('전송 중 오류가 발생했습니다. 다시 시도해주세요.');
+                console.error('FAILED...', error);
+            })
+            .finally(function() {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            });
     });
 }
 
@@ -198,25 +219,24 @@ if (newsletterForm) {
         const email = this.querySelector('.newsletter-input').value;
         
         if (email) {
-            const subject = '[원숭이행성] 뉴스레터 구독 신청';
-            const body = `안녕하세요,\n\n뉴스레터 구독을 신청합니다.\n\n구독 이메일: ${email}\n\n감사합니다.`;
-            const mailtoLink = `mailto:official@kapesplanet.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            const templateParams = {
+                from_name: '뉴스레터 구독자',
+                from_email: email,
+                message: '뉴스레터 구독을 신청합니다.'
+            };
             
-            window.location.href = mailtoLink;
-            this.querySelector('.newsletter-input').value = '';
-            alert('뉴스레터 구독 신청 메일이 준비되었습니다.');
+            emailjs.send(('service_x1zvv5a', 'template_lujx42n', templateParams)
+                .then(function(response) {
+                    alert('뉴스레터 구독이 완료되었습니다!');
+                    newsletterForm.querySelector('.newsletter-input').value = '';
+                })
+                .catch(function(error) {
+                    alert('구독 신청 중 오류가 발생했습니다.');
+                    console.error('Newsletter error:', error);
+                });
         }
     });
 }
-
-
-    if (newsletterForm) {
-        newsletterForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('뉴스레터 구독이 완료되었습니다.');
-            this.querySelector('.newsletter-input').value = '';
-        });
-    }
 
     // 스크롤 애니메이션 (선택사항)
     let ticking = false;
