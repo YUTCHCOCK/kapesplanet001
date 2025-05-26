@@ -311,43 +311,46 @@ nav ul li a.active {
     }
 }
 
-/* About 섹션 */
+/* About 섹션 - 완전 수정 */
 .about {
     background-color: var(--dark-color);
+    padding: 120px 100px;
 }
 
 .about-content {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 60px;
 }
 
 .about-text {
-    flex: 1;
-    min-width: 300px;
-    padding-right: 50px;
+    flex: 2;
+    min-width: 400px;
 }
 
 .about-title {
-    font-size: 2.5rem;
+    font-size: 2.8rem;
     font-weight: 700;
     margin-bottom: 30px;
     color: var(--primary-color);
+    line-height: 1.2;
 }
 
 .about-description {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     line-height: 1.8;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
+    color: var(--text-color);
+    opacity: 0.9;
 }
 
-/* About 섹션 stats - 세로 정렬로 수정 */
+/* About stats - 항상 세로 정렬 */
 .about-stats {
     display: flex;
-    flex-direction: column; /* 세로 정렬 */
+    flex-direction: column !important; /* 강제 세로 정렬 */
     gap: 30px;
-    align-items: flex-start; /* 왼쪽 정렬 */
+    align-items: flex-start;
 }
 
 .stat-item {
@@ -358,10 +361,11 @@ nav ul li a.active {
 }
 
 .stat-value {
-    font-size: 2.5rem;
+    font-size: 1.8rem;
     font-weight: 700;
     color: var(--primary-color);
     margin-bottom: 8px;
+    letter-spacing: 0.5px;
 }
 
 .stat-label {
@@ -376,12 +380,14 @@ nav ul li a.active {
     min-width: 300px;
     display: flex;
     justify-content: center;
+    align-items: flex-start;
 }
 
 .about-image img {
     max-width: 100%;
+    width: 280px;
     height: auto;
-    border-radius: 10px;
+    border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
