@@ -12,7 +12,10 @@
     <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon.png">
 
     <!-- 사이트 매니페스트 (PWA, 선택) -->
-    <link rel="manifest" href="img/favicon/site.webmanifest">
+    <link rel="manifest" href="img/favicon/site.webmanifest">\
+    
+    <!-- 이메일 어드레스 추가  -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,6 +24,8 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
+
     <!-- 헤더 -->
     <header>
         <div class="header-logo">
@@ -210,20 +215,13 @@
                     <input type="text" class="form-control" name="name" placeholder="이름 또는 회사명" required>
                 </div>
                 <div class="form-group">
-                     <input type="email" class="form-control" name="email" placeholder="이메일 주소" required>
-                </div>        
-                <div class="form-group">
-                    <textarea class="form-control" name="message" placeholder="문의 내용을 입력하세요" required></textarea>
+                    <input type="email" class="form-control" name="email" placeholder="이메일 주소" required>
                 </div>
+                <div class="form-group">
+                <textarea class="form-control" name="message" placeholder="문의 내용을 입력하세요" required></textarea>
+            </div>
                 <button type="submit" class="submit-btn">문의 보내기</button>
             </form>
-        </div>
-        <div class="map-container">
-            <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3163.5634567288895!2d126.9021837153106!3d37.55662537979837!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357c989228d6c717%3A0x934c8ca8b8c4b89b!2z7ISc7Jq47Yq567OE7IucIOuniO2PrOq1rCDsm5TrnpzsubXrs7Tro5wgNDAy!5e0!3m2!1sko!2skr!4v1640995200000!5m2!1sko!2skr"
-                allowfullscreen
-                loading="lazy">
-            </iframe>
         </div>
     </section>
 
