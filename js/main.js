@@ -190,17 +190,46 @@ if (ctaBtn) {
         }
     });
 
-    // 폼 제출 처리
-    const contactForm = document.querySelector('.contact-form');
-    const newsletterForm = document.querySelector('.newsletter-form');
+// 폼 제출 처리 - mailto 방식
+const contactForm = document.querySelector('.contact-form');
+const newsletterForm = document.querySelector('.newsletter-form');
 
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('문의가 접수되었습니다. 빠른 시일 내에 연락드리겠습니다.');
-            this.reset();
-        });
-    }
+if (contactForm) {
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(this);
+        const name = formData.get('name') || '이름 없음';
+        const email = formData.get('email') || '';
+        const message = formData.get('message') || '';
+        
+        const subject = `[원숭이행성 문의] ${name}님의 문의`;
+        const body = `이름: ${name}\n이메일: ${email}\n\n문의내용:\n${message}`;
+        
+        window.location.href = `mailto:official@kapesplanet.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        
+        this.reset();
+        alert('기본 메일 앱이 열립니다. 메일을 확인하고 전송해주세요.');
+    });
+}
+
+if (newsletterForm) {
+    newsletterForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const email = this.querySelector('.newsletter-input').value;
+        
+        if (email) {
+            const subject = '[원숭이행성] 뉴스레터 구독 신청';
+            const body = `안녕하세요,\n\n뉴스레터 구독을 신청합니다.\n\n구독 이메일: ${email}\n\n감사합니다.`;
+            const mailtoLink = `mailto:official@kapesplanet.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            
+            window.location.href = mailtoLink;
+            this.querySelector('.newsletter-input').value = '';
+            alert('뉴스레터 구독 신청 메일이 준비되었습니다.');
+        }
+    });
+}
+
 
     if (newsletterForm) {
         newsletterForm.addEventListener('submit', function(e) {
