@@ -158,6 +158,7 @@ nav ul li a.active {
     color: var(--text-color);
     opacity: 0.8;
 }
+
 /* 히어로 섹션 - 개선된 애니메이션 */
 .hero {
     position: relative;
@@ -181,12 +182,13 @@ nav ul li a.active {
 
 .hero-tagline {
     font-size: 1.68rem; /* 2.4rem의 70% */
-    margin-bottom: 10px; /* 20px에서 10px로 간격 줄임 */
+    margin-bottom: 10px;
     opacity: 0;
     white-space: nowrap;
     overflow: hidden;
     border-right: 2px solid rgba(255, 255, 255, 0.7);
-    animation: typewriter1 2s steps(20) 0.5s forwards, blink 1s infinite 2.5s;
+    animation: typewriter1 2s steps(20) 2s forwards, /* 1.5초 지연 */
+               hideCursor1 0.1s linear 4s forwards; /* 타이핑 완료 후 커서 숨김 */
 }
 
 .hero-title {
@@ -200,9 +202,9 @@ nav ul li a.active {
     color: white;
     display: inline-block;
     position: relative;
-    animation: typewriter2 2s steps(10) 3s forwards, 
-               blink 1s infinite 5s,
-               colorCycle 6.5s linear 6s infinite;
+    animation: typewriter2 2s steps(10) 4.5s forwards, /* 4.5초 지연 (1.5초 + 태그라인 2초 + 0.5초 간격) */
+               hideCursor2 0.1s linear 6.5s forwards, /* 타이핑 완료 후 커서 숨김 */
+               colorCycle 6.5s linear 7s infinite; /* 색상 변화는 타이핑 완료 후 시작 */
 }
 
 /* 타이핑 애니메이션 - 태그라인 */
@@ -211,13 +213,9 @@ nav ul li a.active {
         width: 0;
         opacity: 1;
     }
-    99% {
-        border-right: 2px solid rgba(255, 255, 255, 0.7);
-    }
     100% {
         width: 100%;
         opacity: 1;
-        border-right: 2px solid transparent;
     }
 }
 
@@ -227,23 +225,29 @@ nav ul li a.active {
         width: 0;
         opacity: 1;
     }
-    99% {
-        border-right: 3px solid rgba(255, 255, 255, 0.7);
-    }
     100% {
         width: 100%;
         opacity: 1;
-        border-right: 3px solid transparent;
     }
 }
 
-/* 커서 깜빡임 */
-@keyframes blink {
-    0%, 50% {
-        border-right-color: rgba(255, 255, 255, 0.7);
+/* 커서 숨기기 - 태그라인 */
+@keyframes hideCursor1 {
+    0% {
+        border-right: 2px solid rgba(255, 255, 255, 0.7);
     }
-    51%, 100% {
-        border-right-color: transparent;
+    100% {
+        border-right: 2px solid transparent;
+    }
+}
+
+/* 커서 숨기기 - 타이틀 */
+@keyframes hideCursor2 {
+    0% {
+        border-right: 3px solid rgba(255, 255, 255, 0.7);
+    }
+    100% {
+        border-right: 3px solid transparent;
     }
 }
 
