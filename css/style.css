@@ -1275,8 +1275,8 @@ footer {
     
     .about-image {
         bottom: 60px; /* 위치도 조정 */
-        right: 50%;
-        transform: translateX(50%); /* 중앙 정렬 */
+       left: 50%;
+        transform: translateX(-50%); /* 중앙 정렬 */
     }
 
     /* 포트폴리오 필터 강제 한 줄 */
@@ -1334,8 +1334,8 @@ footer {
     
     .about-image {
         bottom: 50px;
-        right: 50%;
-        transform: translateX(50%);
+       left: 50%;
+        transform: translateX(-50%);
     }
 }
 
@@ -1398,8 +1398,8 @@ footer {
     
     .about-image {
         bottom: 40px;
-        right: 50%;
-        transform: translateX(50%);
+       left: 50%;
+        transform: translateX(-50%);
     }
 
     /* 포트폴리오 필터 강제 한 줄 */
@@ -1475,8 +1475,8 @@ footer {
     
     .about-image {
         bottom: 30px;
-        right: 50%;
-        transform: translateX(50%);
+       left: 50%;
+        transform: translateX(-50%);
     }
 }
 
@@ -1519,7 +1519,7 @@ footer {
     
     .about-image {
         bottom: 25px;
-        right: 50%;
-        transform: translateX(50%);
+       left: 50%;
+        transform: translateX(-50%);
     }
 }
