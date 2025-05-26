@@ -187,8 +187,8 @@ nav ul li a.active {
     white-space: nowrap;
     overflow: hidden;
     border-right: 2px solid rgba(255, 255, 255, 0.7);
-    animation: typewriter1 1.5s steps(20) 1.5s forwards, 
-               hideCursor1 0.1s linear 3.5s forwards; /* 타이핑 완료 후 커서 숨김 */
+    animation: typewriter1 1.5s steps(20) 1s forwards, 
+               hideCursor1 0.1s linear 3s forwards; /* 타이핑 완료 후 커서 숨김 */
 }
 
 .hero-title {
@@ -202,9 +202,9 @@ nav ul li a.active {
     color: white;
     display: inline-block;
     position: relative;
-    animation: typewriter2 1.5s steps(10) 4s forwards, /* 4초 지연 
-               hideCursor2 0.1s linear 6.5s forwards, /* 타이핑 완료 후 커서 숨김 */
-               colorCycle 6.5s linear 7s infinite; /* 색상 변화는 타이핑 완료 후 시작 */
+    animation: typewriter2 1.5s steps(10) 3.5s forwards, /* 4초 지연 
+               hideCursor2 0.1s linear 5.5s forwards, /* 타이핑 완료 후 커서 숨김 */
+               colorCycle 6.5s linear 6s infinite; /* 색상 변화는 타이핑 완료 후 시작 */
 }
 
 /* 타이핑 애니메이션 - 태그라인 */
