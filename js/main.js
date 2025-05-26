@@ -60,27 +60,6 @@ document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
         }
     });
 });
-
-// CTA 버튼 클릭 처리 추가
-const ctaBtn = document.querySelector('.cta-btn');
-if (ctaBtn) {
-    ctaBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector('#portfolio');
-        if (target) {
-            const header = document.querySelector('header');
-            const headerOffset = header ? header.offsetHeight : 80;
-            const elementPosition = target.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-            
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: 'smooth'
-            });
-        }
-    });
-}
-
     // 헤더 스크롤 효과
     window.addEventListener('scroll', function() {
         const header = document.querySelector('header');
