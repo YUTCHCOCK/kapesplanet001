@@ -71,36 +71,120 @@ document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
             }
         }
     });
+// 비디오 모달 기능 - 완전 수정
+const modal = document.getElementById('video-modal');
+const closeButton = modal ? modal.querySelector('.close-button') : null;
+const modalIframe = document.getElementById('modal-iframe');
 
-    // 비디오 모달 기능 - 수정됨
-    const modal = document.getElementById('video-modal');
-    const closeButton = modal ? modal.querySelector('.close-button') : null;
-    const modalIframe = document.getElementById('modal-iframe');
-
-    // 포트폴리오 비디오 썸네일 클릭 시 모달 열기
-    document.querySelectorAll('.portfolio-thumbnail').forEach(function(thumbnail) {
-        thumbnail.addEventListener('click', function(e) {
+// 포트폴리오 비디오 클릭 이벤트 - 개선됨
+function setupVideoClicks() {
+    // 모든 포트폴리오 아이템에 클릭 이벤트 추가
+    document.querySelectorAll('.portfolio-item').forEach(function(item) {
+        item.style.cursor = 'pointer';
+        
+        item.addEventListener('click', function(e) {
             e.preventDefault();
             e.stopPropagation();
             
             const iframe = this.querySelector('iframe');
             if (iframe && modal && modalIframe) {
                 let videoSrc = iframe.src;
+                console.log('Original video src:', videoSrc);
                 
                 // YouTube URL에서 비디오 ID 추출
                 let videoId = '';
+                
+                // embed URL에서 ID 추출
                 if (videoSrc.includes('youtube.com/embed/')) {
-                    videoId = videoSrc.split('youtube.com/embed/')[1].split('?')[0];
-                } else if (videoSrc.includes('youtu.be/')) {
-                    videoId = videoSrc.split('youtu.be/')[1].split('?')[0];
+                    const embedMatch = videoSrc.match(/youtube\.com\/embed\/([^?&]+)/);
+                    if (embedMatch) {
+                        videoId = embedMatch[1];
+                    }
                 }
                 
+                console.log('Extracted video ID:', videoId);
+                
                 if (videoId) {
-                    // 모달용 YouTube URL 생성 (autoplay 포함)
-                    const modalVideoSrc = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=0&controls=1&rel=0`;
+                    // 모달용 URL 생성
+                    const modalVideoSrc = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=0&controls=1&rel=0&modestbranding=1`;
+                    console.log('Modal video src:', modalVideoSrc);
+                    
                     modalIframe.src = modalVideoSrc;
                     modal.style.display = 'flex';
                     document.body.style.overflow = 'hidden';
+                } else {
+                    console.error('Could not extract video ID from:', videoSrc);
+                    alert('비디오를 재생할 수 없습니다.');
+                }
+            }
+        });
+    });
+}
+
+// 모달 닫기 함수
+function closeModal() {
+    if (modal && modalIframe) {
+        modal.style.display = 'none';
+        modalIframe.src = '';
+        document.body.style.overflow = '';
+    }
+}
+
+// 닫기 버튼 클릭
+if (closeButton) {
+    closeButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        closeModal();
+    });
+}
+
+// 모달 바깥 클릭 시 닫기
+if (modal) {
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            closeModal();
+        }
+    });
+}
+
+// ESC 키로 모달 닫기
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && modal && modal.style.display === 'flex') {
+        closeModal();
+    }
+});
+
+// 포트폴리오 필터링 함수도 수정
+const filterBtns = document.querySelectorAll('.filter-btn');
+const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+filterBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+        // 활성 버튼 변경
+        filterBtns.forEach(function(b) { b.classList.remove('active'); });
+        this.classList.add('active');
+
+        const filter = this.getAttribute('data-filter');
+
+        // 포트폴리오 아이템 필터링
+        portfolioItems.forEach(function(item) {
+            if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                item.style.display = 'block';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+
+        // 필터링 후 비디오 클릭 이벤트 재설정
+        setTimeout(setupVideoClicks, 100);
+    });
+});
+
+// 페이지 로드 시 비디오 클릭 이벤트 설정
+document.addEventListener('DOMContentLoaded', function() {
+    setupVideoClicks();
+    
                 }
             }
         });
