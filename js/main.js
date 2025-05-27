@@ -16,23 +16,41 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // 스무스 스크롤
+    // 스무스 스크롤 - 수정된 버전
     document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
         anchor.addEventListener('click', function(e) {
             const href = this.getAttribute('href');
+            console.log('링크 클릭됨:', href); // 디버깅용
+            
             if (href && href.length > 1) {
                 e.preventDefault();
+                
+                // 특별한 경우: #hero는 페이지 최상단으로
+                if (href === '#hero') {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                    return;
+                }
+                
                 const target = document.querySelector(href);
+                console.log('타겟 요소:', target); // 디버깅용
+                
                 if (target) {
                     const header = document.querySelector('header');
-                    const headerOffset = header ? header.offsetHeight : 80;
+                    const headerOffset = header ? header.offsetHeight + 20 : 100; // 여유 공간 추가
                     const elementPosition = target.getBoundingClientRect().top;
                     const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                    
+                    console.log('스크롤 위치:', offsetPosition); // 디버깅용
                     
                     window.scrollTo({
                         top: offsetPosition,
                         behavior: 'smooth'
                     });
+                } else {
+                    console.error('타겟 요소를 찾을 수 없습니다:', href);
                 }
             }
         });
@@ -261,29 +279,47 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // 네비게이션 활성 링크 업데이트
-    window.addEventListener('scroll', function() {
+    // 네비게이션 활성 링크 업데이트 - 수정된 버전
+    function updateActiveNavigation() {
         const sections = document.querySelectorAll('section[id]');
         const navLinks = document.querySelectorAll('nav ul li a');
         
         let current = '';
-        sections.forEach(function(section) {
-            const sectionTop = section.getBoundingClientRect().top;
-            if (sectionTop <= 150) {
-                current = section.getAttribute('id');
-            }
-        });
+        const scrollPosition = window.scrollY + 150; // 헤더 높이 고려
+        
+        // 최상단에 있을 때는 hero를 활성화
+        if (window.scrollY < 100) {
+            current = 'hero';
+        } else {
+            // 각 섹션의 위치를 확인
+            sections.forEach(function(section) {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+                
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    current = section.getAttribute('id');
+                }
+            });
+        }
 
+        // 네비게이션 링크 업데이트
         navLinks.forEach(function(link) {
             link.classList.remove('active');
-            if (link.getAttribute('href') === '#' + current) {
+            const href = link.getAttribute('href');
+            if (href === '#' + current) {
                 link.classList.add('active');
             }
         });
-    });
+    }
+
+    // 스크롤 이벤트에 네비게이션 업데이트 추가
+    window.addEventListener('scroll', updateActiveNavigation);
 
     // 초기 비디오 클릭 이벤트 설정
     setupVideoClicks();
     
-    console.log('Page loaded, video clicks setup complete');
+    // 초기 네비게이션 상태 설정
+    updateActiveNavigation();
+    
+    console.log('Page loaded, navigation and video clicks setup complete');
 });
