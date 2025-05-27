@@ -438,7 +438,7 @@ nav ul li a.active {
 }
 
 
-/* 포트폴리오 섹션 */
+/* 워크 섹션 */
 .work {
     background-color: #0a0a0a;
 }
@@ -926,7 +926,7 @@ footer {
         right: 25px;
     }
 
-    /* 포트폴리오 필터 1200px */
+    /* 워크 필터 1200px */
     .work-filter {
         flex-wrap: nowrap;
         overflow-x: auto;
@@ -1005,7 +1005,7 @@ footer {
         right: 20px;
     }
 
-    /* 포트폴리오 필터 992px */
+    /* 워크 필터 992px */
     .work-filter {
         gap: 6px;
         padding: 0 10px;
@@ -1163,7 +1163,7 @@ footer {
         right: 15px;
     }
 
-    /* 포트폴리오 필터 모바일 최적화 */
+    /* 워크 필터 모바일 최적화 */
     .work-filter {
         gap: 3px;
         margin-bottom: 40px;
@@ -1279,7 +1279,7 @@ footer {
         transform: translateX(-50%); /* 중앙 정렬 */
     }
 
-    /* 포트폴리오 필터 강제 한 줄 */
+    /* 워크 필터 강제 한 줄 */
     .work-filter {
         flex-wrap: nowrap !important;
         overflow-x: auto !important;
@@ -1402,7 +1402,7 @@ footer {
         transform: translateX(-50%);
     }
 
-    /* 포트폴리오 필터 강제 한 줄 */
+    /* 워크 필터 강제 한 줄 */
     .work-filter {
         flex-wrap: nowrap !important;
         overflow-x: auto !important;
