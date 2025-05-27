@@ -25,32 +25,58 @@
 </head>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // 네비게이션 링크들에 직접 이벤트 추가
-    const navLinks = document.querySelectorAll('nav ul li a');
-    
-    navLinks.forEach(function(link) {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
+  document.querySelectorAll('nav ul li a').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+        console.log(`=== 네비게이션 클릭: ${this.getAttribute('href')} ===`);
+        
+        e.preventDefault();
+        e.stopPropagation();
+        
+        const href = this.getAttribute('href');
+        if (href && href.startsWith('#')) {
+            const targetId = href.substring(1);
+            console.log('타겟 ID:', targetId);
             
-            const href = this.getAttribute('href');
-            if (href && href.startsWith('#')) {
-                const targetId = href.substring(1);
-                
-                if (targetId === 'hero') {
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
+            if (targetId === 'hero') {
+                // Hero 섹션은 페이지 최상단
+                console.log('Hero로 스크롤');
+                document.documentElement.scrollTop = 0;
+                document.body.scrollTop = 0; // Safari 호환
+            } else {
+                const target = document.getElementById(targetId);
+                if (target) {
+                    console.log('타겟 찾음:', target);
+                    
+                    // scrollIntoView 사용 (더 안정적)
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    
+                    // 헤더 높이만큼 추가로 위로 스크롤
+                    setTimeout(function() {
+                        const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+                        const newScroll = currentScroll - 120; // 헤더 높이
+                        window.scrollTo({
+                            top: Math.max(0, newScroll),
+                            behavior: 'smooth'
+                        });
+                    }, 100);
+                    
+                    console.log('스크롤 완료');
                 } else {
-                    const target = document.getElementById(targetId);
-                    if (target) {
-                        const headerHeight = 120;
-                        const targetTop = target.offsetTop - headerHeight;
-                        window.scrollTo({ top: targetTop, behavior: 'smooth' });
-                    }
+                    console.error('타겟 요소 없음:', targetId);
                 }
             }
-        });
+        }
+        
+        // 모바일 메뉴 닫기
+        const nav = document.querySelector('header nav');
+        if (nav && nav.classList.contains('active')) {
+            nav.classList.remove('active');
+        }
     });
 });
-</script>
     
 <body>
 
