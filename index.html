@@ -23,6 +23,35 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // 네비게이션 링크들에 직접 이벤트 추가
+    const navLinks = document.querySelectorAll('nav ul li a');
+    
+    navLinks.forEach(function(link) {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const href = this.getAttribute('href');
+            if (href && href.startsWith('#')) {
+                const targetId = href.substring(1);
+                
+                if (targetId === 'hero') {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    const target = document.getElementById(targetId);
+                    if (target) {
+                        const headerHeight = 120;
+                        const targetTop = target.offsetTop - headerHeight;
+                        window.scrollTo({ top: targetTop, behavior: 'smooth' });
+                    }
+                }
+            }
+        });
+    });
+});
+</script>
+    
 <body>
 
 
