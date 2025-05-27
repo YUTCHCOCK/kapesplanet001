@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM 로드 완료');
     
     // 1. 섹션들이 존재하는지 확인
-    const sections = ['hero', 'about', 'portfolio', 'contact'];
+    const sections = ['hero', 'about', 'work', 'contact'];
     sections.forEach(id => {
         const element = document.getElementById(id);
         console.log(`섹션 ${id}:`, element ? '존재함' : '없음');
@@ -113,7 +113,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // 6. 콘솔에서 테스트할 수 있는 함수들 제공
     console.log('테스트 함수들:');
     console.log('- testScroll("about") - About 섹션으로 스크롤');
-    console.log('- testScroll("portfolio") - Portfolio 섹션으로 스크롤');
+    console.log('- testScroll("work") - work 섹션으로 스크롤');
     console.log('- testScroll("contact") - Contact 섹션으로 스크롤');
 });
 
