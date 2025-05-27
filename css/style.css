@@ -73,7 +73,7 @@ header.scrolled {
     margin-right: 10px;
 }
 .header-logo span {
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.1rem;
@@ -87,7 +87,7 @@ nav ul li {
 }
 nav ul li a {
     position: relative;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     font-weight: 500;
     color: var(--text-color);
     transition: color 0.3s;
