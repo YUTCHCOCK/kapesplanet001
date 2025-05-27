@@ -423,7 +423,7 @@ nav ul li a.active {
 /* 로고를 섹션 최하단에 배치 */
 .about-image {
     position: absolute;
-    bottom: 100px;
+    bottom: 50px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 1;
