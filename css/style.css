@@ -120,7 +120,7 @@ nav ul li a.active {
 /* 섹션 기본 스타일 */
 .hero,
 .about,
-.portfolio,
+.work,
 .contact,
 .section {
     min-height: 100vh;
@@ -439,11 +439,11 @@ nav ul li a.active {
 
 
 /* 포트폴리오 섹션 */
-.portfolio {
+.work {
     background-color: #0a0a0a;
 }
 
-.portfolio-filter {
+.work-filter {
     display: flex;
     justify-content: center;
     margin-bottom: 50px;
@@ -482,13 +482,13 @@ nav ul li a.active {
     width: 100%;
 }
 
-.portfolio-grid {
+.work-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
     gap: 30px;
 }
 
-.portfolio-item {
+.work-item {
     position: relative;
     border-radius: 10px;
     overflow: hidden;
@@ -497,24 +497,24 @@ nav ul li a.active {
     cursor: pointer; /* 추가 */
 }
 
-.portfolio-thumbnail {
+.work-thumbnail {
     width: 100%;
     height: 100%;
     cursor: pointer; /* 추가 */
 }
 
-.portfolio-item:hover {
+.work-item:hover {
     transform: translateY(-10px);
 }
 
-.portfolio-thumbnail iframe {
+.work-thumbnail iframe {
     width: 100%;
     aspect-ratio: 16/9;
     border-radius: 12px;
     border: none;
 }
 
-.portfolio-overlay {
+.work-overlay {
     position: absolute;
     top: 0;
     left: 0;
@@ -529,18 +529,18 @@ nav ul li a.active {
     transition: opacity 0.3s;
 }
 
-.portfolio-item:hover .portfolio-overlay {
+.work-item:hover .work-overlay {
     opacity: 1;
 }
 
-.portfolio-title {
+.work-title {
     font-size: 1.5rem;
     font-weight: 600;
     color: var(--text-color);
     margin-bottom: 10px;
 }
 
-.portfolio-category {
+.work-category {
     font-size: 0.9rem;
     color: var(--primary-color);
 }
@@ -927,7 +927,7 @@ footer {
     }
 
     /* 포트폴리오 필터 1200px */
-    .portfolio-filter {
+    .work-filter {
         flex-wrap: nowrap;
         overflow-x: auto;
         justify-content: center;
@@ -961,7 +961,7 @@ footer {
         font-size: 1.26rem; /* 1.8rem의 70% */
     }
 
-    .portfolio-grid {
+    .work-grid {
         grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     }
 
@@ -1006,7 +1006,7 @@ footer {
     }
 
     /* 포트폴리오 필터 992px */
-    .portfolio-filter {
+    .work-filter {
         gap: 6px;
         padding: 0 10px;
     }
@@ -1033,7 +1033,7 @@ footer {
         gap: 24px;
     }
 
-    .portfolio-grid {
+    .work-grid {
         grid-template-columns: 1fr;
     }
 
@@ -1164,7 +1164,7 @@ footer {
     }
 
     /* 포트폴리오 필터 모바일 최적화 */
-    .portfolio-filter {
+    .work-filter {
         gap: 3px;
         margin-bottom: 40px;
         padding: 0 5px;
@@ -1280,7 +1280,7 @@ footer {
     }
 
     /* 포트폴리오 필터 강제 한 줄 */
-    .portfolio-filter {
+    .work-filter {
         flex-wrap: nowrap !important;
         overflow-x: auto !important;
         gap: 4px !important;
@@ -1403,7 +1403,7 @@ footer {
     }
 
     /* 포트폴리오 필터 강제 한 줄 */
-    .portfolio-filter {
+    .work-filter {
         flex-wrap: nowrap !important;
         overflow-x: auto !important;
         gap: 2px !important;
