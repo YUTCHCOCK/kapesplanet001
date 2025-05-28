@@ -362,7 +362,7 @@ function setupContactForm() {
                 from_email: email,
                 message: '뉴스레터 구독을 신청합니다.'
             };
-            emailjs.send('service_x1zvv5a', 'template_lujx42n', templateParams)
+            emailjs.send('service_x1zvv5a', 'template_lujx42m', templateParams)
                 .then(function(response) {
                     alert('뉴스레터 구독이 완료되었습니다!');
                     emailInput.value = '';
