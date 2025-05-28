@@ -270,11 +270,11 @@ function closeVideoModal() {
 // 1. 최신순으로 배열 (0번이 가장 최신, 마지막이 가장 오래된 기사)
 const articles = [
   { title: "케이프스플래닛 '시크릿 아이돌' 원안자 + 공동제작자로 밝혀져", url: "https://www.sportsseoul.com/news/read/1519235" },
-  { title: "유튜브 영상 - 유치콕 숏폼 관련 인터뷰, url: "https://youtu.be/4D40Ldpxm5c?si=4JWRI1hHd1MImN87" },
+  { title: "유튜브 영상 - 유치콕 숏폼 관련 인터뷰", url: "https://youtu.be/4D40Ldpxm5c?si=4JWRI1hHd1MImN87" },
   { title: "KOCCA 트렌드OTT - 인물 인터뷰 유치콕 편", url: "https://www.kocca.kr/trendott/vol01/people_1.html" },
   { title: "솔비 신개념 진행 빛났다 - B급 토크쇼 '시방솔비'로 MC 능력 검증", url: "https://www.dailian.co.kr/news/view/1399105" },
-  { title: "KOCCA 콘텐츠 뉴스" - 바야흐로 숏숏폼 시대, url: "https://www.kocca.kr/n_content/vol30/sub02.html" },
-  { title: 서울 1인 우수 창조기업 - 케이프스플래닛 선정, url: "https://www.donga.com/news/article/all/20231108/122080292/1" }
+  { title: "KOCCA 콘텐츠 뉴스 - 바야흐로 숏숏폼 시대", url: "https://www.kocca.kr/n_content/vol30/sub02.html" },
+  { title: "서울 1인 우수 창조기업 - 케이프스플래닛 선정", url: "https://www.donga.com/news/article/all/20231108/122080292/1" }
   // 7번째 기사도 추가하면 됩니다!
 ];
 
