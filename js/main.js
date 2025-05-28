@@ -266,21 +266,14 @@ function closeVideoModal() {
 }
 console.log('main.js 로드됨');
 
+console.log('main.js 로드됨');
+
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM 로드 완료');
-    setupNavigation();
-    setupMobileMenu();
-    setupHeaderEffects();
-    setupPortfolioFilter();
-    setupVideoModal();
-    setupContactForm();
+    // ...
     renderBoard();
-    console.log('모든 설정 완료');
+    // ...
 });
 
-// (setupNavigation, setupMobileMenu, setupHeaderEffects, setupPortfolioFilter, setupVideoModal, setupContactForm 함수는 기존과 동일하게 둡니다)
-
-// 최신 press 게시판 데이터 (프레스/언론사 필드 포함)
 const articles = [
   {
     date: "2025-05-28",
@@ -326,38 +319,28 @@ const articles = [
   }
 ];
 
-let openedIdx = null;
-
 function renderBoard() {
   const board = document.getElementById('headlineBoard');
   if (!board) return;
 
-  let html = '';
-  articles.forEach((item, idx) => {
+  let html = "";
+  articles.forEach(item => {
     html += `
       <li class="headline-row">
-        <span class="headline-date">${item.date}</span>
-        <button
-          class="headline-title-btn"
-          onclick="toggleArticle(${idx})"
-          title="기사 열기"
-        >
-          ${item.title}
-        </button>
-        <span class="headline-press">${item.press}</span>
-        <div id="articleContent${idx}" class="article-content${openedIdx === idx ? ' open' : ''}">
-          <iframe src="${item.url}" title="기사${idx + 1}"></iframe>
+        <div class="headline-date">${item.date}</div>
+        <div class="headline-main">
+          <a href="${item.url}" class="headline-title" target="_blank" rel="noopener">
+            ${item.title}
+          </a>
+          <div class="headline-summary">${item.summary}</div>
         </div>
+        <div class="headline-media">${item.media}</div>
       </li>
     `;
   });
+
   board.innerHTML = `<ul class="headline-list">${html}</ul>`;
 }
-
-window.toggleArticle = function(idx) {
-  openedIdx = (openedIdx === idx) ? null : idx;
-  renderBoard();
-};
 
 // 컨택트 폼 설정
 function setupContactForm() {
