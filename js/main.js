@@ -265,43 +265,37 @@ function closeVideoModal() {
     }
 }
 
-// Press 페이지: 최신순 헤드라인 게시판 (최신이 위, 오래된 게 아래)
-
-// 1. 최신순으로 배열 (0번이 가장 최신, 마지막이 가장 오래된 기사)
+// articles 배열에 날짜와 언론사 추가 (예시로 6개)
 const articles = [
-  { title: "케이프스플래닛 '시크릿 아이돌' 원안자 + 공동제작자로 밝혀져", url: "https://www.sportsseoul.com/news/read/1519235" },
-  { title: "유튜브 영상 - 유치콕 숏폼 관련 인터뷰", url: "https://youtu.be/4D40Ldpxm5c?si=4JWRI1hHd1MImN87" },
-  { title: "KOCCA 트렌드OTT - 인물 인터뷰 유치콕 편", url: "https://www.kocca.kr/trendott/vol01/people_1.html" },
-  { title: "솔비 신개념 진행 빛났다 - B급 토크쇼 '시방솔비'로 MC 능력 검증", url: "https://www.dailian.co.kr/news/view/1399105" },
-  { title: "KOCCA 콘텐츠 뉴스 - 바야흐로 숏숏폼 시대", url: "https://www.kocca.kr/n_content/vol30/sub02.html" },
-  { title: "서울 1인 우수 창조기업 - 케이프스플래닛 선정", url: "https://www.donga.com/news/article/all/20231108/122080292/1" }
-  // 7번째 기사도 추가하면 됩니다!
+  { date: "2024-03-20", press: "스포츠서울", title: "케이프스플래닛 '시크릿 아이돌' 원안자 + 공동제작자로 밝혀져", url: "https://www.sportsseoul.com/news/read/1519235" },
+  { date: "2024-03-12", press: "유튜브", title: "유치콕 숏폼 관련 인터뷰", url: "https://youtu.be/4D40Ldpxm5c?si=4JWRI1hHd1MImN87" },
+  { date: "2024-02-28", press: "KOCCA", title: "KOCCA 트렌드OTT - 인물 인터뷰 유치콕 편", url: "https://www.kocca.kr/trendott/vol01/people_1.html" },
+  { date: "2024-02-15", press: "데일리안", title: "솔비 신개념 진행 빛났다 - B급 토크쇼 '시방솔비'로 MC 능력 검증", url: "https://www.dailian.co.kr/news/view/1399105" },
+  { date: "2024-01-20", press: "KOCCA", title: "KOCCA 콘텐츠 뉴스 - 바야흐로 숏숏폼 시대", url: "https://www.kocca.kr/n_content/vol30/sub02.html" },
+  { date: "2023-11-08", press: "동아일보", title: "서울 1인 우수 창조기업 - 케이프스플래닛 선정", url: "https://www.donga.com/news/article/all/20231108/122080292/1" }
 ];
 
-// 펼쳐진 기사 index
 let openedIdx = null;
 
-// 게시판 렌더링 함수
 function renderBoard() {
   const board = document.getElementById('headlineBoard');
   if (!board) return;
 
-  let html = '<ul style="list-style:none;padding:0;margin:0;">';
+  let html = '<ul class="headline-list">';
   articles.forEach((item, idx) => {
     html += `
-      <li style="margin-bottom:16px;">
+      <li class="headline-row">
+        <span class="headline-date">${item.date}</span>
         <button
-          style="background:none;border:none;color:#1976d2;cursor:pointer;font-size:1em;padding:0;text-decoration:underline;"
+          class="headline-title-btn"
           onclick="toggleArticle(${idx})"
+          title="기사 열기"
         >
           ${item.title}
         </button>
-        <div id="articleContent${idx}" style="display: ${openedIdx === idx ? 'block' : 'none'}; margin-top:10px;">
-          <iframe
-            src="${item.url}"
-            style="width:100%;height:400px;border:1px solid #ccc;"
-            title="기사${idx + 1}">
-          </iframe>
+        <span class="headline-press">${item.press}</span>
+        <div id="articleContent${idx}" class="article-content${openedIdx === idx ? ' open' : ''}">
+          <iframe src="${item.url}" title="기사${idx + 1}"></iframe>
         </div>
       </li>
     `;
@@ -310,13 +304,11 @@ function renderBoard() {
   board.innerHTML = html;
 }
 
-// 기사 토글 함수
 window.toggleArticle = function(idx) {
   openedIdx = (openedIdx === idx) ? null : idx;
   renderBoard();
 };
 
-// 페이지 로드시 렌더
 window.addEventListener('DOMContentLoaded', renderBoard);
 
 // 컨택트 폼 설정
