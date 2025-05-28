@@ -544,74 +544,77 @@ nav ul li a.active {
     font-size: 0.9rem;
     color: var(--primary-color);
 }
-/* PRESS SECTION 스타일 (수정본) */
-.section.press {
-  width: 90vw;                   /* 전체 너비의 90% */
-  max-width: 1100px;             /* 최대 1100px */
-  min-width: 320px;              /* 너무 좁아지지 않게 */
-  margin: 40px auto;
-  background: #181818;
-  border-radius: 16px;
-  box-shadow: none !important;   /* 테두리 그림자 제거 */
-  border: none !important;       /* 외곽선 제거 */
-  padding: 40px 32px 60px 32px;
-  color: #fff;
-  transition: width 0.2s;
-}
 
-/* 헤더, 안내 등 폰트 및 여백 */
-.section.press .section-header {
-  margin-bottom: 24px;
-  text-align: center;
-}
-.section.press h2 {
-  font-size: 2.6em;
-  font-weight: bold;
-  color: #fff;
-  margin-bottom: 0.4em;
-}
-.section.press .section-desc {
-  color: #ddd;
-  font-size: 1.15em;
-  margin-bottom: 1.2em;
-}
-.section.press hr {
-  border: none;
-  border-top: 4px solid #ff9800;
-  width: 120px;
-  margin: 18px auto;
-}
-
-/* 기사 리스트 */
+/* 헤드라인 리스트 구조 */
 .headline-list {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-.headline-list li {
-  margin-bottom: 18px;
+.headline-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0 8px 0;
+  border-bottom: 1px solid #333;
+  gap: 10px;
+  position: relative;
+  flex-wrap: wrap;
 }
-.headline-btn {
+.headline-date {
+  flex: 0 0 110px;
+  color: #bbb;
+  font-size: 1.1em;
+  text-align: left;
+  font-family: 'Roboto Mono',monospace;
+}
+.headline-title-btn {
+  flex: 1 1 0;
+  text-align: left;
   background: none;
   border: none;
-  color: #ffa726;
-  cursor: pointer;
-  font-size: 1.08em;
+  color: #fff;
+  font-size: 2em;
   font-weight: bold;
+  cursor: pointer;
+  transition: color 0.15s;
+  outline: none;
+  word-break: keep-all;
+  white-space: normal;
+  padding: 0 10px;
+}
+.headline-title-btn:hover,
+.headline-title-btn:focus {
+  color: #ffa726;
   text-decoration: underline;
-  padding: 0;
+}
+.headline-press {
+  flex: 0 0 90px;
+  color: #fafafa;
+  font-size: 1.05em;
+  font-weight: 600;
+  text-align: right;
+  letter-spacing: 0.01em;
 }
 .article-content {
-  margin-top: 10px;
+  width: 100%;
+  margin-top: 8px;
   display: none;
-  animation: fadein 0.25s;
 }
-.article-content.open { display: block; }
-iframe {
+.article-content.open {
+  display: block;
+  animation: fadein 0.22s;
+}
+@keyframes fadein {
+  from { opacity: 0; transform: translateY(10px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+.article-content iframe {
   width: 100%;
   height: 400px;
-  border: 1px solid #333;
+  border: 1px solid #444;
   background: #222;
+  border-radius: 8px;
 }
 
 /* 콘택트 섹션 */
