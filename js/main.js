@@ -1,4 +1,3 @@
-// 새로운 main.js - 간단하고 확실하게 작동
 console.log('main.js 로드됨');
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -8,29 +7,8 @@ document.addEventListener('DOMContentLoaded', function() {
     setupHeaderEffects();
     setupPortfolioFilter();
     setupVideoModal();
-    renderBoard();       // ← 여기에서 한 번만 호출
+    renderBoard();
     setupContactForm();
-    console.log('모든 설정 완료');
-});
-    
-    // 네비게이션 스크롤 설정
-    setupNavigation();
-    
-    // 모바일 메뉴 설정
-    setupMobileMenu();
-    
-    // 헤더 스크롤 효과
-    setupHeaderEffects();
-    
-    // 포트폴리오 필터
-    setupPortfolioFilter();
-    
-    // 비디오 모달
-    setupVideoModal();
-    
-    // 컨택트 폼
-    setupContactForm();
-    
     console.log('모든 설정 완료');
 });
 
@@ -43,7 +21,6 @@ function setupNavigation() {
             e.preventDefault();
             const targetId = this.getAttribute('href').replace('#', '');
             scrollToSection(targetId);
-            // hash도 업데이트!
             history.pushState(null, '', '#' + targetId);
         });
     });
@@ -52,7 +29,7 @@ function setupNavigation() {
 // 섹션으로 스크롤
 function scrollToSection(sectionId) {
     console.log('스크롤 시작:', sectionId);
-    
+
     if (sectionId === 'hero') {
         window.scrollTo({
             top: 0,
@@ -61,22 +38,22 @@ function scrollToSection(sectionId) {
         console.log('Hero 섹션으로 스크롤');
         return;
     }
-    
+
     const targetElement = document.getElementById(sectionId);
-    
+
     if (targetElement) {
         const headerHeight = 120;
         const elementTop = targetElement.offsetTop;
         const scrollPosition = elementTop - headerHeight;
-        
+
         console.log('타겟 위치:', elementTop);
         console.log('스크롤 위치:', scrollPosition);
-        
+
         window.scrollTo({
             top: Math.max(0, scrollPosition),
             behavior: 'smooth'
         });
-        
+
         console.log('스크롤 완료');
     } else {
         console.error('섹션을 찾을 수 없음:', sectionId);
@@ -86,17 +63,17 @@ function scrollToSection(sectionId) {
 // 모바일 메뉴 설정
 function setupMobileMenu() {
     console.log('모바일 메뉴 설정...');
-    
+
     const menuButton = document.querySelector('.mobile-menu-btn');
     const navigation = document.querySelector('header nav');
-    
+
     if (menuButton && navigation) {
         // 메뉴 버튼 클릭
         menuButton.addEventListener('click', function() {
             navigation.classList.toggle('active');
             console.log('모바일 메뉴 토글');
         });
-        
+
         // 메뉴 링크 클릭시 메뉴 닫기
         const navLinks = document.querySelectorAll('nav ul li a');
         navLinks.forEach(function(link) {
@@ -113,10 +90,10 @@ function setupMobileMenu() {
 // 헤더 스크롤 효과
 function setupHeaderEffects() {
     console.log('헤더 효과 설정...');
-    
+
     window.addEventListener('scroll', function() {
         const header = document.querySelector('header');
-        
+
         if (header) {
             if (window.scrollY > 50) {
                 header.classList.add('scrolled');
@@ -124,7 +101,7 @@ function setupHeaderEffects() {
                 header.classList.remove('scrolled');
             }
         }
-        
+
         // 네비게이션 활성화 업데이트
         updateActiveNavigation();
     });
@@ -134,10 +111,10 @@ function setupHeaderEffects() {
 function updateActiveNavigation() {
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('nav ul li a');
-    
+
     let currentSection = '';
     const scrollPosition = window.scrollY + 150;
-    
+
     // 최상단이면 hero 활성화
     if (window.scrollY < 100) {
         currentSection = 'hero';
@@ -146,13 +123,13 @@ function updateActiveNavigation() {
         sections.forEach(function(section) {
             const sectionTop = section.offsetTop;
             const sectionHeight = section.offsetHeight;
-            
+
             if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
                 currentSection = section.getAttribute('id');
             }
         });
     }
-    
+
     // 네비게이션 링크 업데이트
     navLinks.forEach(function(link) {
         link.classList.remove('active');
@@ -166,22 +143,22 @@ function updateActiveNavigation() {
 // 포트폴리오 필터 설정
 function setupPortfolioFilter() {
     console.log('포트폴리오 필터 설정...');
-    
+
     const filterButtons = document.querySelectorAll('.filter-btn');
-    
+
     filterButtons.forEach(function(button) {
         button.addEventListener('click', function() {
             // 모든 버튼에서 active 제거
             filterButtons.forEach(function(btn) {
                 btn.classList.remove('active');
             });
-            
+
             // 클릭된 버튼에 active 추가
             this.classList.add('active');
-            
+
             const filterValue = this.getAttribute('data-filter');
             console.log('필터 적용:', filterValue);
-            
+
             // 포트폴리오 아이템 필터링
             const workItems = document.querySelectorAll('.work-item');
             workItems.forEach(function(item) {
@@ -198,16 +175,16 @@ function setupPortfolioFilter() {
 // 비디오 모달 설정
 function setupVideoModal() {
     console.log('비디오 모달 설정...');
-    
+
     const modal = document.getElementById('video-modal');
     const modalIframe = document.getElementById('modal-iframe');
     const closeButton = document.querySelector('.close-button');
-    
+
     if (!modal || !modalIframe) {
         console.log('비디오 모달 요소를 찾을 수 없음');
         return;
     }
-    
+
     // 포트폴리오 아이템 클릭
     document.querySelectorAll('.work-item').forEach(function(item) {
         item.addEventListener('click', function() {
@@ -215,7 +192,7 @@ function setupVideoModal() {
             if (iframe) {
                 const videoSrc = iframe.src;
                 let videoId = '';
-                
+
                 // YouTube 영상 ID 추출
                 if (videoSrc.includes('youtube.com/embed/')) {
                     const match = videoSrc.match(/youtube\.com\/embed\/([^?&]+)/);
@@ -223,33 +200,33 @@ function setupVideoModal() {
                         videoId = match[1];
                     }
                 }
-                
+
                 if (videoId) {
                     const modalSrc = `https://www.youtube.com/embed/${videoId}?autoplay=1&controls=1&rel=0`;
                     modalIframe.src = modalSrc;
                     modal.style.display = 'flex';
                     document.body.style.overflow = 'hidden';
-                    
+
                     console.log('비디오 모달 열림:', videoId);
                 }
             }
         });
     });
-    
+
     // 모달 닫기 버튼
     if (closeButton) {
         closeButton.addEventListener('click', function() {
             closeVideoModal();
         });
     }
-    
+
     // 모달 바깥 클릭시 닫기
     modal.addEventListener('click', function(e) {
         if (e.target === modal) {
             closeVideoModal();
         }
     });
-    
+
     // ESC 키로 닫기
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape' && modal.style.display === 'flex') {
@@ -262,7 +239,7 @@ function setupVideoModal() {
 function closeVideoModal() {
     const modal = document.getElementById('video-modal');
     const modalIframe = document.getElementById('modal-iframe');
-    
+
     if (modal && modalIframe) {
         modal.style.display = 'none';
         modalIframe.src = '';
@@ -270,9 +247,6 @@ function closeVideoModal() {
         console.log('비디오 모달 닫힘');
     }
 }
-console.log('main.js 로드됨');
-
-console.log('main.js 로드됨');
 
 const articles = [
   {
@@ -343,55 +317,55 @@ function renderBoard() {
 // 컨택트 폼 설정
 function setupContactForm() {
     console.log('컨택트 폼 설정...');
-    
+
     // EmailJS 초기화 확인
     if (typeof emailjs === 'undefined') {
         console.log('EmailJS가 로드되지 않음');
         return;
     }
-    
+
     // 환경 변수로 관리하거나 서버사이드에서 처리하는 것이 좋습니다
     emailjs.init("GnCf85iVH7vsa-xKr");
-    
+
     const contactForm = document.querySelector('.contact-form');
     const newsletterForm = document.querySelector('.newsletter-form');
-    
+
     // 컨택트 폼 처리
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            
+
             const formData = new FormData(this);
             const submitBtn = this.querySelector('.submit-btn');
             const originalText = submitBtn.textContent;
-            
+
             // 기본 유효성 검사
             const name = formData.get('name');
             const email = formData.get('email');
             const message = formData.get('message');
-            
+
             if (!name || !email || !message) {
                 alert('모든 필드를 입력해주세요.');
                 return;
             }
-            
+
             // 이메일 형식 검사
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(email)) {
                 alert('올바른 이메일 주소를 입력해주세요.');
                 return;
             }
-            
+
             // 전송 중 표시
             submitBtn.textContent = '전송 중...';
             submitBtn.disabled = true;
-            
+
             const templateParams = {
                 from_name: name,
                 from_email: email,
                 message: message
             };
-            
+
             emailjs.send('service_x1zvv5a', 'template_lujx42m', templateParams)
                 .then(function(response) {
                     alert('문의가 성공적으로 전송되었습니다!');
@@ -408,33 +382,33 @@ function setupContactForm() {
                 });
         });
     }
-    
+
     // 뉴스레터 폼 처리
     if (newsletterForm) {
         newsletterForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            
+
             const emailInput = this.querySelector('.newsletter-input');
             const email = emailInput.value.trim();
-            
+
             // 이메일 유효성 검사
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!email) {
                 alert('이메일 주소를 입력해주세요.');
                 return;
             }
-            
+
             if (!emailRegex.test(email)) {
                 alert('올바른 이메일 주소를 입력해주세요.');
                 return;
             }
-            
+
             const templateParams = {
                 from_name: '뉴스레터 구독자',
                 from_email: email,
                 message: '뉴스레터 구독을 신청합니다.'
             };
-            
+
             emailjs.send('service_x1zvv5a', 'template_lujx42n', templateParams)
                 .then(function(response) {
                     alert('뉴스레터 구독이 완료되었습니다!');
@@ -447,4 +421,4 @@ function setupContactForm() {
                 });
         });
     }
-} // 
+}
