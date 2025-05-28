@@ -14,8 +14,7 @@
     <!-- 사이트 매니페스트 (PWA, 선택) -->
     <link rel="manifest" href="img/favicon/site.webmanifest">
     
-    <!-- 이메일 어드레스 추가  -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <!-- 이메일 어드레스 스크립트 제거 -->
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -166,18 +165,18 @@
     <div class="section-subtitle">언론에 보도된 원숭이행성 소식입니다</div>
   </div>
   <div class="section-content">
-    <ul id="headlineBoard" class="headline-list"></ul>
+    <div id="headlineBoard"></div>
   </div>    
 </section>
         
-    <!-- Contact 섹션 -->
+    <!-- Contact 섹션 - 단순화 -->
     <section class="section contact" id="contact">
         <div class="section-header">
             <div class="section-title">Contact</div>
             <div class="section-subtitle">원숭이행성과 함께 새로운 콘텐츠를 만드세요</div>
         </div>
         <div class="contact-content">
-            <div class="contact-info">
+            <div class="contact-info-centered">
                 <div class="contact-title">KAPES PLANET</div>
                 <div class="contact-description">
                     원숭이행성과 콘텐츠를 만들고 싶으신가요?<br>
@@ -220,36 +219,17 @@
                     </li>
                 </ul>
             </div>
-            <form class="contact-form">
-                <div class="form-group">
-                    <input type="text" class="form-control" name="name" placeholder="이름 또는 회사명" required>
-                </div>
-                <div class="form-group">
-                    <input type="email" class="form-control" name="email" placeholder="이메일 주소" required>
-                </div>
-                <div class="form-group">
-                <textarea class="form-control" name="message" placeholder="문의 내용을 입력하세요" required></textarea>
-            </div>
-                <button type="submit" class="submit-btn">문의 보내기</button>
-            </form>
         </div>
     </section>
 
-    <!-- 푸터 -->
+    <!-- 푸터 - 단순화 -->
     <footer>
         <div class="footer-content">
-            <div class="footer-logo">
+            <div class="footer-logo-centered">
                 <img src="img/kapes_text_logo.png" alt="KAPES PLANET 로고">
                 <div class="footer-description">
                     매일 진화하는 크리에이터 월드 원숭이행성
-            </div>
-            </div>
-            <div class="footer-newsletter">
-                <div class="footer-title">Newsletter</div>
-                <form class="newsletter-form">
-                    <input type="email" class="newsletter-input" placeholder="이메일을 입력하세요">
-                    <button type="submit" class="newsletter-btn"><i class="fas fa-paper-plane"></i></button>
-                </form>
+                </div>
             </div>
         </div>
         <div class="footer-bottom">
