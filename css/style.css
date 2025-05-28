@@ -188,101 +188,249 @@ white-space: nowrap;
 overflow: hidden;
 border-right: 2px solid rgba(255, 255, 255, 0.7);
 animation: typewriter1 1.5s steps(20) 1.5s forwards, 
-               hideCursor1 0.1s linear 3.5s forwards; /* 타이핑 완료 후 커서 숨김 */
-               hideCursor1 0.1s linear 3.5s forwards;
+hideCursor1 0.1s linear 3.5s forwards; /* 타이핑 완료 후 커서 숨김 */
 }
 
 .hero-title {
-@@ -202,9 +202,9 @@
+font-size: 4.2rem; 
+font-weight: bold;
+margin-bottom: 30px;
+opacity: 0;
+white-space: nowrap;
+overflow: hidden;
+border-right: 3px solid rgba(255, 255, 255, 0.7);
 color: white;
 display: inline-block;
 position: relative;
-    animation: typewriter2 2s steps(10) 4s forwards, /* 4초 지연 
-               hideCursor2 0.1s linear 6.5s forwards, /* 타이핑 완료 후 커서 숨김 */
-               colorCycle 6.5s linear 7s infinite; /* 색상 변화는 타이핑 완료 후 시작 */
-    animation: typewriter2 2s steps(10) 4s forwards,
-               hideCursor2 0.1s linear 6.5s forwards,
-               colorCycle 6.5s linear 7s infinite;
+animation: typewriter2 2s steps(10) 4s forwards, /* 4초 지연 
+              hideCursor2 0.1s linear 6.5s forwards, /* 타이핑 완료 후 커서 숨김 */
+colorCycle 6.5s linear 7s infinite; /* 색상 변화는 타이핑 완료 후 시작 */
 }
 
 /* 타이핑 애니메이션 - 태그라인 */
-@@ -253,23 +253,19 @@
+@keyframes typewriter1 {
+0% {
+width: 0;
+opacity: 1;
+}
+100% {
+width: 100%;
+opacity: 1;
+}
+}
+
+/* 타이핑 애니메이션 - 타이틀 */
+@keyframes typewriter2 {
+0% {
+width: 0;
+opacity: 1;
+}
+100% {
+width: 100%;
+opacity: 1;
+}
+}
+
+/* 커서 숨기기 - 태그라인 */
+@keyframes hideCursor1 {
+0% {
+border-right: 2px solid rgba(255, 255, 255, 0.7);
+}
+100% {
+border-right: 2px solid transparent;
+}
+}
+
+/* 커서 숨기기 - 타이틀 */
+@keyframes hideCursor2 {
+0% {
+border-right: 3px solid rgba(255, 255, 255, 0.7);
+}
+100% {
+border-right: 3px solid transparent;
+}
+}
 
 /* 색상 변화 애니메이션 - 수정됨 */
 @keyframes colorCycle {
-    /* 0-3초: 흰색 유지 */
+/* 0-3초: 흰색 유지 */
 0% {
 color: #ffffff;
 }
-    46.15% { /* 3초 지점 */
-    46.15% {
+46.15% { /* 3초 지점 */
 color: #ffffff;
 }
-    /* 3-3.25초: 주황색으로 변화 (15프레임) */
-    50% { /* 3.25초 지점 */
-    50% {
+/* 3-3.25초: 주황색으로 변화 (15프레임) */
+50% { /* 3.25초 지점 */
 color: #ff5a00;
 }
-    /* 3.25-6.25초: 주황색 유지 (3초) */
-    96.15% { /* 6.25초 지점 */
-    96.15% {
+/* 3.25-6.25초: 주황색 유지 (3초) */
+96.15% { /* 6.25초 지점 */
 color: #ff5a00;
 }
-    /* 6.25-6.5초: 흰색으로 변화 (15프레임) */
-    100% { /* 6.5초 지점 */
-    100% {
+/* 6.25-6.5초: 흰색으로 변화 (15프레임) */
+100% { /* 6.5초 지점 */
 color: #ffffff;
 }
 }
-@@ -311,41 +307,7 @@
+
+/* 배경 비디오에 살짝 줌 인 효과 */
+.hero iframe {
+animation: slowZoom 20s ease-in-out infinite alternate;
+}
+
+@keyframes slowZoom {
+0% {
+transform: scale(1);
+}
+100% {
+transform: scale(1.05);
+}
+}
+
+/* 워터마크 애니메이션 */
+.monkey-watermark {
+position: absolute;
+right: 20px;
+bottom: 20px;
+opacity: 0.3;
+width: 220px;
+z-index: 0;
+pointer-events: none;
+animation: floatAnimation 6s ease-in-out infinite;
+}
+
+@keyframes floatAnimation {
+0%, 100% {
+transform: translateY(0px);
+opacity: 0.3;
+}
+50% {
+transform: translateY(-10px);
+opacity: 0.5;
 }
 }
 
 /* About 섹션 - 완전 수정 */
-.about {
-    background-color: var(--dark-color);
-    padding: 120px 100px;
-}
-
-.about-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 60px;
-}
-
-.about-text {
-    flex: 2;
-    min-width: 400px;
-}
-
-.about-title {
-    font-size: 2.8rem;
-    font-weight: 700;
-    margin-bottom: 30px;
-    color: var(--primary-color);
-    line-height: 1.2;
-}
-
-.about-description {
-    font-size: 1.2rem;
-    line-height: 1.8;
-    margin-bottom: 40px;
-    color: var(--text-color);
-    opacity: 0.9;
-}
-
-/* About 섹션 - 완전 수정 */
-/* About 섹션 - 통합된 스타일 */
 .about {
 background-color: var(--dark-color);
 padding: 120px 100px;
-@@ -430,14 +392,13 @@
+}
+
+.about-content {
+display: flex;
+justify-content: space-between;
+align-items: flex-start;
+gap: 60px;
+}
+
+.about-text {
+flex: 2;
+min-width: 400px;
+}
+
+.about-title {
+font-size: 2.8rem;
+font-weight: 700;
+margin-bottom: 30px;
+color: var(--primary-color);
+line-height: 1.2;
+}
+
+.about-description {
+font-size: 1.2rem;
+line-height: 1.8;
+margin-bottom: 40px;
+color: var(--text-color);
+opacity: 0.9;
+}
+
+/* About 섹션 - 완전 수정 */
+.about {
+background-color: var(--dark-color);
+padding: 120px 100px;
+position: relative;
+}
+
+.about-content {
+display: flex;
+flex-direction: column;
+align-items: center;
+text-align: center;
+gap: 40px;
+max-width: 1000px;
+margin: 0 auto;
+}
+
+.about-text {
+width: 100%;
+}
+
+.about-title {
+font-size: 2.8rem;
+font-weight: 700;
+margin-bottom: 30px;
+color: var(--primary-color);
+line-height: 1.2;
+}
+
+.about-description {
+font-size: 1.2rem;
+line-height: 1.8;
+margin-bottom: 40px;
+color: var(--text-color);
+opacity: 0.9;
+max-width: 800px;
+margin-left: auto;
+margin-right: auto;
+}
+
+/* About stats - 가로 정렬 (데스크톱) */
+.about-stats {
+display: flex;
+flex-direction: row;
+gap: 60px;
+align-items: flex-start;
+justify-content: center;
+width: 100%;
+max-width: 900px;
+}
+
+.stat-item {
+display: flex;
+flex-direction: column;
+align-items: center;
+text-align: center;
+flex: 1;
+min-width: 200px;
+}
+
+.stat-value {
+font-size: 1.8rem;
+font-weight: 700;
+color: var(--primary-color);
+margin-bottom: 8px;
+letter-spacing: 0.5px;
+}
+
+.stat-label {
+font-size: 1rem;
+color: var(--text-color);
+opacity: 0.8;
+line-height: 1.4;
+}
+
+/* 로고를 섹션 최하단에 배치 */
+.about-image {
+position: absolute;
+bottom: 50px;
+left: 50%;
+transform: translateX(-50%);
+z-index: 1;
 }
 
 .about-image img {
-    width: 300px; /* 작은 크기 */
-    width: 300px;
+width: 300px; /* 작은 크기 */
 height: auto;
 border-radius: 10px;
 box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
@@ -293,1331 +441,1132 @@ opacity: 0.9;
 /* 워크 섹션 */
 .work {
 background-color: #0a0a0a;
-@@ -493,14 +454,15 @@
+}
+
+.work-filter {
+display: flex;
+justify-content: center;
+margin-bottom: 50px;
+}
+
+.filter-btn {
+padding: 10px 20px;
+font-size: 1rem;
+background-color: transparent;
+color: var(--text-color);
+border: none;
+cursor: pointer;
+margin: 0 10px;
+position: relative;
+transition: color 0.3s;
+}
+
+.filter-btn::after {
+content: '';
+position: absolute;
+width: 0;
+height: 2px;
+bottom: 0;
+left: 0;
+background-color: var(--primary-color);
+transition: width 0.3s;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+color: var(--primary-color);
+}
+
+.filter-btn:hover::after,
+.filter-btn.active::after {
+width: 100%;
+}
+
+.work-grid {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+gap: 30px;
+}
+
+.work-item {
+position: relative;
 border-radius: 10px;
 overflow: hidden;
 height: 250px;
-    transition: transform 0.3s;
-    cursor: pointer; /* 추가 */
-    transition: transform 0.3s, opacity 0.3s ease-in-out;
-    cursor: pointer;
-    opacity: 1;
+transition: transform 0.3s;
+cursor: pointer; /* 추가 */
 }
 
 .work-thumbnail {
 width: 100%;
 height: 100%;
-    cursor: pointer; /* 추가 */
-    cursor: pointer;
+cursor: pointer; /* 추가 */
 }
 
 .work-item:hover {
-@@ -545,523 +507,45 @@
+transform: translateY(-10px);
+}
+
+.work-thumbnail iframe {
+width: 100%;
+aspect-ratio: 16/9;
+border-radius: 12px;
+border: none;
+}
+
+.work-overlay {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+display: flex;
+flex-direction: column;
+justify-content: flex-end;
+padding: 20px;
+opacity: 0;
+transition: opacity 0.3s;
+}
+
+.work-item:hover .work-overlay {
+opacity: 1;
+}
+
+.work-title {
+font-size: 1.5rem;
+font-weight: 600;
+color: var(--text-color);
+margin-bottom: 10px;
+}
+
+.work-category {
+font-size: 0.9rem;
 color: var(--primary-color);
 }
 
-/* Press 섹션 */
 .section.press {
-  width: 90vw;
-  max-width: 1100px;
-  min-width: 320px;
-  margin: 40px auto;
-  background: #181818;
-  border-radius: 16px;
-  box-shadow: none !important;
-  border: none !important;
-  padding: 40px 32px 60px 32px;
-  color: #fff;
-  transition: width 0.2s;
+width: 90vw;
+max-width: 1100px;
+min-width: 320px;
+margin: 40px auto;
+background: #181818;
+border-radius: 16px;
+box-shadow: none !important;
+border: none !important;
+padding: 40px 32px 60px 32px;
+color: #fff;
+transition: width 0.2s;
 }
 .section.press .section-header {
-  margin-bottom: 24px;
-  text-align: center;
-}
-.section.press h2 {
-  font-size: 2.6em;
-  font-weight: bold;
-  color: #fff;
-  margin-bottom: 0.4em;
-    width: 90vw;
-    max-width: 1100px;
-    min-width: 320px;
-    margin: 40px auto;
-    background: #181818;
-    border-radius: 16px;
-    box-shadow: none !important;
-    border: none !important;
-    padding: 40px 32px 60px 32px;
-    color: #fff;
-    transition: width 0.2s;
-}
-.section.press .section-subtitle {
-  color: #ddd;
-  font-size: 1.15em;
-  margin-bottom: 1.2em;
-}
-.section.press hr {
-  border: none;
-  border-top: 4px solid #ff9800;
-  width: 120px;
-  margin: 18px auto;
-}
-.headline-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-.headline-list li {
-  margin-bottom: 18px;
-}
-
-
-
-<!DOCTYPE html> <html lang="ko"> <head> <!-- 기본 ICO (브라우저 호환용) --> <link rel="icon" href="img/favicon/favicon.ico" type="image/x-icon"> <!-- PNG 포맷 (크롬, 파이어폭스 등) --> <link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png"> <link rel="icon" ty
-
-pasted
-
-
-/* 기본 스타일 초기화 */ * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; } /* 글꼴 */ @font-face { font-family: 'Pretendard'; src: url('https://cdnjs.cloudflare.com/ajax/libs/pr
-
-pasted
-
-
-// 새로운 main.js - 간단하고 확실하게 작동 console.log('main.js 로드됨'); document.addEventListener('DOMContentLoaded', function() { console.log('DOM 로드 완료'); // 네비게이션 스크롤 설정 setupNavigation(); // 모바일 메뉴 설정 setupMobileMenu(); // 헤더 스크롤 효과 setupHeaderEffects()
-
-pasted
-
-이 코드를 분석하고, 오류를 찾아줘
-
-Edit
-코드를 분석한 결과, 몇 가지 오류와 개선점을 발견했습니다:
-
-🔴 주요 오류들
-1. HTML 구조 오류
-html
-<!-- 현재 코드 -->
-<ul id="headlineBoard" class="headline-list"></ul>
-
-<!-- JavaScript에서 -->
-board.innerHTML = `<ul class="headline-list">${html}</ul>`;
-문제: ul 안에 다시 ul을 넣어서 중첩된 구조가 됩니다.
-
-수정방법:
-
-html
-<!-- HTML -->
-<div id="headlineBoard"></div>
-
-<!-- 또는 JavaScript 수정 -->
-board.innerHTML = html; // ul 태그 제거
-2. CSS 애니메이션 중복 정의
-css
-/* 768px 미디어쿼리에서 */
-.hero-title {
-    font-size: 1.96rem;
-    white-space: nowrap; /* 타이핑 효과가 깨질 수 있음 */
-}
-
-/* 720px 미디어쿼리에서 다시 정의 */
-.hero-title {
-    font-size: 3.125rem;
-    /* 같은 애니메이션 다시 정의 */
-    animation: typewriter2 2s steps(10) 4s forwards, ...;
-}
-3. JavaScript 함수 중복 호출
-javascript
-// main.js에서 console.log('main.js 로드됨')이 3번 반복됨
-console.log('main.js 로드됨'); // 1번째
-// ... 코드 ...
-console.log('main.js 로드됨'); // 2번째
-// ... 코드 ...
-console.log('main.js 로드됨'); // 3번째
-🟡 잠재적 문제들
-4. EmailJS 보안 문제
-javascript
-emailjs.init("GnCf85iVH7vsa-xKr"); // Public Key가 노출됨
-5. CSS 미디어쿼리 우선순위 충돌
-css
-/* 768px */
-@media screen and (max-width: 768px) {
-    .hero-title { font-size: 1.96rem; }
-}
-
-/* 720px - 더 구체적이지만 768px 규칙과 충돌 가능 */
-@media screen and (max-width: 720px) and (orientation: portrait) {
-    .hero-title { font-size: 3.125rem; }
-}
-🔧 수정된 코드
-
-수정된 main.js
-Code 
-🔧 HTML 수정사항
-HTML에서 Press 섹션을 다음과 같이 수정해야 합니다:
-
-html
-<!-- 현재 -->
-<ul id="headlineBoard" class="headline-list"></ul>
-
-<!-- 수정 후 -->
-<div id="headlineBoard" class="headline-list"></div>
-📋 추가 권장사항
-보안 강화: EmailJS 키를 환경변수로 관리
-에러 핸들링: try-catch 블록 추가
-성능 최적화: 이벤트 리스너 중복 등록 방지
-접근성: ARIA 레이블 추가
-SEO: 메타 태그 최적화
-이러한 수정을 통해 코드의 안정성과 성능이 크게 향상될 것입니다.
-
-
-
-
-
-<!DOCTYPE html> <html lang="ko"> <head> <!-- 기본 ICO (브라우저 호환용) --> <link rel="icon" href="img/favicon/favicon.ico" type="image/x-icon"> <!-- PNG 포맷 (크롬, 파이어폭스 등) --> <link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png"> <link rel="icon" ty
-
-pasted
-
-
-/* 기본 스타일 초기화 */ * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; } /* 글꼴 */ @font-face { font-family: 'Pretendard'; src: url('https://cdnjs.cloudflare.com/ajax/libs/pr
-
-pasted
-
-
-console.log('main.js 로드됨'); document.addEventListener('DOMContentLoaded', function() { console.log('DOM 로드 완료'); setupNavigation(); setupMobileMenu(); setupHeaderEffects(); setupPortfolioFilter(); setupVideoModal(); renderBoard(); setupContactForm(); c
-
-pasted
-
-이제 이 코드들의 오류가 뭔지 살펴봐
-
-Edit
-업데이트된 코드를 분석한 결과, 여러 오류와 개선점을 발견했습니다:
-
-🔴 주요 오류들
-1. HTML 구조 오류
-html
-<!-- 현재 코드 -->
-<div id="headlineBoard"></div>
-
-<!-- JavaScript에서 -->
-board.innerHTML = html; // html 변수에는 <li> 태그들만 있음
-문제: <li> 태그들이 <ul> 없이 직접 div에 삽입되어 HTML 구조가 잘못됩니다.
-
-2. EmailJS 템플릿 ID 불일치
-javascript
-// 컨택트 폼에서
-emailjs.send('service_x1zvv5a', 'template_lujx42m', templateParams) // 'm' 끝
-
-// 뉴스레터에서  
-emailjs.send('service_x1zvv5a', 'template_lujx42n', templateParams) // 'n' 끝
-문제: 템플릿 ID가 다른데 같은 EmailJS 서비스를 사용하고 있어 혼란 가능성이 있습니다.
-
-3. CSS 선택자 문제
-css
-.headline-list {
-  /* 스타일들... */
-}
-.headline-list li {
-  margin-bottom: 18px;
-}
-문제: JavaScript에서 <ul class="headline-list">를 생성하지 않으므로 CSS가 적용되지 않습니다.
-
-4. 브라우저 히스토리 관리 오류
-javascript
-function setupNavigation() {
-    navLinks.forEach(function(link) {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href').replace('#', '');
-            scrollToSection(targetId);
-            history.pushState(null, '', '#' + targetId); // 문제: 뒤로가기 처리 없음
-        });
-    });
-}
-🔧 수정된 코드
-
-완전 수정된 main.js
-Code 
-🔧 CSS 수정사항
-CSS에서도 다음과 같은 수정이 필요합니다:
-
-css
-/* 워크 아이템 필터 애니메이션 추가 */
-.work-item {
-    /* 기존 스타일... */
-    transition: transform 0.3s, opacity 0.3s ease-in-out;
-    opacity: 1;
-}
-
-/* 프레스 섹션 스타일 보완 */
-#headlineBoard {
-    width: 100%;
-}
-
-#headlineBoard .headline-list {
-    /* 기존 headline-list 스타일 적용 */
-}
-📋 주요 개선사항
-✅ 수정된 내용
-HTML 구조 수정: renderBoard()에서 올바른 <ul> 구조 생성
-히스토리 네비게이션: 뒤로가기/앞으로가기 지원 추가
-성능 최적화: 스크롤 이벤트에 requestAnimationFrame 적용
-에러 핸들링: try-catch 블록과 더 안전한 에러 처리
-접근성 향상: ESC 키 지원, 포커스 관리
-필터 애니메이션: 부드러운 페이드 인/아웃 효과
-EmailJS 템플릿 통일: 일관된 템플릿 ID 사용
-입력 검증 강화: 더 정확한 이메일 정규식
-🔒 보안 권장사항
-EmailJS 키를 환경변수로 관리
-CSRF 토큰 추가 (필요시)
-입력 데이터 sanitization
-이제 코드가 훨씬 안정적이고 사용자 친화적으로 작동할 것입니다!
-
-
-
-
-네비 메뉴 클릭해서 스크롤이 되면, 워크섹션에 유튜브 영상들이 새창에 뜨지 않고,  프레스 섹션에 기사들이 보이지 않아. 
-네비 메뉴 클릭해서 스크롤이 안되면, 워크섹션 유튜브, 프레스 섹션 둘 다 정상 작동해 
-뭐가 문제지?
-
-Edit
-문제를 파악했습니다! 네비게이션으로 스크롤할 때와 직접 스크롤할 때의 차이점을 분석해보겠습니다.
-
-🔍 문제 원인 분석
-1. 이벤트 리스너 등록 시점 문제
-javascript
-// 현재 코드에서 문제가 되는 부분
-document.addEventListener('DOMContentLoaded', function() {
-    setupVideoModal();        // 이때 .work-item들이 존재하지 않을 수 있음
-    renderBoard();           // 이 함수가 실행된 후에야 기사들이 생성됨
-});
-
-function setupVideoModal() {
-    // 이 시점에 .work-item이 아직 DOM에 완전히 로드되지 않았을 수 있음
-    document.querySelectorAll('.work-item').forEach(function(item) {
-        // 이벤트 리스너 등록
-    });
-}
-2. 동적 콘텐츠 로딩 순서
-네비게이션 스크롤 시: DOM이 완전히 로드되기 전에 스크롤이 발생
-직접 스크롤 시: 모든 요소가 이미 렌더링된 상태
-🔧 해결책
-
-이벤트 타이밍 수정된 main.js
-Code 
-🎯 핵심 해결책
-문제의 근본 원인
-이벤트 리스너 등록 타이밍: DOM이 완전히 로드되기 전에 이벤트 리스너가 등록됨
-네비게이션 스크롤 시 DOM 상태 변화: 스크롤 중에 일부 요소들이 아직 완전히 렌더링되지 않음
-주요 수정사항
-⏰ 타이밍 조정
-javascript
-// 기본 설정 → 동적 콘텐츠 렌더링 → 이벤트 리스너 등록 순으로 실행
-setTimeout(() => {
-    setupPortfolioFilter();
-    renderBoard();
-    setTimeout(() => {
-        setupVideoModal();
-        setupContactForm();
-    }, 100);
-}, 50);
-🔄 이벤트 리스너 재등록
-javascript
-// 네비게이션 클릭 후 이벤트 리스너 재확인
-setTimeout(() => {
-    reAttachEventListeners();
-}, 1000);
-🛡️ 안전장치 추가
-javascript
-// 요소가 없으면 재시도
-if (workItems.length === 0) {
-    setTimeout(setupVideoModal, 100);
-    return;
-}
-🗑️ 중복 이벤트 방지
-javascript
-// 기존 이벤트 리스너 제거 후 새로 등록
-button.removeEventListener('click', handleFilterClick);
-button.addEventListener('click', handleFilterClick);
-💡 작동 원리
-네비게이션 클릭 시:
-
-스크롤 실행
-1초 후 reAttachEventListeners() 실행
-모든 동적 요소의 이벤트 리스너 재등록
-워크 섹션 유튜브 클릭 가능
-프레스 섹션 기사 표시
-이제 네비게이션으로 스크롤해도 모든 기능이 정상 작동할 것입니다!
-
-
-
-
-
-console.log('main.js 로드됨'); document.addEventListener('DOMContentLoaded', function() { console.log('DOM 로드 완료'); // 기본 설정들 먼저 실행 setupNavigation(); setupMobileMenu(); setupHeaderEffects(); setupHistoryNavigation(); // 동적 콘텐츠 관련 설정은 지연 실행 setTime
-
-pasted
-
-Edit
-현재 코드를 확인해보니, 여전히 몇 가지 문제가 있습니다. 특히 이벤트 리스너 중복 등록과 DOM 요소 복제 과정에서 문제가 발생하고 있습니다.
-
-🔍 현재 코드의 문제점
-1. DOM 요소 복제 시 이벤트 손실
-javascript
-workItems.forEach(function(item) {
-    // 기존 클릭 이벤트 제거
-    const newItem = item.cloneNode(true);  // ❌ 이 과정에서 모든 이벤트가 사라짐
-    item.parentNode.replaceChild(newItem, item);
-});
-2. 복잡한 이벤트 재등록 로직
-현재 접근법이 너무 복잡하고 신뢰성이 떨어집니다.
-
-🔧 간단하고 확실한 해결책
-
-간소화된 main.js (문제 해결)
-Code 
-🎯 핵심 해결책
-주요 변경사항
-🎯 이벤트 위임 사용
-javascript
-// 개별 .work-item에 이벤트 등록하는 대신
-// .work-grid에 한 번만 등록하여 모든 하위 요소 처리
-workGrid.addEventListener('click', handleWorkItemClick);
-🔄 복잡한 DOM 조작 제거
-javascript
-// ❌ 기존: DOM 요소 복제/교체
-// ✅ 개선: 이벤트 위임으로 단순화
-📍 상태 관리 추가
-javascript
-let videoModalInitialized = false;
-let portfolioFilterInitialized = false;
-⚡ 안정적인 재초기화
-javascript
-function ensureVideoModalWorks() {
-    // 간단한 확인 후 필요시에만 재초기화
-}
-💡 작동 원리
-이벤트 위임 방식
-.work-grid에 클릭 이벤트 한 번만 등록
-클릭 시 e.target.closest('.work-item')으로 워크 아이템 감지
-필터 변경이나 DOM 조작 후에도 이벤트가 유지됨
-네비게이션 후 처리
-네비게이션 클릭 → 스크롤
-1.2초 후 ensureVideoModalWorks() 실행
-필요시에만 비디오 모달 재초기화
-이제 네비게이션으로 스크롤해도 모든 기능이 안정적으로 작동할 것입니다! 🚀
-
-
-
-
-image.png
-저 문의 보내기랑 뉴스레터를 아예 삭제해줘 
-자꾸 오류가 나고, 필요 없는 것 같아
-
-Edit
-문의 보내기와 뉴스레터 기능을 완전히 제거해드리겠습니다.
-
-🗑️ HTML에서 제거할 부분
-
-문의폼/뉴스레터 제거된 HTML
-Code 
-🗑️ JavaScript에서 제거할 부분
-
-문의폼/뉴스레터 제거된 JavaScript
-Code 
-
-
-
-Continue
-
-Edit
-
-문의폼/뉴스레터 제거된 JavaScript
-Code ∙ Version 2 
-🗑️ CSS에서 제거할 부분
-CSS에서도 다음 부분들을 제거하거나 수정해주세요:
-
-css
-/* 제거할 CSS 부분들 */
-
-/* 컨택트 폼 관련 스타일 제거 */
-.contact-form { /* 전체 삭제 */ }
-.form-group { /* 전체 삭제 */ }
-.form-control { /* 전체 삭제 */ }
-.submit-btn { /* 전체 삭제 */ }
-
-/* 뉴스레터 관련 스타일 제거 */
-.footer-newsletter { /* 전체 삭제 */ }
-.newsletter-form { /* 전체 삭제 */ }
-.newsletter-input { /* 전체 삭제 */ }
-.newsletter-btn { /* 전체 삭제 */ }
-
-/* 수정할 CSS 부분들 */
-.contact-content {
-    /* flex 레이아웃 제거하고 중앙 정렬로 변경 */
-    display: block;
-.section.press .section-header {
-    margin-bottom: 24px;
+margin-bottom: 24px;
 text-align: center;
 }
-
-.contact-info-centered {
-    max-width: 800px;
-    margin: 0 auto;
-    text-align: center;
 .section.press h2 {
-    font-size: 2.6em;
-    font-weight: bold;
-    color: #fff;
-    margin-bottom: 0.4em;
+font-size: 2.6em;
+font-weight: bold;
+color: #fff;
+margin-bottom: 0.4em;
 }
-
-.footer-logo-centered {
-    text-align: center;
-    max-width: 600px;
-    margin: 0 auto;
 .section.press .section-subtitle {
-    color: #ddd;
-    font-size: 1.15em;
-    margin-bottom: 1.2em;
+color: #ddd;
+font-size: 1.15em;
+margin-bottom: 1.2em;
 }
-
-/* 기존 contact-info 스타일을 contact-info-centered로 변경 */
-.contact-info-centered {
-    padding: 0;
-    margin-bottom: 0;
 .section.press hr {
-    border: none;
-    border-top: 4px solid #ff9800;
-    width: 120px;
-    margin: 18px auto;
+border: none;
+border-top: 4px solid #ff9800;
+width: 120px;
+margin: 18px auto;
 }
-✅ 제거된 내용 요약
-HTML에서 제거됨:
-<script> EmailJS 라이브러리
-.contact-form 전체 폼
-.footer-newsletter 뉴스레터 섹션
-JavaScript에서 제거됨:
-setupContactForm() 함수
-handleContactSubmit() 함수
-handleNewsletterSubmit() 함수
-EmailJS 관련 모든 코드
-CSS에서 제거 필요:
-폼 관련 스타일들
-뉴스레터 관련 스타일들
-이제 문의 보내기와 뉴스레터 기능이 완전히 제거되어 오류 없이 깔끔하게 작동할 것입니다! 🎉
-
-Contact 섹션은 이제 단순히 연락처 정보만 표시하는 정적인 섹션이 되었습니다.
+.headline-list {
+list-style: none;
+padding: 0;
+margin: 0;
+}
+.headline-list li {
+margin-bottom: 18px;
+}
 
 
 
+/* 콘택트 섹션 */
+.contact {
+background-color: var(--dark-color);
+}
 
-image.png
-지금 푸터가 너무 커 아주 얇게 줄여줘 
-그리고 화면 오른쪽에는 로고와 지도를 넣어줘 (구글 맵)
+.contact-content {
+display: flex;
+justify-content: space-between;
+flex-wrap: wrap;
+}
 
-Edit
-푸터를 얇게 줄이고 오른쪽에 로고와 지도를 추가해드리겠습니다!
+.contact-info {
+flex: 1;
+min-width: 300px;
+padding-right: 50px;
+}
 
-📝 수정된 HTML - Contact 섹션
+.contact-title {
+font-size: 2.5rem;
+font-weight: 700;
+color: var(--primary-color);
+margin-bottom: 30px;
+}
 
-Contact 섹션과 푸터 개선
-Code 
-🎨 추가할 CSS 스타일
+.contact-description {
+font-size: 1.1rem;
+line-height: 1.8;
+margin-bottom: 40px;
+}
 
-Contact & Footer CSS 스타일
-Code 
-🔧 기존 CSS에서 제거/수정할 부분
-기존 CSS 파일에서 다음 부분들을 제거하거나 주석 처리해주세요:
+.contact-list {
+list-style: none;
+}
 
-css
-/* 제거할 기존 CSS */
-.contact-content { /* 삭제 */ }
-.contact-info { /* 삭제 */ }
-.contact-info-centered { /* 삭제 */ }
-footer { /* 기존 푸터 스타일 삭제 */ }
-.footer-content { /* 삭제 */ }
-.footer-logo { /* 삭제 */ }
-.footer-logo-centered { /* 삭제 */ }
-.footer-description { /* 삭제 */ }
-.footer-bottom { /* 삭제 */ }
-.bottom-links { /* 삭제 */ }
-.bottom-link { /* 삭제 */ }
-✨ 주요 개선사항
-Contact 섹션:
-✅ 2단 레이아웃: 왼쪽 연락처, 오른쪽 로고+지도
-✅ 구글 지도 추가: KGIT빌딩 위치 표시
-✅ 로고 배치: 지도 위에 깔끔하게 배치
-✅ 호버 효과: 지도에 마우스 오버 시 색상 변화
-푸터:
-✅ 극도로 얇게: 기존 대비 70% 축소
-✅ 미니멀 디자인: 저작권과 링크만 표시
-✅ 한 줄 레이아웃: 양쪽 정렬로 깔끔하게
-반응형 지원:
-✅ 모바일: 세로 배치로 자동 전환
-✅ 태블릿: 적절한 크기 조정
-✅ 데스크톱: 2단 레이아웃 유지
-이제 Contact 섹션이 훨씬 더 전문적이고 실용적으로 보일 것입니다! 🚀
+.contact-item {
+margin-bottom: 20px;
+display: flex;
+align-items: flex-start;
+}
 
-
-
-
-
-
-
-/* Contact 섹션 - 새로운 레이아웃 */
-.contact-layout {
-@@ -1222,82 +706,124 @@
+.contact-icon {
+width: 40px;
+height: 40px;
+background-color: var(--primary-color);
+border-radius: 50%;
+display: flex;
+justify-content: center;
+align-items: center;
+font-size: 1.2rem;
 color: var(--text-color);
-opacity: 0.3;
-font-size: 0.8rem;
+margin-right: 15px;
+}
+
+.contact-text {
+flex: 1;
+}
+
+.contact-label {
+font-size: 1rem;
+font-weight: 600;
+margin-bottom: 5px;
+}
+
+.contact-value {
+font-size: 1rem;
+color: var(--text-color);
+opacity: 0.8;
+}
+
+.contact-form {
+flex: 1;
+min-width: 300px;
+}
+
+.form-group {
+margin-bottom: 20px;
+}
+
+.form-control {
+width: 100%;
+padding: 15px;
+background-color: rgba(255, 255, 255, 0.1);
+border: none;
+border-radius: 5px;
+font-size: 1rem;
+color: var(--text-color);
+transition: background-color 0.3s;
+}
+
+.form-control:focus {
+outline: none;
+background-color: rgba(255, 255, 255, 0.15);
+}
+
+textarea.form-control {
+min-height: 150px;
+resize: vertical;
+}
+
+.submit-btn {
+padding: 15px 30px;
+background-color: var(--primary-color);
+color: var(--text-color);
+font-size: 1rem;
+font-weight: 600;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+transition: background-color 0.3s, transform 0.3s;
+}
+
+.submit-btn:hover {
+background-color: #e65100;
+transform: translateY(-3px);
+}
+
+/* 맵 */
+.map-container {
+margin-top: 80px;
+height: 400px;
+border-radius: 10px;
+overflow: hidden;
+}
+
+.map-container iframe {
+width: 100%;
+height: 100%;
+border: none;
+}
+
+/* 푸터 */
+footer {
+background-color: #080808;
+padding: 50px 100px 20px;
+}
+
+.footer-content {
+display: flex;
+justify-content: space-between;
+flex-wrap: wrap;
+margin-bottom: 40px;
+}
+
+.footer-logo {
+flex: 1;
+min-width: 200px;
+margin-bottom: 30px;
+}
+
+.footer-logo img {
+height: 50px;
+margin-bottom: 20px;
+}
+
+.footer-description {
+font-size: 1rem;
+line-height: 1.6;
+color: var(--text-color);
+opacity: 0.7;
+max-width: 300px;
+}
+
+.footer-links {
+flex: 1;
+min-width: 200px;
+margin-bottom: 30px;
+}
+
+.footer-title {
+font-size: 1.2rem;
+font-weight: 600;
+color: var(--text-color);
+margin-bottom: 20px;
+position: relative;
+padding-bottom: 10px;
+}
+
+.footer-title::after {
+content: '';
+position: absolute;
+bottom: 0;
+left: 0;
+width: 40px;
+height: 3px;
+background-color: var(--primary-color);
+}
+
+.footer-list {
+list-style: none;
+}
+
+.footer-item {
+margin-bottom: 10px;
+}
+
+.footer-item a {
+font-size: 1rem;
+color: var(--text-color);
+opacity: 0.7;
+transition: opacity 0.3s, color 0.3s;
+}
+
+.footer-item a:hover {
+opacity: 1;
+color: var(--primary-color);
+}
+
+.footer-social {
+display: flex;
+margin-top: 20px;
 }
 
 .social-link {
-   width: 40px;
-   height: 40px;
-   background-color: rgba(255, 255, 255, 0.1);
-   border-radius: 50%;
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   font-size: 1.2rem;
-   color: var(--text-color);
-   margin-right: 10px;
-   transition: background-color 0.3s, color 0.3s;
-/* 비디오 모달 */
-.video-modal {
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.7);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
+width: 40px;
+height: 40px;
+background-color: rgba(255, 255, 255, 0.1);
+border-radius: 50%;
+display: flex;
+justify-content: center;
+align-items: center;
+font-size: 1.2rem;
+color: var(--text-color);
+margin-right: 10px;
+transition: background-color 0.3s, color 0.3s;
 }
 
 .social-link:hover {
-   background-color: var(--primary-color);
-   color: var(--text-color);
-.video-modal .modal-content {
-    position: relative;
-    background: #000;
-    padding: 0;
-    border-radius: 10px;
+background-color: var(--primary-color);
+color: var(--text-color);
+}
+
+.footer-newsletter {
+flex: 1;
+min-width: 300px;
+}
+
+.newsletter-form {
+position: relative;
+}
+
+.newsletter-input {
+width: 100%;
+padding: 15px;
+padding-right: 50px;
+background-color: rgba(255, 255, 255, 0.1);
+border: none;
+border-radius: 5px;
+font-size: 1rem;
+color: var(--text-color);
+}
+
+.newsletter-input:focus {
+outline: none;
+background-color: rgba(255, 255, 255, 0.15);
+}
+
+.newsletter-btn {
+position: absolute;
+top: 50%;
+right: 15px;
+transform: translateY(-50%);
+background-color: transparent;
+border: none;
+font-size: 1.2rem;
+color: var(--primary-color);
+cursor: pointer;
+transition: color 0.3s;
+}
+
+.newsletter-btn:hover {
+color: var(--text-color);
 }
 
 .footer-bottom {
-   padding-top: 20px;
-   border-top: 1px solid rgba(255, 255, 255, 0.1);
-   display: flex;
-   justify-content: space-between;
-   align-items: center;
-   flex-wrap: wrap;
-.video-modal iframe {
-    width: 70vw;
-    height: 40vw;
-    max-width: 900px;
-    max-height: 500px;
-    border: none;
-    background: #000;
+padding-top: 20px;
+border-top: 1px solid rgba(255, 255, 255, 0.1);
+display: flex;
+justify-content: space-between;
+align-items: center;
+flex-wrap: wrap;
 }
 
 .copyright {
-   font-size: 0.9rem;
-   color: var(--text-color);
-   opacity: 0.7;
-.video-modal .close-button {
-    position: absolute;
-    top: -30px;
-    right: 0;
-    font-size: 2rem;
-    color: #fff;
-    cursor: pointer;
-    z-index: 2;
+font-size: 0.9rem;
+color: var(--text-color);
+opacity: 0.7;
+}
+
+.bottom-links {
+display: flex;
+}
+
+.bottom-link {
+font-size: 0.9rem;
+color: var(--text-color);
+opacity: 0.7;
+margin-left: 20px;
+transition: opacity 0.3s, color 0.3s;
+}
+
+.bottom-link:hover {
+opacity: 1;
+color: var(--primary-color);
 }
 
 /* 비디오 모달 */
 .video-modal {
-   position: fixed;
-   left: 0;
-   top: 0;
-   width: 100vw;
-   height: 100vh;
-   background: rgba(0, 0, 0, 0.7);
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   z-index: 9999;
-/* 헤드라인 스타일 */
-#headlineBoard {
-    width: 100%;
+position: fixed;
+left: 0;
+top: 0;
+width: 100vw;
+height: 100vh;
+background: rgba(0, 0, 0, 0.7);
+display: flex;
+justify-content: center;
+align-items: center;
+z-index: 9999;
 }
 
 .video-modal .modal-content {
-   position: relative;
-   background: #000;
-   padding: 0;
-   border-radius: 10px;
-.headline-list {
-    width: 100%;
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 0;
-    list-style: none;
+position: relative;
+background: #000;
+padding: 0;
+border-radius: 10px;
 }
 
 .video-modal iframe {
-   width: 70vw;
-   height: 40vw;
-   max-width: 900px;
-   max-height: 500px;
-   border: none;
-   background: #000;
-.headline-row {
-    display: grid;
-    grid-template-columns: 110px 1fr 110px;
-    align-items: flex-start;
-    gap: 20px;
-    padding: 20px 0 14px 0;
-    border-bottom: 1px solid #333;
+width: 70vw;
+height: 40vw;
+max-width: 900px;
+max-height: 500px;
+border: none;
+background: #000;
 }
 
 .video-modal .close-button {
-   position: absolute;
-   top: -30px;
-   right: 0;
-   font-size: 2rem;
-   color: #fff;
-   cursor: pointer;
-   z-index: 2;
-.headline-date {
-    font-size: 1.05em;
-    color: #fff;
-    font-weight: 500;
-    letter-spacing: 0.5px;
-    text-align: left;
-    white-space: nowrap;
-    margin-top: 4px;
+position: absolute;
+top: -30px;
+right: 0;
+font-size: 2rem;
+color: #fff;
+cursor: pointer;
+z-index: 2;
 }
-
-.headline-main {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-.headline-title {
-    font-size: 1.19em;
-    font-weight: bold;
-    color: #fff;
-    margin-bottom: 6px;
-    line-height: 1.25;
-    text-align: left;
-    text-decoration: none;
-    cursor: pointer;
-    word-break: keep-all;
-    transition: color 0.18s;
-}
-
-.headline-title:hover,
-.headline-title:focus {
-    color: #f9d923;
-    text-decoration: underline;
-}
-
 /* 반응형 디자인 - 완전 수정됨 */
-.headline-summary {
-    font-size: 0.96em;
-    color: #eee;
-    opacity: 0.86;
-    line-height: 1.5;
-    text-align: left;
-}
-
-.headline-media {
-    font-size: 1.04em;
-    color: #fff;
-    text-align: right;
-    font-weight: 600;
-    opacity: 0.85;
-    white-space: nowrap;
-    margin-top: 4px;
-}
-
-/* 반응형 디자인 */
 @media screen and (max-width: 1200px) {
 .section {
 padding: 100px 50px;
-@@ -1308,21 +834,20 @@
+}
+
+.hero-overlay {
+top: 60%;
 }
 
 .hero-title {
-        font-size: 3.5rem; /* 5rem의 70% */
-        font-size: 3.5rem;
+font-size: 3.5rem; /* 5rem의 70% */
 }
 
 .hero-tagline {
-        font-size: 1.4rem; /* 2rem의 70% */
-        font-size: 1.4rem;
+font-size: 1.4rem; /* 2rem의 70% */
 }
 
-    /* About 섹션 1200px */
+/* About 섹션 1200px */
 .about {
 padding: 100px 50px;
 }
 
 .about-stats {
 gap: 40px;
-        justify-content: center; /* 가운데 정렬 */
-        justify-content: center;
+justify-content: center; /* 가운데 정렬 */
 }
 
 .about-image img {
-@@ -1334,7 +859,6 @@
+width: 100px;
+}
+
+.about-image {
+bottom: 25px;
 right: 25px;
 }
 
-    /* 워크 필터 1200px */
+/* 워크 필터 1200px */
 .work-filter {
 flex-wrap: nowrap;
 overflow-x: auto;
-@@ -1346,6 +870,15 @@
+justify-content: center;
+gap: 8px;
+}
+
+.filter-btn {
 white-space: nowrap;
 flex-shrink: 0;
 }
-
-    .contact-layout {
-        gap: 40px;
-    }
-
-    .contact-left,
-    .contact-right {
-        min-width: 300px;
-    }
 }
 
 @media screen and (max-width: 992px) {
-@@ -1362,27 +895,17 @@
+header {
+padding: 20px 30px;
+}
+
+header.scrolled {
+padding: 15px 30px;
+}
+
+.hero-overlay {
+top: 60%;
 }
 
 .hero-title {
-        font-size: 2.8rem; /* 4rem의 70% */
-        font-size: 2.8rem;
+font-size: 2.8rem; /* 4rem의 70% */
 }
 
 .hero-tagline {
-        font-size: 1.26rem; /* 1.8rem의 70% */
-        font-size: 1.26rem;
+font-size: 1.26rem; /* 1.8rem의 70% */
 }
 
 .work-grid {
 grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 }
 
-    .contact-info {
-        padding-right: 0;
-        margin-bottom: 50px;
-    }
+.contact-info {
+padding-right: 0;
+margin-bottom: 50px;
+}
 
-    .contact-content {
-        flex-direction: column;
-    }
+.contact-content {
+flex-direction: column;
+}
 
-    /* About 섹션 992px */
+/* About 섹션 992px */
 .about-title {
 font-size: 2.4rem;
 }
-@@ -1393,7 +916,7 @@
+
+.about-description {
+font-size: 1.1rem;
+}
 
 .about-stats {
 gap: 30px;
-        justify-content: center; /* 가운데 정렬 */
-        justify-content: center;
+justify-content: center; /* 가운데 정렬 */
 }
 
 .stat-value {
-@@ -1413,11 +936,21 @@
+font-size: 1.6rem;
+}
+
+.stat-label {
+font-size: 0.9rem;
+}
+
+.about-image img {
+width: 90px;
+}
+
+.about-image {
+bottom: 20px;
 right: 20px;
 }
 
-    /* 워크 필터 992px */
+/* 워크 필터 992px */
 .work-filter {
 gap: 6px;
 padding: 0 10px;
 }
-
-    .contact-layout {
-        flex-direction: column;
-        gap: 40px;
-    }
-
-    .contact-left,
-    .contact-right {
-        min-width: auto;
-        width: 100%;
-    }
 }
 
 @media screen and (max-width: 900px) {
-@@ -1435,27 +968,18 @@
+.monkey-watermark {
+width: 120px;
+right: 10px;
+bottom: 10px;
+}
+
+.section {
+padding: 40px 10px;
+}
+
+.hero-overlay {
 top: 60%;
 }
 
-    .contact-content,
-    .footer-content {
-        flex-direction: column;
-        gap: 24px;
-    }
+.contact-content,
+.footer-content {
+flex-direction: column;
+gap: 24px;
+}
 
 .work-grid {
 grid-template-columns: 1fr;
 }
 
-    .footer-logo,
-    .footer-links,
-    .footer-newsletter {
-        width: 100%;
-        margin-bottom: 24px;
-    .minimal-footer {
-        padding: 15px 30px;
+.footer-logo,
+.footer-links,
+.footer-newsletter {
+width: 100%;
+margin-bottom: 24px;
 }
 
-    .footer-bottom {
-    .footer-content-minimal {
+.footer-bottom {
 flex-direction: column;
-        text-align: center;
+text-align: center;
 gap: 10px;
-        text-align: center;
 }
 }
 
-@@ -1499,7 +1023,7 @@
+@media screen and (max-width: 768px) {
+.mobile-menu-btn {
+display: block;
+}
+
+nav {
+position: fixed;
+top: 0;
+right: -100%;
+width: 80%;
+max-width: 300px;
+height: 100vh;
+background-color: var(--dark-color);
+padding: 100px 30px;
+z-index: 99;
+transition: right 0.3s;
+box-shadow: -5px 0 30px rgba(0, 0, 0, 0.3);
+}
+
+nav.active {
+right: 0;
+}
+
+nav ul {
+flex-direction: column;
+}
+
+nav ul li {
+margin: 0 0 20px 0;
+}
+
+nav ul li a {
+font-size: 1.2rem;
+}
+
+.section {
+padding: 80px 30px;
 }
 
 .hero-overlay {
-        top: 50%; /* 영상 위 중앙으로 복원 */
-        top: 50%;
+top: 50%; /* 영상 위 중앙으로 복원 */
 }
 
 .hero-title {
-@@ -1516,506 +1040,5 @@
+font-size: 1.96rem;
+white-space: nowrap;
+}
+
+.hero-tagline {
+font-size: 0.98rem;
+white-space: nowrap;
+}
+
+.section-title {
 font-size: 2.5rem;
 }
 
-    footer {
-        padding: 50px 30px 20px;
-    }
+footer {
+padding: 50px 30px 20px;
+}
 
-    .bottom-link {
-        margin: 0 10px;
-    }
+.bottom-link {
+margin: 0 10px;
+}
 
-    /* About 섹션 768px - 모바일 세로 정렬 */
+/* About 섹션 768px - 모바일 세로 정렬 */
 .about {
-        padding: 80px 15px;
-    }
+padding: 80px 15px;
+}
 
-    .about-title {
-        font-size: 2rem;
-    }
+.about-title {
+font-size: 2rem;
+}
 
-    .about-description {
-        font-size: 1rem;
-        line-height: 1.6;
-    }
+.about-description {
+font-size: 1rem;
+line-height: 1.6;
+}
 
-    /* 모바일에서 Stats 세로 정렬 */
-    .about-stats {
-        flex-direction: column;
-        gap: 25px;
-        align-items: center;
-        justify-content: center;
-    }
+/* 모바일에서 Stats 세로 정렬 */
+.about-stats {
+flex-direction: column;
+gap: 25px;
+align-items: center;
+justify-content: center;
+}
 
-    .stat-item {
-        width: 100%;
-        max-width: 350px;
-        min-width: auto;
-        align-items: center;
-        text-align: center;
-    }
+.stat-item {
+width: 100%;
+max-width: 350px;
+min-width: auto;
+align-items: center;
+text-align: center;
+}
 
-    .stat-value {
-        font-size: 1.6rem;
-    }
+.stat-value {
+font-size: 1.6rem;
+}
 
-    .stat-label {
-        font-size: 0.9rem;
-    }
-    
-    .about-image img {
-        width: 80px;
-    }
-    
-    .about-image {
-        bottom: 15px;
-        right: 15px;
-    }
+.stat-label {
+font-size: 0.9rem;
+}
 
-    /* 워크 필터 모바일 최적화 */
-    .work-filter {
-        gap: 3px;
-        margin-bottom: 40px;
-        padding: 0 5px;
-        flex-wrap: nowrap !important;
-        overflow-x: auto;
-        justify-content: flex-start;
-    }
+.about-image img {
+width: 80px;
+}
 
-    .filter-btn {
-        padding: 8px 12px;
-        font-size: 0.8rem;
-        border-radius: 15px;
-        white-space: nowrap !important;
-        flex-shrink: 0 !important;
-        min-width: auto;
-    }
+.about-image {
+bottom: 15px;
+right: 15px;
+}
+
+/* 워크 필터 모바일 최적화 */
+.work-filter {
+gap: 3px;
+margin-bottom: 40px;
+padding: 0 5px;
+flex-wrap: nowrap !important;
+overflow-x: auto;
+justify-content: flex-start;
+}
+
+.filter-btn {
+padding: 8px 12px;
+font-size: 0.8rem;
+border-radius: 15px;
+white-space: nowrap !important;
+flex-shrink: 0 !important;
+min-width: auto;
+}
 }
 
 /* 세로 화면 대응 (720px부터) - 타이핑 효과 수정 */
 @media screen and (max-width: 720px) and (orientation: portrait) {
-    .hero {
-        height: 100vh;
-        position: relative;
-        padding: 0;
-        display: block;
-    }
+.hero {
+height: 100vh;
+position: relative;
+padding: 0;
+display: block;
+}
 
-    .hero iframe {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 1;
-    }
+.hero iframe {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+z-index: 1;
+}
 
-    .hero-overlay {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        z-index: 2;
-        color: white;
-        text-align: center;
-        text-shadow: 0 0 12px #000;
-        padding: 0;
-        background: none;
-        border-radius: 0;
-        backdrop-filter: none;
-        border: none;
-        box-shadow: none;
-    }
+.hero-overlay {
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+z-index: 2;
+color: white;
+text-align: center;
+text-shadow: 0 0 12px #000;
+padding: 0;
+background: none;
+border-radius: 0;
+backdrop-filter: none;
+border: none;
+box-shadow: none;
+}
 
-    .hero-title {
-        font-size: 3.125rem; /* 2.5rem의 125% */
-        margin-bottom: 10px;
-        font-weight: bold;
-        opacity: 0;
-        white-space: nowrap; /* 타이핑 효과를 위해 한 줄로 유지 */
-        overflow: hidden;
-        border-right: 3px solid rgba(255, 255, 255, 0.7);
-        color: white;
-        display: inline-block;
-        position: relative;
-        /* 타이핑 애니메이션 적용 */
-        animation: typewriter2 2s steps(10) 4s forwards,
-                   hideCursor2 0.1s linear 6.5s forwards,
-                   colorCycle 6.5s linear 7s infinite;
-    }
-    
-    .hero-tagline {
-        font-size: 1.5rem; /* 1.2rem의 125% */
-        margin-bottom: 8px;
-        opacity: 0;
-        white-space: nowrap; /* 타이핑 효과를 위해 한 줄로 유지 */
-        overflow: hidden;
-        border-right: 2px solid rgba(255, 255, 255, 0.7);
-        /* 타이핑 애니메이션 적용 */
-        animation: typewriter1 1.5s steps(20) 1.5s forwards,
-                   hideCursor1 0.1s linear 3.5s forwards;
-    }
+.hero-title {
+font-size: 3.125rem; /* 2.5rem의 125% */
+margin-bottom: 10px;
+font-weight: bold;
+opacity: 0;
+white-space: nowrap; /* 타이핑 효과를 위해 한 줄로 유지 */
+overflow: hidden;
+border-right: 3px solid rgba(255, 255, 255, 0.7);
+color: white;
+display: inline-block;
+position: relative;
+/* 타이핑 애니메이션 적용 */
+animation: typewriter2 2s steps(10) 4s forwards,
+hideCursor2 0.1s linear 6.5s forwards,
+colorCycle 6.5s linear 7s infinite;
+}
 
-    .monkey-watermark {
-        position: absolute;
-        bottom: 10px;
-        right: 10px;
-        width: 80px;
-        z-index: 3;
-    }
+.hero-tagline {
+font-size: 1.5rem; /* 1.2rem의 125% */
+margin-bottom: 8px;
+opacity: 0;
+white-space: nowrap; /* 타이핑 효과를 위해 한 줄로 유지 */
+overflow: hidden;
+border-right: 2px solid rgba(255, 255, 255, 0.7);
+/* 타이핑 애니메이션 적용 */
+animation: typewriter1 1.5s steps(20) 1.5s forwards,
+hideCursor1 0.1s linear 3.5s forwards;
+}
 
-    /* About 세로화면에서 stats 세로 정렬 */
-    .about-stats {
-        flex-direction: column !important;
-        gap: 25px !important;
-        align-items: center !important;
-        justify-content: center !important;
-    }
+.monkey-watermark {
+position: absolute;
+bottom: 10px;
+right: 10px;
+width: 80px;
+z-index: 3;
+}
 
-    .stat-item {
-        align-items: center !important;
-        text-align: center !important;
-    }
+/* About 세로화면에서 stats 세로 정렬 */
+.about-stats {
+flex-direction: column !important;
+gap: 25px !important;
+align-items: center !important;
+justify-content: center !important;
+}
 
-    /* About 로고 크기 기본 비율 유지 */
-    .about-image img {
-        width: 200px; /* 데스크톱 300px의 약 67% 비율 유지 */
-    }
-    
-    .about-image {
-        bottom: 60px; /* 위치도 조정 */
-       left: 50%;
-        transform: translateX(-50%); /* 중앙 정렬 */
-    }
+.stat-item {
+align-items: center !important;
+text-align: center !important;
+}
 
-    /* 워크 필터 강제 한 줄 */
-    .work-filter {
-        flex-wrap: nowrap !important;
-        overflow-x: auto !important;
-        gap: 4px !important;
-        padding: 0 3px !important;
-    }
+/* About 로고 크기 기본 비율 유지 */
+.about-image img {
+width: 200px; /* 데스크톱 300px의 약 67% 비율 유지 */
+}
 
-    .filter-btn {
-        font-size: 0.75rem !important;
-        padding: 6px 8px !important;
-        white-space: nowrap !important;
-        flex-shrink: 0 !important;
-    }
+.about-image {
+bottom: 60px; /* 위치도 조정 */
+left: 50%;
+transform: translateX(-50%); /* 중앙 정렬 */
+}
+
+/* 워크 필터 강제 한 줄 */
+.work-filter {
+flex-wrap: nowrap !important;
+overflow-x: auto !important;
+gap: 4px !important;
+padding: 0 3px !important;
+}
+
+.filter-btn {
+font-size: 0.75rem !important;
+padding: 6px 8px !important;
+white-space: nowrap !important;
+flex-shrink: 0 !important;
+}
 }
 
 /* 세로 화면 600px 이하 */
 @media screen and (max-width: 600px) and (orientation: portrait) {
-    .hero-overlay {
-        padding: 0;
-        background: none;
-    }
+.hero-overlay {
+padding: 0;
+background: none;
+}
 
-    .hero-title {
-        font-size: 2.5rem; /* 2rem의 125% */
-        margin-bottom: 8px;
-        /* 타이핑 효과 유지 */
-        white-space: nowrap;
-        overflow: hidden;
-        opacity: 0;
-        border-right: 3px solid rgba(255, 255, 255, 0.7);
-        animation: typewriter2 2s steps(10) 4s forwards,
-                   hideCursor2 0.1s linear 6.5s forwards,
-                   colorCycle 6.5s linear 7s infinite;
-    }
-    
-    .hero-tagline {
-        font-size: 1.25rem; /* 1rem의 125% */
-        margin-bottom: 6px;
-        /* 타이핑 효과 유지 */
-        white-space: nowrap;
-        overflow: hidden;
-        opacity: 0;
-        border-right: 2px solid rgba(255, 255, 255, 0.7);
-        animation: typewriter1 1.5s steps(20) 1.5s forwards,
-                   hideCursor1 0.1s linear 3.5s forwards;
-    }
+.hero-title {
+font-size: 2.5rem; /* 2rem의 125% */
+margin-bottom: 8px;
+/* 타이핑 효과 유지 */
+white-space: nowrap;
+overflow: hidden;
+opacity: 0;
+border-right: 3px solid rgba(255, 255, 255, 0.7);
+animation: typewriter2 2s steps(10) 4s forwards,
+hideCursor2 0.1s linear 6.5s forwards,
+colorCycle 6.5s linear 7s infinite;
+}
 
-    /* About 로고 크기 조정 */
-    .about-image img {
-        width: 160px; /* 600px 이하에서 적절한 크기 */
-    }
-    
-    .about-image {
-        bottom: 50px;
-       left: 50%;
-        transform: translateX(-50%);
-    }
+.hero-tagline {
+font-size: 1.25rem; /* 1rem의 125% */
+margin-bottom: 6px;
+/* 타이핑 효과 유지 */
+white-space: nowrap;
+overflow: hidden;
+opacity: 0;
+border-right: 2px solid rgba(255, 255, 255, 0.7);
+animation: typewriter1 1.5s steps(20) 1.5s forwards,
+hideCursor1 0.1s linear 3.5s forwards;
+}
+
+/* About 로고 크기 조정 */
+.about-image img {
+width: 160px; /* 600px 이하에서 적절한 크기 */
+}
+
+.about-image {
+bottom: 50px;
+left: 50%;
+transform: translateX(-50%);
+}
 }
 
 /* 세로 화면 576px 이하 */
 @media screen and (max-width: 576px) and (orientation: portrait) {
-    .hero-overlay {
-        padding: 0;
-        background: none;
-    }
+.hero-overlay {
+padding: 0;
+background: none;
+}
 
-    .hero-title {
-        font-size: 2.25rem; /* 1.8rem의 125% */
-        margin-bottom: 6px;
-        /* 타이핑 효과 유지 - white-space: normal 제거 */
-        white-space: nowrap;
-        overflow: hidden;
-        opacity: 0;
-        border-right: 3px solid rgba(255, 255, 255, 0.7);
-        animation: typewriter2 2s steps(10) 4s forwards,
-                   hideCursor2 0.1s linear 6.5s forwards,
-                   colorCycle 6.5s linear 7s infinite;
-    }
-    
-    .hero-tagline {
-        font-size: 1.125rem; /* 0.9rem의 125% */
-        margin-bottom: 4px;
-        /* 타이핑 효과 유지 - white-space: normal 제거 */
-        white-space: nowrap;
-        overflow: hidden;
-        opacity: 0;
-        border-right: 2px solid rgba(255, 255, 255, 0.7);
-        animation: typewriter1 1.5s steps(20) 1.5s forwards,
-                   hideCursor1 0.1s linear 3.5s forwards;
-    }
+.hero-title {
+font-size: 2.25rem; /* 1.8rem의 125% */
+margin-bottom: 6px;
+/* 타이핑 효과 유지 - white-space: normal 제거 */
+white-space: nowrap;
+overflow: hidden;
+opacity: 0;
+border-right: 3px solid rgba(255, 255, 255, 0.7);
+animation: typewriter2 2s steps(10) 4s forwards,
+hideCursor2 0.1s linear 6.5s forwards,
+colorCycle 6.5s linear 7s infinite;
+}
 
-    /* About 세로화면 stats 세로 정렬 유지 */
-    .about-stats {
-        gap: 20px !important;
-        align-items: center !important;
-        justify-content: center !important;
-    }
+.hero-tagline {
+font-size: 1.125rem; /* 0.9rem의 125% */
+margin-bottom: 4px;
+/* 타이핑 효과 유지 - white-space: normal 제거 */
+white-space: nowrap;
+overflow: hidden;
+opacity: 0;
+border-right: 2px solid rgba(255, 255, 255, 0.7);
+animation: typewriter1 1.5s steps(20) 1.5s forwards,
+hideCursor1 0.1s linear 3.5s forwards;
+}
 
-    .stat-item {
-        align-items: center !important;
-        text-align: center !important;
-    }
+/* About 세로화면 stats 세로 정렬 유지 */
+.about-stats {
+gap: 20px !important;
+align-items: center !important;
+justify-content: center !important;
+}
 
-    .stat-value {
-        font-size: 1.4rem !important;
-    }
+.stat-item {
+align-items: center !important;
+text-align: center !important;
+}
 
-    .stat-label {
-        font-size: 0.85rem !important;
-    }
+.stat-value {
+font-size: 1.4rem !important;
+}
 
-    /* About 로고 크기 조정 */
-    .about-image img {
-        width: 140px; /* 576px 이하에서 적절한 크기 */
-    }
-    
-    .about-image {
-        bottom: 40px;
-       left: 50%;
-        transform: translateX(-50%);
-    }
+.stat-label {
+font-size: 0.85rem !important;
+}
 
-    /* 워크 필터 강제 한 줄 */
-    .work-filter {
-        flex-wrap: nowrap !important;
-        overflow-x: auto !important;
-        gap: 2px !important;
-    }
+/* About 로고 크기 조정 */
+.about-image img {
+width: 140px; /* 576px 이하에서 적절한 크기 */
+}
+
+.about-image {
+bottom: 40px;
+left: 50%;
+transform: translateX(-50%);
+}
+
+/* 워크 필터 강제 한 줄 */
+.work-filter {
+flex-wrap: nowrap !important;
+overflow-x: auto !important;
+gap: 2px !important;
+}
 }
 
 /* 세로 화면 480px 이하 */
 @media screen and (max-width: 480px) and (orientation: portrait) {
-    .hero-overlay {
-        padding: 0;
-        background: none;
-    }
+.hero-overlay {
+padding: 0;
+background: none;
+}
 
-    .hero-title {
-        font-size: 1.875rem; /* 1.5rem의 125% */
-        margin-bottom: 5px;
-        /* 타이핑 효과 유지 - white-space: normal 제거 */
-        white-space: nowrap;
-        overflow: hidden;
-        opacity: 0;
-        border-right: 3px solid rgba(255, 255, 255, 0.7);
-        animation: typewriter2 2s steps(10) 4s forwards,
-                   hideCursor2 0.1s linear 6.5s forwards,
-                   colorCycle 6.5s linear 7s infinite;
-    }
-    
-    .hero-tagline {
-        font-size: 1rem; /* 0.8rem의 125% */
-        margin-bottom: 3px;
-        /* 타이핑 효과 유지 - white-space: normal 제거 */
-        white-space: nowrap;
-        overflow: hidden;
-        opacity: 0;
-        border-right: 2px solid rgba(255, 255, 255, 0.7);
-        animation: typewriter1 1.5s steps(20) 1.5s forwards,
-                   hideCursor1 0.1s linear 3.5s forwards;
-    }
+.hero-title {
+font-size: 1.875rem; /* 1.5rem의 125% */
+margin-bottom: 5px;
+/* 타이핑 효과 유지 - white-space: normal 제거 */
+white-space: nowrap;
+overflow: hidden;
+opacity: 0;
+border-right: 3px solid rgba(255, 255, 255, 0.7);
+animation: typewriter2 2s steps(10) 4s forwards,
+hideCursor2 0.1s linear 6.5s forwards,
+colorCycle 6.5s linear 7s infinite;
+}
 
-    .monkey-watermark {
-        width: 60px;
-        bottom: 5px;
-        right: 5px;
-    }
+.hero-tagline {
+font-size: 1rem; /* 0.8rem의 125% */
+margin-bottom: 3px;
+/* 타이핑 효과 유지 - white-space: normal 제거 */
+white-space: nowrap;
+overflow: hidden;
+opacity: 0;
+border-right: 2px solid rgba(255, 255, 255, 0.7);
+animation: typewriter1 1.5s steps(20) 1.5s forwards,
+hideCursor1 0.1s linear 3.5s forwards;
+}
 
-    /* About 세로화면에서 stats 세로 정렬 유지 */
-    .about-stats {
-        gap: 18px !important;
-        align-items: center !important;
-        justify-content: center !important;
-    }
+.monkey-watermark {
+width: 60px;
+bottom: 5px;
+right: 5px;
+}
 
-    .stat-item {
-        align-items: center !important;
-        text-align: center !important;
-    }
+/* About 세로화면에서 stats 세로 정렬 유지 */
+.about-stats {
+gap: 18px !important;
+align-items: center !important;
+justify-content: center !important;
+}
 
-    .stat-value {
-        font-size: 1.3rem !important;
-    }
+.stat-item {
+align-items: center !important;
+text-align: center !important;
+}
 
-    .stat-label {
-        font-size: 0.8rem !important;
-    }
+.stat-value {
+font-size: 1.3rem !important;
+}
 
-    /* About 로고 크기 조정 */
-    .about-image img {
-        width: 120px; /* 480px 이하에서 적절한 크기 */
-    }
-    
-    .about-image {
-        bottom: 30px;
-       left: 50%;
-        transform: translateX(-50%);
-    }
+.stat-label {
+font-size: 0.8rem !important;
+}
+
+/* About 로고 크기 조정 */
+.about-image img {
+width: 120px; /* 480px 이하에서 적절한 크기 */
+}
+
+.about-image {
+bottom: 30px;
+left: 50%;
+transform: translateX(-50%);
+}
 }
 
 /* 세로 화면 400px 이하 */
 @media screen and (max-width: 400px) and (orientation: portrait) {
-    .hero-overlay {
-        padding: 0;
-        background: none;
-    }
+.hero-overlay {
+padding: 0;
+background: none;
+}
 
-    .hero-title {
-        font-size: 1.625rem; /* 1.3rem의 125% */
-        margin-bottom: 4px;
-        /* 타이핑 효과 유지 */
-        white-space: nowrap;
-        overflow: hidden;
-        opacity: 0;
-        border-right: 3px solid rgba(255, 255, 255, 0.7);
-        animation: typewriter2 2s steps(10) 4s forwards,
-                   hideCursor2 0.1s linear 6.5s forwards,
-                   colorCycle 6.5s linear 7s infinite;
-    }
-    
-    .hero-tagline {
-        font-size: 0.875rem; /* 0.7rem의 125% */
-        margin-bottom: 2px;
-        /* 타이핑 효과 유지 */
-        white-space: nowrap;
-        overflow: hidden;
-        opacity: 0;
-        border-right: 2px solid rgba(255, 255, 255, 0.7);
-        animation: typewriter1 1.5s steps(20) 1.5s forwards,
-                   hideCursor1 0.1s linear 3.5s forwards;
-    }
+.hero-title {
+font-size: 1.625rem; /* 1.3rem의 125% */
+margin-bottom: 4px;
+/* 타이핑 효과 유지 */
+white-space: nowrap;
+overflow: hidden;
+opacity: 0;
+border-right: 3px solid rgba(255, 255, 255, 0.7);
+animation: typewriter2 2s steps(10) 4s forwards,
+hideCursor2 0.1s linear 6.5s forwards,
+colorCycle 6.5s linear 7s infinite;
+}
 
-    /* About 로고 크기 조정 */
-    .about-image img {
-        width: 100px; /* 400px 이하에서 적절한 크기 */
-    }
-    
-    .about-image {
-        bottom: 25px;
-       left: 50%;
-        transform: translateX(-50%);
-    }
+.hero-tagline {
+font-size: 0.875rem; /* 0.7rem의 125% */
+margin-bottom: 2px;
+/* 타이핑 효과 유지 */
+white-space: nowrap;
+overflow: hidden;
+opacity: 0;
+border-right: 2px solid rgba(255, 255, 255, 0.7);
+animation: typewriter1 1.5s steps(20) 1.5s forwards,
+hideCursor1 0.1s linear 3.5s forwards;
+}
+
+/* About 로고 크기 조정 */
+.about-image img {
+width: 100px; /* 400px 이하에서 적절한 크기 */
+}
+
+.about-image {
+bottom: 25px;
+left: 50%;
+transform: translateX(-50%);
+}
 }
 .headline-list {
   width: 100%;
@@ -1707,4 +1656,3 @@ font-size: 2.5rem;
     margin-bottom: 2px;
   }
 }
-        padding: 80px 15
