@@ -659,26 +659,6 @@ nav ul li a.active {
     opacity: 0.8;
 }
 
-.contact-form {
-    flex: 1;
-    min-width: 300px;
-}
-
-.form-group {
-    margin-bottom: 20px;
-}
-
-.form-control {
-    width: 100%;
-    padding: 15px;
-    background-color: rgba(255, 255, 255, 0.1);
-    border: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    color: var(--text-color);
-    transition: background-color 0.3s;
-}
-
 .form-control:focus {
     outline: none;
     background-color: rgba(255, 255, 255, 0.15);
@@ -687,23 +667,6 @@ nav ul li a.active {
 textarea.form-control {
     min-height: 150px;
     resize: vertical;
-}
-
-.submit-btn {
-    padding: 15px 30px;
-    background-color: var(--primary-color);
-    color: var(--text-color);
-    font-size: 1rem;
-    font-weight: 600;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s;
-}
-
-.submit-btn:hover {
-    background-color: #e65100;
-    transform: translateY(-3px);
 }
 
 /* 맵 */
@@ -818,48 +781,6 @@ footer {
 
 .social-link:hover {
    background-color: var(--primary-color);
-   color: var(--text-color);
-}
-
-.footer-newsletter {
-   flex: 1;
-   min-width: 300px;
-}
-
-.newsletter-form {
-   position: relative;
-}
-
-.newsletter-input {
-   width: 100%;
-   padding: 15px;
-   padding-right: 50px;
-   background-color: rgba(255, 255, 255, 0.1);
-   border: none;
-   border-radius: 5px;
-   font-size: 1rem;
-   color: var(--text-color);
-}
-
-.newsletter-input:focus {
-   outline: none;
-   background-color: rgba(255, 255, 255, 0.15);
-}
-
-.newsletter-btn {
-   position: absolute;
-   top: 50%;
-   right: 15px;
-   transform: translateY(-50%);
-   background-color: transparent;
-   border: none;
-   font-size: 1.2rem;
-   color: var(--primary-color);
-   cursor: pointer;
-   transition: color 0.3s;
-}
-
-.newsletter-btn:hover {
    color: var(--text-color);
 }
 
