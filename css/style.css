@@ -1257,23 +1257,6 @@ Contact 섹션:
    opacity: 0.7;
 }
 
-.bottom-links {
-   display: flex;
-}
-
-.bottom-link {
-   font-size: 0.9rem;
-   color: var(--text-color);
-   opacity: 0.7;
-   margin-left: 20px;
-   transition: opacity 0.3s, color 0.3s;
-}
-
-.bottom-link:hover {
-   opacity: 1;
-   color: var(--primary-color);
-}
-
 /* 비디오 모달 */
 .video-modal {
    position: fixed;
@@ -1313,6 +1296,7 @@ Contact 섹션:
    cursor: pointer;
    z-index: 2;
 }
+
 /* 반응형 디자인 - 완전 수정됨 */
 @media screen and (max-width: 1200px) {
     .section {
