@@ -322,7 +322,6 @@ const articles = [
 function renderBoard() {
   const board = document.getElementById('headlineBoard');
   if (!board) return;
-
   let html = "";
   articles.forEach(item => {
     html += `
@@ -338,8 +337,7 @@ function renderBoard() {
       </li>
     `;
   });
-
-  board.innerHTML = `<ul class="headline-list">${html}</ul>`;
+  board.innerHTML = html;
 }
 
 // 컨택트 폼 설정
