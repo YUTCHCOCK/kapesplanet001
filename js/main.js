@@ -37,17 +37,14 @@ document.addEventListener('DOMContentLoaded', function() {
 // 네비게이션 스크롤 기능
 function setupNavigation() {
     console.log('네비게이션 설정...');
-    
     const navLinks = document.querySelectorAll('nav ul li a');
-    
     navLinks.forEach(function(link) {
         link.addEventListener('click', function(e) {
             e.preventDefault();
-            
             const targetId = this.getAttribute('href').replace('#', '');
-            console.log('클릭된 섹션:', targetId);
-            
             scrollToSection(targetId);
+            // hash도 업데이트!
+            history.pushState(null, '', '#' + targetId);
         });
     });
 }
@@ -283,7 +280,7 @@ const articles = [
     media: "스포츠서울",
     title: "케이프스플래닛 '시크릿 아이돌' 원안자 + 공동제작자로 밝혀져",
     url: "https://www.sportsseoul.com/news/read/1519235",
-    summary: "이정재가 1대주주로 있는 아티스트 스튜디오와 영국의 이매지너리움의 합작으로 기획개발중인 영화 '시크릿 아이돌'의 원안 기획 및 공동제작사가 케이프스플래닛으로 밝혀지며, 글로벌에서 주목하고 있다. "
+    summary: "이정재가 1대주주로 있는 아티스트 스튜디오와 영국의 이매지너리움의 합작으로 기획개발중인 영화 '시크릿 아이돌'의 원안 기획 및 공동제작사가 케이프스플래닛가 글로벌 주목을 받고 있다. "
   },
   {
     date: "2025-05-08",
