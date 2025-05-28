@@ -1,254 +1,1357 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <!-- 기본 ICO (브라우저 호환용) -->
-    <link rel="icon" href="img/favicon/favicon.ico" type="image/x-icon">
+/* 기본 스타일 초기화 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
 
-    <!-- PNG 포맷 (크롬, 파이어폭스 등) -->
-    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png">
+/* 글꼴 */
+@font-face {
+    font-family: 'Pretendard';
+    src: url('https://cdnjs.cloudflare.com/ajax/libs/pretendard/1.3.8/static/woff2/Pretendard-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Pretendard';
+    src: url('https://cdnjs.cloudflare.com/ajax/libs/pretendard/1.3.8/static/woff2/Pretendard-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
 
-    <!-- 애플 터치 아이콘 (iOS 홈화면용) -->
-    <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon.png">
+/* 테마 색상 */
+:root {
+    --primary-color: #FF5A00;
+    --dark-color: #121212;
+    --light-color: #F9F6F0;
+    --accent-color: #F9D923;
+    --text-color: #FFFFFF;
+}
 
-    <!-- 사이트 매니페스트 (PWA, 선택) -->
-    <link rel="manifest" href="img/favicon/site.webmanifest">
+/* 기본 body 스타일 */
+html, body {
+    background-color: var(--dark-color);
+    color: var(--text-color);
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    min-height: 100vh;
+    height: 100%;
+}
+
+/* 링크 */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* 헤더 */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    padding: 30px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    transition: background-color 0.3s, padding 0.3s;
+    background: transparent;
+}
+header.scrolled {
+    background-color: rgba(0, 0, 0, 0.9);
+    padding: 20px 50px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+.header-logo {
+    display: flex;
+    align-items: center;
+}
+.header-logo img {
+    height: 40px;
+    margin-right: 10px;
+}
+.header-logo span {
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+}
+nav ul {
+    display: flex;
+    list-style: none;
+}
+nav ul li {
+    margin-left: 30px;
+}
+nav ul li a {
+    position: relative;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--text-color);
+    transition: color 0.3s;
+}
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: var(--primary-color);
+    transition: width 0.3s;
+}
+nav ul li a:hover::after,
+nav ul li a.active::after {
+    width: 100%;
+}
+nav ul li a:hover,
+nav ul li a.active {
+    color: var(--primary-color);
+}
+.mobile-menu-btn {
+    display: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-color);
+}
+
+/* 섹션 기본 스타일 */
+.hero,
+.about,
+.work,
+.contact,
+.section {
+    min-height: 100vh;
+    padding: 120px 100px;
+    position: relative;
+}
+
+.section-header {
+    margin-bottom: 80px;
+    text-align: center;
+}
+
+.section-title {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 20px;
+    position: relative;
+    display: inline-block;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background-color: var(--primary-color);
+}
+
+.section-subtitle {
+    font-size: 1.2rem;
+    color: var(--text-color);
+    opacity: 0.8;
+}
+
+/* 히어로 섹션 */
+.hero {
+    position: relative;
+    width: 100vw;
+    height: 60vw;
+    max-height: 70vh;
+    overflow: hidden;
+    padding: 0;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    color: white;
+    text-align: center;
+    text-shadow: 0 0 12px #000;
+}
+
+.hero-tagline {
+    font-size: 1.7rem; 
+    margin-bottom: 10px;
+    opacity: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 2px solid rgba(255, 255, 255, 0.7);
+    animation: typewriter1 1.5s steps(20) 1.5s forwards, 
+               hideCursor1 0.1s linear 3.5s forwards;
+}
+
+.hero-title {
+    font-size: 4.2rem; 
+    font-weight: bold;
+    margin-bottom: 30px;
+    opacity: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 3px solid rgba(255, 255, 255, 0.7);
+    color: white;
+    display: inline-block;
+    position: relative;
+    animation: typewriter2 2s steps(10) 4s forwards,
+               hideCursor2 0.1s linear 6.5s forwards,
+               colorCycle 6.5s linear 7s infinite;
+}
+
+/* 타이핑 애니메이션 */
+@keyframes typewriter1 {
+    0% { width: 0; opacity: 1; }
+    100% { width: 100%; opacity: 1; }
+}
+
+@keyframes typewriter2 {
+    0% { width: 0; opacity: 1; }
+    100% { width: 100%; opacity: 1; }
+}
+
+@keyframes hideCursor1 {
+    0% { border-right: 2px solid rgba(255, 255, 255, 0.7); }
+    100% { border-right: 2px solid transparent; }
+}
+
+@keyframes hideCursor2 {
+    0% { border-right: 3px solid rgba(255, 255, 255, 0.7); }
+    100% { border-right: 3px solid transparent; }
+}
+
+@keyframes colorCycle {
+    0% { color: #ffffff; }
+    46.15% { color: #ffffff; }
+    50% { color: #ff5a00; }
+    96.15% { color: #ff5a00; }
+    100% { color: #ffffff; }
+}
+
+.hero iframe {
+    animation: slowZoom 20s ease-in-out infinite alternate;
+}
+
+@keyframes slowZoom {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.05); }
+}
+
+/* 워터마크 애니메이션 */
+.monkey-watermark {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    opacity: 0.3;
+    width: 220px;
+    z-index: 0;
+    pointer-events: none;
+    animation: floatAnimation 6s ease-in-out infinite;
+}
+
+@keyframes floatAnimation {
+    0%, 100% {
+        transform: translateY(0px);
+        opacity: 0.3;
+    }
+    50% {
+        transform: translateY(-10px);
+        opacity: 0.5;
+    }
+}
+
+/* About 섹션 */
+.about {
+    background-color: var(--dark-color);
+    padding: 120px 100px;
+    position: relative;
+}
+
+.about-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 40px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.about-text {
+    width: 100%;
+}
+
+.about-title {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+    color: var(--primary-color);
+    line-height: 1.2;
+}
+
+.about-description {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin-bottom: 40px;
+    color: var(--text-color);
+    opacity: 0.9;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.about-stats {
+    display: flex;
+    flex-direction: row;
+    gap: 60px;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+    max-width: 900px;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex: 1;
+    min-width: 200px;
+}
+
+.stat-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+}
+
+.stat-label {
+    font-size: 1rem;
+    color: var(--text-color);
+    opacity: 0.8;
+    line-height: 1.4;
+}
+
+.about-image {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+}
+
+.about-image img {
+    width: 300px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    opacity: 0.9;
+}
+
+/* 워크 섹션 */
+.work {
+    background-color: #0a0a0a;
+}
+
+.work-filter {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+
+.filter-btn {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: transparent;
+    color: var(--text-color);
+    border: none;
+    cursor: pointer;
+    margin: 0 10px;
+    position: relative;
+    transition: color 0.3s;
+}
+
+.filter-btn::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--primary-color);
+    transition: width 0.3s;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    color: var(--primary-color);
+}
+
+.filter-btn:hover::after,
+.filter-btn.active::after {
+    width: 100%;
+}
+
+.work-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 30px;
+}
+
+.work-item {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    height: 250px;
+    transition: transform 0.3s, opacity 0.3s ease-in-out;
+    cursor: pointer;
+    opacity: 1;
+}
+
+.work-thumbnail {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.work-item:hover {
+    transform: translateY(-10px);
+}
+
+.work-thumbnail iframe {
+    width: 100%;
+    aspect-ratio: 16/9;
+    border-radius: 12px;
+    border: none;
+}
+
+.work-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.work-item:hover .work-overlay {
+    opacity: 1;
+}
+
+.work-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 10px;
+}
+
+.work-category {
+    font-size: 0.9rem;
+    color: var(--primary-color);
+}
+
+/* 프레스 섹션 */
+.section.press {
+    width: 90vw;
+    max-width: 1100px;
+    min-width: 320px;
+    margin: 40px auto;
+    background: #181818;
+    border-radius: 16px;
+    padding: 40px 32px 60px 32px;
+    color: #fff;
+    transition: width 0.2s;
+}
+
+.section.press .section-header {
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.section.press h2 {
+    font-size: 2.6em;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 0.4em;
+}
+
+.section.press .section-subtitle {
+    color: #ddd;
+    font-size: 1.15em;
+    margin-bottom: 1.2em;
+}
+
+#headlineBoard {
+    width: 100%;
+}
+
+.headline-list {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0;
+    list-style: none;
+}
+
+.headline-row {
+    display: grid;
+    grid-template-columns: 110px 1fr 110px;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 20px 0 14px 0;
+    border-bottom: 1px solid #333;
+}
+
+.headline-date {
+    font-size: 1.05em;
+    color: #fff;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-align: left;
+    white-space: nowrap;
+    margin-top: 4px;
+}
+
+.headline-main {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.headline-title {
+    font-size: 1.19em;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 6px;
+    line-height: 1.25;
+    text-align: left;
+    text-decoration: none;
+    cursor: pointer;
+    word-break: keep-all;
+    transition: color 0.18s;
+}
+
+.headline-title:hover,
+.headline-title:focus {
+    color: #f9d923;
+    text-decoration: underline;
+}
+
+.headline-summary {
+    font-size: 0.96em;
+    color: #eee;
+    opacity: 0.86;
+    line-height: 1.5;
+    text-align: left;
+}
+
+.headline-media {
+    font-size: 1.04em;
+    color: #fff;
+    text-align: right;
+    font-weight: 600;
+    opacity: 0.85;
+    white-space: nowrap;
+    margin-top: 4px;
+}
+
+/* Contact 섹션 - 새로운 레이아웃 */
+.contact-layout {
+    display: flex;
+    gap: 60px;
+    align-items: flex-start;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.contact-left {
+    flex: 1;
+    min-width: 400px;
+}
+
+.contact-right {
+    flex: 1;
+    min-width: 400px;
+}
+
+.contact-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 30px;
+}
+
+.contact-description {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 40px;
+    color: var(--text-color);
+    opacity: 0.9;
+}
+
+.contact-list {
+    list-style: none;
+    padding: 0;
+}
+
+.contact-item {
+    margin-bottom: 25px;
+    display: flex;
+    align-items: flex-start;
+}
+
+.contact-icon {
+    width: 45px;
+    height: 45px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.3rem;
+    color: var(--text-color);
+    margin-right: 20px;
+    flex-shrink: 0;
+}
+
+.contact-text {
+    flex: 1;
+}
+
+.contact-label {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: var(--text-color);
+}
+
+.contact-value {
+    font-size: 1rem;
+    color: var(--text-color);
+    opacity: 0.8;
+    line-height: 1.4;
+}
+
+.contact-value a {
+    color: var(--text-color);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.contact-value a:hover {
+    color: var(--primary-color);
+}
+
+/* 오른쪽 로고와 지도 */
+.contact-logo {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.contact-logo img {
+    width: 250px;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.contact-map {
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.contact-map iframe {
+    filter: grayscale(20%) contrast(1.1);
+    transition: filter 0.3s;
+}
+
+.contact-map:hover iframe {
+    filter: grayscale(0%) contrast(1.2);
+}
+
+/* 극도로 얇은 푸터 */
+.minimal-footer {
+    background-color: #000000;
+    padding: 15px 50px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-content-minimal {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.copyright {
+    font-size: 0.85rem;
+    color: var(--text-color);
+    opacity: 0.6;
+}
+
+.footer-links-minimal {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.footer-link {
+    font-size: 0.85rem;
+    color: var(--text-color);
+    opacity: 0.6;
+    text-decoration: none;
+    transition: opacity 0.3s, color 0.3s;
+}
+
+.footer-link:hover {
+    opacity: 1;
+    color: var(--primary-color);
+}
+
+.separator {
+    color: var(--text-color);
+    opacity: 0.3;
+    font-size: 0.8rem;
+}
+
+/* 비디오 모달 */
+.video-modal {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.video-modal .modal-content {
+    position: relative;
+    background: #000;
+    padding: 0;
+    border-radius: 10px;
+}
+
+.video-modal iframe {
+    width: 70vw;
+    height: 40vw;
+    max-width: 900px;
+    max-height: 500px;
+    border: none;
+    background: #000;
+}
+
+.video-modal .close-button {
+    position: absolute;
+    top: -30px;
+    right: 0;
+    font-size: 2rem;
+    color: #fff;
+    cursor: pointer;
+    z-index: 2;
+}
+
+/* 반응형 디자인 */
+@media screen and (max-width: 1200px) {
+    .section {
+        padding: 100px 50px;
+    }
+
+    .hero-overlay {
+        top: 60%;
+    }
     
-    <!-- 이메일 어드레스 스크립트 제거 -->
+    .hero-title {
+        font-size: 3.5rem;
+    }
     
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KapesPlanet - 원숭이행성</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
-</head>
-    <body>
-    <!-- 헤더 -->
-    <header>
-        <div class="header-logo">
-            <img src="img/kapes_logo_circle_negative.png" alt="KAPES PLANET 원형 반전 로고">
-            <span>KAPES PLANET</span>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="#hero" class="active">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#work">Work</a></li>
-                <li><a href="#press">Press</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-        <div class="mobile-menu-btn">
-            <i class="fas fa-bars"></i>
-        </div>
-    </header>
-    <!-- 히어로 섹션 -->
-    <section class="hero" id="hero">
-        <!-- 유튜브 배경 영상 -->
-        <iframe 
-            src="https://www.youtube.com/embed/sbEYTBXJb4I?autoplay=1&mute=1&controls=0&showinfo=0&loop=1&playlist=sbEYTBXJb4I&modestbranding=1"
-            style="position:absolute; top:0; left:0; width:100%; height:100%; z-index:1; pointer-events:none; border:0;"
-            frameborder="0"
-            allow="autoplay; encrypted-media"
-            allowfullscreen>
-        </iframe>
+    .hero-tagline {
+        font-size: 1.4rem;
+    }
+
+    .about {
+        padding: 100px 50px;
+    }
     
-        <!-- 오버레이 텍스트 -->
-        <div class="hero-overlay">
-            <div class="hero-tagline">매일 진화하는 크리에이터 월드</div>
-            <div class="hero-title">원숭이행성</div>
-        </div>
+    .about-stats {
+        gap: 40px;
+        justify-content: center;
+    }
+    
+    .about-image img {
+        width: 250px;
+    }
+    
+    .about-image {
+        bottom: 30px;
+    }
 
-        <!-- monkey 텍스트 로고 워터마크 -->
-        <img class="monkey-watermark" src="img/monkey_text_logo.png" alt="Monkey Text Logo Watermark">
-    </section>
+    .work-filter {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        justify-content: center;
+        gap: 8px;
+    }
 
-    <!-- About 섹션 -->
-    <section class="section about" id="about">
-        <div class="section-header">
-            <div class="section-title">About</div>
-            <div class="section-subtitle">진화하는 크리에이터 월드 원숭이행성</div>
-        </div>
-        <div class="about-content">
-            <div class="about-text">
-                <div class="about-title">새로운 IP가 탄생하는 곳</div>
-                <div class="about-description">
-                    CJ ENM, dingo, hello82의 유일한(유치콕)대표가 설립한<br>
-                    원숭이행성은 항상 새롭고 참신한 기획과 제작으로<br>
-                    광고, 유튜브, 드라마 등 K-콘텐츠의 진화를 추구합니다. 
-                </div>
-                <div class="about-stats">
-                    <div class="stat-item">
-                        <div class="stat-value">AI POWERED</div>
-                        <div class="stat-label">AI로 빠르고 효율적인 창작</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value">TOP CREATOR</div>
-                        <div class="stat-label">검증된 실력의 작가, PD</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value">MIX & MATCH</div>
-                        <div class="stat-label">숏폼부터 OTT까지 유연한 확장성</div>
-                    </div>
-                </div>
-            </div>
-            <div class="about-image">
-                <img src="img/kapes_logo_full.png" alt="KAPES PLANET 소개 이미지">
-            </div>
-        </div>
-        <!-- monkey 텍스트 로고 워터마크 -->
-        <img class="monkey-watermark" src="img/monkey_text_logo.png" alt="Monkey Text Logo Watermark">
-    </section>
+    .filter-btn {
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
 
-    <!-- work 섹션 -->
-    <section class="section work" id="work">
-        <div class="section-header">
-            <div class="section-title">Work</div>
-            <div class="section-subtitle">원숭이행성 제작 콘텐츠를 감상하세요</div>
-        </div>
-        <div class="work-filter">
-            <button class="filter-btn active" data-filter="all">전체</button>
-            <button class="filter-btn" data-filter="Digital Film">바이럴 광고</button>
-            <button class="filter-btn" data-filter="Short Form">웹예능</button>
-            <button class="filter-btn" data-filter="Youtube">유튜브</button>
-        </div>
-        <div class="work-grid">
-            <div class="work-item" data-category="Digital Film">
-                <div class="work-thumbnail">
-                    <iframe 
-                        src="https://www.youtube.com/embed/pqDtXGHiqEE"
-                        frameborder="0"
-                        allow="autoplay; encrypted-media"
-                        allowfullscreen>
-                    </iframe>
-                </div>
-                <div class="work-overlay">
-                    <div class="work-title">디지털 필름</div>
-                    <div class="work-category">Digital Film</div>
-                </div>
-            </div>
-            <div class="work-item" data-category="Short Form">
-                <div class="work-thumbnail">
-                    <iframe 
-                        src="https://www.youtube.com/embed/-ZQ2FUDAZe0"
-                        frameborder="0"
-                        allow="autoplay; encrypted-media"
-                        allowfullscreen>
-                    </iframe>
-                </div>
-                <div class="work-overlay">
-                    <div class="work-title">웹예능</div>
-                    <div class="work-category">Short Form</div>
-                </div>
-            </div>
-            <div class="work-item" data-category="Youtube">
-                <div class="work-thumbnail">
-                    <iframe 
-                        src="https://www.youtube.com/embed/UGfz4VKEd9U"
-                        frameborder="0"
-                        allow="autoplay; encrypted-media"
-                        allowfullscreen>
-                    </iframe>
-                </div>
-                <div class="work-overlay">
-                    <div class="work-title">유튜브 채널</div>
-                    <div class="work-category">Youtube</div>
-                </div>
-            </div>
-        </div>
-    </section>
+    .contact-layout {
+        gap: 40px;
+    }
+    
+    .contact-logo img {
+        width: 200px;
+    }
+}
 
-<!-- 프레스 영역 -->
-<section class="section press" id="press">
-  <div class="section-header">
-    <h2 class="section-title">Press</h2>
-    <div class="section-subtitle">언론에 보도된 원숭이행성 소식입니다</div>
-  </div>
-  <div class="section-content">
-    <div id="headlineBoard"></div>
-  </div>    
-</section>
-        
-<!-- Contact 섹션 - 새로운 레이아웃 -->
-    <section class="section contact" id="contact">
-        <div class="section-header">
-            <div class="section-title">Contact</div>
-            <div class="section-subtitle">원숭이행성과 함께 새로운 콘텐츠를 만드세요</div>
-        </div>
-        <div class="contact-layout">
-            <!-- 왼쪽: 연락처 정보 -->
-            <div class="contact-left">
-                <div class="contact-title">KAPES PLANET</div>
-                <div class="contact-description">
-                    원숭이행성과 콘텐츠를 만들고 싶으신가요?<br>
-                    기획, 제작, 프로덕션까지 편하게 연락 주십시오 
-                </div>
-                <ul class="contact-list">
-                    <li class="contact-item">
-                        <span class="contact-icon"><i class="fas fa-envelope"></i></span>
-                        <span class="contact-text">
-                            <div class="contact-label">Email</div>
-                            <div class="contact-value">
-                                <a href="mailto:official@kapesplanet.com">official@kapesplanet.com</a>
-                            </div>
-                        </span>
-                    </li>
-                    <li class="contact-item">
-                        <span class="contact-icon"><i class="fab fa-youtube"></i></span>
-                        <span class="contact-text">
-                            <div class="contact-label">Youtube</div>
-                            <div class="contact-value">
-                                <a href="https://www.youtube.com/@tlqkdSOLBI" target="_blank" rel="noopener">youtube.com/@tlqkdsolbi</a>
-                            </div>
-                        </span>
-                    </li>
-                    <li class="contact-item">
-                        <span class="contact-icon"><i class="fab fa-instagram"></i></span>
-                        <span class="contact-text">
-                            <div class="contact-label">Instagram</div>
-                            <div class="contact-value">
-                                <a href="https://instagram.com/kapesplanet" target="_blank" rel="noopener">instagram.com/kapesplanet</a>
-                            </div>
-                        </span>
-                    </li>
-                    <li class="contact-item">
-                        <span class="contact-icon"><i class="fas fa-map-marker-alt"></i></span>
-                        <span class="contact-text">
-                            <div class="contact-label">Address</div>
-                            <div class="contact-value">서울특별시 마포구 월드컵북로 402, KGIT빌딩 1601-1호</div>
-                        </span>
-                    </li>
-                </ul>
-            </div>
-            
-            <!-- 오른쪽: 로고와 지도 -->
-            <div class="contact-right">
-                <div class="contact-logo">
-                    <img src="img/kapes_logo_full.png" alt="KAPES PLANET 로고">
-                </div>
-                <div class="contact-map">
-                    <iframe 
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3163.892474!2d126.889!3d37.5665!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357c98e9!2sKGIT%EB%B9%8C%EB%94%A9!5e0!3m2!1sko!2skr!4v1640000000000!5m2!1sko!2skr"
-                        width="100%" 
-                        height="300" 
-                        style="border:0; border-radius: 10px;" 
-                        allowfullscreen="" 
-                        loading="lazy" 
-                        referrerpolicy="no-referrer-when-downgrade">
-                    </iframe>
-                </div>
-            </div>
-        </div>
-    </section>
+@media screen and (max-width: 992px) {
+    header {
+        padding: 20px 30px;
+    }
 
-    <!-- 푸터 - 극도로 얇게 -->
-    <footer class="minimal-footer">
-        <div class="footer-content-minimal">
-            <div class="copyright">© 2025 KAPES PLANET. All rights reserved.</div>
-            <div class="footer-links-minimal">
-                <a href="#" class="footer-link">Privacy Policy</a>
-                <span class="separator">|</span>
-                <a href="#" class="footer-link">Terms of Service</a>
-            </div>
-        </div>
-    </footer>
+    header.scrolled {
+        padding: 15px 30px;
+    }
+
+    .hero-overlay {
+        top: 60%;
+    }
+
+    .hero-title {
+        font-size: 2.8rem;
+    }
+    
+    .hero-tagline {
+        font-size: 1.26rem;
+    }
+
+    .work-grid {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
+
+    .about-title {
+        font-size: 2.4rem;
+    }
+    
+    .about-description {
+        font-size: 1.1rem;
+    }
+    
+    .about-stats {
+        gap: 30px;
+        justify-content: center;
+    }
+    
+    .stat-value {
+        font-size: 1.6rem;
+    }
+    
+    .stat-label {
+        font-size: 0.9rem;
+    }
+    
+    .about-image img {
+        width: 200px;
+    }
+
+    .work-filter {
+        gap: 6px;
+        padding: 0 10px;
+    }
+
+    .contact-layout {
+        flex-direction: column;
+        gap: 40px;
+    }
+    
+    .contact-left,
+    .contact-right {
+        min-width: auto;
+        width: 100%;
+    }
+    
+    .contact-logo img {
+        width: 200px;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .monkey-watermark {
+        width: 120px;
+        right: 10px;
+        bottom: 10px;
+    }
+
+    .section {
+        padding: 40px 10px;
+    }
+
+    .hero-overlay {
+        top: 60%;
+    }
+
+    .work-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .mobile-menu-btn {
+        display: block;
+    }
+
+    nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        max-width: 300px;
+        height: 100vh;
+        background-color: var(--dark-color);
+        padding: 100px 30px;
+        z-index: 99;
+        transition: right 0.3s;
+        box-shadow: -5px 0 30px rgba(0, 0, 0, 0.3);
+    }
+
+    nav.active {
+        right: 0;
+    }
+
+    nav ul {
+        flex-direction: column;
+    }
+
+    nav ul li {
+        margin: 0 0 20px 0;
+    }
+
+    nav ul li a {
+        font-size: 1.2rem;
+    }
+
+    .section {
+        padding: 80px 30px;
+    }
+
+    .hero-overlay {
+        top: 50%;
+    }
+
+    .hero-title {
+        font-size: 1.96rem;
+        white-space: nowrap;
+    }
+    
+    .hero-tagline {
+        font-size: 0.98rem;
+        white-space: nowrap;
+    }
+
+    .section-title {
+        font-size: 2.5rem;
+    }
+
+    .about {
+        padding: 80px 15px;
+    }
+
+    .about-title {
+        font-size: 2rem;
+    }
+
+    .about-description {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+
+    .about-stats {
+        flex-direction: column;
+        gap: 25px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .stat-item {
+        width: 100%;
+        max-width: 350px;
+        min-width: auto;
+        align-items: center;
+        text-align: center;
+    }
+
+    .stat-value {
+        font-size: 1.6rem;
+    }
+
+    .stat-label {
+        font-size: 0.9rem;
+    }
+    
+    .about-image img {
+        width: 150px;
+    }
+    
+    .about-image {
+        bottom: 20px;
+    }
+
+    .work-filter {
+        gap: 3px;
+        margin-bottom: 40px;
+        padding: 0 5px;
+        flex-wrap: nowrap !important;
+        overflow-x: auto;
+        justify-content: flex-start;
+    }
+
+    .filter-btn {
+        padding: 8px 12px;
+        font-size: 0.8rem;
+        border-radius: 15px;
+        white-space: nowrap !important;
+        flex-shrink: 0 !important;
+        min-width: auto;
+    }
+
+    .contact-layout {
+        gap: 30px;
+    }
+    
+    .contact-title {
+        font-size: 2rem;
+    }
+    
+    .contact-description {
+        font-size: 1rem;
+    }
+    
+    .contact-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+        margin-right: 15px;
+    }
+    
+    .contact-logo img {
+        width: 150px;
+    }
+    
+    .contact-map iframe {
+        height: 250px;
+    }
+    
+    .minimal-footer {
+        padding: 12px 30px;
+    }
+    
+    .footer-content-minimal {
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+    }
+    
+    .footer-links-minimal {
+        gap: 10px;
+    }
+
+    .headline-list {
+        max-width: 98vw;
+    }
+    
+    .headline-row {
+        grid-template-columns: 80px 1fr 80px;
+        gap: 8px;
+        padding: 12px 0;
+    }
+    
+    .headline-title { 
+        font-size: 1em; 
+    }
+    
+    .headline-summary { 
+        font-size: 0.88em; 
+    }
+    
+    .headline-media, .headline-date { 
+        font-size: 0.92em; 
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .contact-item {
+        margin-bottom: 20px;
+    }
+    
+    .contact-icon {
+        width: 35px;
+        height: 35px;
+        font-size: 1.1rem;
+    }
+    
+    .contact-label {
+        font-size: 1rem;
+    }
+    
+    .contact-value {
+        font-size: 0.9rem;
+    }
+    
+    .contact-logo img {
+        width: 120px;
+    }
+    
+    .contact-map iframe {
+        height: 200px;
+    }
+    
+    .headline-row {
+        grid-template-columns: 1fr;
+        gap: 2px;
+        padding: 10px 0;
+    }
+    
+    .headline-date,
+    .headline-media {
+        text-align: left;
+        font-size: 0.89em;
+        margin-bottom: 2px;
+    }
+}
+
+/* 세로 화면 대응 (720px부터) */
+@media screen and (max-width: 720px) and (orientation: portrait) {
+    .hero {
+        height: 100vh;
+        position: relative;
+        padding: 0;
+        display: block;
+    }
+
+    .hero iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+    }
+
+    .hero-overlay {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 2;
+        color: white;
+        text-align: center;
+        text-shadow: 0 0 12px #000;
+        padding: 0;
+        background: none;
+        border-radius: 0;
+        backdrop-filter: none;
+        border: none;
+        box-shadow: none;
+    }
+
+    .hero-title {
+        font-size: 3.125rem;
+        margin-bottom: 10px;
+        font-weight: bold;
+        opacity: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        border-right: 3px solid rgba(255, 255, 255, 0.7);
+        color: white;
+        display: inline-block;
+        position: relative;
+        animation: typewriter2 2s steps(10) 4s forwards,
+                   hideCursor2 0.1s linear 6.5s forwards,
+                   colorCycle 6.5s linear 7s infinite;
+    }
+    
+    .hero-tagline {
+        font-size: 1.5rem;
+        margin-bottom: 8px;
+        opacity: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        border-right: 2px solid rgba(255, 255, 255, 0.7);
+        animation: typewriter1 1.5s steps(20) 1.5s forwards,
+                   hideCursor1 0.1s linear 3.5s forwards;
+    }
+
+    .monkey-watermark {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        width: 80px;
+        z-index: 3;
+    }
+
+    .about-stats {
+        flex-direction: column !important;
+        gap: 25px !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    .stat-item {
+        align-items: center !important;
+        text-align: center !important;
+    }
+
+    .about-image img {
+        width: 200px;
+    }
+    
+    .about-image {
+        bottom: 60px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .work-filter {
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        gap: 4px !important;
+        padding: 0 3px !important;
+    }
+
+    .filter-btn {
+        font-size: 0.75rem !important;
+        padding: 6px 8px !important;
+        white-space: nowrap !important;
+        flex-shrink: 0 !important;
+    }
+}
+
+@media screen and (max-width: 600px) and (orientation: portrait) {
+    .hero-overlay {
+        padding: 0;
+        background: none;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+        margin-bottom: 8px;
+        white-space: nowrap;
+        overflow: hidden;
+        opacity: 0;
+        border-right: 3px solid rgba(255, 255, 255, 0.7);
+        animation: typewriter2 2s steps(10) 4s forwards,
+                   hideCursor2 0.1s linear 6.5s forwards,
+                   colorCycle 6.5s linear 7s infinite;
+    }
+    
+    .hero-tagline {
+        font-size: 1.25rem;
+        margin-bottom: 6px;
+        white-space: nowrap;
+        overflow: hidden;
+        opacity: 0;
+        border-right: 2px solid rgba(255, 255, 255, 0.7);
+        animation: typewriter1 1.5s steps(20) 1.5s forwards,
+                   hideCursor1 0.1s linear 3.5s forwards;
+    }
+
+    .about-image img {
+        width: 160px;
+    }
+    
+    .about-image {
+        bottom: 50px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+@media screen and (max-width: 576px) and (orientation: portrait) {
+    .hero-overlay {
+        padding: 0;
+        background: none;
+    }
+
+    .hero-title {
+        font-size: 2.25rem;
+        margin-bottom: 6px;
+        white-space: nowrap;
+        overflow: hidden;
+        opacity: 0;
+        border-right: 3px solid rgba(255, 255, 255, 0.7);
+        animation: typewriter2 2s steps(10) 4s forwards,
+                   hideCursor2 0.1s linear 6.5s forwards,
+                   colorCycle 6.5s linear 7s infinite;
+    }
+    
+    .hero-tagline {
+        font-size: 1.125rem;
+        margin-bottom: 4px;
+        white-space: nowrap;
+        overflow: hidden;
+        opacity: 0;
+        border-right: 2px solid rgba(255, 255, 255, 0.7);
+        animation: typewriter1 1.5s steps(20) 1.5s forwards,
+                   hideCursor1 0.1s linear 3.5s forwards;
+    }
+
+    .about-stats {
+        gap: 20px !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    .stat-item {
+        align-items: center !important;
+        text-align: center !important;
+    }
+
+    .stat-value {
+        font-size: 1.4rem !important;
+    }
+
+    .stat-label {
+        font-size: 0.85rem !important;
+    }
+
+    .about-image img {
+        width: 140px;
+    }
+    
+    .about-image {
+        bottom: 40px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .work-filter {
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        gap: 2px !important;
+    }
+}
+    
