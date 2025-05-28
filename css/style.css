@@ -588,6 +588,8 @@ nav ul li a.active {
   margin-bottom: 18px;
 }
 
+
+
 /* 콘택트 섹션 */
 .contact {
     background-color: var(--dark-color);
@@ -1565,4 +1567,92 @@ footer {
        left: 50%;
         transform: translateX(-50%);
     }
+}
+.headline-list {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+}
+.headline-row {
+  display: grid;
+  grid-template-columns: 110px 1fr 110px;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 20px 0 14px 0;
+  border-bottom: 1px solid #333;
+}
+.headline-date {
+  font-size: 1.05em;
+  color: #fff;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-align: left;
+  white-space: nowrap;
+  margin-top: 4px;
+}
+.headline-main {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.headline-title {
+  font-size: 1.19em;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 6px;
+  line-height: 1.25;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+  word-break: keep-all;
+  transition: color 0.18s;
+}
+.headline-title:hover,
+.headline-title:focus {
+  color: #f9d923;
+  text-decoration: underline;
+}
+.headline-summary {
+  font-size: 0.96em;
+  color: #eee;
+  opacity: 0.86;
+  line-height: 1.5;
+  text-align: left;
+}
+.headline-media {
+  font-size: 1.04em;
+  color: #fff;
+  text-align: right;
+  font-weight: 600;
+  opacity: 0.85;
+  white-space: nowrap;
+  margin-top: 4px;
+}
+@media (max-width: 700px) {
+  .headline-list {
+    max-width: 98vw;
+  }
+  .headline-row {
+    grid-template-columns: 80px 1fr 80px;
+    gap: 8px;
+    padding: 12px 0;
+  }
+  .headline-title { font-size: 1em; }
+  .headline-summary { font-size: 0.88em; }
+  .headline-media, .headline-date { font-size: 0.92em; }
+}
+@media (max-width: 420px) {
+  .headline-row {
+    grid-template-columns: 1fr;
+    gap: 2px;
+    padding: 10px 0;
+  }
+  .headline-date,
+  .headline-media {
+    text-align: left;
+    font-size: 0.89em;
+    margin-bottom: 2px;
+  }
 }
