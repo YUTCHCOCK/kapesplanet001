@@ -169,14 +169,15 @@
   </div>    
 </section>
         
-    <!-- Contact 섹션 - 단순화 -->
+<!-- Contact 섹션 - 새로운 레이아웃 -->
     <section class="section contact" id="contact">
         <div class="section-header">
             <div class="section-title">Contact</div>
             <div class="section-subtitle">원숭이행성과 함께 새로운 콘텐츠를 만드세요</div>
         </div>
-        <div class="contact-content">
-            <div class="contact-info-centered">
+        <div class="contact-layout">
+            <!-- 왼쪽: 연락처 정보 -->
+            <div class="contact-left">
                 <div class="contact-title">KAPES PLANET</div>
                 <div class="contact-description">
                     원숭이행성과 콘텐츠를 만들고 싶으신가요?<br>
@@ -219,37 +220,35 @@
                     </li>
                 </ul>
             </div>
-        </div>
-    </section>
-
-    <!-- 푸터 - 단순화 -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-logo-centered">
-                <img src="img/kapes_text_logo.png" alt="KAPES PLANET 로고">
-                <div class="footer-description">
-                    매일 진화하는 크리에이터 월드 원숭이행성
+            
+            <!-- 오른쪽: 로고와 지도 -->
+            <div class="contact-right">
+                <div class="contact-logo">
+                    <img src="img/kapes_logo_full.png" alt="KAPES PLANET 로고">
+                </div>
+                <div class="contact-map">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3163.892474!2d126.889!3d37.5665!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357c98e9!2sKGIT%EB%B9%8C%EB%94%A9!5e0!3m2!1sko!2skr!4v1640000000000!5m2!1sko!2skr"
+                        width="100%" 
+                        height="300" 
+                        style="border:0; border-radius: 10px;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
                 </div>
             </div>
         </div>
-        <div class="footer-bottom">
+    </section>
+
+    <!-- 푸터 - 극도로 얇게 -->
+    <footer class="minimal-footer">
+        <div class="footer-content-minimal">
             <div class="copyright">© 2025 KAPES PLANET. All rights reserved.</div>
-            <div class="bottom-links">
-                <a href="#" class="bottom-link">Privacy Policy</a>
-                <a href="#" class="bottom-link">Terms of Service</a>
+            <div class="footer-links-minimal">
+                <a href="#" class="footer-link">Privacy Policy</a>
+                <span class="separator">|</span>
+                <a href="#" class="footer-link">Terms of Service</a>
             </div>
         </div>
     </footer>
-
-    <!-- 유튜브 비디오 모달 -->
-    <div id="video-modal" class="video-modal" style="display:none;">
-        <div class="modal-content">
-            <span class="close-button" aria-label="비디오 닫기">&times;</span>
-            <iframe id="modal-iframe" src="" frameborder="0" allowfullscreen allow="autoplay; encrypted-media"></iframe>
-        </div>
-    </div>
-
-    <!-- JavaScript -->
-    <script src="js/main.js"></script>
-</body>
-</html>
