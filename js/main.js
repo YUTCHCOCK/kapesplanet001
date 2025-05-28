@@ -264,43 +264,23 @@ function closeVideoModal() {
         console.log('비디오 모달 닫힘');
     }
 }
-// 기사 데이터
-const articles = [
-  {
-    date: "2025-05-28",
-    title: "케이프스플래닛 '시크릿 아이돌' 원안자 + 공동제작자로 밝혀져",
-    url: "https://www.sportsseoul.com/news/read/1519235",
-    summary: "이정재가 1대주주로 있는 아티스트 스튜디오와 영국의 이매지너리움의 합작으로 기획개발중인 영화 '시크릿 아이돌'의 원안 기획 및 공동제작자로 케이프스플래닛이 참여 중."
-  },
-  {
-    date: "2025-04-24",
-    title: "대상웰라이프, 건강한 내일을 위한 브랜드 ‘헤이N’ 론칭",
-    url: "https://news-site.com/article2",
-    summary: "대상웰라이프가 건강한 내일을 위한 새로운 브랜드 '헤이N'을 론칭했습니다."
-  },
-  {
-    date: "2025-04-21",
-    title: "뉴케어, 청소년 균형영양식 ‘뉴케어 하이멘토’ 출시",
-    url: "https://news-site.com/article3",
-    summary: "뉴케어가 청소년을 위한 균형영양식 '하이멘토'를 새롭게 출시하였습니다."
-  }
-  // ... 더 추가 가능
-];
+console.log('main.js 로드됨');
 
-// 게시판 렌더링
-function renderNewsList() {
-  const list = document.getElementById('newsList');
-  list.innerHTML = articles.map(item => `
-    <li class="news-item">
-      <a href="${item.url}" class="news-title" target="_blank" rel="noopener noreferrer">${item.title}</a>
-      <div class="news-summary">${item.summary}</div>
-      <div class="news-date">${item.date}</div>
-    </li>
-  `).join('');
-}
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM 로드 완료');
+    setupNavigation();
+    setupMobileMenu();
+    setupHeaderEffects();
+    setupPortfolioFilter();
+    setupVideoModal();
+    setupContactForm();
+    renderBoard();
+    console.log('모든 설정 완료');
+});
 
-window.addEventListener('DOMContentLoaded', renderNewsList);
-// articles 배열에 날짜와 언론사 추가 (예시로 6개)
+// (setupNavigation, setupMobileMenu, setupHeaderEffects, setupPortfolioFilter, setupVideoModal, setupContactForm 함수는 기존과 동일하게 둡니다)
+
+// 최신 press 게시판 데이터 (프레스/언론사 필드 포함)
 const articles = [
   {
     date: "2025-05-28",
@@ -316,55 +296,43 @@ const articles = [
     url: "https://youtu.be/4D40Ldpxm5c?si=Qv7Ebk-Mk5gygy-l5",
     summary: "케이프스플래닛 유일한 대표 인터뷰 영상. 한국 콘텐츠 진흥원 발간 웹진 방송영상 OTT트렌드 2025 Vol.1"
   },
- {
+  {
     date: "2025-05-07",
     press: "한국콘텐츠진흥원",
     title: "'KOCCA 트렌드 - 인물 인터뷰 유치콕 편",
     url: "https://www.kocca.kr/trendott/vol01/people_1.html",
     summary: "원숭이행성 자체 제작 유튜브 채널 <시방솔비> 론칭으로 화제몰이 중인 MC솔비를 만나다 "
   },
-{
+  {
     date: "2025-05-28",
     press: "스포츠경향",
     title: "'시방솔비' 솔비의 좌충우돌 B급 MC 성장기 ",
-    url: "https://www.sportsseoul.com/news/read/1519235",
-    summary: "솔비는 최근 론칭한 유튜브 채널 ‘시방솔비(연출 유일한, 원숭이행성 제작)’에서 단독 MC를 맡고, ‘성장형 캐릭터’로서 기대를 모으고 있다.
+    url: "https://sports.khan.co.kr/article/202408230804003",
+    summary: "솔비는 최근 론칭한 유튜브 채널 ‘시방솔비(연출 유일한, 원숭이행성 제작)’에서 단독 MC를 맡고, ‘성장형 캐릭터’로서 기대를 모으고 있다."
   },
- {
+  {
     date: "2023-11-29",
     press: "한국콘텐츠진흥원",
     title: "KOCCA 콘텐츠 뉴스 - 바야흐로 숏숏폼 시대",
     url: "https://www.kocca.kr/n_content/vol30/sub02.html",
     summary: "케이프스플래닛 유일한 대표와 함께 숏폼 콘텐츠 비즈니스의 어제와 오늘, 그리고 내일에 대해 이야기해보았습니다."
   },
- {
+  {
     date: "2025-05-28",
     press: "동아일보",
     title: "23년 서울 1인 창조기업 - 케이프스플래닛 창웝진흥원장 표창",
     url: "https://www.donga.com/news/article/all/20231108/122080292/1",
     summary: " ‘2023 서울권 1인 창조기업 지원센터 입주기업 성과발표회를 통해 케이프스플래닛 유일한 대표(창업진흥원) 등이 우수한 성과를 낸 공로를 인정받아 표창장을 받았다."
-  },
+  }
+];
 
-// 게시판 렌더링
-function renderNewsList() {
-  const list = document.getElementById('newsList');
-  list.innerHTML = articles.map(item => `
-    <li class="news-item">
-      <a href="${item.url}" class="news-title" target="_blank" rel="noopener noreferrer">${item.title}</a>
-      <div class="news-summary">${item.summary}</div>
-      <div class="news-date">${item.date}</div>
-    </li>
-  `).join('');
-}
-
-window.addEventListener('DOMContentLoaded', renderNewsList);
 let openedIdx = null;
 
 function renderBoard() {
   const board = document.getElementById('headlineBoard');
   if (!board) return;
 
-  let html = '<ul class="headline-list">';
+  let html = '';
   articles.forEach((item, idx) => {
     html += `
       <li class="headline-row">
@@ -383,16 +351,13 @@ function renderBoard() {
       </li>
     `;
   });
-  html += '</ul>';
-  board.innerHTML = html;
+  board.innerHTML = `<ul class="headline-list">${html}</ul>`;
 }
 
 window.toggleArticle = function(idx) {
   openedIdx = (openedIdx === idx) ? null : idx;
   renderBoard();
 };
-
-window.addEventListener('DOMContentLoaded', renderBoard);
 
 // 컨택트 폼 설정
 function setupContactForm() {
