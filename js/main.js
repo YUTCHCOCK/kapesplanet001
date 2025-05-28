@@ -3,6 +3,15 @@ console.log('main.js 로드됨');
 
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM 로드 완료');
+    setupNavigation();
+    setupMobileMenu();
+    setupHeaderEffects();
+    setupPortfolioFilter();
+    setupVideoModal();
+    renderBoard();       // ← 여기에서 한 번만 호출
+    setupContactForm();
+    console.log('모든 설정 완료');
+});
     
     // 네비게이션 스크롤 설정
     setupNavigation();
@@ -267,12 +276,6 @@ function closeVideoModal() {
 console.log('main.js 로드됨');
 
 console.log('main.js 로드됨');
-
-document.addEventListener('DOMContentLoaded', function() {
-    // ...
-    renderBoard();
-    // ...
-});
 
 const articles = [
   {
