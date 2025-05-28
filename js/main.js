@@ -447,3 +447,4 @@ function setupContactForm() {
                 });
         });
     }
+} // 
