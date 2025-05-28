@@ -392,7 +392,7 @@ function setupContactForm() {
                 message: message
             };
             
-            emailjs.send('service_x1zvv5a', 'template_lujx42n', templateParams)
+            emailjs.send('service_x1zvv5a', 'template_lujx42m', templateParams)
                 .then(function(response) {
                     alert('문의가 성공적으로 전송되었습니다!');
                     contactForm.reset();
