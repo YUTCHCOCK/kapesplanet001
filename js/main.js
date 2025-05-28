@@ -1,5 +1,9 @@
 console.log('main.js 로드됨');
 
+// 전역 변수로 이벤트 등록 상태 관리
+let videoModalInitialized = false;
+let portfolioFilterInitialized = false;
+
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM 로드 완료');
     
@@ -9,30 +13,44 @@ document.addEventListener('DOMContentLoaded', function() {
     setupHeaderEffects();
     setupHistoryNavigation();
     
-    // 동적 콘텐츠 관련 설정은 지연 실행
-    setTimeout(() => {
-        setupPortfolioFilter();
-        renderBoard();
-        
-        // 모든 동적 콘텐츠가 렌더링된 후 이벤트 리스너 등록
-        setTimeout(() => {
-            setupVideoModal();
-            setupContactForm();
-            console.log('모든 설정 완료');
-        }, 100);
-    }, 50);
+    // 프레스 보드 즉시 렌더링
+    renderBoard();
+    
+    // 다른 기능들 초기화 (문의폼 제거)
+    initializeAllFeatures();
+    
+    console.log('모든 설정 완료');
 });
 
-// 이벤트 리스너를 다시 등록하는 함수
-function reAttachEventListeners() {
-    console.log('이벤트 리스너 재등록');
-    setupVideoModal();
+// 모든 기능 초기화 (단순화)
+function initializeAllFeatures() {
+    // 약간의 지연 후 초기화 (DOM 완전 로드 보장)
+    setTimeout(() => {
+        setupPortfolioFilter();
+        setupVideoModal();
+        
+        // 페이지 로드 후 추가 확인
+        setTimeout(() => {
+            ensureVideoModalWorks();
+        }, 500);
+    }, 100);
 }
 
-// 네비게이션 스크롤 기능
+// 비디오 모달 작동 확인 및 재초기화
+function ensureVideoModalWorks() {
+    const workItems = document.querySelectorAll('.work-item');
+    console.log(`비디오 모달 확인 - 워크 아이템 수: ${workItems.length}`);
+    
+    if (workItems.length > 0 && !videoModalInitialized) {
+        setupVideoModal();
+    }
+}
+
+// 네비게이션 스크롤 기능 (단순화)
 function setupNavigation() {
     console.log('네비게이션 설정...');
     const navLinks = document.querySelectorAll('nav ul li a');
+    
     navLinks.forEach(function(link) {
         link.addEventListener('click', function(e) {
             e.preventDefault();
@@ -41,10 +59,11 @@ function setupNavigation() {
             
             scrollToSection(targetId);
             
-            // 스크롤 완료 후 이벤트 리스너 재확인
+            // 스크롤 완료 후 기능 재확인 (간단한 방법)
             setTimeout(() => {
-                reAttachEventListeners();
-            }, 1000);
+                console.log('네비게이션 후 기능 재확인');
+                ensureVideoModalWorks();
+            }, 1200);
             
             // 히스토리 상태 업데이트
             if (window.location.hash !== '#' + targetId) {
@@ -61,10 +80,10 @@ function setupHistoryNavigation() {
         console.log('히스토리 네비게이션:', hash);
         scrollToSection(hash);
         
-        // 히스토리 네비게이션 후에도 이벤트 리스너 재확인
+        // 히스토리 네비게이션 후에도 기능 재확인
         setTimeout(() => {
-            reAttachEventListeners();
-        }, 1000);
+            ensureVideoModalWorks();
+        }, 1200);
     });
     
     // 페이지 로드시 URL 해시 확인
@@ -72,7 +91,7 @@ function setupHistoryNavigation() {
         const initialSection = window.location.hash.replace('#', '');
         setTimeout(() => {
             scrollToSection(initialSection);
-            setTimeout(() => reAttachEventListeners(), 1000);
+            setTimeout(() => ensureVideoModalWorks(), 1200);
         }, 100);
     }
 }
@@ -140,7 +159,6 @@ function setupMobileMenu() {
             if (!navigation.contains(e.target) && !menuButton.contains(e.target)) {
                 if (navigation.classList.contains('active')) {
                     navigation.classList.remove('active');
-                    console.log('모바일 메뉴 외부 클릭으로 닫힘');
                 }
             }
         });
@@ -149,7 +167,6 @@ function setupMobileMenu() {
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape' && navigation.classList.contains('active')) {
                 navigation.classList.remove('active');
-                console.log('ESC 키로 모바일 메뉴 닫힘');
             }
         });
     }
@@ -210,63 +227,64 @@ function updateActiveNavigation() {
     });
 }
 
-// 포트폴리오 필터 설정
+// 포트폴리오 필터 설정 (단순화)
 function setupPortfolioFilter() {
+    if (portfolioFilterInitialized) return;
+    
     console.log('포트폴리오 필터 설정...');
     const filterButtons = document.querySelectorAll('.filter-btn');
     
     if (filterButtons.length === 0) {
-        console.log('필터 버튼을 찾을 수 없음, 재시도...');
-        setTimeout(setupPortfolioFilter, 100);
+        console.log('필터 버튼을 찾을 수 없음');
         return;
     }
     
     filterButtons.forEach(function(button) {
-        // 기존 이벤트 리스너 제거 (중복 방지)
-        button.removeEventListener('click', handleFilterClick);
-        button.addEventListener('click', handleFilterClick);
+        button.addEventListener('click', function() {
+            // 모든 버튼에서 active 제거
+            filterButtons.forEach(function(btn) {
+                btn.classList.remove('active');
+            });
+            
+            // 클릭된 버튼에 active 추가
+            this.classList.add('active');
+            
+            const filterValue = this.getAttribute('data-filter');
+            console.log('필터 적용:', filterValue);
+            
+            // 포트폴리오 아이템 필터링
+            const workItems = document.querySelectorAll('.work-item');
+            workItems.forEach(function(item) {
+                if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                    item.style.display = 'block';
+                    setTimeout(() => {
+                        item.style.opacity = '1';
+                        item.style.transform = 'translateY(0)';
+                    }, 10);
+                } else {
+                    item.style.opacity = '0';
+                    item.style.transform = 'translateY(20px)';
+                    setTimeout(() => {
+                        item.style.display = 'none';
+                    }, 300);
+                }
+            });
+            
+            // 필터 변경 후 비디오 모달 재초기화
+            setTimeout(() => {
+                videoModalInitialized = false;
+                setupVideoModal();
+            }, 350);
+        });
     });
+    
+    portfolioFilterInitialized = true;
 }
 
-// 필터 클릭 핸들러 (별도 함수로 분리)
-function handleFilterClick() {
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    
-    filterButtons.forEach(function(btn) {
-        btn.classList.remove('active');
-    });
-    
-    this.classList.add('active');
-    
-    const filterValue = this.getAttribute('data-filter');
-    console.log('필터 적용:', filterValue);
-    
-    const workItems = document.querySelectorAll('.work-item');
-    workItems.forEach(function(item) {
-        if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
-            item.style.display = 'block';
-            setTimeout(() => {
-                item.style.opacity = '1';
-                item.style.transform = 'translateY(0)';
-            }, 10);
-        } else {
-            item.style.opacity = '0';
-            item.style.transform = 'translateY(20px)';
-            setTimeout(() => {
-                item.style.display = 'none';
-            }, 300);
-        }
-    });
-    
-    // 필터 변경 후 비디오 모달 이벤트 재등록
-    setTimeout(() => {
-        setupVideoModal();
-    }, 350);
-}
-
-// 비디오 모달 설정 (개선된 버전)
+// 비디오 모달 설정 (대폭 단순화)
 function setupVideoModal() {
-    console.log('비디오 모달 설정...');
+    console.log('비디오 모달 설정 시작...');
+    
     const modal = document.getElementById('video-modal');
     const modalIframe = document.getElementById('modal-iframe');
     const closeButton = document.querySelector('.close-button');
@@ -276,76 +294,79 @@ function setupVideoModal() {
         return;
     }
     
-    // 기존 이벤트 리스너 제거 (중복 방지)
-    const workItems = document.querySelectorAll('.work-item');
-    
-    if (workItems.length === 0) {
-        console.log('워크 아이템을 찾을 수 없음, 재시도...');
-        setTimeout(setupVideoModal, 100);
+    // 모든 워크 아이템에 이벤트 위임 사용
+    const workGrid = document.querySelector('.work-grid');
+    if (!workGrid) {
+        console.log('워크 그리드를 찾을 수 없음');
         return;
     }
     
-    console.log(`${workItems.length}개의 워크 아이템 발견`);
+    // 기존 이벤트 리스너 제거 (이벤트 위임이므로 한 번만)
+    workGrid.removeEventListener('click', handleWorkItemClick);
+    workGrid.addEventListener('click', handleWorkItemClick);
     
-    workItems.forEach(function(item) {
-        // 기존 클릭 이벤트 제거
-        const newItem = item.cloneNode(true);
-        item.parentNode.replaceChild(newItem, item);
-    });
-    
-    // 새로운 이벤트 리스너 등록
-    document.querySelectorAll('.work-item').forEach(function(item) {
-        item.addEventListener('click', function(e) {
-            console.log('워크 아이템 클릭됨');
-            e.preventDefault();
-            e.stopPropagation();
-            
-            const iframe = this.querySelector('iframe');
-            if (iframe) {
-                const videoSrc = iframe.src;
-                let videoId = '';
-                
-                console.log('비디오 소스:', videoSrc);
-                
-                try {
-                    if (videoSrc.includes('youtube.com/embed/')) {
-                        const match = videoSrc.match(/youtube\.com\/embed\/([^?&]+)/);
-                        if (match && match[1]) {
-                            videoId = match[1];
-                        }
-                    }
-                    
-                    if (videoId) {
-                        const modalSrc = `https://www.youtube.com/embed/${videoId}?autoplay=1&controls=1&rel=0`;
-                        modalIframe.src = modalSrc;
-                        modal.style.display = 'flex';
-                        document.body.style.overflow = 'hidden';
-                        
-                        console.log('비디오 모달 열림:', videoId);
-                    } else {
-                        console.error('비디오 ID를 찾을 수 없음');
-                    }
-                } catch (error) {
-                    console.error('비디오 ID 추출 실패:', error);
-                }
-            } else {
-                console.error('iframe을 찾을 수 없음');
-            }
-        });
-    });
-    
-    // 모달 닫기 이벤트 설정
+    // 모달 닫기 이벤트
     if (closeButton) {
         closeButton.removeEventListener('click', closeVideoModal);
         closeButton.addEventListener('click', closeVideoModal);
     }
     
-    modal.removeEventListener('click', handleModalClick);
-    modal.addEventListener('click', handleModalClick);
+    modal.removeEventListener('click', handleModalBackgroundClick);
+    modal.addEventListener('click', handleModalBackgroundClick);
+    
+    videoModalInitialized = true;
+    console.log('비디오 모달 설정 완료');
 }
 
-// 모달 클릭 핸들러 (별도 함수로 분리)
-function handleModalClick(e) {
+// 워크 아이템 클릭 핸들러 (이벤트 위임)
+function handleWorkItemClick(e) {
+    // 클릭된 요소가 work-item 또는 그 자식인지 확인
+    const workItem = e.target.closest('.work-item');
+    if (!workItem) return;
+    
+    console.log('워크 아이템 클릭됨');
+    e.preventDefault();
+    e.stopPropagation();
+    
+    const iframe = workItem.querySelector('iframe');
+    if (!iframe) {
+        console.error('iframe을 찾을 수 없음');
+        return;
+    }
+    
+    const videoSrc = iframe.src;
+    console.log('비디오 소스:', videoSrc);
+    
+    let videoId = '';
+    
+    try {
+        if (videoSrc.includes('youtube.com/embed/')) {
+            const match = videoSrc.match(/youtube\.com\/embed\/([^?&]+)/);
+            if (match && match[1]) {
+                videoId = match[1];
+            }
+        }
+        
+        if (videoId) {
+            const modal = document.getElementById('video-modal');
+            const modalIframe = document.getElementById('modal-iframe');
+            
+            const modalSrc = `https://www.youtube.com/embed/${videoId}?autoplay=1&controls=1&rel=0`;
+            modalIframe.src = modalSrc;
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            
+            console.log('비디오 모달 열림:', videoId);
+        } else {
+            console.error('비디오 ID를 찾을 수 없음');
+        }
+    } catch (error) {
+        console.error('비디오 ID 추출 실패:', error);
+    }
+}
+
+// 모달 배경 클릭 핸들러
+function handleModalBackgroundClick(e) {
     if (e.target === document.getElementById('video-modal')) {
         closeVideoModal();
     }
@@ -426,8 +447,7 @@ function renderBoard() {
     const board = document.getElementById('headlineBoard');
     
     if (!board) {
-        console.error('headlineBoard 요소를 찾을 수 없음, 재시도...');
-        setTimeout(renderBoard, 100);
+        console.error('headlineBoard 요소를 찾을 수 없음');
         return;
     }
 
@@ -450,123 +470,4 @@ function renderBoard() {
     board.innerHTML = `<ul class="headline-list">${html}</ul>`;
     
     console.log('프레스 보드 렌더링 완료 - 기사 수:', articles.length);
-    
-    // 렌더링 후 요소 확인
-    const renderedItems = board.querySelectorAll('.headline-row');
-    console.log('렌더링된 기사 수:', renderedItems.length);
-}
-
-// 컨택트 폼 설정
-function setupContactForm() {
-    console.log('컨택트 폼 설정...');
-    
-    if (typeof emailjs === 'undefined') {
-        console.error('EmailJS가 로드되지 않음');
-        return;
-    }
-    
-    emailjs.init("GnCf85iVH7vsa-xKr");
-    
-    const contactForm = document.querySelector('.contact-form');
-    const newsletterForm = document.querySelector('.newsletter-form');
-
-    // 컨택트 폼 처리
-    if (contactForm) {
-        // 기존 이벤트 리스너 제거
-        contactForm.removeEventListener('submit', handleContactSubmit);
-        contactForm.addEventListener('submit', handleContactSubmit);
-    }
-
-    // 뉴스레터 폼 처리
-    if (newsletterForm) {
-        newsletterForm.removeEventListener('submit', handleNewsletterSubmit);
-        newsletterForm.addEventListener('submit', handleNewsletterSubmit);
-    }
-}
-
-// 컨택트 폼 제출 핸들러
-function handleContactSubmit(e) {
-    e.preventDefault();
-    
-    const formData = new FormData(this);
-    const submitBtn = this.querySelector('.submit-btn');
-    const originalText = submitBtn.textContent;
-    
-    const name = formData.get('name')?.trim();
-    const email = formData.get('email')?.trim();
-    const message = formData.get('message')?.trim();
-    
-    if (!name || !email || !message) {
-        alert('모든 필드를 입력해주세요.');
-        return;
-    }
-    
-    const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
-    if (!emailRegex.test(email)) {
-        alert('올바른 이메일 주소를 입력해주세요.');
-        return;
-    }
-    
-    submitBtn.textContent = '전송 중...';
-    submitBtn.disabled = true;
-    
-    const templateParams = {
-        from_name: name,
-        from_email: email,
-        message: message
-    };
-    
-    emailjs.send('service_x1zvv5a', 'template_lujx42n', templateParams)
-        .then(function(response) {
-            alert('문의가 성공적으로 전송되었습니다!');
-            this.reset();
-            console.log('이메일 전송 성공:', response);
-        }.bind(this))
-        .catch(function(error) {
-            alert('전송 중 오류가 발생했습니다. 다시 시도해주세요.');
-            console.error('이메일 전송 실패:', error);
-        })
-        .finally(function() {
-            submitBtn.textContent = originalText;
-            submitBtn.disabled = false;
-        });
-}
-
-// 뉴스레터 폼 제출 핸들러
-function handleNewsletterSubmit(e) {
-    e.preventDefault();
-    
-    const emailInput = this.querySelector('.newsletter-input');
-    const email = emailInput.value?.trim();
-    
-    const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
-    
-    if (!email) {
-        alert('이메일 주소를 입력해주세요.');
-        emailInput.focus();
-        return;
-    }
-    
-    if (!emailRegex.test(email)) {
-        alert('올바른 이메일 주소를 입력해주세요.');
-        emailInput.focus();
-        return;
-    }
-    
-    const templateParams = {
-        from_name: '뉴스레터 구독자',
-        from_email: email,
-        message: '뉴스레터 구독을 신청합니다.'
-    };
-    
-    emailjs.send('service_x1zvv5a', 'template_lujx42n', templateParams)
-        .then(function(response) {
-            alert('뉴스레터 구독이 완료되었습니다!');
-            emailInput.value = '';
-            console.log('뉴스레터 구독 성공:', response);
-        })
-        .catch(function(error) {
-            alert('구독 신청 중 오류가 발생했습니다.');
-            console.error('뉴스레터 구독 실패:', error);
-        });
 }
