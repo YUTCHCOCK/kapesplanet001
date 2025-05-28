@@ -297,7 +297,7 @@ const articles = [
     summary: "숏폼의 역사 돌아보기: 숏폼의 시작과 변천사 / 숏폼의 오늘: 글로벌 숏폼드라마 플랫폼은 미래가 될 것인가 / 숏폼의 내일: 숏폼 IP 비즈니스의 미래와 앞으로의 전망 "
   },
   {
-    date: "2025-05-28",
+    date: "2024-08-23",
     media: "스포츠경향",
     title: "'시방솔비' 솔비의 좌충우돌 B급 MC 성장기 ",
     url: "https://sports.khan.co.kr/article/202408230804003",
@@ -311,7 +311,7 @@ const articles = [
     summary: "숏폼들은 계속해서 한 단계 업그레이드를 한다. ‘틱톡’의 등장과 함께 1분 이하의 더 짧은 콘텐츠의 시대가 개막한 것이다. 인스타 릴스, 유튜브 숏츠.. 바야흐로 ‘숏숏폼(1분 이하의 콘텐츠)’ 전성시대가 열렸다.."
   },
   {
-    date: "2025-05-28",
+    date: "2023-11-08",
     media: "동아일보",
     title: "23년 서울 1인 창조기업 - 케이프스플래닛 창웝진흥원장 표창",
     url: "https://www.donga.com/news/article/all/20231108/122080292/1",
@@ -350,6 +350,7 @@ function setupContactForm() {
         return;
     }
     
+    // 환경 변수로 관리하거나 서버사이드에서 처리하는 것이 좋습니다
     emailjs.init("GnCf85iVH7vsa-xKr");
     
     const contactForm = document.querySelector('.contact-form');
@@ -364,14 +365,31 @@ function setupContactForm() {
             const submitBtn = this.querySelector('.submit-btn');
             const originalText = submitBtn.textContent;
             
+            // 기본 유효성 검사
+            const name = formData.get('name');
+            const email = formData.get('email');
+            const message = formData.get('message');
+            
+            if (!name || !email || !message) {
+                alert('모든 필드를 입력해주세요.');
+                return;
+            }
+            
+            // 이메일 형식 검사
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('올바른 이메일 주소를 입력해주세요.');
+                return;
+            }
+            
             // 전송 중 표시
             submitBtn.textContent = '전송 중...';
             submitBtn.disabled = true;
             
             const templateParams = {
-                from_name: formData.get('name') || '이름 없음',
-                from_email: formData.get('email') || '',
-                message: formData.get('message') || ''
+                from_name: name,
+                from_email: email,
+                message: message
             };
             
             emailjs.send('service_x1zvv5a', 'template_lujx42n', templateParams)
@@ -396,26 +414,36 @@ function setupContactForm() {
         newsletterForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
-            const email = this.querySelector('.newsletter-input').value;
+            const emailInput = this.querySelector('.newsletter-input');
+            const email = emailInput.value.trim();
             
-            if (email) {
-                const templateParams = {
-                    from_name: '뉴스레터 구독자',
-                    from_email: email,
-                    message: '뉴스레터 구독을 신청합니다.'
-                };
-                
-                emailjs.send('service_x1zvv5a', 'template_lujx42n', templateParams)
-                    .then(function(response) {
-                        alert('뉴스레터 구독이 완료되었습니다!');
-                        newsletterForm.querySelector('.newsletter-input').value = '';
-                        console.log('뉴스레터 구독 성공');
-                    })
-                    .catch(function(error) {
-                        alert('구독 신청 중 오류가 발생했습니다.');
-                        console.error('뉴스레터 구독 실패:', error);
-                    });
+            // 이메일 유효성 검사
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!email) {
+                alert('이메일 주소를 입력해주세요.');
+                return;
             }
+            
+            if (!emailRegex.test(email)) {
+                alert('올바른 이메일 주소를 입력해주세요.');
+                return;
+            }
+            
+            const templateParams = {
+                from_name: '뉴스레터 구독자',
+                from_email: email,
+                message: '뉴스레터 구독을 신청합니다.'
+            };
+            
+            emailjs.send('service_x1zvv5a', 'template_lujx42n', templateParams)
+                .then(function(response) {
+                    alert('뉴스레터 구독이 완료되었습니다!');
+                    emailInput.value = '';
+                    console.log('뉴스레터 구독 성공');
+                })
+                .catch(function(error) {
+                    alert('구독 신청 중 오류가 발생했습니다.');
+                    console.error('뉴스레터 구독 실패:', error);
+                });
         });
     }
-}
