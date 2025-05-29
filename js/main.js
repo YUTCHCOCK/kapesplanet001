@@ -14,18 +14,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // 네비게이션 스크롤 기능
 function setupNavigation() {
-    console.log('네비게이션 설정...');
     const navLinks = document.querySelectorAll('nav ul li a');
+
     navLinks.forEach(function(link) {
         link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href').replace('#', '');
-            scrollToSection(targetId);
-            history.pushState(null, '', '#' + targetId);
+            const href = this.getAttribute('href');
+            
+            if (href.startsWith('#')) {
+                // 내부 앵커일 경우만 기본 동작 막고 스크롤 이동
+                e.preventDefault();
+                const targetId = href.replace('#', '');
+                scrollToSection(targetId);
+            }
         });
     });
 }
-
 // 섹션으로 스크롤
 function scrollToSection(sectionId) {
     console.log('스크롤 시작:', sectionId);
