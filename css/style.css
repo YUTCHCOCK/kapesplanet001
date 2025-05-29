@@ -619,7 +619,7 @@ nav ul li a.active {
 
 .contact-list {
     list-style: none;
-    padding: 0;
+    padding-left: 0%;
 }
 
 .contact-item {
@@ -671,9 +671,9 @@ nav ul li a.active {
 }
 
 /* 극도로 얇은 푸터 */
-.minimal-footer {
+.footer-minimal-footer {
     background-color: #000000;
-    padding: 15px 50px;
+    padding: 25px 50px;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -685,7 +685,7 @@ nav ul li a.active {
     margin: 0 auto;
 }
 
-.copyright {
+.footer-copyright {
     font-size: 0.85rem;
     color: var(--text-color);
     opacity: 0.6;
