@@ -320,7 +320,7 @@ nav ul li a.active {
     display: flex;
     flex-direction: row;
     gap: 60px;
-    align-items: flex-start;
+    align-items: center;
     justify-content: center;
     width: 100%;
     max-width: 900px;
@@ -670,40 +670,14 @@ nav ul li a.active {
 
 .contact-value a:hover {
     color: var(--primary-color);
-}
-.footer {
-  width: 100%;
-  height: 100px; /* 높이 조절 */
-  background: #222;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.footer-content {
-  width: 90%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.footer-text {
-  font-size: 1.2em;
-}
-
-.footer-logo {
-  height: 60px;  /* 로고 크기 */
-  /* 필요하면 width도 조절하세요 */
-}
-
+)
 
 / 푸터 수정안 /
 .footer-minimal-footer {
     background-color: #000;
     border-top: 1px solid rgba(255,255,255,0.1);
-    padding: 30px 80px;
-    min-height: 50px;        /* 원하는 높이로 조절 */
+    padding: 80px 100px;
+    min-height: 60px;        /* 원하는 높이로 조절 */
     color: #fff;
 }
 
