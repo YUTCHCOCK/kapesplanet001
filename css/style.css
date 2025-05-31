@@ -671,6 +671,32 @@ nav ul li a.active {
 .contact-value a:hover {
     color: var(--primary-color);
 )
+More actions
+.footer {
+  width: 100%;
+  height: 100px; /* 높이 조절 */
+  background: #222;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-content {
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer-text {
+  font-size: 1.2em;
+}
+
+.footer-logo {
+  height: 60px;  /* 로고 크기 */
+  /* 필요하면 width도 조절하세요 */
+}Add commentMore actions
 
 / 푸터 수정안 /
 .footer-minimal-footer {
