@@ -702,7 +702,7 @@ nav ul li a.active {
 .footer-minimal-footer {
     background-color: #000;
     border-top: 1px solid rgba(255,255,255,0.1);
-    padding: 30px 50px;
+    padding: 30px 80px;
     min-height: 50px;        /* 원하는 높이로 조절 */
     color: #fff;
 }
@@ -722,7 +722,7 @@ nav ul li a.active {
 }
 
 .footer-links {
-    font-size: 0.95em;
+    font-size: 0.9em;
     opacity: 0.7;
     margin-top: 4px;
 }
@@ -742,7 +742,7 @@ nav ul li a.active {
     height: 24px;      /* 로고 크기 원하는 만큼 조절 */
     width: auto;
     display: block;
-    opacity: 0.9;
+    opacity: 0.8;
 }
 
 .separator {
