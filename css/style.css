@@ -676,8 +676,8 @@ nav ul li a.active {
 .footer-minimal-footer {
     background-color: #000;
     border-top: 1px solid rgba(255,255,255,0.1);
-    padding: 80px 100px;
-    min-height: 60px;        /* 원하는 높이로 조절 */
+    padding: 30px 100px;
+    min-height: 40px;        /* 원하는 높이로 조절 */
     color: #fff;
 }
 
