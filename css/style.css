@@ -320,7 +320,7 @@ nav ul li a.active {
     display: flex;
     flex-direction: row;
     gap: 60px;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     width: 100%;
     max-width: 900px;
@@ -360,8 +360,6 @@ nav ul li a.active {
 
 .about-image img {
     width: 300px;
-    margin-left: auto;
-    margin-right: auto;
     height: auto;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
@@ -670,48 +668,81 @@ nav ul li a.active {
 
 .contact-value a:hover {
     color: var(--primary-color);
-)
-More actions
-.footer-minimal-footer {
-  background-color: #000;
-  border-top: 1px solid rgba(255,255,255,0.1);
-  padding: 30px 100px;
-  color: #fff;
 }
-.footer-content-minimal {
-  max-width: 1200px;
-  margin: 0 auto;
+.footer {
+  width: 100%;
+  height: 100px; /* 높이 조절 */
+  background: #222;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-content {
+  width: 90%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0;
 }
+
+.footer-text {
+  font-size: 1.2em;
+}
+
+.footer-logo {
+  height: 60px;  /* 로고 크기 */
+  /* 필요하면 width도 조절하세요 */
+}
+
+
+/ 푸터 수정안 /
+.footer-minimal-footer {
+    background-color: #000;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding: 30px 50px;
+    min-height: 90px;        /* 원하는 높이로 조절 */
+    color: #fff;
+}
+
+.footer-content-minimal {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 .footer-left {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
+
 .footer-links {
-  font-size: 0.9em;
-  opacity: 0.7;
+    font-size: 0.95em;
+    opacity: 0.7;
+    margin-top: 4px;
 }
+
 .bottom-link {
-  color: #fff;
-  text-decoration: none;
-  opacity: 0.7;
-  margin: 0 4px;
-  transition: opacity 0.3s, color 0.3s;
+    color: #fff;
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.3s, color 0.3s;
 }
 .bottom-link:hover {
-  opacity: 1;
-  color: #00C3A5;
+    opacity: 1;
+    color: #00C3A5; /* 원하시는 포인트 컬러 */
 }
+
 .footer-right .footer-logo-img {
-  height: 20px;
-  width: auto;
-  display: block;
-  opacity: 0.8;
-} 
+    height: 48px;      /* 로고 크기 원하는 만큼 조절 */
+    width: auto;
+    display: block;
+}
+}
+
 .separator {
     color: var(--text-color);
     opacity: 0.3;
