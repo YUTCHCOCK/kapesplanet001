@@ -669,7 +669,23 @@ nav ul li a.active {
 .contact-value a:hover {
     color: var(--primary-color);
 }
-
+/* PC: contact-list 오른쪽에 로고 */
+@media (min-width: 768px) {
+  .contact-content {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 32px; /* 아이템 간 간격 */
+  }
+  .contact-info {
+    flex: 1;
+  }
+  .contact-logo img {
+    width: 160px; /* 필요에 따라 조정 */
+    height: auto;
+    display: block;
+  }
+}
 /* 극도로 얇은 푸터 */
 .footer-minimal-footer {
     background-color: #000000;
