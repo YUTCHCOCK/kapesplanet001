@@ -70,8 +70,7 @@
         </div>
     </header>
     <!-- 히어로 섹션 -->
-    <section class="hero" id="hero">
-        <!-- 유튜브 배경 영상 -->
+    <section class="hero" id="hero" style="position:relative; overflow:hidden;">
       <iframe 
           src="https://www.youtube.com/embed/sbEYTBXJb4I?autoplay=1&mute=1&controls=0&showinfo=0&loop=1&playlist=sbEYTBXJb4I&modestbranding=1"
           title="KAPES PLANET 메인 영상"
@@ -80,8 +79,10 @@
           allow="autoplay; encrypted-media"
           allowfullscreen>
       </iframe> 
-        <!-- 오버레이 텍스트 -->
-        <div class="hero-overlay">
+        <div class="youtube-mask youtube-mask-top"></div>
+        <div class="youtube-mask youtube-mask-bottom"></div>
+        </div>
+        <div class="hero-overlay" style="position:relative; z-index:3;">
             <div class="hero-tagline">매일 진화하는 크리에이터 월드</div>
             <div class="hero-title">원숭이행성</div>
         </div>
