@@ -1,17 +1,28 @@
-      <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
-    <!-- 성능 최적화 메타태그 추가 -->
+    <!-- 성능 최적화 메타태그 -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <meta name="theme-color" content="#FF5A00">
     
-    <!-- 프리로드 최적화 추가 -->
+    <!-- CSP 정책 수정 (더 관대한 설정) -->
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob:;
+        script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://www.youtube.com;
+        style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com;
+        img-src 'self' data: blob: https:;
+        frame-src 'self' https://www.youtube.com;
+        connect-src 'self' https:;
+        font-src 'self' https://cdnjs.cloudflare.com;
+    ">
+    
+    <!-- 프리로드 최적화 -->
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="preconnect" href="https://www.youtube.com">
     <link rel="dns-prefetch" href="//www.googletagmanager.com">
     
-    <!-- 기존 Google Analytics 코드 그대로 유지 -->
+    <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-SPSZWEVBWW"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -20,7 +31,7 @@
       gtag('config', 'G-SPSZWEVBWW');
     </script>
     
-    <!-- 기존 파비콘들 그대로 유지 -->
+    <!-- 파비콘 -->
     <link rel="icon" href="img/favicon/favicon.ico" type="image/x-icon">
     <link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png">
@@ -29,12 +40,12 @@
     
     <title>KapesPlanet - 원숭이행성</title>
     
-    <!-- Font Awesome 비동기 로딩으로 수정 -->
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    <!-- Font Awesome - 즉시 로딩으로 변경 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- 기존 CSS 유지 -->
+    <!-- CSS -->
     <link rel="stylesheet" href="css/style.css">
+</head>
     
     <!-- 이메일 스크립트는 하단으로 이동 (나중에 설명) -->
 </head>
@@ -265,34 +276,78 @@
     </div>
 </footer>
 
-<!-- 유튜브 비디오 모달 - 그대로 유지 -->
-      <div id="video-modal" class="video-modal" style="display:none;">
-          <div class="modal-content">
-              <span class="close-button" aria-label="비디오 닫기">&times;</span>
-              <iframe id="modal-iframe" src="" frameborder="0" allowfullscreen allow="autoplay; encrypted-media"></iframe>
-          </div>
-      </div>
+<!-- 비디오 모달 -->
+<div id="video-modal" class="video-modal" style="display:none;">
+    <div class="modal-content">
+        <span class="close-button" aria-label="비디오 닫기">&times;</span>
+        <iframe id="modal-iframe" src="" frameborder="0" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+    </div>
+</div>
 
-      <!-- 최적화된 JavaScript -->
-      <script src="js/main.js" defer></script>
+<!-- JavaScript - 순서 변경 -->
+<!-- 먼저 메인 스크립트 로드 -->
+<script>
+// 즉시 실행 함수로 전역 스코프 오염 방지
+(function() {
+    'use strict';
+    
+    // 에러 핸들링
+    window.addEventListener('error', function(e) {
+        console.error('JavaScript 오류:', e.error);
+    });
+    
+    // 스크립트 로드 및 실행
+    function loadMainScript() {
+        const script = document.createElement('script');
+        script.src = 'js/main.js';
+        script.async = false; // 순서 보장
+        script.onload = function() {
+            console.log('메인 스크립트 로드 완료');
+        };
+        script.onerror = function() {
+            console.error('메인 스크립트 로드 실패');
+        };
+        document.head.appendChild(script);
+    }
+    
+    // DOM 준비 완료 후 스크립트 로드
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', loadMainScript);
+    } else {
+        loadMainScript();
+    }
+})();
+</script>
 
-      <!-- EmailJS 최적화 로딩 -->
-      <script>
-      document.addEventListener('DOMContentLoaded', function() {
-          // Contact 섹션에 마우스 올릴 때만 EmailJS 로드
-          const contactSection = document.querySelector('#contact');
-          if (contactSection) {
-              contactSection.addEventListener('mouseenter', function() {
-                  if (!window.emailJSLoaded) {
-                      const script = document.createElement('script');
-                      script.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js';
-                      script.async = true;
-                      document.head.appendChild(script);
-                      window.emailJSLoaded = true;
-                        }
-                    }, { once: true });
+<!-- EmailJS 최적화 로딩 (Contact 섹션에서만 필요시) -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const contactSection = document.querySelector('#contact');
+    if (contactSection) {
+        // Intersection Observer로 Contact 섹션이 보일 때만 로드
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting && !window.emailJSLoaded) {
+                    const script = document.createElement('script');
+                    script.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js';
+                    script.async = true;
+                    script.onload = function() {
+                        window.emailJSLoaded = true;
+                        console.log('EmailJS 로드 완료');
+                    };
+                    document.head.appendChild(script);
+                    observer.disconnect(); // 한 번만 로드
                 }
             });
-      </script>
+        }, {
+            threshold: 0.1,
+            rootMargin: '50px'
+        });
+        
+        observer.observe(contactSection);
+    }
+});
+</script>
+
 </body>
 </html>
