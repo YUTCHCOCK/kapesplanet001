@@ -673,7 +673,7 @@ nav ul li a.active {
 /* 극도로 얇은 푸터 */
 .footer-minimal-footer {
     background-color: #000000;
-    padding: 25px 50px;
+    padding: 50px 50px;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -684,6 +684,15 @@ nav ul li a.active {
     max-width: 1200px;
     margin: 0 auto;
 }
+
+.footer-contact-info {
+    font-size: 0.8rem;
+    color: var(--text-color);
+    opacity: 0.7;
+    margin-top: 10px;        /* 푸터 다른 요소와 간격 */
+    margin-bottom: 10px;     /* 필요하다면 추가 */
+    text-align: right;       /* 오른쪽 정렬 (필요에 따라 left, center도 가능) */
+    letter-spacing: 0.02em;  /* 자간 살짝 조정 */
 
 .footer-copyright {
     font-size: 0.85rem;
@@ -698,7 +707,7 @@ nav ul li a.active {
 }
 
 .footer-link {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     color: var(--text-color);
     opacity: 0.6;
     text-decoration: none;
