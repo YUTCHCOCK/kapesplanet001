@@ -38,6 +38,37 @@
     
     <!-- 이메일 스크립트는 하단으로 이동 (나중에 설명) -->
 </head>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('강제 네비게이션 시작');
+    
+    // 모든 네비게이션 링크 찾기
+    const links = document.querySelectorAll('nav ul li a');
+    console.log('찾은 링크:', links.length);
+    
+    // 각 링크에 강제로 이벤트 추가
+    links.forEach(function(link) {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('실제 클릭됨:', this.href);
+            
+            const targetId = this.getAttribute('href').replace('#', '');
+            
+            if (targetId === 'hero') {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                const target = document.getElementById(targetId);
+                if (target) {
+                    const top = target.offsetTop - 100;
+                    window.scrollTo({ top: top, behavior: 'smooth' });
+                    console.log('스크롤 실행:', targetId, top);
+                }
+            }
+        });
+    });
+});
+</script>
+      
     <body>
     <!-- 헤더 -->
     <header>
