@@ -284,70 +284,8 @@
     </div>
 </div>
 
-<!-- JavaScript - 순서 변경 -->
-<!-- 먼저 메인 스크립트 로드 -->
-<script>
-// 즉시 실행 함수로 전역 스코프 오염 방지
-(function() {
-    'use strict';
-    
-    // 에러 핸들링
-    window.addEventListener('error', function(e) {
-        console.error('JavaScript 오류:', e.error);
-    });
-    
-    // 스크립트 로드 및 실행
-    function loadMainScript() {
-        const script = document.createElement('script');
-        script.src = 'js/main.js';
-        script.async = false; // 순서 보장
-        script.onload = function() {
-            console.log('메인 스크립트 로드 완료');
-        };
-        script.onerror = function() {
-            console.error('메인 스크립트 로드 실패');
-        };
-        document.head.appendChild(script);
-    }
-    
-    // DOM 준비 완료 후 스크립트 로드
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', loadMainScript);
-    } else {
-        loadMainScript();
-    }
-})();
-</script>
-
-<!-- EmailJS 최적화 로딩 (Contact 섹션에서만 필요시) -->
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const contactSection = document.querySelector('#contact');
-    if (contactSection) {
-        // Intersection Observer로 Contact 섹션이 보일 때만 로드
-        const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(function(entry) {
-                if (entry.isIntersecting && !window.emailJSLoaded) {
-                    const script = document.createElement('script');
-                    script.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js';
-                    script.async = true;
-                    script.onload = function() {
-                        window.emailJSLoaded = true;
-                        console.log('EmailJS 로드 완료');
-                    };
-                    document.head.appendChild(script);
-                    observer.disconnect(); // 한 번만 로드
-                }
-            });
-        }, {
-            threshold: 0.1,
-            rootMargin: '50px'
-        });
-        
-        observer.observe(contactSection);
-    }
-});
-</script>
+<!-- 매우 간단한 스크립트 로딩 -->
+<script src="js/main.js"></script>
 
 </body>
 </html>
