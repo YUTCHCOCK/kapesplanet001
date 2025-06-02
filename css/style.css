@@ -688,7 +688,7 @@ nav ul li a.active {
 .footer-contact-info {
     font-size: 0.8rem;
     color: var(--text-color);
-    opacity: 0.7;
+    opacity: 0.5;
     margin-top: 10px;        /* 푸터 다른 요소와 간격 */
     margin-bottom: 10px;     /* 필요하다면 추가 */
     text-align: right;       /* 오른쪽 정렬 (필요에 따라 left, center도 가능) */
