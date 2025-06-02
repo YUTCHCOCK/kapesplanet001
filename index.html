@@ -265,15 +265,34 @@
     </div>
 </footer>
 
-    <!-- 유튜브 비디오 모달 -->
-    <div id="video-modal" class="video-modal" style="display:none;">
-        <div class="modal-content">
-            <span class="close-button" aria-label="비디오 닫기">&times;</span>
-            <iframe id="modal-iframe" src="" frameborder="0" allowfullscreen allow="autoplay; encrypted-media"></iframe>
-        </div>
-    </div>
+<!-- 유튜브 비디오 모달 - 그대로 유지 -->
+      <div id="video-modal" class="video-modal" style="display:none;">
+          <div class="modal-content">
+              <span class="close-button" aria-label="비디오 닫기">&times;</span>
+              <iframe id="modal-iframe" src="" frameborder="0" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+          </div>
+      </div>
 
-    <!-- JavaScript -->
-    <script src="js/main.js"></script>
+      <!-- 최적화된 JavaScript -->
+      <script src="js/main.js" defer></script>
+
+      <!-- EmailJS 최적화 로딩 -->
+      <script>
+      document.addEventListener('DOMContentLoaded', function() {
+          // Contact 섹션에 마우스 올릴 때만 EmailJS 로드
+          const contactSection = document.querySelector('#contact');
+          if (contactSection) {
+              contactSection.addEventListener('mouseenter', function() {
+                  if (!window.emailJSLoaded) {
+                      const script = document.createElement('script');
+                      script.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js';
+                      script.async = true;
+                      document.head.appendChild(script);
+                      window.emailJSLoaded = true;
+                        }
+                    }, { once: true });
+                }
+            });
+      </script>
 </body>
 </html>
