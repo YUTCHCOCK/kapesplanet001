@@ -447,33 +447,26 @@
             showLoading();
             
             try {
-                // Firebase Functions를 통해 캐릭터 조회
-                const getUserCharacters = functions.httpsCallable('getUserCharacters');
-                const result = await getUserCharacters();
-                characters = result.data.characters;
+                console.log('Firestore에서 직접 캐릭터 조회 시작');
+                const snapshot = await db.collection('mystery-character-chat-001')
+                    .where('userId', '==', currentUser.uid)
+                    .orderBy('createdAt', 'desc')
+                    .get();
+                
+                characters = [];
+                snapshot.forEach(doc => {
+                    characters.push({
+                        id: doc.id,
+                        ...doc.data()
+                    });
+                });
+                console.log('로딩된 캐릭터 수:', characters.length);
                 showCharacters();
             } catch (error) {
                 console.error('캐릭터 로딩 오류:', error);
-                // 실패시 직접 Firestore에서 조회
-                try {
-                    const snapshot = await db.collection('characters')
-                        .where('userId', '==', currentUser.uid)
-                        .orderBy('createdAt', 'desc')
-                        .get();
-                    
-                    characters = [];
-                    snapshot.forEach(doc => {
-                        characters.push({
-                            id: doc.id,
-                            ...doc.data()
-                        });
-                    });
-                    showCharacters();
-                } catch (dbError) {
-                    console.error('Firestore 직접 조회 오류:', dbError);
-                    characters = [];
-                    showCharacters();
-                }
+                // 오류가 나도 빈 상태 표시
+                characters = [];
+                showCharacters();
             }
         }
 
@@ -525,7 +518,7 @@
             if (!confirm('정말로 이 캐릭터를 삭제하시겠습니까?')) return;
             
             try {
-                await db.collection('characters').doc(characterId).delete();
+                await db.collection('mystery-character-chat-001').doc(characterId).delete();
                 characters = characters.filter(c => c.id !== characterId);
                 showCharacters();
                 alert('캐릭터가 삭제되었습니다.');
