@@ -273,6 +273,158 @@ function renderPressBoard() {
         console.log('프레스 게시판 요소 없음');
         return;
     }
+
+// 기존 main.js 파일에서 수정할 부분들
+
+// 1. setupScrollIndicator 함수를 다른 함수들과 함께 추가
+// (renderPressBoard 함수 다음에 추가하면 됩니다)
+
+// 8. 프레스 게시판 렌더링
+function renderPressBoard() {
+    console.log('📰 프레스 게시판 렌더링 중...');
+    
+    const board = document.getElementById('headlineBoard');
+    if (!board) {
+        console.log('프레스 게시판 요소 없음');
+        return;
+    }
+    
+    // 프레스 데이터
+    const articles = [
+        // ... 기존 articles 배열 내용 ...
+    ];
+    
+    // 기사 목록 생성
+    board.innerHTML = '';
+    
+    articles.forEach(article => {
+        const li = document.createElement('li');
+        li.className = 'headline-row';
+        li.innerHTML = `
+            <div class="headline-date">${article.date}</div>
+            <div class="headline-main">
+                <a href="${article.url}" class="headline-title" target="_blank" rel="noopener">
+                    ${article.title}
+                </a>
+                <div class="headline-summary">${article.summary}</div>
+            </div>
+            <div class="headline-media">${article.media}</div>
+        `;
+        board.appendChild(li);
+    });
+    
+    console.log('✅ 프레스 게시판 렌더링 완료');
+}
+
+// 🆕 9. 스크롤 안내 표시판 설정 함수 (여기에 추가!)
+function setupScrollIndicator() {
+    console.log('📍 스크롤 안내 표시판 설정 중...');
+    
+    const scrollIndicator = document.querySelector('.scroll-indicator');
+    const heroSection = document.querySelector('.hero');
+    
+    if (!scrollIndicator || !heroSection) {
+        console.log('스크롤 안내 표시판 요소 없음');
+        return;
+    }
+    
+    // 클릭시 About 섹션으로 스크롤
+    scrollIndicator.addEventListener('click', function() {
+        const aboutSection = document.getElementById('about');
+        if (aboutSection) {
+            scrollToTarget('about');
+            console.log('스크롤 안내 클릭 - About 섹션으로 이동');
+        }
+    });
+    
+    // 스크롤에 따른 표시판 숨김/표시
+    let lastScrollY = 0;
+    let ticking = false;
+    
+    function updateScrollIndicator() {
+        const scrollY = window.pageYOffset;
+        const heroHeight = heroSection.offsetHeight;
+        const scrollProgress = scrollY / (heroHeight * 0.3); // 히어로의 30% 지점에서 시작
+        
+        if (scrollProgress > 1) {
+            // 완전히 숨김
+            scrollIndicator.classList.add('hide');
+        } else if (scrollProgress > 0.5) {
+            // 페이드 아웃 시작
+            const opacity = 1 - ((scrollProgress - 0.5) * 2);
+            scrollIndicator.style.opacity = Math.max(0, opacity);
+            scrollIndicator.style.transform = `translateX(-50%) translateY(${scrollProgress * 20}px)`;
+        } else {
+            // 완전히 표시
+            scrollIndicator.classList.remove('hide');
+            scrollIndicator.style.opacity = '';
+            scrollIndicator.style.transform = '';
+        }
+        
+        lastScrollY = scrollY;
+        ticking = false;
+    }
+    
+    function requestScrollUpdate() {
+        if (!ticking) {
+            requestAnimationFrame(updateScrollIndicator);
+            ticking = true;
+        }
+    }
+    
+    // 스크롤 이벤트 리스너 (쓰로틀링 적용)
+    window.addEventListener('scroll', requestScrollUpdate, { passive: true });
+    
+    // 히어로 섹션 높이 변경시 재계산
+    if (window.ResizeObserver) {
+        const resizeObserver = new ResizeObserver(requestScrollUpdate);
+        resizeObserver.observe(heroSection);
+    }
+    
+    console.log('✅ 스크롤 안내 표시판 설정 완료');
+}
+
+function safeInit() {
+    if (isInitialized) return;
+    
+    console.log('안전한 초기화 시작...');
+    
+    // DOM 요소들이 존재하는지 확인
+    const navLinks = document.querySelectorAll('header nav ul li a');
+    console.log('네비게이션 링크 개수:', navLinks.length);
+    
+    if (navLinks.length === 0) {
+        console.log('네비게이션 링크를 찾을 수 없음. 1초 후 재시도...');
+        setTimeout(safeInit, 1000);
+        return;
+    }
+    
+    // 모든 기능 초기화
+    try {
+        setupSimpleNavigation();
+        setupMobileMenu();
+        setupHeaderScroll();
+        setupPortfolioFilter();
+        setupVideoModal();
+        renderPressBoard();
+        setupResizeHandler();
+        setupScrollIndicator(); // 🆕 이 줄 추가!
+        
+        isInitialized = true;
+        console.log('✅ 모든 기능 초기화 완료');
+    } catch (error) {
+        console.error('초기화 중 오류:', error);
+        // 3초 후 재시도
+        setTimeout(() => {
+            isInitialized = false;
+            safeInit();
+        }, 3000);
+    }
+}
+
+// 나머지 코드는 그대로 유지...
+
+
     
     // 프레스 데이터
     const articles = [
