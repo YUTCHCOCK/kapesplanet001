@@ -456,3 +456,113 @@
                 console.error('캐릭터 로딩 오류:', error);
                 // 실패시 직접 Firestore에서 조회
                 try {
+                    const snapshot = await db.collection('characters')
+                        .where('userId', '==', currentUser.uid)
+                        .orderBy('createdAt', 'desc')
+                        .get();
+                    
+                    characters = [];
+                    snapshot.forEach(doc => {
+                        characters.push({
+                            id: doc.id,
+                            ...doc.data()
+                        });
+                    });
+                    showCharacters();
+                } catch (dbError) {
+                    console.error('Firestore 직접 조회 오류:', dbError);
+                    characters = [];
+                    showCharacters();
+                }
+            }
+        }
+
+        // 캐릭터 렌더링
+        function renderCharacters() {
+            const grid = document.getElementById('charactersGrid');
+            grid.innerHTML = '';
+            
+            characters.forEach(character => {
+                const card = createCharacterCard(character);
+                grid.appendChild(card);
+            });
+        }
+
+        // 캐릭터 카드 생성
+        function createCharacterCard(character) {
+            const card = document.createElement('div');
+            card.className = 'character-card';
+            
+            const roleEmoji = roleEmojis[character.role] || '🎭';
+            const roleName = roleNames[character.role] || character.role;
+            
+            card.innerHTML = `
+                <img src="${character.imageUrl || 'https://api.dicebear.com/7.x/avataaars/svg?seed=' + character.name}" 
+                     alt="${character.name}" class="character-avatar">
+                <div class="character-name">${character.name}</div>
+                <div class="character-role">${roleEmoji} ${roleName}</div>
+                <div class="character-traits">
+                    ${character.traits.map(trait => `<span class="trait-tag">${trait}</span>`).join('')}
+                </div>
+                <div class="character-actions">
+                    <a href="/cc/chat.html?id=${character.id}" class="action-btn chat-btn">💬 채팅</a>
+                    <button onclick="editCharacter('${character.id}')" class="action-btn edit-btn">✏️ 수정</button>
+                    <button onclick="deleteCharacter('${character.id}')" class="action-btn delete-btn">🗑️ 삭제</button>
+                </div>
+            `;
+            
+            return card;
+        }
+
+        // 캐릭터 수 업데이트
+        function updateCharacterCount() {
+            const countElement = document.getElementById('characterCount');
+            countElement.textContent = `총 ${characters.length}개의 캐릭터`;
+        }
+
+        // 캐릭터 삭제
+        async function deleteCharacter(characterId) {
+            if (!confirm('정말로 이 캐릭터를 삭제하시겠습니까?')) return;
+            
+            try {
+                await db.collection('characters').doc(characterId).delete();
+                characters = characters.filter(c => c.id !== characterId);
+                showCharacters();
+                alert('캐릭터가 삭제되었습니다.');
+            } catch (error) {
+                console.error('삭제 오류:', error);
+                alert('삭제에 실패했습니다.');
+            }
+        }
+
+        // 캐릭터 수정 (임시)
+        function editCharacter(characterId) {
+            alert('수정 기능은 곧 추가될 예정입니다!');
+        }
+
+        // 로그인 버튼 이벤트
+        document.getElementById('googleLoginBtn').addEventListener('click', async () => {
+            try {
+                const provider = new firebase.auth.GoogleAuthProvider();
+                await auth.signInWithPopup(provider);
+            } catch (error) {
+                console.error('로그인 오류:', error);
+                alert('로그인에 실패했습니다.');
+            }
+        });
+
+        document.getElementById('anonymousLoginBtn').addEventListener('click', async () => {
+            try {
+                await auth.signInAnonymously();
+            } catch (error) {
+                console.error('익명 로그인 오류:', error);
+                alert('익명 로그인에 실패했습니다.');
+            }
+        });
+
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            auth.signOut();
+        });
+    </script>
+</body>
+</html>
