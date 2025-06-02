@@ -38,38 +38,7 @@
     
     <!-- 이메일 스크립트는 하단으로 이동 (나중에 설명) -->
 </head>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('강제 네비게이션 시작');
-    
-    // 모든 네비게이션 링크 찾기
-    const links = document.querySelectorAll('nav ul li a');
-    console.log('찾은 링크:', links.length);
-    
-    // 각 링크에 강제로 이벤트 추가
-    links.forEach(function(link) {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            console.log('실제 클릭됨:', this.href);
-            
-            const targetId = this.getAttribute('href').replace('#', '');
-            
-            if (targetId === 'hero') {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            } else {
-                const target = document.getElementById(targetId);
-                if (target) {
-                    const top = target.offsetTop - 100;
-                    window.scrollTo({ top: top, behavior: 'smooth' });
-                    console.log('스크롤 실행:', targetId, top);
-                }
-            }
-        });
-    });
-});
-</script>
-      
-    <body>
+   <body>
     <!-- 헤더 -->
     <header>
         <div class="header-logo">
@@ -120,16 +89,12 @@ document.addEventListener('DOMContentLoaded', function() {
             <div class="about-text">
                 <div class="about-title">새로운 IP가 탄생하는 곳</div>
                 <div class="about-description">
-                    CJ ENM, dingo, hello82의 유일한(유치콕)대표의<br>
-                    원숭이행성은 항상 새롭고 참신한 기획과 제작으로<br>
-                    광고, 유튜브, 드라마 등 K-콘텐츠의 진화를 추구합니다.<br>
+                    2023년 8월, 혜성같이 등장한 원숭이행성은 
+                    CJ ENM, dingo, hello82의 유일한(유치콕)대표와<br>
+                    스타 크리에이터들이 함께하는 영상 프로덕션입니다<br>
+                    영화부터 유튜브까지, 오디션부터 숏폼까지  <br>
+                    K-콘텐츠의 글로벌 침공에 함께하겠습니다. 
                   <br>
-                  <br>
-                   2023.08  회사 설립<br>
-                   2023.09  아티스트스튜디오와 드라마 2편, 예능 1편 공동 제작 및 투자 계약<br>
-                   2024.05  한국 콘텐츠진흥원 예능 방송기획안 공모전 본선 진출 '백만다이아클럽'<br>
-                   2024.08  유튜브 채널 및 광고 프로덕션 사업 시작 '시방솔비'<br>
-                   2025.05  영국 이매지너리움사와 영화 공동 제작 계약 '시크릿 아이돌'<br>
                 </div>              
                 <div class="about-stats">
                     <div class="stat-item">
