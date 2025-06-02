@@ -1,622 +1,522 @@
-// 반응형 최적화 JavaScript (수정된 버전)
-console.log('반응형 최적화 스크립트 로드됨');
 
-// 디바이스 감지 및 성능 최적화
-const isMobile = window.innerWidth <= 768;
-const isTablet = window.innerWidth > 768 && window.innerWidth <= 1024;
-const isDesktop = window.innerWidth > 1024;
 
-// 디바운스 함수 (성능 최적화)
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-}
+[Deprecation] -ms-high-contrast is in the process of being deprecated. Please see <URL> for tips on updating to the new Forced Colors Mode standard. [Deprecation] -ms-high-contrast is in the process of being deprecated. Please see <URL> for tips on updating to the new Forced Colors Mode standard.
 
-// 쓰로틀 함수 (스크롤 성능 최적화)
-function throttle(func, limit) {
-    let inThrottle;
-    return function() {
-        const args = arguments;
-        const context = this;
-        if (!inThrottle) {
-            func.apply(context, args);
-            inThrottle = true;
-            setTimeout(() => inThrottle = false, limit);
-        }
-    }
-}
+pasted
 
-// DOM 로드 완료 후 초기화
-function initializeApp() {
-    console.log('DOM 로드 완료 - 반응형 초기화');
+
+// 반응형 최적화 JavaScript console.log('반응형 최적화 스크립트 로드됨'); // 디바이스 감지 및 성능 최적화 const isMobile = window.innerWidth <= 768; const isTablet = window.innerWidth > 768 && window.innerWidth <= 1024; const isDesktop = window.innerWidth > 1024; // 디바운스 함수 (성능 최적화) function debounce(func, wait) {
+
+pasted
+
+
+<!DOCTYPE html> <html lang="ko"> <head> <!-- 성능 최적화 메타태그 추가 --> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes"> <meta name="theme-color" content="#FF5A00"> <!-- 프리로드 최적화 추가 -->
+
+pasted
+
+
+/* ===== 기존 스타일 유지 + 미디어 최적화 ===== */ /* 기본 스타일 초기화 */ * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; } /* 글꼴 */ @font-face { font-family: 'Pretendard'; src: url('
+
+pasted
+
+네비게이션 메뉴가 작동하지 않는데... 왜 그럴까?
+
+코드를 분석해보니 네비게이션 메뉴가 작동하지 않는 주요 원인들이 보입니다. 콘솔 에러와 코드를 함께 살펴보면 다음과 같은 문제들이 있어요:
+
+주요 문제점들
+1. Content Security Policy (CSP) 위반
+[Report Only] Refused to load the script because it violates CSP directive: "script-src 'unsafe-inline'"
+인라인 스크립트들이 CSP에 의해 차단되고 있어요
+2. 비동기 로딩 문제
+JavaScript에서 loading="eager"와 defer 속성을 동시에 사용하면서 타이밍 문제가 발생할 수 있어요.
+
+3. 이벤트 리스너 충돌
+스크롤 이벤트에서 passive: false와 passive: true가 혼재되어 있어요.
+
+해결 방법
+
+수정된 네비게이션 JavaScript 코드
+Code 
+추가 수정사항
+HTML에서도 몇 가지 수정이 필요해요:
+
+
+수정된 HTML head 섹션
+Code 
+스크립트 로딩 순서 수정
+HTML 하단의 스크립트 부분도 수정해주세요:
+
+
+수정된 스크립트 로딩
+Code 
+
+
+
+Continue
+
+
+수정된 스크립트 로딩
+Code ∙ Version 2 
+추가로 CSS에서 스크롤 성능 개선
+CSS에도 몇 가지 성능 최적화를 추가해주세요:
+
+
+CSS 성능 최적화 추가
+Code 
+문제 해결 요약
+네비게이션이 작동하지 않는 주요 원인들과 해결책은 다음과 같습니다:
+
+🔍 주요 문제점들
+CSP (Content Security Policy) 위반
+인라인 스크립트가 보안 정책에 의해 차단됨
+unsafe-inline과 unsafe-eval 허용 필요
+이벤트 리스너 중복/충돌
+같은 요소에 여러 번 이벤트 리스너 등록
+passive: true/false 혼재로 인한 충돌
+스크립트 로딩 순서 문제
+defer 속성과 DOMContentLoaded 이벤트 충돌
+Font Awesome 비동기 로딩으로 인한 아이콘 렌더링 지연
+스크롤 성능 이슈
+Violation 경고들로 인한 스크롤 블로킹
+✅ 해결 방법
+CSP 정책 완화 - 더 관대한 보안 정책 설정
+이벤트 리스너 정리 - 기존 리스너 제거 후 재등록
+스크립트 로딩 개선 - 순차적이고 안정적인 로딩
+성능 최적화 - GPU 가속, 터치 최적화 등
+🛠️ 적용 방법
+JavaScript 파일(js/main.js) 를 수정된 코드로 교체
+HTML head 섹션 의 CSP와 스크립트 로딩 부분 수정
+CSS 파일 상단 에 성능 최적화 코드 추가
+HTML 하단 의 스크립트 로딩 부분 수정
+이렇게 수정하면 네비게이션 메뉴가 정상적으로 작동할 것입니다! 💪
+
+
+
+
+여전히 네비가 작동되지 않아 ㅜㅜ 그리고 프레스 게시판이 다 보이지 않게 됐어
+
+아, 문제를 정확히 파악했어요! 네비게이션이 안 되는 이유와 프레스 게시판이 안 보이는 이유를 찾았습니다.
+
+
+JavaScript navigation scroll not working DOM ready
+10 results
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+문제를 찾았어요! 두 가지 주요 이슈가 있습니다:
+
+JavaScript가 DOM 요소를 찾지 못함 - 스크립트가 로드되기 전에 실행되고 있어요
+articles 배열이 누락됨 - 프레스 게시판 데이터가 빠졌네요
+간단하고 확실한 해결책을 제시할게요:
+
+
+확실히 작동하는 간단한 네비게이션 스크립트
+Code 
+이제 HTML에서 스크립트 로딩 부분을 아주 간단하게 수정해주세요:
+
+
+간단한 HTML 스크립트 로딩
+Code 
+🔧 해결 방법 요약
+문제점들:
+❌ DOM 요소를 찾지 못함 - 스크립트가 너무 일찍 실행됨
+❌ 프레스 기사 데이터 누락 - `
+
+
+
+// 간단하고 확실하게 작동하는 네비게이션 스크립트
+console.log('네비게이션 스크립트 시작');
+
+// 전역 변수로 초기화 상태 관리
+let isInitialized = false;
+
+// 안전한 초기화 함수
+function safeInit() {
+    if (isInitialized) return;
     
-    // 순차적으로 초기화
+    console.log('안전한 초기화 시작...');
+    
+    // DOM 요소들이 존재하는지 확인
+    const navLinks = document.querySelectorAll('header nav ul li a');
+    console.log('네비게이션 링크 개수:', navLinks.length);
+    
+    if (navLinks.length === 0) {
+        console.log('네비게이션 링크를 찾을 수 없음. 1초 후 재시도...');
+        setTimeout(safeInit, 1000);
+        return;
+    }
+    
+    // 모든 기능 초기화
     try {
-        initResponsiveFeatures();
-        setupNavigation();
+        setupSimpleNavigation();
         setupMobileMenu();
-        setupHeaderEffects();
+        setupHeaderScroll();
         setupPortfolioFilter();
         setupVideoModal();
-        renderBoard();
-        setupResizeHandlers();
-        console.log('반응형 설정 완료');
+        renderPressBoard();
+        setupResizeHandler();
+        
+        isInitialized = true;
+        console.log('✅ 모든 기능 초기화 완료');
     } catch (error) {
-        console.error('초기화 중 오류 발생:', error);
+        console.error('초기화 중 오류:', error);
+        // 3초 후 재시도
+        setTimeout(() => {
+            isInitialized = false;
+            safeInit();
+        }, 3000);
     }
 }
 
-// 문서 준비 상태 확인
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initializeApp);
-} else {
-    initializeApp();
-}
-
-// 반응형 기능 초기화
-function initResponsiveFeatures() {
-    // 뷰포트 메타태그 동적 설정
-    const viewport = document.querySelector('meta[name="viewport"]');
-    if (viewport) {
-        viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes');
-    }
+// 1. 간단한 네비게이션 설정
+function setupSimpleNavigation() {
+    console.log('📍 네비게이션 설정 중...');
     
-    // 디바이스별 클래스 추가
-    document.body.classList.add(
-        isMobile ? 'mobile' : 
-        isTablet ? 'tablet' : 'desktop'
-    );
+    const navLinks = document.querySelectorAll('header nav ul li a');
     
-    // 터치 디바이스 감지
-    if ('ontouchstart' in window) {
-        document.body.classList.add('touch-device');
-    }
-}
-
-// 네비게이션 스크롤 기능 (완전히 수정된 버전)
-function setupNavigation() {
-    console.log('네비게이션 설정 시작...');
-    
-    // 네비게이션 링크 찾기
-    const navLinks = document.querySelectorAll('nav ul li a');
-    console.log('네비게이션 링크 개수:', navLinks.length);
-
-    if (navLinks.length === 0) {
-        console.error('네비게이션 링크를 찾을 수 없습니다.');
-        return;
-    }
-
-    navLinks.forEach(function(link, index) {
+    navLinks.forEach(link => {
         const href = link.getAttribute('href');
-        console.log(`링크 ${index}:`, href);
+        console.log('링크 설정:', href);
         
-        // 기존 이벤트 리스너 제거 (중복 방지)
-        link.removeEventListener('click', handleNavClick);
-        
-        // 새 이벤트 리스너 추가
-        link.addEventListener('click', handleNavClick, { passive: false });
-    });
-
-    function handleNavClick(e) {
-        const href = this.getAttribute('href');
-        console.log('클릭된 링크:', href);
-        
-        // 네비게이션 링크인지 확인 (# 으로 시작하는 것만)
         if (href && href.startsWith('#')) {
-            e.preventDefault(); // 기본 동작 막기
-            e.stopPropagation(); // 이벤트 전파 막기
-            
-            const targetId = href.replace('#', '');
-            console.log('타겟 ID:', targetId);
-            
-            // 스크롤 실행
-            scrollToSection(targetId);
-            
-            // 활성 링크 업데이트
-            updateActiveLink(this);
-            
-            // 모바일 메뉴 닫기
-            closeMobileMenu();
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = href.substring(1); // # 제거
+                console.log('클릭된 섹션:', targetId);
+                
+                scrollToTarget(targetId);
+                setActiveLink(this);
+                closeMobileMenu();
+            });
         }
-    }
-
-    function updateActiveLink(clickedLink) {
-        const navLinks = document.querySelectorAll('nav ul li a');
-        navLinks.forEach(l => l.classList.remove('active'));
-        clickedLink.classList.add('active');
-    }
-
-    function closeMobileMenu() {
-        const nav = document.querySelector('header nav');
-        const menuButton = document.querySelector('.mobile-menu-btn');
-        const body = document.body;
-        
-        if (nav && nav.classList.contains('active')) {
-            nav.classList.remove('active');
-            body.style.overflow = '';
-            if (menuButton) {
-                menuButton.innerHTML = '<i class="fas fa-bars"></i>';
-            }
-            console.log('모바일 메뉴 닫힘');
-        }
-    }
+    });
 }
 
-// 섹션으로 스크롤 (완전히 재작성)
-function scrollToSection(sectionId) {
-    console.log('스크롤 시작:', sectionId);
-
-    try {
-        // Hero 섹션인 경우
-        if (sectionId === 'hero' || sectionId === '') {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-            console.log('Hero 섹션으로 스크롤 완료');
-            return;
-        }
-
-        // 다른 섹션인 경우
-        const targetElement = document.getElementById(sectionId);
-        console.log('타겟 요소:', targetElement);
-        
-        if (targetElement) {
-            // 헤더 높이 계산
-            const header = document.querySelector('header');
-            const headerHeight = header ? header.offsetHeight + 20 : 100;
-            
-            // 요소 위치 계산
-            const elementRect = targetElement.getBoundingClientRect();
-            const elementTop = elementRect.top + window.pageYOffset;
-            const scrollPosition = Math.max(0, elementTop - headerHeight);
-
-            console.log('요소 위치:', elementTop);
-            console.log('헤더 높이:', headerHeight);
-            console.log('스크롤 위치:', scrollPosition);
-
-            // 부드러운 스크롤 실행
-            window.scrollTo({
-                top: scrollPosition,
-                behavior: 'smooth'
-            });
-            
-            console.log('스크롤 완료:', sectionId);
-        } else {
-            console.error('섹션을 찾을 수 없음:', sectionId);
-            
-            // 디버깅: 페이지의 모든 ID 요소 출력
-            const allIds = Array.from(document.querySelectorAll('[id]')).map(el => el.id);
-            console.log('페이지의 모든 ID:', allIds);
-        }
-    } catch (error) {
-        console.error('스크롤 중 오류 발생:', error);
-        
-        // 폴백: 기본 스크롤
-        const targetElement = document.getElementById(sectionId);
-        if (targetElement) {
-            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-    }
-}
-
-// 모바일 메뉴 최적화 (수정된 버전)
-function setupMobileMenu() {
-    console.log('모바일 메뉴 설정...');
+// 2. 스크롤 함수 (가장 간단한 버전)
+function scrollToTarget(sectionId) {
+    console.log('🎯 스크롤 대상:', sectionId);
     
-    const menuButton = document.querySelector('.mobile-menu-btn');
-    const navigation = document.querySelector('header nav');
-    const body = document.body;
-
-    if (!menuButton || !navigation) {
-        console.error('모바일 메뉴 요소를 찾을 수 없습니다.');
+    if (sectionId === 'hero' || sectionId === '') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        console.log('✅ Hero 섹션으로 스크롤');
         return;
     }
-
-    // 기존 이벤트 리스너 제거
-    menuButton.removeEventListener('click', handleMenuToggle);
     
-    // 메뉴 버튼 클릭
-    menuButton.addEventListener('click', handleMenuToggle, { passive: false });
-
-    function handleMenuToggle(e) {
-        e.stopPropagation();
-        e.preventDefault();
-        
-        const isActive = navigation.classList.contains('active');
-        
-        if (isActive) {
-            closeMenu();
-        } else {
-            openMenu();
-        }
+    const target = document.getElementById(sectionId);
+    if (!target) {
+        console.error('❌ 섹션을 찾을 수 없음:', sectionId);
+        return;
     }
+    
+    const headerHeight = 100; // 고정 헤더 높이
+    const targetTop = target.offsetTop - headerHeight;
+    
+    console.log('📐 계산된 스크롤 위치:', targetTop);
+    
+    window.scrollTo({
+        top: Math.max(0, targetTop),
+        behavior: 'smooth'
+    });
+    
+    console.log('✅ 스크롤 완료:', sectionId);
+}
 
+// 3. 활성 링크 설정
+function setActiveLink(clickedLink) {
+    document.querySelectorAll('header nav ul li a').forEach(link => {
+        link.classList.remove('active');
+    });
+    clickedLink.classList.add('active');
+}
+
+// 4. 모바일 메뉴
+function setupMobileMenu() {
+    console.log('📱 모바일 메뉴 설정 중...');
+    
+    const menuBtn = document.querySelector('.mobile-menu-btn');
+    const nav = document.querySelector('header nav');
+    
+    if (!menuBtn || !nav) {
+        console.log('모바일 메뉴 요소 없음');
+        return;
+    }
+    
+    menuBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        nav.classList.toggle('active');
+        
+        if (nav.classList.contains('active')) {
+            menuBtn.innerHTML = '<i class="fas fa-times"></i>';
+            document.body.style.overflow = 'hidden';
+        } else {
+            menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            document.body.style.overflow = '';
+        }
+    });
+    
     // 메뉴 외부 클릭시 닫기
     document.addEventListener('click', function(e) {
-        if (navigation.classList.contains('active') && 
-            !navigation.contains(e.target) && 
-            !menuButton.contains(e.target)) {
-            closeMenu();
+        if (!nav.contains(e.target) && !menuBtn.contains(e.target)) {
+            closeMobileMenu();
         }
-    }, { passive: true });
-
-    // ESC 키로 메뉴 닫기
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && navigation.classList.contains('active')) {
-            closeMenu();
-        }
-    }, { passive: true });
-
-    function openMenu() {
-        navigation.classList.add('active');
-        body.style.overflow = 'hidden';
-        menuButton.innerHTML = '<i class="fas fa-times"></i>';
-        console.log('모바일 메뉴 열림');
-    }
-
-    function closeMenu() {
-        navigation.classList.remove('active');
-        body.style.overflow = '';
-        menuButton.innerHTML = '<i class="fas fa-bars"></i>';
-        console.log('모바일 메뉴 닫힘');
-    }
-
-    // 전역으로 노출
-    window.closeMobileMenu = closeMenu;
+    });
 }
 
-// 헤더 스크롤 효과 (수정된 버전)
-function setupHeaderEffects() {
-    console.log('헤더 효과 설정...');
-    
-    const throttledScroll = throttle(() => {
-        const header = document.querySelector('header');
-        if (!header) return;
-
-        if (window.scrollY > 50) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
-        
-        updateActiveNavigation();
-    }, 16); // 60fps
-
-    // 스크롤 이벤트 등록
-    window.addEventListener('scroll', throttledScroll, { passive: true });
-}
-
-// 네비게이션 활성화 업데이트 (최적화된 버전)
-function updateActiveNavigation() {
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('nav ul li a');
-    let currentSection = '';
-    const scrollPosition = window.scrollY + 150;
-
-    // 최상단이면 hero 활성화
-    if (window.scrollY < 100) {
-        currentSection = 'hero';
-    } else {
-        // 현재 보이는 섹션 찾기
-        for (let i = sections.length - 1; i >= 0; i--) {
-            const section = sections[i];
-            const sectionTop = section.offsetTop;
-            if (scrollPosition >= sectionTop) {
-                currentSection = section.getAttribute('id');
-                break;
-            }
-        }
-    }
-
-    // 활성 링크 업데이트 (변경된 경우만)
-    const activeLink = document.querySelector('nav ul li a.active');
-    const newActiveLink = document.querySelector(`nav ul li a[href="#${currentSection}"]`);
-    
-    if (activeLink !== newActiveLink) {
-        navLinks.forEach(link => link.classList.remove('active'));
-        if (newActiveLink) {
-            newActiveLink.classList.add('active');
-        }
-    }
-}
-
-// 리사이즈 핸들러 설정
-function setupResizeHandlers() {
-    const handleResize = debounce(() => {
-        const currentWidth = window.innerWidth;
-        
-        // 디바이스 타입 업데이트
-        document.body.classList.remove('mobile', 'tablet', 'desktop');
-        if (currentWidth <= 768) {
-            document.body.classList.add('mobile');
-            handleMobileResize();
-        } else if (currentWidth <= 1024) {
-            document.body.classList.add('tablet');
-            handleTabletResize();
-        } else {
-            document.body.classList.add('desktop');
-            handleDesktopResize();
-        }
-        
-        // 히어로 섹션 높이 조정
-        adjustHeroHeight();
-        
-        // 워터마크 크기 조정
-        adjustWatermarkSize();
-        
-    }, 250);
-    
-    window.addEventListener('resize', handleResize, { passive: true });
-    window.addEventListener('orientationchange', debounce(handleResize, 500), { passive: true });
-}
-
-// 나머지 함수들은 기존 코드와 동일하게 유지...
-function handleMobileResize() {
+function closeMobileMenu() {
     const nav = document.querySelector('header nav');
+    const menuBtn = document.querySelector('.mobile-menu-btn');
+    
     if (nav && nav.classList.contains('active')) {
         nav.classList.remove('active');
-    }
-    adjustMobileVideoModal();
-}
-
-function handleTabletResize() {
-    const nav = document.querySelector('header nav');
-    if (nav) {
-        nav.classList.remove('active');
-    }
-}
-
-function handleDesktopResize() {
-    const nav = document.querySelector('header nav');
-    if (nav) {
-        nav.classList.remove('active');
-    }
-}
-
-function adjustHeroHeight() {
-    const hero = document.querySelector('.hero');
-    if (!hero) return;
-    
-    const viewportHeight = window.innerHeight;
-    const viewportWidth = window.innerWidth;
-    
-    if (viewportWidth <= 768) {
-        hero.style.height = `${viewportHeight}px`;
-    } else if (viewportWidth <= 1024) {
-        hero.style.height = '80vh';
-    } else {
-        hero.style.height = '';
-    }
-}
-
-function adjustWatermarkSize() {
-    const watermarks = document.querySelectorAll('.monkey-watermark');
-    const viewportWidth = window.innerWidth;
-    
-    watermarks.forEach(watermark => {
-        if (viewportWidth <= 480) {
-            watermark.style.width = '60px';
-        } else if (viewportWidth <= 768) {
-            watermark.style.width = '80px';
-        } else if (viewportWidth <= 1024) {
-            watermark.style.width = '120px';
-        } else {
-            watermark.style.width = '220px';
+        document.body.style.overflow = '';
+        if (menuBtn) {
+            menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
         }
-    });
-}
-
-function adjustMobileVideoModal() {
-    const modal = document.querySelector('.video-modal iframe');
-    if (!modal) return;
-    
-    const viewportWidth = window.innerWidth;
-    const viewportHeight = window.innerHeight;
-    
-    if (viewportWidth <= 768) {
-        modal.style.width = '95vw';
-        modal.style.height = '53vw';
-        modal.style.maxHeight = `${viewportHeight * 0.6}px`;
     }
 }
 
-// 포트폴리오 필터 (기존 코드 유지)
+// 5. 헤더 스크롤 효과
+function setupHeaderScroll() {
+    console.log('📜 헤더 스크롤 효과 설정 중...');
+    
+    let lastScroll = 0;
+    
+    window.addEventListener('scroll', function() {
+        const currentScroll = window.pageYOffset;
+        const header = document.querySelector('header');
+        
+        if (header) {
+            if (currentScroll > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        }
+        
+        lastScroll = currentScroll;
+    }, { passive: true });
+}
+
+// 6. 포트폴리오 필터
 function setupPortfolioFilter() {
-    console.log('포트폴리오 필터 설정...');
-    const filterButtons = document.querySelectorAll('.filter-btn');
+    console.log('🎨 포트폴리오 필터 설정 중...');
+    
+    const filterBtns = document.querySelectorAll('.filter-btn');
     const workItems = document.querySelectorAll('.work-item');
-
-    if (filterButtons.length === 0 || workItems.length === 0) return;
-
-    filterButtons.forEach(function(button) {
-        button.addEventListener('click', function() {
-            const filterValue = this.getAttribute('data-filter');
+    
+    if (filterBtns.length === 0) {
+        console.log('필터 버튼 없음');
+        return;
+    }
+    
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const filter = this.getAttribute('data-filter');
             
-            filterButtons.forEach(btn => btn.classList.remove('active'));
+            // 활성 버튼 변경
+            filterBtns.forEach(b => b.classList.remove('active'));
             this.classList.add('active');
             
-            console.log('필터 적용:', filterValue);
-            
-            workItems.forEach(function(item, index) {
-                const shouldShow = filterValue === 'all' || 
-                                 item.getAttribute('data-category') === filterValue;
+            // 아이템 필터링
+            workItems.forEach(item => {
+                const category = item.getAttribute('data-category');
+                const shouldShow = filter === 'all' || category === filter;
                 
-                if (shouldShow) {
-                    item.style.opacity = '0';
-                    item.style.transform = 'translateY(20px)';
-                    item.style.display = 'block';
-                    
-                    setTimeout(() => {
-                        item.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-                        item.style.opacity = '1';
-                        item.style.transform = 'translateY(0)';
-                    }, index * 50);
-                } else {
-                    item.style.transition = 'opacity 0.2s ease, transform 0.2s ease';
-                    item.style.opacity = '0';
-                    item.style.transform = 'translateY(-10px)';
-                    
-                    setTimeout(() => {
-                        item.style.display = 'none';
-                    }, 200);
-                }
+                item.style.display = shouldShow ? 'block' : 'none';
             });
+            
+            console.log('필터 적용됨:', filter);
         });
     });
 }
 
-// 비디오 모달 (기존 코드 유지)
+// 7. 비디오 모달
 function setupVideoModal() {
-    console.log('비디오 모달 설정...');
-    const modal = document.getElementById('video-modal');
-    const modalIframe = document.getElementById('modal-iframe');
-    const closeButton = document.querySelector('.close-button');
+    console.log('🎬 비디오 모달 설정 중...');
     
-    if (!modal || !modalIframe) {
-        console.log('비디오 모달 요소를 찾을 수 없음');
+    const modal = document.getElementById('video-modal');
+    const iframe = document.getElementById('modal-iframe');
+    const closeBtn = document.querySelector('.close-button');
+    
+    if (!modal || !iframe) {
+        console.log('비디오 모달 요소 없음');
         return;
     }
-
-    document.querySelectorAll('.work-item').forEach(function(item) {
+    
+    // 포트폴리오 아이템 클릭
+    document.querySelectorAll('.work-item').forEach(item => {
         item.addEventListener('click', function(e) {
-            e.stopPropagation();
             e.preventDefault();
             
-            const iframe = this.querySelector('iframe');
-            if (!iframe) return;
-
-            const videoSrc = iframe.src;
-            const videoId = extractYouTubeId(videoSrc);
-            
-            if (videoId) {
-                openVideoModal(videoId);
+            const videoFrame = this.querySelector('iframe');
+            if (videoFrame) {
+                const src = videoFrame.src;
+                const videoId = extractVideoId(src);
+                if (videoId) {
+                    openModal(videoId);
+                }
             }
         });
     });
-
-    if (closeButton) {
-        closeButton.addEventListener('click', closeVideoModal);
+    
+    // 모달 닫기
+    if (closeBtn) {
+        closeBtn.addEventListener('click', closeModal);
     }
-
+    
     modal.addEventListener('click', function(e) {
-        if (e.target === modal) {
-            closeVideoModal();
-        }
+        if (e.target === modal) closeModal();
     });
-
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && modal.style.display === 'flex') {
-            closeVideoModal();
-        }
-    });
-
-    function extractYouTubeId(url) {
+    
+    function extractVideoId(url) {
         const match = url.match(/youtube\.com\/embed\/([^?&]+)/);
         return match ? match[1] : null;
     }
-
-    function openVideoModal(videoId) {
-        const modalSrc = `https://www.youtube.com/embed/${videoId}?autoplay=1&controls=1&rel=0&modestbranding=1`;
-        modalIframe.src = modalSrc;
+    
+    function openModal(videoId) {
+        iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
         modal.style.display = 'flex';
         document.body.style.overflow = 'hidden';
-        modal.focus();
-        console.log('비디오 모달 열림:', videoId);
     }
-
-    function closeVideoModal() {
+    
+    function closeModal() {
         modal.style.display = 'none';
-        modalIframe.src = '';
+        iframe.src = '';
         document.body.style.overflow = '';
-        console.log('비디오 모달 닫힘');
     }
-
-    window.closeVideoModal = closeVideoModal;
+    
+    // 전역으로 노출
+    window.closeVideoModal = closeModal;
 }
 
-// 게시판 데이터와 렌더링 (기존 코드 유지)
-const articles = [
-    {
-        date: "2025-05-28",
-        media: "스포츠서울",
-        title: "케이프스플래닛 '시크릿 아이돌' 원안자 + 공동제작자로 밝혀져",
-        url: "https://www.sportsseoul.com/news/read/1519235",
-        summary: "이정재가 1대주주로 있는 아티스트 스튜디오와 영국의 이매지너리움의 합작으로 기획개발중인 영화 '시크릿 아이돌'"
-    },
-    // 나머지 기사들...
-];
-
-function renderBoard() {
-    const board = document.getElementById('headlineBoard');
-    if (!board) return;
-
-    const fragment = document.createDocumentFragment();
+// 8. 프레스 게시판 렌더링
+function renderPressBoard() {
+    console.log('📰 프레스 게시판 렌더링 중...');
     
-    articles.forEach(item => {
+    const board = document.getElementById('headlineBoard');
+    if (!board) {
+        console.log('프레스 게시판 요소 없음');
+        return;
+    }
+    
+    // 프레스 데이터
+    const articles = [
+        {
+            date: "2025-05-28",
+            media: "스포츠서울",
+            title: "케이프스플래닛 '시크릿 아이돌' 원안자 + 공동제작자로 밝혀져",
+            url: "https://www.sportsseoul.com/news/read/1519235",
+            summary: "이정재가 1대주주로 있는 아티스트 스튜디오와 영국의 이매지너리움의 합작으로 기획개발중인 영화 '시크릿 아이돌'"
+        },
+        {
+            date: "2025-05-08",
+            media: "한국콘텐츠진흥원",
+            title: "숏폼에서 콘텐츠 비즈니스의 미래를 보다 l 케이프스플래닛 유일한 대표",
+            url: "https://youtu.be/4D40Ldpxm5c?si=Qv7Ebk-Mk5gygy-l5",
+            summary: "케이프스플래닛 유일한 대표 인터뷰 영상. 한국 콘텐츠 진흥원 발간 웹진 방송영상 OTT트렌드 2025 Vol.1"
+        },
+        {
+            date: "2025-05-07",
+            media: "한국콘텐츠진흥원",
+            title: "'KOCCA 트렌드 - 인물 인터뷰 유치콕 편",
+            url: "https://www.kocca.kr/trendott/vol01/people_1.html",
+            summary: "숏폼의 시작과 변천사 / 글로벌 숏폼드라마 플랫폼은 미래가 될 것인가 / 숏폼 IP 비즈니스의 미래와 앞으로의 전망"
+        },
+        {
+            date: "2024-08-23",
+            media: "스포츠경향",
+            title: "'시방솔비' 솔비의 좌충우돌 B급 MC 성장기",
+            url: "https://sports.khan.co.kr/article/202408230804003",
+            summary: "김구라, 김종민, 가비, 유병재, 궤도 등 초특급 게스트로 연일 화제몰이중인 유튜브 채널 시방솔비"
+        },
+        {
+            date: "2023-11-29",
+            media: "한국콘텐츠진흥원",
+            title: "KOCCA 콘텐츠 뉴스 - 바야흐로 숏숏폼 시대",
+            url: "https://www.kocca.kr/n_content/vol30/sub02.html",
+            summary: "숏폼들은 계속해서 업그레이드를 한다. '틱톡'의 등장과 함께 바야흐로 '숏숏폼(1분 이하의 콘텐츠)' 전성시대가 열렸다."
+        },
+        {
+            date: "2023-11-08",
+            media: "동아일보",
+            title: "23년 서울 1인 창조기업 - 케이프스플래닛 창업진흥원장 표창",
+            url: "https://www.donga.com/news/article/all/20231108/122080292/1",
+            summary: "'2023 서울권 1인 창조기업 지원센터 입주기업 성과발표회에서 케이프스플래닛 등이 창업진흥원장 표창장을 받았다."
+        }
+    ];
+    
+    // 기사 목록 생성
+    board.innerHTML = ''; // 기존 내용 초기화
+    
+    articles.forEach(article => {
         const li = document.createElement('li');
         li.className = 'headline-row';
         li.innerHTML = `
-            <div class="headline-date">${item.date}</div>
+            <div class="headline-date">${article.date}</div>
             <div class="headline-main">
-                <a href="${item.url}" class="headline-title" target="_blank" rel="noopener">
-                    ${item.title}
+                <a href="${article.url}" class="headline-title" target="_blank" rel="noopener">
+                    ${article.title}
                 </a>
-                <div class="headline-summary">${item.summary}</div>
+                <div class="headline-summary">${article.summary}</div>
             </div>
-            <div class="headline-media">${item.media}</div>
+            <div class="headline-media">${article.media}</div>
         `;
-        fragment.appendChild(li);
+        board.appendChild(li);
     });
     
-    board.appendChild(fragment);
+    console.log('✅ 프레스 게시판 렌더링 완료');
 }
 
-// 성능 모니터링
-function setupPerformanceMonitoring() {
-    if (typeof performance !== 'undefined') {
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                const perfData = performance.getEntriesByType('navigation')[0];
-                console.log('페이지 로드 성능:', {
-                    'DOM 로드': Math.round(perfData.domContentLoadedEventEnd - perfData.navigationStart),
-                    '전체 로드': Math.round(perfData.loadEventEnd - perfData.navigationStart),
-                    'FCP': Math.round(perfData.responseEnd - perfData.navigationStart)
-                });
-            }, 1000);
-        });
+// 9. 리사이즈 핸들러
+function setupResizeHandler() {
+    console.log('📏 리사이즈 핸들러 설정 중...');
+    
+    let resizeTimer;
+    
+    window.addEventListener('resize', function() {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function() {
+            // 모바일 메뉴가 열려있으면 닫기
+            if (window.innerWidth > 768) {
+                closeMobileMenu();
+            }
+        }, 250);
+    }, { passive: true });
+}
+
+// 초기화 실행
+// 다양한 시점에서 초기화 시도
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', safeInit);
+} else {
+    safeInit();
+}
+
+// 추가 안전장치: 페이지 로드 완료 후에도 한 번 더 시도
+window.addEventListener('load', function() {
+    if (!isInitialized) {
+        console.log('페이지 로드 완료 후 재시도...');
+        setTimeout(safeInit, 500);
     }
-}
+});
 
-// 이미지 레이지 로딩
-function setupLazyLoading() {
-    if ('IntersectionObserver' in window) {
-        const imageObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    if (img.dataset.src) {
-                        img.src = img.dataset.src;
-                        img.removeAttribute('data-src');
-                        observer.unobserve(img);
-                    }
-                }
-            });
-        });
-
-        document.querySelectorAll('img[data-src]').forEach(img => {
-            imageObserver.observe(img);
-        });
-    }
-}
-
-// 초기화
-setupPerformanceMonitoring();
-setupLazyLoading();
+console.log('🚀 네비게이션 스크립트 로드 완료');
