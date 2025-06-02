@@ -588,6 +588,7 @@ nav ul li a.active {
     display: flex;
     align-items: center;
     justify-content: center;
+    align-self: center; /* 새로 추가 */
 }
 
 .contact-logo img {
@@ -840,6 +841,7 @@ footer {
     .contact-logo {
         order: 2; /* 로고를 하단으로 */
         margin-top: 20px;
+        align-self: center;
     }
     
     .contact-logo img {
@@ -989,13 +991,13 @@ footer {
         flex-direction: column;
     }
     
-    .contact-logo {
+    . {
         order: 2; /* 모바일에서 로고를 하단으로 */
         margin-top: 20px;
     }
     
     .contact-logo img {
-        width: 150px;
+        width: 250px;
     }
     
     .contact-icon {
@@ -1055,7 +1057,7 @@ footer {
     }
     
     .contact-logo img {
-        width: 120px;
+        width: 180px;
     }
     
     .headline-row {
