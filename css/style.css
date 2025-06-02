@@ -294,6 +294,148 @@ nav ul li a.active {
     text-align: center;
     text-shadow: 0 0 12px #000;
 }
+.scroll-indicator.hide {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+    pointer-events: none;
+}
+
+.scroll-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    animation: scrollBounce 2.5s ease-in-out infinite;
+}
+
+/* V 두 개가 겹쳐있는 컨테이너 */
+.scroll-chevrons {
+    position: relative;
+    height: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.chevron {
+    position: absolute;
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 1;
+    transition: all 0.3s ease;
+}
+
+/* 첫 번째 V (위쪽) */
+.chevron-1 {
+    top: 0;
+    opacity: 0.6;
+    animation: chevronFloat1 2.2s ease-in-out infinite;
+}
+
+/* 두 번째 V (아래쪽) */
+.chevron-2 {
+    top: 12px;
+    opacity: 0.9;
+    animation: chevronFloat2 2.2s ease-in-out infinite 0.3s; /* 0.3초 지연 */
+}
+
+.scroll-text {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    opacity: 0.8;
+    animation: textPulse 2.5s ease-in-out infinite;
+}
+
+/* 스크롤 안내 애니메이션들 */
+@keyframes scrollBounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-6px);
+    }
+}
+
+/* 첫 번째 V 애니메이션 */
+@keyframes chevronFloat1 {
+    0%, 100% {
+        transform: translateY(0);
+        opacity: 0.4;
+    }
+    25% {
+        transform: translateY(-2px);
+        opacity: 0.6;
+    }
+    50% {
+        transform: translateY(-4px);
+        opacity: 0.8;
+    }
+    75% {
+        transform: translateY(-2px);
+        opacity: 0.6;
+    }
+}
+
+/* 두 번째 V 애니메이션 (살짝 다른 타이밍) */
+@keyframes chevronFloat2 {
+    0%, 100% {
+        transform: translateY(0);
+        opacity: 0.7;
+    }
+    25% {
+        transform: translateY(-3px);
+        opacity: 0.9;
+    }
+    50% {
+        transform: translateY(-6px);
+        opacity: 1;
+    }
+    75% {
+        transform: translateY(-3px);
+        opacity: 0.9;
+    }
+}
+
+@keyframes textPulse {
+    0%, 100% {
+        opacity: 0.8;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+/* 호버 효과 */
+.scroll-indicator:hover .scroll-icon {
+    animation-play-state: paused;
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
+}
+
+.scroll-indicator:hover .chevron {
+    color: var(--primary-color, #FF5A00);
+    opacity: 1 !important;
+    transition: color 0.3s ease, opacity 0.3s ease;
+}
+
+.scroll-indicator:hover .chevron-1 {
+    transform: translateY(-2px);
+}
+
+.scroll-indicator:hover .chevron-2 {
+    transform: translateY(2px);
+}
+
+.scroll-indicator:hover .scroll-text {
+    opacity: 1;
+    color: var(--primary-color, #FF5A00);
+    transition: color 0.3s ease, opacity 0.3s ease;
+}
 
 .hero-tagline {
     font-size: 1.7rem; 
