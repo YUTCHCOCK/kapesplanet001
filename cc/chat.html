@@ -1,1 +1,569 @@
 
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>캐릭터 채팅 | KapesPlanet</title>
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #ffffff;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .chat-container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        .chat-header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .character-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .character-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 3px solid #ffd700;
+            margin-right: 15px;
+        }
+
+        .character-details h1 {
+            color: #ffd700;
+            font-size: 1.5em;
+            margin-bottom: 5px;
+        }
+
+        .character-details p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9em;
+        }
+
+        .back-link {
+            color: #ffd700;
+            text-decoration: none;
+            padding: 10px 20px;
+            border: 2px solid #ffd700;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            background: #ffd700;
+            color: #1a1a2e;
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .message {
+            max-width: 70%;
+            padding: 15px 20px;
+            border-radius: 20px;
+            position: relative;
+            word-wrap: break-word;
+        }
+
+        .message.user {
+            align-self: flex-end;
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            color: #1a1a2e;
+            border-bottom-right-radius: 5px;
+        }
+
+        .message.character {
+            align-self: flex-start;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-bottom-left-radius: 5px;
+        }
+
+        .message-time {
+            font-size: 0.7em;
+            opacity: 0.7;
+            margin-top: 5px;
+        }
+
+        .message.user .message-time {
+            color: rgba(26, 26, 46, 0.7);
+        }
+
+        .typing-indicator {
+            align-self: flex-start;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            border-bottom-left-radius: 5px;
+            display: none;
+        }
+
+        .typing-dots {
+            display: flex;
+            gap: 4px;
+        }
+
+        .typing-dots span {
+            width: 8px;
+            height: 8px;
+            background: #ffd700;
+            border-radius: 50%;
+            animation: typing 1.4s infinite ease-in-out;
+        }
+
+        .typing-dots span:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dots span:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes typing {
+            0%, 80%, 100% { transform: scale(0); opacity: 0.5; }
+            40% { transform: scale(1); opacity: 1; }
+        }
+
+        .chat-input-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-top: 2px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .chat-input-wrapper {
+            display: flex;
+            gap: 10px;
+            align-items: flex-end;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            font-size: 16px;
+            resize: none;
+            min-height: 50px;
+            max-height: 120px;
+            transition: all 0.3s ease;
+        }
+
+        .chat-input:focus {
+            outline: none;
+            border-color: #ffd700;
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .chat-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .send-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: none;
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            color: #1a1a2e;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .send-btn:hover:not(:disabled) {
+            background: linear-gradient(45deg, #ffed4e, #ffd700);
+            transform: scale(1.1);
+        }
+
+        .send-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .scenario-starter {
+            background: rgba(255, 215, 0, 0.1);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px;
+            text-align: center;
+        }
+
+        .scenario-btn {
+            background: #ffd700;
+            color: #1a1a2e;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .scenario-btn:hover {
+            background: #ffed4e;
+            transform: translateY(-2px);
+        }
+
+        .loading-state {
+            text-align: center;
+            padding: 40px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        @media (max-width: 768px) {
+            .chat-header {
+                padding: 15px;
+            }
+            
+            .character-avatar {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .character-details h1 {
+                font-size: 1.2em;
+            }
+            
+            .message {
+                max-width: 85%;
+            }
+            
+            .chat-input-container {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <!-- 로딩 상태 -->
+        <div id="loadingState" class="loading-state">
+            <h2>🔄 캐릭터 정보를 불러오고 있습니다...</h2>
+        </div>
+
+        <!-- 채팅 헤더 -->
+        <div id="chatHeader" class="chat-header" style="display: none;">
+            <div class="character-info">
+                <img id="characterAvatar" class="character-avatar" src="" alt="캐릭터">
+                <div class="character-details">
+                    <h1 id="characterName">캐릭터 이름</h1>
+                    <p id="characterRole">역할</p>
+                </div>
+            </div>
+            <a href="/cc/" class="back-link">← 목록으로</a>
+        </div>
+
+        <!-- 시나리오 시작 -->
+        <div id="scenarioStarter" class="scenario-starter" style="display: none;">
+            <h3>🔍 추리 시나리오를 시작하시겠습니까?</h3>
+            <p>캐릭터가 준비한 특별한 사건이 있습니다.</p>
+            <button id="startScenarioBtn" class="scenario-btn">🎭 시나리오 시작</button>
+            <button id="freeChat" class="scenario-btn">💬 자유 대화</button>
+        </div>
+
+        <!-- 채팅 메시지 영역 -->
+        <div id="chatMessages" class="chat-messages" style="display: none;">
+            <!-- 메시지들이 여기에 동적으로 추가됩니다 -->
+        </div>
+
+        <!-- 타이핑 인디케이터 -->
+        <div id="typingIndicator" class="typing-indicator">
+            <div class="typing-dots">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <!-- 채팅 입력 -->
+        <div id="chatInputContainer" class="chat-input-container" style="display: none;">
+            <div class="chat-input-wrapper">
+                <textarea id="chatInput" class="chat-input" placeholder="메시지를 입력하세요..." rows="1"></textarea>
+                <button id="sendBtn" class="send-btn">📤</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Firebase 설정
+        const firebaseConfig = {
+            apiKey: "AIzaSyA3g2IZvPU9mNjzuSHCcinnt696epuz2tI",
+            authDomain: "adop-test.firebaseapp.com",
+            projectId: "adop-test",
+            storageBucket: "adop-test.firebasestorage.app",
+            messagingSenderId: "901968465409",
+            appId: "1:901968465409:web:d7cbe17100926d89e6fa00"
+        };
+
+        // Firebase 초기화
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+        const auth = firebase.auth();
+
+        // 전역 변수
+        let currentUser = null;
+        let currentCharacter = null;
+        let conversationId = null;
+        let messages = [];
+
+        // URL에서 캐릭터 ID 가져오기
+        const urlParams = new URLSearchParams(window.location.search);
+        const characterId = urlParams.get('id');
+
+        if (!characterId) {
+            alert('캐릭터 ID가 없습니다.');
+            window.location.href = '/cc/';
+        }
+
+        // 인증 상태 확인
+        auth.onAuthStateChanged((user) => {
+            currentUser = user;
+            if (user) {
+                loadCharacter();
+            } else {
+                alert('로그인이 필요합니다.');
+                window.location.href = '/cc/';
+            }
+        });
+
+        // 캐릭터 정보 로드
+        async function loadCharacter() {
+            try {
+                const doc = await db.collection('mystery-character-chat-001').doc(characterId).get();
+                
+                if (!doc.exists) {
+                    alert('캐릭터를 찾을 수 없습니다.');
+                    window.location.href = '/cc/';
+                    return;
+                }
+
+                currentCharacter = { id: doc.id, ...doc.data() };
+                displayCharacterInfo();
+                showScenarioStarter();
+                
+            } catch (error) {
+                console.error('캐릭터 로드 오류:', error);
+                alert('캐릭터 정보를 불러올 수 없습니다.');
+                window.location.href = '/cc/';
+            }
+        }
+
+        // 캐릭터 정보 표시
+        function displayCharacterInfo() {
+            document.getElementById('loadingState').style.display = 'none';
+            document.getElementById('chatHeader').style.display = 'flex';
+            
+            document.getElementById('characterName').textContent = currentCharacter.name;
+            document.getElementById('characterRole').textContent = getRoleText(currentCharacter.role);
+            document.getElementById('characterAvatar').src = currentCharacter.imageUrl || 
+                `https://api.dicebear.com/7.x/avataaars/svg?seed=${currentCharacter.name}`;
+        }
+
+        // 역할 텍스트 변환
+        function getRoleText(role) {
+            const roleMap = {
+                detective: '🕵️ 탐정',
+                client: '😰 의뢰인',
+                witness: '👁️ 목격자',
+                suspect: '😈 용의자',
+                assistant: '🤝 조수'
+            };
+            return roleMap[role] || role;
+        }
+
+        // 시나리오 시작 옵션 표시
+        function showScenarioStarter() {
+            document.getElementById('scenarioStarter').style.display = 'block';
+        }
+
+        // 채팅 시작
+        function startChat(withScenario = false) {
+            document.getElementById('scenarioStarter').style.display = 'none';
+            document.getElementById('chatMessages').style.display = 'flex';
+            document.getElementById('chatInputContainer').style.display = 'block';
+            
+            if (withScenario) {
+                generateScenario();
+            } else {
+                addCharacterMessage(`안녕하세요! 저는 ${currentCharacter.name}입니다. 무엇을 도와드릴까요?`);
+            }
+        }
+
+        // 시나리오 생성
+        async function generateScenario() {
+            showTyping();
+            
+            try {
+                // 임시 시나리오 (실제로는 Gemini API 호출)
+                const scenarios = {
+                    murder: `어젯밤 저택에서 의문의 죽음이 발생했습니다. 피해자는 유명한 미술품 수집가였고, 현장에는 이상한 단서들이 남겨져 있었습니다. 범인은 과연 누구일까요?`,
+                    theft: `박물관에서 귀중한 다이아몬드가 사라졌습니다. 하지만 보안 시스템에는 아무도 기록되지 않았어요. 이 불가능해 보이는 범죄의 비밀은 무엇일까요?`,
+                    missing: `일주일 전부터 연락이 끊긴 사람이 있습니다. 마지막으로 목격된 곳은 오래된 도서관이었는데, 그곳에서 이상한 일들이 일어나고 있다는 소문이 있어요.`
+                };
+                
+                const scenario = scenarios[currentCharacter.preferredScenario] || scenarios.murder;
+                
+                setTimeout(() => {
+                    hideTyping();
+                    addCharacterMessage(`🔍 새로운 사건이 발생했습니다!\n\n${scenario}\n\n이 사건에 대해 어떻게 생각하시나요?`);
+                }, 2000);
+                
+            } catch (error) {
+                hideTyping();
+                addCharacterMessage('죄송합니다. 시나리오를 준비하는 중에 문제가 생겼네요. 자유롭게 대화해 보시겠어요?');
+            }
+        }
+
+        // 메시지 추가
+        function addMessage(content, isUser = false) {
+            const messagesContainer = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${isUser ? 'user' : 'character'}`;
+            
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('ko-KR', { 
+                hour: '2-digit', 
+                minute: '2-digit' 
+            });
+            
+            messageDiv.innerHTML = `
+                <div>${content}</div>
+                <div class="message-time">${timeString}</div>
+            `;
+            
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            
+            // 메시지 저장
+            messages.push({
+                content,
+                isUser,
+                timestamp: now.toISOString()
+            });
+        }
+
+        function addCharacterMessage(content) {
+            addMessage(content, false);
+        }
+
+        function addUserMessage(content) {
+            addMessage(content, true);
+        }
+
+        // 타이핑 인디케이터
+        function showTyping() {
+            document.getElementById('typingIndicator').style.display = 'block';
+            const messagesContainer = document.getElementById('chatMessages');
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function hideTyping() {
+            document.getElementById('typingIndicator').style.display = 'none';
+        }
+
+        // AI 응답 생성 (임시)
+        async function generateResponse(userMessage) {
+            showTyping();
+            
+            try {
+                // 실제로는 Gemini API 호출
+                // 지금은 간단한 응답 시뮬레이션
+                
+                const responses = [
+                    `흥미로운 관찰이네요. ${currentCharacter.name}으로서 이런 점을 고려해볼 필요가 있겠어요.`,
+                    `그 부분에 대해서는 더 자세히 살펴봐야겠습니다. 다른 단서는 없을까요?`,
+                    `좋은 지적입니다. 이 사건에는 분명 숨겨진 것이 있어요.`,
+                    `${userMessage}에 대해 생각해보니, 새로운 가능성이 보이는군요.`
+                ];
+                
+                const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                
+                setTimeout(() => {
+                    hideTyping();
+                    addCharacterMessage(randomResponse);
+                }, 1000 + Math.random() * 2000);
+                
+            } catch (error) {
+                hideTyping();
+                addCharacterMessage('죄송해요, 잠시 생각을 정리하고 있었어요. 다시 말씀해주시겠어요?');
+            }
+        }
+
+        // 이벤트 리스너
+        document.getElementById('startScenarioBtn').addEventListener('click', () => {
+            startChat(true);
+        });
+
+        document.getElementById('freeChat').addEventListener('click', () => {
+            startChat(false);
+        });
+
+        document.getElementById('sendBtn').addEventListener('click', sendMessage);
+
+        document.getElementById('chatInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+
+        // 메시지 전송
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            addUserMessage(message);
+            input.value = '';
+            
+            // AI 응답 생성
+            generateResponse(message);
+        }
+
+        // 텍스트영역 자동 크기 조절
+        document.getElementById('chatInput').addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+        });
+    </script>
+</body>
+</html>
