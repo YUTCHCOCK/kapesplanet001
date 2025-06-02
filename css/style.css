@@ -673,7 +673,7 @@ nav ul li a.active {
 /* 극도로 얇은 푸터 */
 .footer-minimal-footer {
     background-color: #000000;
-    padding: 50px 50px;
+    padding: 100px 100px;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -683,19 +683,20 @@ nav ul li a.active {
     align-items: center;
     max-width: 1200px;
     margin: 0 auto;
+    min-height: 100px; /* 푸터 내부 영역을 더 높게 */
 }
 
 .footer-contact-info {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     color: var(--text-color);
-    opacity: 0.5;
+    opacity: 0.8;
     margin-top: 10px;        /* 푸터 다른 요소와 간격 */
     margin-bottom: 10px;     /* 필요하다면 추가 */
     text-align: right;       /* 오른쪽 정렬 (필요에 따라 left, center도 가능) */
     letter-spacing: 0.02em;  /* 자간 살짝 조정 */
 
 .footer-copyright {
-    font-size: 0.85rem;
+    font-size: 0.7rem;
     color: var(--text-color);
     opacity: 0.6;
 }
@@ -707,7 +708,7 @@ nav ul li a.active {
 }
 
 .footer-link {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     color: var(--text-color);
     opacity: 0.6;
     text-decoration: none;
@@ -720,9 +721,9 @@ nav ul li a.active {
 }
 
 .separator {
-    color: var(--text-color);
-    opacity: 0.3;
-    font-size: 0.8rem;
+    color: #999;
+    opacity: 0.8;
+    font-size: 0.7rem;
 }
 
 /* 비디오 모달 */
