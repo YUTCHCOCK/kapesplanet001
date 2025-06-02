@@ -1,44 +1,48 @@
       <!DOCTYPE html>
 <html lang="ko">
 <head>
-
-      <!-- Google tag (gtag.js) -->
+    <!-- 성능 최적화 메타태그 추가 -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="theme-color" content="#FF5A00">
+    
+    <!-- 프리로드 최적화 추가 -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://www.youtube.com">
+    <link rel="dns-prefetch" href="//www.googletagmanager.com">
+    
+    <!-- 기존 Google Analytics 코드 그대로 유지 -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-SPSZWEVBWW"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-SPSZWEVBWW');
-</script>
+    </script>
     
-    <!-- 기본 ICO (브라우저 호환용) -->
+    <!-- 기존 파비콘들 그대로 유지 -->
     <link rel="icon" href="img/favicon/favicon.ico" type="image/x-icon">
-
-    <!-- PNG 포맷 (크롬, 파이어폭스 등) -->
     <link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png">
-
-    <!-- 애플 터치 아이콘 (iOS 홈화면용) -->
     <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon.png">
-
-    <!-- 사이트 매니페스트 (PWA, 선택) -->
     <link rel="manifest" href="img/favicon/site.webmanifest">
     
-    <!-- 이메일 어드레스 추가  -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-    
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KapesPlanet - 원숭이행성</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Font Awesome 비동기 로딩으로 수정 -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    
+    <!-- 기존 CSS 유지 -->
     <link rel="stylesheet" href="css/style.css">
+    
+    <!-- 이메일 스크립트는 하단으로 이동 (나중에 설명) -->
 </head>
     <body>
     <!-- 헤더 -->
     <header>
         <div class="header-logo">
-            <img src="img/kapes_logo_circle_negative.png" alt="KAPES PLANET 원형 반전 로고">
+            <img src="img/kapes_logo_circle_negative.png" alt="KAPES PLANET 원형 반전 로고" loading="eager">
             <span>KAPES PLANET</span>
         </div>
         <nav>
@@ -57,14 +61,14 @@
     <!-- 히어로 섹션 -->
     <section class="hero" id="hero">
         <!-- 유튜브 배경 영상 -->
-        <iframe 
-            src="https://www.youtube.com/embed/sbEYTBXJb4I?autoplay=1&mute=1&controls=0&showinfo=0&loop=1&playlist=sbEYTBXJb4I&modestbranding=1"
-            style="position:absolute; top:0; left:0; width:100%; height:100%; z-index:1; pointer-events:none; border:0;"
-            frameborder="0"
-            allow="autoplay; encrypted-media"
-            allowfullscreen>
-        </iframe>
-    
+      <iframe 
+          src="https://www.youtube.com/embed/sbEYTBXJb4I?autoplay=1&mute=1&controls=0&showinfo=0&loop=1&playlist=sbEYTBXJb4I&modestbranding=1"
+          title="KAPES PLANET 메인 영상"
+          style="position:absolute; top:0; left:0; width:100%; height:100%; z-index:1; pointer-events:none; border:0;"
+          frameborder="0"
+          allow="autoplay; encrypted-media"
+          allowfullscreen>
+      </iframe> 
         <!-- 오버레이 텍스트 -->
         <div class="hero-overlay">
             <div class="hero-tagline">매일 진화하는 크리에이터 월드</div>
@@ -105,7 +109,7 @@
                 </div>
         </div>
         <!-- monkey 텍스트 로고 워터마크 -->
-        <img class="monkey-watermark" src="img/monkey_text_logo.png" alt="Monkey Text Logo Watermark">
+        <img class="monkey-watermark" src="img/monkey_text_logo.png" alt="Monkey Text Logo Watermark" loading="lazy">
     </section>
 
     <!-- work 섹션 -->
