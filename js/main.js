@@ -92,8 +92,9 @@ function setupResizeHandlers() {
         
     }, 250);
     
-    window.addEventListener('resize', handleResize);
-    window.addEventListener('orientationchange', debounce(handleResize, 500));
+    // passive: true 추가로 성능 향상
+    window.addEventListener('resize', handleResize, { passive: true });
+    window.addEventListener('orientationchange', debounce(handleResize, 500), { passive: true });
 }
 
 // 모바일 리사이즈 처리
@@ -180,7 +181,7 @@ function adjustMobileVideoModal() {
     }
 }
 
-// 네비게이션 스크롤 기능 (간단하고 확실한 버전)
+// 네비게이션 스크롤 기능 (수정된 버전)
 function setupNavigation() {
     const navLinks = document.querySelectorAll('nav ul li a');
     console.log('네비게이션 링크 개수:', navLinks.length);
@@ -189,12 +190,13 @@ function setupNavigation() {
         console.log(`링크 ${index}:`, link.getAttribute('href'));
         
         link.addEventListener('click', function(e) {
-            e.preventDefault(); // 기본 동작 막기
-            
             const href = this.getAttribute('href');
             console.log('클릭된 링크:', href);
             
+            // 네비게이션 링크인지 확인 (# 으로 시작하는 것만)
             if (href && href.startsWith('#')) {
+                e.preventDefault(); // 네비게이션 링크만 기본 동작 막기
+                
                 const targetId = href.replace('#', '');
                 console.log('타겟 ID:', targetId);
                 scrollToSection(targetId);
@@ -210,6 +212,7 @@ function setupNavigation() {
                     console.log('모바일 메뉴 닫힘');
                 }
             }
+            // href가 #으로 시작하지 않으면 (외부 링크 등) 기본 동작 허용
         });
     });
 }
@@ -326,6 +329,7 @@ function setupHeaderEffects() {
         updateActiveNavigation();
     }, 16); // 60fps
 
+    // passive: true 추가로 성능 향상
     window.addEventListener('scroll', throttledScroll, { passive: true });
 }
 
@@ -411,7 +415,7 @@ function setupPortfolioFilter() {
     });
 }
 
-// 비디오 모달 (성능 및 접근성 최적화)
+// 비디오 모달 (이벤트 충돌 방지)
 function setupVideoModal() {
     console.log('비디오 모달 설정...');
     const modal = document.getElementById('video-modal');
@@ -423,9 +427,12 @@ function setupVideoModal() {
         return;
     }
 
-    // 포트폴리오 아이템 클릭
+    // 포트폴리오 아이템 클릭 (이벤트 전파 막기)
     document.querySelectorAll('.work-item').forEach(function(item) {
-        item.addEventListener('click', function() {
+        item.addEventListener('click', function(e) {
+            e.stopPropagation(); // 이벤트 전파 막기
+            e.preventDefault(); // 기본 동작 막기
+            
             const iframe = this.querySelector('iframe');
             if (!iframe) return;
 
