@@ -294,6 +294,16 @@ nav ul li a.active {
     text-align: center;
     text-shadow: 0 0 12px #000;
 }
+
+.scroll-indicator {
+    z-index: 10; /* 가장 높은 z-index로 설정 */
+    opacity: 1; /* 기본적으로 보이도록 */
+    position: absolute; /* 히어로 섹션 기준 */
+    bottom: 40px; /* 하단에서 40px */
+    left: 50%; /* 중앙 정렬 */
+    transform: translateX(-50%);
+}
+    
 .scroll-indicator.hide {
     opacity: 0;
     transform: translateX(-50%) translateY(20px);
