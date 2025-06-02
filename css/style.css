@@ -352,22 +352,6 @@ nav ul li a.active {
     line-height: 1.4;
 }
 
-.about-image {
-    position: absolute;
-    bottom: 50px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1;
-}
-
-.about-image img {
-    width: 300px;
-    height: auto;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    opacity: 0.9;
-}
-
 /* 워크 섹션 */
 .work {
     background-color: #0a0a0a;
@@ -599,6 +583,21 @@ nav ul li a.active {
     min-width: 400px;
 }
 
+.contact-logo {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contact-logo img {
+    width: 200px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    opacity: 0.9;
+}
+
 .contact-list {
     list-style: none;
     padding-left: 0%;
@@ -822,10 +821,6 @@ footer {
     .stat-label {
         font-size: 0.9rem;
     }
-    
-    .about-image img {
-        width: 200px;
-    }
 
     .work-filter {
         gap: 6px;
@@ -840,6 +835,15 @@ footer {
     .contact-info {
         min-width: auto;
         width: 100%;
+    }
+    
+    .contact-logo {
+        order: 2; /* 로고를 하단으로 */
+        margin-top: 20px;
+    }
+    
+    .contact-logo img {
+        width: 180px;
     }
     
     footer {
@@ -961,14 +965,6 @@ footer {
     .stat-label {
         font-size: 0.9rem;
     }
-    
-    .about-image img {
-        width: 150px;
-    }
-    
-    .about-image {
-        bottom: 20px;
-    }
 
     .work-filter {
         gap: 3px;
@@ -990,6 +986,16 @@ footer {
 
     .contact-content {
         gap: 30px;
+        flex-direction: column;
+    }
+    
+    .contact-logo {
+        order: 2; /* 모바일에서 로고를 하단으로 */
+        margin-top: 20px;
+    }
+    
+    .contact-logo img {
+        width: 150px;
     }
     
     .contact-icon {
@@ -1046,6 +1052,10 @@ footer {
     
     .contact-value {
         font-size: 0.9rem;
+    }
+    
+    .contact-logo img {
+        width: 120px;
     }
     
     .headline-row {
