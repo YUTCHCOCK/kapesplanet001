@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>추리 캐릭터 생성 | KapesPlanet</title>
+    
+    <!-- Firebase SDK v9 -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-functions-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #ffd700;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #e0e0e0;
+            font-size: 1.1em;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #ffd700;
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+
+        input::placeholder, textarea::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .personality-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .personality-tag {
+            background: rgba(255, 215, 0, 0.2);
+            border: 2px solid rgba(255, 215, 0, 0.5);
+            border-radius: 20px;
+            padding: 8px 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .personality-tag:hover {
+            background: rgba(255, 215, 0, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .personality-tag.selected {
+            background: #ffd700;
+            color: #1a1a2e;
+            border-color: #ffd700;
+        }
+
+        .scenario-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .scenario-card {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .scenario-card:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .scenario-card.selected {
+            border-color: #ffd700;
+            background: rgba(255, 215, 0, 0.2);
+        }
+
+        .scenario-icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .create-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            color: #1a1a2e;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 30px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+        }
+
+        .create-btn:hover:not(:disabled) {
+            background: linear-gradient(45deg, #ffed4e, #ffd700);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .create-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .create-btn.loading::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            border: 2px solid #1a1a2e;
+            border-top: 2px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        .create-btn.loading {
+            color: transparent;
+        }
+
+        @keyframes spin {
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .example-text {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 5px;
+            font-style: italic;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #ffd700;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: #ffed4e;
+        }
+
+        .login-section {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 215, 0, 0.1);
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .login-btn {
+            background: #ffd700;
+            color: #1a1a2e;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+        }
+
+        .login-btn:hover {
+            background: #ffed4e;
+            transform: translateY(-2px);
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(255, 215, 0, 0.1);
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .image-preview {
+            margin-top: 20px;
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            border: 2px dashed rgba(255, 215, 0, 0.3);
+        }
+
+        .preview-image {
+            max-width: 300px;
+            max-height: 300px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            margin: 10px 0;
+        }
+
+        .status-message {
+            text-align: center;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 10px;
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            .scenario-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/cc/" class="back-link">← 캐릭터 목록으로</a>
+        
+        <h1>🔍 추리 캐릭터 생성</h1>
+        
+        <!-- 로그인 섹션 -->
+        <div id="loginSection" class="login-section">
+            <h3>🔐 로그인이 필요합니다</h3>
+            <p>캐릭터를 저장하고 관리하려면 로그인해주세요.</p>
+            <button id="googleLoginBtn" class="login-btn">📱 구글로 로그인</button>
+            <button id="anonymousLoginBtn" class="login-btn">👤 익명으로 시작</button>
+        </div>
+
+        <!-- 사용자 정보 -->
+        <div id="userInfo" class="user-info" style="display: none;">
+            <div style="display: flex; align-items: center;">
+                <img id="userAvatar" class="user-avatar" src="" alt="프로필">
+                <span id="userName">사용자</span>
+            </div>
+            <button id="logoutBtn" class="login-btn">로그아웃</button>
+        </div>
+
+        <!-- 상태 메시지 -->
+        <div id="statusMessage" class="status-message" style="display: none;"></div>
+        
+        <form id="characterForm" style="display: none;">
+            <div class="form-group">
+                <label for="name">캐릭터 이름</label>
+                <input type="text" id="name" name="name" placeholder="예: 셜록 홈즈, 코난 에도가와" required>
+            </div>
+
+            <div class="form-group">
+                <label for="role">역할</label>
+                <select id="role" name="role" required>
+                    <option value="">역할을 선택하세요</option>
+                    <option value="detective">🕵️ 탐정 - 사건을 해결하는 주인공</option>
+                    <option value="client">😰 의뢰인 - 도움을 요청하는 사람</option>
+                    <option value="witness">👁️ 목격자 - 중요한 단서를 가진 사람</option>
+                    <option value="suspect">😈 용의자 - 의심스러운 행동을 하는 사람</option>
+                    <option value="assistant">🤝 조수 - 탐정을 돕는 파트너</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>성격 특성 (3개 선택)</label>
+                <div class="personality-tags">
+                    <div class="personality-tag" data-trait="논리적">논리적</div>
+                    <div class="personality-tag" data-trait="직관적">직관적</div>
+                    <div class="personality-tag" data-trait="냉정한">냉정한</div>
+                    <div class="personality-tag" data-trait="감정적">감정적</div>
+                    <div class="personality-tag" data-trait="신중한">신중한</div>
+                    <div class="personality-tag" data-trait="충동적">충동적</div>
+                    <div class="personality-tag" data-trait="의심많은">의심많은</div>
+                    <div class="personality-tag" data-trait="순진한">순진한</div>
+                    <div class="personality-tag" data-trait="유머러스">유머러스</div>
+                    <div class="personality-tag" data-trait="진지한">진지한</div>
+                    <div class="personality-tag" data-trait="호기심많은">호기심많은</div>
+                    <div class="personality-tag" data-trait="신비로운">신비로운</div>
+                </div>
+                <p class="example-text">선택된 성격: <span id="selectedTraits">없음</span></p>
+            </div>
+
+            <div class="form-group">
+                <label for="background">배경 스토리</label>
+                <textarea id="background" name="background" rows="3" placeholder="예: 전직 경찰관 출신의 사립탐정. 5년 전 미해결 사건으로 인해 경찰을 그만두고..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="speechStyle">말투와 특징</label>
+                <input type="text" id="speechStyle" name="speechStyle" placeholder="예: 정중한 존댓말, 가끔 영국식 표현 사용">
+            </div>
+
+            <div class="form-group">
+                <label>선호하는 사건 유형</label>
+                <div class="scenario-grid">
+                    <div class="scenario-card" data-scenario="murder">
+                        <span class="scenario-icon">💀</span>
+                        <strong>살인 사건</strong>
+                        <p>복잡한 동기와 알리바이</p>
+                    </div>
+                    <div class="scenario-card" data-scenario="theft">
+                        <span class="scenario-icon">💎</span>
+                        <strong>도난 사건</strong>
+                        <p>귀중품의 실종</p>
+                    </div>
+                    <div class="scenario-card" data-scenario="missing">
+                        <span class="scenario-icon">❓</span>
+                        <strong>실종 사건</strong>
+                        <p>사라진 사람의 행방</p>
+                    </div>
+                    <div class="scenario-card" data-scenario="fraud">
+                        <span class="scenario-icon">💰</span>
+                        <strong>사기 사건</strong>
+                        <p>교묘한 속임수</p>
+                    </div>
+                    <div class="scenario-card" data-scenario="mystery">
+                        <span class="scenario-icon">🔮</span>
+                        <strong>미스터리</strong>
+                        <p>초자연적 현상</p>
+                    </div>
+                    <div class="scenario-card" data-scenario="corporate">
+                        <span class="scenario-icon">🏢</span>
+                        <strong>기업 범죄</strong>
+                        <p>내부 고발과 음모</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 이미지 미리보기 영역 -->
+            <div id="imagePreview" class="image-preview" style="display: none;">
+                <h3>🎨 캐릭터 이미지</h3>
+                <img id="previewImage" class="preview-image" src="" alt="캐릭터 이미지">
+            </div>
+
+            <button type="submit" class="create-btn" id="createBtn">🔍 캐릭터 생성하기</button>
+        </form>
+    </div>
+
+    <script>
+        // Firebase 설정
+        const firebaseConfig = {
+            apiKey: "AIzaSyA3g2IZvPU9mNjzuSHCcinnt696epuz2tI",
+            authDomain: "adop-test.firebaseapp.com",
+            projectId: "adop-test",
+            storageBucket: "adop-test.firebasestorage.app",
+            messagingSenderId: "901968465409",
+            appId: "1:901968465409:web:d7cbe17100926d89e6fa00"
+        };
+
+        // Firebase 초기화
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+        const auth = firebase.auth();
+        const functions = firebase.functions();
+        const storage = firebase.storage();
+
+        // 전역 변수
+        let selectedTraits = [];
+        let selectedScenario = '';
+        let currentUser = null;
+        const maxTraits = 3;
+
+        // 상태 메시지 표시 함수
+        function showStatus(message, type = 'info') {
+            const statusDiv = document.getElementById('statusMessage');
+            statusDiv.textContent = message;
+            statusDiv.style.display = 'block';
+            statusDiv.style.backgroundColor = type === 'error' ? 'rgba(255, 0, 0, 0.1)' : 'rgba(255, 215, 0, 0.1)';
+            statusDiv.style.borderColor = type === 'error' ? 'rgba(255, 0, 0, 0.3)' : 'rgba(255, 215, 0, 0.3)';
+            
+            setTimeout(() => {
+                statusDiv.style.display = 'none';
+            }, 5000);
+        }
+
+        // 인증 상태 변화 감지
+        auth.onAuthStateChanged((user) => {
+            currentUser = user;
+            if (user) {
+                showUserInfo(user);
+                showCharacterForm();
+            } else {
+                showLoginSection();
+                hideCharacterForm();
+            }
+        });
+
+        // UI 표시/숨김 함수들
+        function showLoginSection() {
+            document.getElementById('loginSection').style.display = 'block';
+            document.getElementById('userInfo').style.display = 'none';
+        }
+
+        function showUserInfo(user) {
+            document.getElementById('loginSection').style.display = 'none';
+            document.getElementById('userInfo').style.display = 'flex';
+            
+            const avatar = document.getElementById('userAvatar');
+            const name = document.getElementById('userName');
+            
+            if (user.isAnonymous) {
+                avatar.src = 'https://api.dicebear.com/7.x/avataaars/svg?seed=anonymous&backgroundColor=ffd700';
+                name.textContent = '익명 사용자';
+            } else {
+                avatar.src = user.photoURL || 'https://api.dicebear.com/7.x/avataaars/svg?seed=' + user.uid;
+                name.textContent = user.displayName || user.email;
+            }
+        }
+
+        function showCharacterForm() {
+            document.getElementById('characterForm').style.display = 'block';
+        }
+
+        function hideCharacterForm() {
+            document.getElementById('characterForm').style.display = 'none';
+        }
+
+        // 로그인 버튼 이벤트
+        document.getElementById('googleLoginBtn').addEventListener('click', async () => {
+            try {
+                const provider = new firebase.auth.GoogleAuthProvider();
+                await auth.signInWithPopup(provider);
+                showStatus('로그인 성공!');
+            } catch (error) {
+                console.error('로그인 오류:', error);
+                showStatus('로그인에 실패했습니다.', 'error');
+            }
+        });
+
+        document.getElementById('anonymousLoginBtn').addEventListener('click', async () => {
+            try {
+                await auth.signInAnonymously();
+                showStatus('익명 로그인 성공!');
+            } catch (error) {
+                console.error('익명 로그인 오류:', error);
+                showStatus('익명 로그인에 실패했습니다.', 'error');
+            }
+        });
+
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            auth.signOut();
+        });
+
+        // 성격 특성 선택 로직
+        document.querySelectorAll('.personality-tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                const trait = this.dataset.trait;
+                
+                if (this.classList.contains('selected')) {
+                    this.classList.remove('selected');
+                    selectedTraits = selectedTraits.filter(t => t !== trait);
+                } else if (selectedTraits.length < maxTraits) {
+                    this.classList.add('selected');
+                    selectedTraits.push(trait);
+                } else {
+                    showStatus(`최대 ${maxTraits}개까지만 선택할 수 있습니다.`, 'error');
+                }
+                
+                updateTraitsDisplay();
+                checkFormValid();
+            });
+        });
+
+        function updateTraitsDisplay() {
+            const display = document.getElementById('selectedTraits');
+            display.textContent = selectedTraits.length > 0 ? selectedTraits.join(', ') : '없음';
+        }
+
+        // 시나리오 선택 로직
+        document.querySelectorAll('.scenario-card').forEach(card => {
+            card.addEventListener('click', function() {
+                document.querySelectorAll('.scenario-card').forEach(c => c.classList.remove('selected'));
+                this.classList.add('selected');
+                selectedScenario = this.dataset.scenario;
+                checkFormValid();
+            });
+        });
+
+        // Firebase Functions를 통한 캐릭터 이미지 생성
+        async function generateCharacterImage(characterData) {
+            try {
+                showStatus('캐릭터 이미지를 생성하고 있습니다...');
+                
+                // Firebase Function 호출 (아직 구현 전이므로 임시 이미지 사용)
+                const generateImage = functions.httpsCallable('generateCharacterImage');
+                // const result = await generateImage(characterData);
+                
+                // 임시로 DiceBear API 사용
+                const imageUrl = `https://api.dicebear.com/7.x/avataaars/svg?seed=${characterData.name}&backgroundColor=ffd700&clothesColor=262e33&hairColor=724133&skinColor=f8d25c&accessories=[]&accessoriesColor=[]&top=shortHair&topColor=724133&hatColor=262e33&facialHair=[]&facialHairColor=724133&eyes=default&eyebrows=default&mouth=default`;
+                
+                return imageUrl;
+            } catch (error) {
+                console.error('이미지 생성 오류:', error);
+                showStatus('이미지 생성에 실패했습니다. 기본 이미지를 사용합니다.', 'error');
+                return `https://api.dicebear.com/7.x/avataaars/svg?seed=${characterData.name}`;
+            }
+        }
+
+        // 폼 제출 처리
+        document.getElementById('characterForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            if (!currentUser) {
+                showStatus('로그인이 필요합니다.', 'error');
+                return;
+            }
+            
+            if (selectedTraits.length === 0) {
+                showStatus('성격 특성을 최소 1개 이상 선택해주세요.', 'error');
+                return;
+            }
+            
+            if (!selectedScenario) {
+                showStatus('선호하는 사건 유형을 선택해주세요.', 'error');
+                return;
+            }
+
+            // 로딩 상태 표시
+            const createBtn = document.getElementById('createBtn');
+            createBtn.classList.add('loading');
+            createBtn.disabled = true;
+
+            try {
+                // 캐릭터 데이터 수집
+                const characterData = {
+                    name: document.getElementById('name').value,
+                    role: document.getElementById('role').value,
+                    traits: selectedTraits,
+                    background: document.getElementById('background').value,
+                    speechStyle: document.getElementById('speechStyle').value,
+                    preferredScenario: selectedScenario,
+                    userId: currentUser.uid,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                };
+
+                showStatus('캐릭터 이미지를 생성하고 있습니다...');
+
+                // 캐릭터 이미지 생성
+                const imageUrl = await generateCharacterImage(characterData);
+                characterData.imageUrl = imageUrl;
+
+                // 이미지 미리보기 표시
+                const previewSection = document.getElementById('imagePreview');
+                const previewImage = document.getElementById('previewImage');
+                previewImage.src = imageUrl;
+                previewSection.style.display = 'block';
+
+                showStatus('캐릭터를 저장하고 있습니다...');
+
+                // Firebase에 저장
+                const docRef = await db.collection('characters').add(characterData);
+                console.log('캐릭터 저장 완료:', docRef.id);
+
+                showStatus(`🎉 "${characterData.name}" 캐릭터가 성공적으로 생성되었습니다!`);
+                
+                // 2초 후 리다이렉트
+                setTimeout(() => {
+                    window.location.href = '/cc/';
+                }, 2000);
+
+            } catch (error) {
+                console.error('캐릭터 생성 오류:', error);
+                showStatus('캐릭터 생성 중 오류가 발생했습니다. 다시 시도해주세요.', 'error');
+            } finally {
+                createBtn.classList.remove('loading');
+                createBtn.disabled = false;
+            }
+        });
+
+        // 폼 유효성 검사
+        function checkFormValid() {
+            const name = document.getElementById('name').value;
+            const role = document.getElementById('role').value;
+            const hasTraits = selectedTraits.length > 0;
+            const hasScenario = selectedScenario !== '';
+            
+            const isValid = name && role && hasTraits && hasScenario;
+            document.getElementById('createBtn').disabled = !isValid;
+        }
+
+        // 입력 필드 변경 감지
+        document.getElementById('name').addEventListener('input', checkFormValid);
+        document.getElementById('role').addEventListener('change', checkFormValid);
+        
+        // 초기 상태 설정
+        checkFormValid();
+    </script>
+</body>
+</html>
