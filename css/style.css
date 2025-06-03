@@ -1198,7 +1198,7 @@ footer {
         white-space: nowrap;
     }
         .scroll-indicator {
-        bottom: 140px;
+        bottom: 100px;
     )
 
     .section-title {
@@ -1346,7 +1346,7 @@ footer {
         margin-bottom: 2px;
     }
     .scroll-indicator {
-        bottom: 180px;
+        bottom: 140px;
     )
 
     .monkey-watermark {
