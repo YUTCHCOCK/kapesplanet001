@@ -357,9 +357,9 @@ nav ul li a.active {
 }
 
 .scroll-text {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 500;
-    margin-bottom: 10px;
+    margin-bottom: 25px;
     letter-spacing: 0.3em;
     text-transform: uppercase;
     opacity: 0.8;
