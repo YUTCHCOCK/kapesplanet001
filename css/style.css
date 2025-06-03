@@ -1139,10 +1139,6 @@ footer {
     .hero-overlay {
         top: 50%;
     }
-        .scroll-indicator {
-        bottom: 150px;
-    )
-
     .work-grid {
         grid-template-columns: 1fr;
     }
@@ -1202,7 +1198,7 @@ footer {
         white-space: nowrap;
     }
         .scroll-indicator {
-        bottom: 180px;
+        bottom: 140px;
     )
 
     .section-title {
