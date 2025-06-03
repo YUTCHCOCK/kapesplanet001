@@ -312,7 +312,7 @@ nav ul li a.active {
     opacity: 0;
     transform: translateX(-50%) translateY(20px);
     pointer-events: none;
-    transition: opacity 5s, transform 5s;
+    transition: opacity 10s, transform 10s;
 }
 
 .scroll-icon {
