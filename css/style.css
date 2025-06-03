@@ -302,6 +302,10 @@ nav ul li a.active {
     bottom: 80px; 
     left: 50%; /* 중앙 정렬 */
     transform: translateX(-50%);
+    position: absolute; /* 히어로 섹션 기준 */
+    bottom: 40px; /* 하단에서 40px */
+    left: 50%; /* 중앙 정렬 */
+    transform: translateX(-50%);
 }
     
 .scroll-indicator.hide {
