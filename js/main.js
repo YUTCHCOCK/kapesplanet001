@@ -497,7 +497,7 @@ function safeInit() {
 window.addEventListener("DOMContentLoaded", function() {
     setTimeout(function() {
         document.querySelector(".scroll-indicator")?.classList.remove("hide");
-    }, 3000); // 5초(5000ms) 후 나타남
+    }, 3000); // 10초(10000ms) 후 나타남
 });
 </script>
 // 9. 리사이즈 핸들러
