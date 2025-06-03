@@ -1012,8 +1012,6 @@ footer {
     .hero-tagline {
         font-size: 1.4rem;
     }
-    .scroll-indicator {
-        bottom: 200px;
     )
     .about {
         padding: 100px 50px;
@@ -1071,7 +1069,7 @@ footer {
         font-size: 1.26rem;
     }
         .scroll-indicator {
-        bottom: 160px;
+        bottom: 200px;
     )
 
     .work-grid {
@@ -1145,7 +1143,7 @@ footer {
         top: 50%;
     }
         .scroll-indicator {
-        bottom: 120px;
+        bottom: 200px;
     )
 
     .work-grid {
@@ -1207,10 +1205,7 @@ footer {
         white-space: nowrap;
     }
         .scroll-indicator {
-        bottom: 100px;
-    )
-        .scroll-indicator {
-        bottom: 80px;
+        bottom: 180px;
     )
 
     .section-title {
@@ -1342,7 +1337,7 @@ footer {
     }
     
     .contact-logo img {
-        width: 180px;
+        width: 160px;
     }
     
     .headline-row {
@@ -1357,8 +1352,8 @@ footer {
         font-size: 0.89em;
         margin-bottom: 2px;
     }
-        .scroll-indicator {
-        bottom: 60px;
+    .scroll-indicator {
+        bottom: 120px;
     )
 
     .monkey-watermark {
