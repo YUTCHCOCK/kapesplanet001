@@ -1012,7 +1012,9 @@ footer {
     .hero-tagline {
         font-size: 1.4rem;
     }
-
+    .scroll-indicator {
+        bottom: 200px;
+    )
     .about {
         padding: 100px 50px;
     }
@@ -1068,6 +1070,9 @@ footer {
     .hero-tagline {
         font-size: 1.26rem;
     }
+        .scroll-indicator {
+        bottom: 160px;
+    )
 
     .work-grid {
         grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -1139,6 +1144,9 @@ footer {
     .hero-overlay {
         top: 50%;
     }
+        .scroll-indicator {
+        bottom: 120px;
+    )
 
     .work-grid {
         grid-template-columns: 1fr;
@@ -1198,6 +1206,12 @@ footer {
         font-size: 0.98rem;
         white-space: nowrap;
     }
+        .scroll-indicator {
+        bottom: 100px;
+    )
+        .scroll-indicator {
+        bottom: 80px;
+    )
 
     .section-title {
         font-size: 2.5rem;
@@ -1343,6 +1357,9 @@ footer {
         font-size: 0.89em;
         margin-bottom: 2px;
     }
+        .scroll-indicator {
+        bottom: 60px;
+    )
 
     .monkey-watermark {
         width: 80px;
