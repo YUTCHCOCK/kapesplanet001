@@ -493,7 +493,13 @@ function safeInit() {
     
     console.log('✅ 프레스 게시판 렌더링 완료');
 }
-
+<script>
+window.addEventListener("DOMContentLoaded", function() {
+    setTimeout(function() {
+        document.querySelector(".scroll-indicator")?.classList.remove("hide");
+    }, 3000); // 3초(3000ms) 후 나타남
+});
+</script>
 // 9. 리사이즈 핸들러
 function setupResizeHandler() {
     console.log('📏 리사이즈 핸들러 설정 중...');
