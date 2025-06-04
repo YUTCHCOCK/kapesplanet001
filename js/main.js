@@ -48,20 +48,21 @@ window.addEventListener('load', function() {
 // 1. 간단한 네비게이션 설정
 function setupSimpleNavigation() {
     console.log('📍 네비게이션 설정 중...');
-    
     const navLinks = document.querySelectorAll('header nav ul li a');
     
+    // 기존 이벤트 제거 (replaceWith + cloneNode 방식)
     navLinks.forEach(link => {
+        link.replaceWith(link.cloneNode(true));
+    });
+
+    // 새롭게 바인딩
+    const freshNavLinks = document.querySelectorAll('header nav ul li a');
+    freshNavLinks.forEach(link => {
         const href = link.getAttribute('href');
-        console.log('링크 설정:', href);
-        
         if (href && href.startsWith('#')) {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
-                
-                const targetId = href.substring(1); // # 제거
-                console.log('클릭된 섹션:', targetId);
-                
+                const targetId = href.substring(1);
                 scrollToTarget(targetId);
                 setActiveLink(this);
                 closeMobileMenu();
