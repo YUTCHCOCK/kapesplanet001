@@ -280,6 +280,16 @@
             border: 1px solid rgba(255, 215, 0, 0.3);
         }
 
+        .debug-info {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-family: monospace;
+            font-size: 12px;
+            color: #ccc;
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 20px;
@@ -301,6 +311,13 @@
         <a href="/cc/" class="back-link">← 캐릭터 목록으로</a>
         
         <h1>🔍 추리 캐릭터 생성</h1>
+        
+        <!-- 디버그 정보 -->
+        <div id="debugInfo" class="debug-info">
+            <strong>연결 상태:</strong> <span id="connectionStatus">확인 중...</span><br>
+            <strong>사용자:</strong> <span id="userStatus">로그인 대기 중...</span><br>
+            <strong>Firestore:</strong> <span id="firestoreStatus">초기화 중...</span>
+        </div>
         
         <!-- 로그인 섹션 -->
         <div id="loginSection" class="login-section">
@@ -426,14 +443,53 @@
             appId: "1:901968465409:web:d7cbe17100926d89e6fa00"
         };
 
-        // Firebase 초기화
+        // Firebase 초기화 및 Firestore 설정
         console.log('Firebase 초기화 시작');
         firebase.initializeApp(firebaseConfig);
+        
+        // Firestore 초기화 시 Long Polling 강제 적용
         const db = firebase.firestore();
+        
+        // Long Polling 설정 강제 적용
+        try {
+            db.settings({
+                experimentalForceLongPolling: true,
+                useFetchStreams: false
+            });
+            console.log('Firestore Long Polling 설정 완료');
+            updateDebugStatus('firestoreStatus', '✅ Long Polling 설정 완료');
+        } catch (error) {
+            console.warn('Firestore 설정 오류 (이미 초기화됨):', error);
+            updateDebugStatus('firestoreStatus', '⚠️ 설정 오류 (이미 초기화됨)');
+        }
+        
         const auth = firebase.auth();
         const functions = firebase.functions();
         const storage = firebase.storage();
         console.log('Firebase 초기화 완료');
+
+        // 디버그 상태 업데이트 함수
+        function updateDebugStatus(elementId, status) {
+            const element = document.getElementById(elementId);
+            if (element) {
+                element.textContent = status;
+            }
+        }
+
+        // 연결 상태 확인
+        function checkConnectionStatus() {
+            updateDebugStatus('connectionStatus', navigator.onLine ? '✅ 온라인' : '❌ 오프라인');
+            
+            // Firestore 연결 테스트
+            db.doc('test/connection').get()
+                .then(() => {
+                    updateDebugStatus('firestoreStatus', '✅ Firestore 연결 성공');
+                })
+                .catch((error) => {
+                    updateDebugStatus('firestoreStatus', '❌ Firestore 연결 실패: ' + error.code);
+                    console.error('Firestore 연결 테스트 실패:', error);
+                });
+        }
 
         // 전역 변수
         let selectedTraits = [];
@@ -460,9 +516,11 @@
             currentUser = user;
             if (user) {
                 console.log('사용자 정보:', user.uid, user.email || '익명');
+                updateDebugStatus('userStatus', user.isAnonymous ? '👤 익명 사용자' : '✅ ' + (user.email || user.displayName));
                 showUserInfo(user);
                 showCharacterForm();
             } else {
+                updateDebugStatus('userStatus', '❌ 로그아웃 상태');
                 showLoginSection();
                 hideCharacterForm();
             }
@@ -566,10 +624,6 @@
             try {
                 showStatus('캐릭터 이미지를 생성하고 있습니다...');
                 
-                // Firebase Function 호출 (아직 구현 전이므로 임시 이미지 사용)
-                const generateImage = functions.httpsCallable('generateCharacterImage');
-                // const result = await generateImage(characterData);
-                
                 // 임시로 DiceBear API 사용
                 const imageUrl = `https://api.dicebear.com/7.x/avataaars/svg?seed=${characterData.name}&backgroundColor=ffd700&clothesColor=262e33&hairColor=724133&skinColor=f8d25c&accessories=[]&accessoriesColor=[]&top=shortHair&topColor=724133&hatColor=262e33&facialHair=[]&facialHairColor=724133&eyes=default&eyebrows=default&mouth=default`;
                 
@@ -579,6 +633,35 @@
                 showStatus('이미지 생성에 실패했습니다. 기본 이미지를 사용합니다.', 'error');
                 return `https://api.dicebear.com/7.x/avataaars/svg?seed=${characterData.name}`;
             }
+        }
+
+        // 캐릭터 저장 함수 (재시도 로직 포함)
+        async function saveCharacterWithRetry(characterData, maxRetries = 3) {
+            let lastError;
+            
+            for (let attempt = 1; attempt <= maxRetries; attempt++) {
+                try {
+                    console.log(`캐릭터 저장 시도 ${attempt}/${maxRetries}`);
+                    showStatus(`캐릭터를 저장하고 있습니다... (시도 ${attempt}/${maxRetries})`);
+                    
+                    const docRef = await db.collection('mystery-character-chat-001').add(characterData);
+                    console.log('캐릭터 저장 완료:', docRef.id);
+                    return docRef;
+                    
+                } catch (error) {
+                    console.error(`저장 시도 ${attempt} 실패:`, error);
+                    lastError = error;
+                    
+                    if (attempt < maxRetries) {
+                        // 지수적 백오프: 1초, 2초, 4초 대기
+                        const delay = Math.pow(2, attempt - 1) * 1000;
+                        console.log(`${delay/1000}초 후 재시도...`);
+                        await new Promise(resolve => setTimeout(resolve, delay));
+                    }
+                }
+            }
+            
+            throw lastError;
         }
 
         // 폼 제출 처리
@@ -618,7 +701,7 @@
                     createdAt: firebase.firestore.FieldValue.serverTimestamp()
                 };
 
-                showStatus('캐릭터 이미지를 생성하고 있습니다...');
+                console.log('생성할 캐릭터 데이터:', characterData);
 
                 // 캐릭터 이미지 생성
                 const imageUrl = await generateCharacterImage(characterData);
@@ -630,11 +713,8 @@
                 previewImage.src = imageUrl;
                 previewSection.style.display = 'block';
 
-                showStatus('캐릭터를 저장하고 있습니다...');
-
-                // Firebase에 저장
-                const docRef = await db.collection('mystery-character-chat-001').add(characterData);
-                console.log('캐릭터 저장 완료:', docRef.id);
+                // Firebase에 저장 (재시도 로직 포함)
+                const docRef = await saveCharacterWithRetry(characterData);
 
                 showStatus(`🎉 "${characterData.name}" 캐릭터가 성공적으로 생성되었습니다!`);
                 
@@ -645,7 +725,20 @@
 
             } catch (error) {
                 console.error('캐릭터 생성 오류:', error);
-                showStatus('캐릭터 생성 중 오류가 발생했습니다. 다시 시도해주세요.', 'error');
+                let errorMessage = '캐릭터 생성 중 오류가 발생했습니다.';
+                
+                // 구체적인 오류 메시지 제공
+                if (error.code === 'permission-denied') {
+                    errorMessage = '권한이 없습니다. 로그인 상태를 확인해주세요.';
+                } else if (error.code === 'unavailable') {
+                    errorMessage = 'Firestore 서비스에 일시적으로 연결할 수 없습니다. 잠시 후 다시 시도해주세요.';
+                } else if (error.code === 'failed-precondition') {
+                    errorMessage = 'Firestore 규칙 오류입니다. 관리자에게 문의하세요.';
+                } else if (error.message) {
+                    errorMessage += ' ' + error.message;
+                }
+                
+                showStatus(errorMessage, 'error');
             } finally {
                 createBtn.classList.remove('loading');
                 createBtn.disabled = false;
@@ -667,8 +760,22 @@
         document.getElementById('name').addEventListener('input', checkFormValid);
         document.getElementById('role').addEventListener('change', checkFormValid);
         
-        // 초기 상태 설정
+        // 초기 상태 설정 및 연결 상태 확인
         checkFormValid();
+        checkConnectionStatus();
+        
+        // 네트워크 상태 변화 감지
+        window.addEventListener('online', () => {
+            updateDebugStatus('connectionStatus', '✅ 온라인');
+            checkConnectionStatus();
+        });
+        
+        window.addEventListener('offline', () => {
+            updateDebugStatus('connectionStatus', '❌ 오프라인');
+        });
+
+        // Firestore 연결 상태 주기적 확인
+        setInterval(checkConnectionStatus, 30000); // 30초마다 확인
     </script>
 </body>
 </html>
