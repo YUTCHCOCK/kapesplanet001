@@ -641,3 +641,47 @@
         // 로그인 버튼 이벤트
         document.getElementById('googleLoginBtn').addEventListener('click', async () => {
             try {
+                const provider = new firebase.auth.GoogleAuthProvider();
+                await auth.signInWithPopup(provider);
+                showStatus('로그인 성공!');
+            } catch (error) {
+                console.error('로그인 오류:', error);
+                showStatus('로그인에 실패했습니다.', 'error');
+            }
+        });
+
+        document.getElementById('anonymousLoginBtn').addEventListener('click', async () => {
+            try {
+                await auth.signInAnonymously();
+                showStatus('익명 로그인 성공!');
+            } catch (error) {
+                console.error('익명 로그인 오류:', error);
+                showStatus('익명 로그인에 실패했습니다.', 'error');
+            }
+        });
+
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            auth.signOut();
+        });
+
+        // 초기 상태 설정 및 연결 상태 확인
+        checkConnectionStatus();
+        
+        // 네트워크 상태 변화 감지
+        window.addEventListener('online', () => {
+            updateDebugStatus('connectionStatus', '✅ 온라인');
+            checkConnectionStatus();
+            if (currentUser) {
+                loadCharacters(); // 온라인 복구시 캐릭터 다시 로드
+            }
+        });
+        
+        window.addEventListener('offline', () => {
+            updateDebugStatus('connectionStatus', '❌ 오프라인');
+        });
+
+        // Firestore 연결 상태 주기적 확인
+        setInterval(checkConnectionStatus, 30000); // 30초마다 확인
+    </script>
+</body>
+</html>
