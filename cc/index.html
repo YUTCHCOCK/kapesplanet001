@@ -76,6 +76,16 @@
             box-shadow: 0 10px 20px rgba(255, 215, 0, 0.3);
         }
 
+        .debug-info {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-family: monospace;
+            font-size: 12px;
+            color: #ccc;
+        }
+
         .user-section {
             display: flex;
             align-items: center;
@@ -281,6 +291,15 @@
             transform: translateY(-2px);
         }
 
+        .status-message {
+            text-align: center;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 10px;
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 10px;
@@ -310,6 +329,17 @@
             <p class="subtitle">당신이 만든 독특한 캐릭터들과 함께 추리 소설을 써보세요</p>
             <a href="/cc/create.html" class="create-new-btn">+ 새 캐릭터 만들기</a>
         </div>
+
+        <!-- 디버그 정보 -->
+        <div id="debugInfo" class="debug-info">
+            <strong>연결 상태:</strong> <span id="connectionStatus">확인 중...</span><br>
+            <strong>사용자:</strong> <span id="userStatus">로그인 대기 중...</span><br>
+            <strong>Firestore:</strong> <span id="firestoreStatus">초기화 중...</span><br>
+            <strong>마지막 업데이트:</strong> <span id="lastUpdate">-</span>
+        </div>
+
+        <!-- 상태 메시지 -->
+        <div id="statusMessage" class="status-message" style="display: none;"></div>
 
         <!-- 로그인 필요 섹션 -->
         <div id="loginRequired" class="login-required" style="display: none;">
@@ -358,14 +388,67 @@
             appId: "1:901968465409:web:d7cbe17100926d89e6fa00"
         };
 
-        // Firebase 초기화
+        // Firebase 초기화 및 Firestore 설정
         firebase.initializeApp(firebaseConfig);
+        
+        // Firestore 초기화 시 Long Polling 강제 적용
         const db = firebase.firestore();
+        
+        // Long Polling 설정 강제 적용
+        try {
+            db.settings({
+                experimentalForceLongPolling: true,
+                useFetchStreams: false
+            });
+            console.log('Firestore Long Polling 설정 완료');
+            updateDebugStatus('firestoreStatus', '✅ Long Polling 설정 완료');
+        } catch (error) {
+            console.warn('Firestore 설정 오류 (이미 초기화됨):', error);
+            updateDebugStatus('firestoreStatus', '⚠️ 설정 오류 (이미 초기화됨)');
+        }
+        
         const auth = firebase.auth();
         const functions = firebase.functions();
 
         let currentUser = null;
         let characters = [];
+
+        // 디버그 상태 업데이트 함수
+        function updateDebugStatus(elementId, status) {
+            const element = document.getElementById(elementId);
+            if (element) {
+                element.textContent = status;
+            }
+            document.getElementById('lastUpdate').textContent = new Date().toLocaleTimeString();
+        }
+
+        // 상태 메시지 표시 함수
+        function showStatus(message, type = 'info') {
+            const statusDiv = document.getElementById('statusMessage');
+            statusDiv.textContent = message;
+            statusDiv.style.display = 'block';
+            statusDiv.style.backgroundColor = type === 'error' ? 'rgba(255, 0, 0, 0.1)' : 'rgba(255, 215, 0, 0.1)';
+            statusDiv.style.borderColor = type === 'error' ? 'rgba(255, 0, 0, 0.3)' : 'rgba(255, 215, 0, 0.3)';
+            
+            setTimeout(() => {
+                statusDiv.style.display = 'none';
+            }, 5000);
+        }
+
+        // 연결 상태 확인
+        function checkConnectionStatus() {
+            updateDebugStatus('connectionStatus', navigator.onLine ? '✅ 온라인' : '❌ 오프라인');
+            
+            // Firestore 연결 테스트
+            db.doc('test/connection').get()
+                .then(() => {
+                    updateDebugStatus('firestoreStatus', '✅ Firestore 연결 성공');
+                })
+                .catch((error) => {
+                    updateDebugStatus('firestoreStatus', '❌ Firestore 연결 실패: ' + error.code);
+                    console.error('Firestore 연결 테스트 실패:', error);
+                });
+        }
 
         // 역할 이모지 매핑
         const roleEmojis = {
@@ -389,9 +472,11 @@
         auth.onAuthStateChanged((user) => {
             currentUser = user;
             if (user) {
+                updateDebugStatus('userStatus', user.isAnonymous ? '👤 익명 사용자' : '✅ ' + (user.email || user.displayName));
                 showUserSection(user);
                 loadCharacters();
             } else {
+                updateDebugStatus('userStatus', '❌ 로그아웃 상태');
                 showLoginRequired();
             }
         });
@@ -440,33 +525,53 @@
             updateCharacterCount();
         }
 
-        // 캐릭터 로딩
+        // 캐릭터 로딩 (재시도 로직 포함)
         async function loadCharacters() {
             if (!currentUser) return;
             
             showLoading();
+            updateDebugStatus('firestoreStatus', '🔄 캐릭터 로딩 중...');
             
-            try {
-                console.log('Firestore에서 직접 캐릭터 조회 시작');
-                const snapshot = await db.collection('mystery-character-chat-001')
-                    .where('userId', '==', currentUser.uid)
-                    .orderBy('createdAt', 'desc')
-                    .get();
-                
-                characters = [];
-                snapshot.forEach(doc => {
-                    characters.push({
-                        id: doc.id,
-                        ...doc.data()
+            let retryCount = 0;
+            const maxRetries = 3;
+            
+            while (retryCount < maxRetries) {
+                try {
+                    console.log(`캐릭터 로딩 시도 ${retryCount + 1}/${maxRetries}`);
+                    
+                    const snapshot = await db.collection('mystery-character-chat-001')
+                        .where('userId', '==', currentUser.uid)
+                        .orderBy('createdAt', 'desc')
+                        .get();
+                    
+                    characters = [];
+                    snapshot.forEach(doc => {
+                        characters.push({
+                            id: doc.id,
+                            ...doc.data()
+                        });
                     });
-                });
-                console.log('로딩된 캐릭터 수:', characters.length);
-                showCharacters();
-            } catch (error) {
-                console.error('캐릭터 로딩 오류:', error);
-                // 오류가 나도 빈 상태 표시
-                characters = [];
-                showCharacters();
+                    
+                    console.log('로딩된 캐릭터 수:', characters.length);
+                    updateDebugStatus('firestoreStatus', `✅ 캐릭터 ${characters.length}개 로딩 완료`);
+                    showCharacters();
+                    return; // 성공시 리턴
+                    
+                } catch (error) {
+                    console.error(`캐릭터 로딩 시도 ${retryCount + 1} 실패:`, error);
+                    retryCount++;
+                    
+                    if (retryCount < maxRetries) {
+                        updateDebugStatus('firestoreStatus', `⚠️ 로딩 실패, ${2 ** retryCount}초 후 재시도...`);
+                        await new Promise(resolve => setTimeout(resolve, 1000 * (2 ** retryCount)));
+                    } else {
+                        updateDebugStatus('firestoreStatus', '❌ 캐릭터 로딩 실패');
+                        showStatus('캐릭터를 불러오는데 실패했습니다. 새로고침 해주세요.', 'error');
+                        // 오류가 나도 빈 상태 표시
+                        characters = [];
+                        showCharacters();
+                    }
+                }
             }
         }
 
@@ -521,41 +626,18 @@
                 await db.collection('mystery-character-chat-001').doc(characterId).delete();
                 characters = characters.filter(c => c.id !== characterId);
                 showCharacters();
-                alert('캐릭터가 삭제되었습니다.');
+                showStatus('캐릭터가 삭제되었습니다.');
             } catch (error) {
                 console.error('삭제 오류:', error);
-                alert('삭제에 실패했습니다.');
+                showStatus('삭제에 실패했습니다.', 'error');
             }
         }
 
         // 캐릭터 수정 (임시)
         function editCharacter(characterId) {
-            alert('수정 기능은 곧 추가될 예정입니다!');
+            showStatus('수정 기능은 곧 추가될 예정입니다!');
         }
 
         // 로그인 버튼 이벤트
         document.getElementById('googleLoginBtn').addEventListener('click', async () => {
             try {
-                const provider = new firebase.auth.GoogleAuthProvider();
-                await auth.signInWithPopup(provider);
-            } catch (error) {
-                console.error('로그인 오류:', error);
-                alert('로그인에 실패했습니다.');
-            }
-        });
-
-        document.getElementById('anonymousLoginBtn').addEventListener('click', async () => {
-            try {
-                await auth.signInAnonymously();
-            } catch (error) {
-                console.error('익명 로그인 오류:', error);
-                alert('익명 로그인에 실패했습니다.');
-            }
-        });
-
-        document.getElementById('logoutBtn').addEventListener('click', () => {
-            auth.signOut();
-        });
-    </script>
-</body>
-</html>
