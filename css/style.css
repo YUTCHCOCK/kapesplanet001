@@ -1675,3 +1675,33 @@ footer {
         color: black;
     }
 }
+
+.people-section-title {
+    font-weight: bold;
+    font-size: 1.1em;
+    margin-bottom: 0.4em;
+}
+.people-works li b {
+    color: #aaa;
+    font-weight: bold;
+    margin-right: 0.5em;
+    font-size: 1em;
+}
+.people-name {
+    font-size: 2em;
+    font-weight: bold;
+}
+.people-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2em;
+    align-items: flex-start;
+}
+.people-photo img {
+    border-radius: 1em;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+@media (max-width: 700px) {
+    .people-content { flex-direction: column; gap: 1em;}
+    .people-photo, .people-info { max-width: 100%; }
+}
