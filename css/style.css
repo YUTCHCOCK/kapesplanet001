@@ -1675,33 +1675,163 @@ footer {
         color: black;
     }
 }
-
-.people-section-title {
-    font-weight: bold;
-    font-size: 1.1em;
-    margin-bottom: 0.4em;
+.people-content {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 24px;
+    padding: 32px 0;
+    flex-wrap: wrap;
 }
-.people-works li b {
-    color: #aaa;
-    font-weight: bold;
-    margin-right: 0.5em;
-    font-size: 1em;
+.people-card {
+    background: #f6f7fa; /* 더 연한 회색 */
+    border-radius: 18px;
+    box-shadow: 0 2px 12px rgba(30,40,60,0.06);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 28px 24px 24px 24px;
+    width: 100%;
+    max-width: 420px;
+    min-width: 240px;
+}
+.people-photo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 18px;
+}
+.people-photo img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    margin-bottom: 10px;
+}
+.people-role {
+    font-size: 1.08em;
+    color: #888;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    margin-top: 0;
+}
+.people-info {
+    width: 100%;
 }
 .people-name {
     font-size: 2em;
-    font-weight: bold;
+    font-weight: 700;
+    color: #222;
+    margin-bottom: 0.35em;
+    text-align: center;
 }
-.people-content {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2em;
-    align-items: flex-start;
+.people-section-title {
+    font-weight: 600;
+    font-size: 1.1em;
+    margin-bottom: 0.5em;
+    text-align: center;
 }
-.people-photo img {
-    border-radius: 1em;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+
+/* 경력 테이블 */
+.people-positions-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1em;
+  margin-bottom: 1em;
+  background: none;
 }
-@media (max-width: 700px) {
-    .people-content { flex-direction: column; gap: 1em;}
-    .people-photo, .people-info { max-width: 100%; }
+.people-positions-table td {
+  padding: 0.3em 0.5em;
+  border: none;
+  vertical-align: top;
+  text-align: left;
+}
+.people-positions-table .years {
+  width: 60px;
+  min-width: 58px;
+  color: #222;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.people-positions-table .company {
+  color: #888;
+  font-weight: 600;
+  min-width: 90px;
+  white-space: nowrap;
+}
+.people-positions-table .position {
+  color: #333;
+  font-weight: 400;
+}
+
+/* 대표 연출작 테이블 */
+.people-works-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 0 1em 0;
+  font-size: 1em;
+  background: none;
+}
+.people-works-table td {
+  padding: 0.4em 0.7em;
+  border: none;
+  vertical-align: top;
+}
+.people-works-table .channel {
+  font-weight: 700;
+  color: #888;
+  width: 130px;
+  min-width: 90px;
+  white-space: nowrap;
+  text-align: left;
+}
+.people-works-table .work-title {
+  color: #333;
+  font-weight: 400;
+  text-align: left;
+}
+
+/* 모바일 최적화 */
+@media (max-width: 768px) {
+    .people-content {
+        flex-direction: column;
+        align-items: center;
+        gap: 18px;
+        padding: 18px 0;
+    }
+    .people-card {
+        max-width: 98vw;
+        min-width: 0;
+        padding: 16px 6vw 20px 6vw;
+    }
+    .people-photo img {
+        width: 90px;
+        height: 90px;
+    }
+    .people-name {
+        font-size: 1.4em;
+    }
+    .people-positions-table .years,
+    .people-positions-table .company,
+    .people-positions-table .position {
+      display: block;
+      width: 100%;
+      margin-bottom: 2px;
+    }
+    .people-works-table,
+    .people-works-table tbody,
+    .people-works-table tr,
+    .people-works-table td {
+      display: block;
+      width: 100%;
+    }
+    .people-works-table tr {
+      margin-bottom: 0.7em;
+    }
+    .people-works-table .channel,
+    .people-works-table .work-title {
+      display: block;
+      margin-bottom: 2px;
+    }
 }
