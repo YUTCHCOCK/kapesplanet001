@@ -1676,176 +1676,178 @@ footer {
     }
 }
 .people-content {
-    display: flex;
-    align-items: flex-start;
-    gap: 36px;
-    padding: 32px 0;
-    flex-wrap: wrap;
-    justify-content: center;
-    background: #f6f7fa;
-    border-radius: 18px;
-    box-shadow: 0 2px 12px rgba(30,40,60,0.06);
-    max-width: 900px;
-    margin: 0 auto 40px auto;
+  display: flex;
+  align-items: flex-start;
+  gap: 36px;
+  padding: 32px 0;
+  flex-wrap: wrap;
+  justify-content: center;
+  background: #f6f7fa;
+  border-radius: 18px;
+  box-shadow: 0 2px 12px rgba(30,40,60,0.06);
+  max-width: 900px;
+  margin: 0 auto 40px auto;
 }
 .people-photo-area {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-width: 150px;
-    max-width: 180px;
-    flex: 0 0 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 150px;
+  max-width: 180px;
+  flex: 0 0 180px;
 }
 .people-photo-img {
-    width: 120px;
-    height: 120px;
-    object-fit: cover;
-    border-radius: 16px;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-    margin-bottom: 10px;
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  margin-bottom: 10px;
 }
 .people-role {
-    font-size: 1.08em;
-    color: #888;
-    font-weight: 600;
-    letter-spacing: 0.01em;
-    margin-top: 6px;
-    text-align: center;
+  font-size: 1.08em;
+  color: #888;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  margin-top: 6px;
+  text-align: center;
 }
 .people-info {
-    flex: 1;
-    min-width: 220px;
-    max-width: 580px;
+  flex: 1;
+  min-width: 220px;
+  max-width: 580px;
 }
 .people-name {
-    font-size: 2em;
-    font-weight: 700;
-    color: #222;
-    margin-bottom: 0.5em;
-    text-align: left;
+  font-size: 1.1em;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 0.7em;
+  text-align: left;
 }
 .people-section-title {
-    font-size: 1.1em;
-    font-weight: 700;
-    margin: 1.2em 0 0.5em 0;
-    text-align: left;
-    color: #222;
-    letter-spacing: -0.01em;
+  font-size: 1.1em;
+  font-weight: 700;
+  margin: 1.2em 0 0.5em 0;
+  text-align: left;
+  color: #222;
+  letter-spacing: -0.01em;
 }
 
-/* 경력 테이블 */
 .people-positions-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 1em;
-    margin-bottom: 1em;
-    background: none;
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1em;
+  margin-bottom: 1em;
+  background: none;
 }
 .people-positions-table td {
-    padding: 0.3em 0.5em;
-    border: none;
-    vertical-align: top;
-    text-align: left;
-    font-size: 1em;
+  padding: 0.3em 0.5em;
+  border: none;
+  vertical-align: top;
+  font-size: 1em;
 }
 .people-positions-table .years {
-    width: 60px;
-    min-width: 58px;
-    color: #222;
-    font-weight: 500;
-    white-space: nowrap;
-    font-size: 1em;
+  text-align: right;
+  padding-right: 1em;
+  width: 60px;
+  min-width: 58px;
+  color: #222;
+  font-weight: 500;
+  white-space: nowrap;
+  font-size: 1em;
 }
 .people-positions-table .company {
-    color: #888;
-    font-weight: 600;
-    min-width: 90px;
-    white-space: nowrap;
-    font-size: 1em;
+  color: #888;
+  font-weight: 600;
+  min-width: 90px;
+  white-space: nowrap;
+  font-size: 1em;
 }
 .people-positions-table .position {
-    color: #333;
-    font-weight: 400;
-    font-size: 1em;
+  color: #333;
+  font-weight: 400;
+  font-size: 1em;
 }
 
-/* 대표 연출작 테이블 */
 .people-works-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 0 0 1em 0;
-    font-size: 1em;
-    background: none;
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 0 1em 0;
+  font-size: 1em;
+  background: none;
 }
 .people-works-table td {
-    padding: 0.4em 0.7em;
-    border: none;
-    vertical-align: top;
-    font-size: 1em;
+  padding: 0.4em 0.7em;
+  border: none;
+  vertical-align: top;
+  font-size: 1em;
 }
 .people-works-table .channel {
-    font-weight: 600;
-    color: #888;
-    width: 130px;
-    min-width: 90px;
-    white-space: nowrap;
-    text-align: right;
-    padding-right: 1.3em;
-    font-size: 1em;
+  font-weight: 600;
+  color: #888;
+  width: 130px;
+  min-width: 90px;
+  white-space: nowrap;
+  text-align: right;
+  padding-right: 1.3em;
+  font-size: 1em;
 }
 .people-works-table .work-title {
-    color: #333;
-    font-weight: 400;
-    text-align: left;
-    font-size: 1em;
+  color: #333;
+  font-weight: 400;
+  text-align: left;
+  font-size: 1em;
 }
 
 /* 모바일 최적화 */
 @media (max-width: 900px) {
-    .people-content {
-        flex-direction: column;
-        align-items: center;
-        gap: 18px;
-        padding: 18px 0;
-    }
-    .people-photo-area {
-        margin-bottom: 12px;
-        min-width: 120px;
-        max-width: 120px;
-        flex: 0 0 120px;
-    }
-    .people-photo-img {
-        width: 90px;
-        height: 90px;
-    }
-    .people-name {
-        font-size: 1.4em;
-    }
-    .people-info {
-        max-width: 98vw;
-    }
-    .people-positions-table .years,
-    .people-positions-table .company,
-    .people-positions-table .position {
-        display: block;
-        width: 100%;
-        margin-bottom: 2px;
-    }
-    .people-works-table,
-    .people-works-table tbody,
-    .people-works-table tr,
-    .people-works-table td {
-        display: block;
-        width: 100%;
-    }
-    .people-works-table tr {
-        margin-bottom: 0.7em;
-    }
-    .people-works-table .channel,
-    .people-works-table .work-title {
-        display: block;
-        margin-bottom: 2px;
-        text-align: left !important;
-        padding-right: 0;
-    }
+  .people-content {
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    padding: 18px 0;
+  }
+  .people-photo-area {
+    margin-bottom: 12px;
+    min-width: 120px;
+    max-width: 120px;
+    flex: 0 0 120px;
+  }
+  .people-photo-img {
+    width: 90px;
+    height: 90px;
+  }
+  .people-name,
+  .people-section-title {
+    font-size: 1em;
+  }
+  .people-info {
+    max-width: 98vw;
+  }
+  .people-positions-table .years,
+  .people-positions-table .company,
+  .people-positions-table .position {
+    display: block;
+    width: 100%;
+    margin-bottom: 2px;
+    text-align: left !important;
+    padding-right: 0 !important;
+  }
+  .people-works-table,
+  .people-works-table tbody,
+  .people-works-table tr,
+  .people-works-table td {
+    display: block;
+    width: 100%;
+  }
+  .people-works-table tr {
+    margin-bottom: 0.7em;
+  }
+  .people-works-table .channel,
+  .people-works-table .work-title {
+    display: block;
+    margin-bottom: 2px;
+    text-align: left !important;
+    padding-right: 0;
+  }
 }
