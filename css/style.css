@@ -849,7 +849,8 @@ nav ul li a.active {
 
 .creator-content {
     display: flex;
-    gap: 80px;
+    justify-content: center;
+    gap: 140px;
     align-items: flex-start;
     max-width: 1400px;
     margin: 0 auto;
