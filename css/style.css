@@ -127,7 +127,6 @@ nav ul li a {
     --primary-color: #FF5A00;
     --dark-color: #121212;
     --light-color: #F9F6F0;
-    --accent-color: #F9D923;
     --text-color: #FFFFFF;
 }
 
@@ -885,7 +884,7 @@ nav ul li a.active {
 .role-title {
     font-size: 1.2rem;
     font-weight: 600;
-    color: var(--accent-color);
+    color: var(--text-color);
     margin-bottom: 8px;
     letter-spacing: 2px;
 }
@@ -904,7 +903,7 @@ nav ul li a.active {
 .creator-description {
     font-size: 1.8rem;
     font-weight: 600;
-    color: var(--accent-color);
+    color: var(--text-color);
     margin-bottom: 50px;
     line-height: 1.4;
 }
