@@ -873,8 +873,8 @@ nav ul li a.active {
 }
 
 .creator-photo img {
-    width: 100%;
-    height: 100%;
+    width: 60%;
+    height: 60%;
     object-fit: cover;
 }
 
@@ -883,7 +883,7 @@ nav ul li a.active {
 }
 
 .role-title {
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 600;
     color: var(--text-color);
     margin-bottom: 8px;
@@ -891,7 +891,7 @@ nav ul li a.active {
 }
 
 .role-name {
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: 700;
     color: var(--text-color);
 }
@@ -902,7 +902,7 @@ nav ul li a.active {
 }
 
 .creator-description {
-    font-size: 1.8rem;
+    font-size: 1.4rem;
     font-weight: 600;
     color: var(--text-color);
     margin-bottom: 50px;
@@ -941,20 +941,20 @@ nav ul li a.active {
 }
 
 .career-years {
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     font-weight: 600;
     color: #888;
     min-width: 120px;
 }
 
 .career-company {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     font-weight: 700;
     color: var(--text-color);
 }
 
 .career-position {
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     font-weight: 600;
     color: var(--primary-color);
 }
@@ -972,14 +972,14 @@ nav ul li a.active {
 
 .work-channel {
     min-width: 100px;
-    font-size: 0.95rem;
+    font-size: 0.8rem;
     font-weight: 600;
     color: #aaa;
     flex-shrink: 0;
 }
 
 .work-title {
-    font-size: 1rem;
+    font-size: 0.8rem;
     color: var(--text-color);
     line-height: 1.4;
 }
