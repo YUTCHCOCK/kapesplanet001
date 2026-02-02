@@ -3,6 +3,7 @@
 /* 스크롤 성능 최적화 */
 html {
     scroll-behavior: smooth;
+    scroll-padding-top: 100px;
 }
 
 /* GPU 가속 활성화 */

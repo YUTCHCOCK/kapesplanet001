@@ -4,59 +4,43 @@ console.log('네비게이션 스크립트 시작');
 // 전역 변수로 초기화 상태 관리
 let isInitialized = false;
 
-// 1. 간단한 네비게이션 설정
+// 1. 네비게이션 설정 (이벤트 위임 방식)
 function setupSimpleNavigation() {
     console.log('📍 네비게이션 설정 중...');
-    const navLinks = document.querySelectorAll('header nav ul li a');
 
-    // 기존 이벤트 제거 (replaceWith + cloneNode 방식)
-    navLinks.forEach(link => {
-        link.replaceWith(link.cloneNode(true));
-    });
+    const nav = document.querySelector('header nav');
+    if (!nav) return;
 
-    // 새롭게 바인딩
-    const freshNavLinks = document.querySelectorAll('header nav ul li a');
-    freshNavLinks.forEach(link => {
-        const href = link.getAttribute('href');
-        if (href && href.startsWith('#')) {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const targetId = href.substring(1);
-                scrollToTarget(targetId);
-                setActiveLink(this);
-                closeMobileMenu();
-            });
-        }
+    nav.addEventListener('click', function(e) {
+        const link = e.target.closest('a[href^="#"]');
+        if (!link) return;
+
+        e.preventDefault();
+        const targetId = link.getAttribute('href').substring(1);
+        scrollToTarget(targetId);
+        setActiveLink(link);
+        closeMobileMenu();
     });
 }
 
-// 2. 스크롤 함수
+// 2. 스크롤 함수 (getBoundingClientRect 기반)
 function scrollToTarget(sectionId) {
-    console.log('🎯 스크롤 대상:', sectionId);
-
     if (sectionId === 'hero' || sectionId === '') {
         window.scrollTo({ top: 0, behavior: 'smooth' });
-        console.log('✅ Hero 섹션으로 스크롤');
         return;
     }
 
     const target = document.getElementById(sectionId);
-    if (!target) {
-        console.error('❌ 섹션을 찾을 수 없음:', sectionId);
-        return;
-    }
+    if (!target) return;
 
-    const headerHeight = 100;
-    const targetTop = target.offsetTop - headerHeight;
-
-    console.log('📐 계산된 스크롤 위치:', targetTop);
+    const header = document.querySelector('header');
+    const headerHeight = header ? header.offsetHeight : 100;
+    const targetTop = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
 
     window.scrollTo({
         top: Math.max(0, targetTop),
         behavior: 'smooth'
     });
-
-    console.log('✅ 스크롤 완료:', sectionId);
 }
 
 // 3. 활성 링크 설정
