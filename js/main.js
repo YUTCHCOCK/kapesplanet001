@@ -1,55 +1,14 @@
-// 간단하고 확실하게 작동하는 네비게이션 스크립트
+// 네비게이션 스크립트
 console.log('네비게이션 스크립트 시작');
 
 // 전역 변수로 초기화 상태 관리
 let isInitialized = false;
 
-function safeInit() {
-    if (isInitialized) return;
-    // ...생략...
-    try {
-        setupSimpleNavigation();
-        setupMobileMenu();
-        setupHeaderScroll();
-        setupPortfolioFilter();
-        setupVideoModal();
-        renderPressBoard();
-        setupResizeHandler();
-        setupScrollIndicator();
-        isInitialized = true;
-        console.log('✅ 모든 기능 초기화 완료');
-    } catch (error) {
-        // ...생략...
-    }
-}
-
-// 이하 모든 함수 선언: 중복 없이 한 번만!
-// setupSimpleNavigation, setupMobileMenu 등...
-
-// renderPressBoard 함수도 한 번만!
-function renderPressBoard() {
-    // ...프레스 게시판 렌더링...
-}
-
-// setupScrollIndicator 등, 나머지 함수 단 한 번씩만
-
-// 초기화 실행부
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', safeInit);
-} else {
-    safeInit();
-}
-window.addEventListener('load', function() {
-    if (!isInitialized) {
-        setTimeout(safeInit, 500);
-    }
-});
-
 // 1. 간단한 네비게이션 설정
 function setupSimpleNavigation() {
     console.log('📍 네비게이션 설정 중...');
     const navLinks = document.querySelectorAll('header nav ul li a');
-    
+
     // 기존 이벤트 제거 (replaceWith + cloneNode 방식)
     navLinks.forEach(link => {
         link.replaceWith(link.cloneNode(true));
@@ -71,32 +30,32 @@ function setupSimpleNavigation() {
     });
 }
 
-// 2. 스크롤 함수 (가장 간단한 버전)
+// 2. 스크롤 함수
 function scrollToTarget(sectionId) {
     console.log('🎯 스크롤 대상:', sectionId);
-    
+
     if (sectionId === 'hero' || sectionId === '') {
         window.scrollTo({ top: 0, behavior: 'smooth' });
         console.log('✅ Hero 섹션으로 스크롤');
         return;
     }
-    
+
     const target = document.getElementById(sectionId);
     if (!target) {
         console.error('❌ 섹션을 찾을 수 없음:', sectionId);
         return;
     }
-    
-    const headerHeight = 100; // 고정 헤더 높이
+
+    const headerHeight = 100;
     const targetTop = target.offsetTop - headerHeight;
-    
+
     console.log('📐 계산된 스크롤 위치:', targetTop);
-    
+
     window.scrollTo({
         top: Math.max(0, targetTop),
         behavior: 'smooth'
     });
-    
+
     console.log('✅ 스크롤 완료:', sectionId);
 }
 
@@ -111,19 +70,19 @@ function setActiveLink(clickedLink) {
 // 4. 모바일 메뉴
 function setupMobileMenu() {
     console.log('📱 모바일 메뉴 설정 중...');
-    
+
     const menuBtn = document.querySelector('.mobile-menu-btn');
     const nav = document.querySelector('header nav');
-    
+
     if (!menuBtn || !nav) {
         console.log('모바일 메뉴 요소 없음');
         return;
     }
-    
+
     menuBtn.addEventListener('click', function(e) {
         e.preventDefault();
         nav.classList.toggle('active');
-        
+
         if (nav.classList.contains('active')) {
             menuBtn.innerHTML = '<i class="fas fa-times"></i>';
             document.body.style.overflow = 'hidden';
@@ -132,7 +91,7 @@ function setupMobileMenu() {
             document.body.style.overflow = '';
         }
     });
-    
+
     // 메뉴 외부 클릭시 닫기
     document.addEventListener('click', function(e) {
         if (!nav.contains(e.target) && !menuBtn.contains(e.target)) {
@@ -144,7 +103,7 @@ function setupMobileMenu() {
 function closeMobileMenu() {
     const nav = document.querySelector('header nav');
     const menuBtn = document.querySelector('.mobile-menu-btn');
-    
+
     if (nav && nav.classList.contains('active')) {
         nav.classList.remove('active');
         document.body.style.overflow = '';
@@ -157,13 +116,11 @@ function closeMobileMenu() {
 // 5. 헤더 스크롤 효과
 function setupHeaderScroll() {
     console.log('📜 헤더 스크롤 효과 설정 중...');
-    
-    let lastScroll = 0;
-    
+
     window.addEventListener('scroll', function() {
         const currentScroll = window.pageYOffset;
         const header = document.querySelector('header');
-        
+
         if (header) {
             if (currentScroll > 50) {
                 header.classList.add('scrolled');
@@ -171,39 +128,34 @@ function setupHeaderScroll() {
                 header.classList.remove('scrolled');
             }
         }
-        
-        lastScroll = currentScroll;
     }, { passive: true });
 }
 
 // 6. 포트폴리오 필터
 function setupPortfolioFilter() {
     console.log('🎨 포트폴리오 필터 설정 중...');
-    
+
     const filterBtns = document.querySelectorAll('.filter-btn');
     const workItems = document.querySelectorAll('.work-item');
-    
+
     if (filterBtns.length === 0) {
         console.log('필터 버튼 없음');
         return;
     }
-    
+
     filterBtns.forEach(btn => {
         btn.addEventListener('click', function() {
             const filter = this.getAttribute('data-filter');
-            
-            // 활성 버튼 변경
+
             filterBtns.forEach(b => b.classList.remove('active'));
             this.classList.add('active');
-            
-            // 아이템 필터링
+
             workItems.forEach(item => {
                 const category = item.getAttribute('data-category');
                 const shouldShow = filter === 'all' || category === filter;
-                
                 item.style.display = shouldShow ? 'block' : 'none';
             });
-            
+
             console.log('필터 적용됨:', filter);
         });
     });
@@ -212,21 +164,20 @@ function setupPortfolioFilter() {
 // 7. 비디오 모달
 function setupVideoModal() {
     console.log('🎬 비디오 모달 설정 중...');
-    
+
     const modal = document.getElementById('video-modal');
     const iframe = document.getElementById('modal-iframe');
     const closeBtn = document.querySelector('.close-button');
-    
+
     if (!modal || !iframe) {
         console.log('비디오 모달 요소 없음');
         return;
     }
-    
-    // 포트폴리오 아이템 클릭
+
     document.querySelectorAll('.work-item').forEach(item => {
         item.addEventListener('click', function(e) {
             e.preventDefault();
-            
+
             const videoFrame = this.querySelector('iframe');
             if (videoFrame) {
                 const src = videoFrame.src;
@@ -237,200 +188,45 @@ function setupVideoModal() {
             }
         });
     });
-    
-    // 모달 닫기
+
     if (closeBtn) {
         closeBtn.addEventListener('click', closeModal);
     }
-    
+
     modal.addEventListener('click', function(e) {
         if (e.target === modal) closeModal();
     });
-    
+
     function extractVideoId(url) {
         const match = url.match(/youtube\.com\/embed\/([^?&]+)/);
         return match ? match[1] : null;
     }
-    
+
     function openModal(videoId) {
         iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
         modal.style.display = 'flex';
         document.body.style.overflow = 'hidden';
     }
-    
+
     function closeModal() {
         modal.style.display = 'none';
         iframe.src = '';
         document.body.style.overflow = '';
     }
-    
-    // 전역으로 노출
+
     window.closeVideoModal = closeModal;
 }
 
 // 8. 프레스 게시판 렌더링
 function renderPressBoard() {
     console.log('📰 프레스 게시판 렌더링 중...');
-    
+
     const board = document.getElementById('headlineBoard');
     if (!board) {
         console.log('프레스 게시판 요소 없음');
         return;
     }
 
-// 기존 main.js 파일에서 수정할 부분들
-
-// 1. setupScrollIndicator 함수를 다른 함수들과 함께 추가
-// (renderPressBoard 함수 다음에 추가하면 됩니다)
-
-// 8. 프레스 게시판 렌더링
-function renderPressBoard() {
-    console.log('📰 프레스 게시판 렌더링 중...');
-    
-    const board = document.getElementById('headlineBoard');
-    if (!board) {
-        console.log('프레스 게시판 요소 없음');
-        return;
-    }
-    
-    // 프레스 데이터
-    const articles = [
-        // ... 기존 articles 배열 내용 ...
-    ];
-    
-    // 기사 목록 생성
-    board.innerHTML = '';
-    
-    articles.forEach(article => {
-        const li = document.createElement('li');
-        li.className = 'headline-row';
-        li.innerHTML = `
-            <div class="headline-date">${article.date}</div>
-            <div class="headline-main">
-                <a href="${article.url}" class="headline-title" target="_blank" rel="noopener">
-                    ${article.title}
-                </a>
-                <div class="headline-summary">${article.summary}</div>
-            </div>
-            <div class="headline-media">${article.media}</div>
-        `;
-        board.appendChild(li);
-    });
-    
-    console.log('✅ 프레스 게시판 렌더링 완료');
-}
-
-// 🆕 9. 스크롤 안내 표시판 설정 함수 (여기에 추가!)
-function setupScrollIndicator() {
-    console.log('📍 스크롤 안내 표시판 설정 중...');
-    
-    const scrollIndicator = document.querySelector('.scroll-indicator');
-    const heroSection = document.querySelector('.hero');
-    
-    if (!scrollIndicator || !heroSection) {
-        console.log('스크롤 안내 표시판 요소 없음');
-        return;
-    }
-    
-    // 클릭시 About 섹션으로 스크롤
-    scrollIndicator.addEventListener('click', function() {
-        const aboutSection = document.getElementById('about');
-        if (aboutSection) {
-            scrollToTarget('about');
-            console.log('스크롤 안내 클릭 - About 섹션으로 이동');
-        }
-    });
-    
-    // 스크롤에 따른 표시판 숨김/표시
-    let lastScrollY = 0;
-    let ticking = false;
-    
-    function updateScrollIndicator() {
-        const scrollY = window.pageYOffset;
-        const heroHeight = heroSection.offsetHeight;
-        const scrollProgress = scrollY / (heroHeight * 0.3); // 히어로의 30% 지점에서 시작
-        
-        if (scrollProgress > 1) {
-            // 완전히 숨김
-            scrollIndicator.classList.add('hide');
-        } else if (scrollProgress > 0.5) {
-            // 페이드 아웃 시작
-            const opacity = 1 - ((scrollProgress - 0.5) * 2);
-            scrollIndicator.style.opacity = Math.max(0, opacity);
-            scrollIndicator.style.transform = `translateX(-50%) translateY(${scrollProgress * 20}px)`;
-        } else {
-            // 완전히 표시
-            scrollIndicator.classList.remove('hide');
-            scrollIndicator.style.opacity = '';
-            scrollIndicator.style.transform = '';
-        }
-        
-        lastScrollY = scrollY;
-        ticking = false;
-    }
-    
-    function requestScrollUpdate() {
-        if (!ticking) {
-            requestAnimationFrame(updateScrollIndicator);
-            ticking = true;
-        }
-    }
-    
-    // 스크롤 이벤트 리스너 (쓰로틀링 적용)
-    window.addEventListener('scroll', requestScrollUpdate, { passive: true });
-    
-    // 히어로 섹션 높이 변경시 재계산
-    if (window.ResizeObserver) {
-        const resizeObserver = new ResizeObserver(requestScrollUpdate);
-        resizeObserver.observe(heroSection);
-    }
-    
-    console.log('✅ 스크롤 안내 표시판 설정 완료');
-}
-
-function safeInit() {
-    if (isInitialized) return;
-    
-    console.log('안전한 초기화 시작...');
-    
-    // DOM 요소들이 존재하는지 확인
-    const navLinks = document.querySelectorAll('header nav ul li a');
-    console.log('네비게이션 링크 개수:', navLinks.length);
-    
-    if (navLinks.length === 0) {
-        console.log('네비게이션 링크를 찾을 수 없음. 1초 후 재시도...');
-        setTimeout(safeInit, 1000);
-        return;
-    }
-    
-    // 모든 기능 초기화
-    try {
-        setupSimpleNavigation();
-        setupMobileMenu();
-        setupHeaderScroll();
-        setupPortfolioFilter();
-        setupVideoModal();
-        renderPressBoard();
-        setupResizeHandler();
-        setupScrollIndicator(); // 🆕 이 줄 추가!
-        
-        isInitialized = true;
-        console.log('✅ 모든 기능 초기화 완료');
-    } catch (error) {
-        console.error('초기화 중 오류:', error);
-        // 3초 후 재시도
-        setTimeout(() => {
-            isInitialized = false;
-            safeInit();
-        }, 3000);
-    }
-}
-
-// 나머지 코드는 그대로 유지...
-
-
-    
-    // 프레스 데이터
     const articles = [
         {
             date: "2025-05-28",
@@ -475,10 +271,9 @@ function safeInit() {
             summary: "'2023 서울권 1인 창조기업 성과발표회, 케이프스플래닛 창업진흥원장 표창"
         }
     ];
-    
-    // 기사 목록 생성
-    board.innerHTML = ''; // 기존 내용 초기화
-    
+
+    board.innerHTML = '';
+
     articles.forEach(article => {
         const li = document.createElement('li');
         li.className = 'headline-row';
@@ -494,24 +289,85 @@ function safeInit() {
         `;
         board.appendChild(li);
     });
-    
+
     console.log('✅ 프레스 게시판 렌더링 완료');
 }
-window.addEventListener("DOMContentLoaded", function() {
+
+// 9. 스크롤 안내 표시판 설정
+function setupScrollIndicator() {
+    console.log('📍 스크롤 안내 표시판 설정 중...');
+
+    const scrollIndicator = document.querySelector('.scroll-indicator');
+    const heroSection = document.querySelector('.hero');
+
+    if (!scrollIndicator || !heroSection) {
+        console.log('스크롤 안내 표시판 요소 없음');
+        return;
+    }
+
+    // 클릭시 About 섹션으로 스크롤
+    scrollIndicator.addEventListener('click', function() {
+        const aboutSection = document.getElementById('about');
+        if (aboutSection) {
+            scrollToTarget('about');
+            console.log('스크롤 안내 클릭 - About 섹션으로 이동');
+        }
+    });
+
+    // 스크롤에 따른 표시판 숨김/표시
+    let ticking = false;
+
+    function updateScrollIndicator() {
+        const scrollY = window.pageYOffset;
+        const heroHeight = heroSection.offsetHeight;
+        const scrollProgress = scrollY / (heroHeight * 0.3);
+
+        if (scrollProgress > 1) {
+            scrollIndicator.classList.add('hide');
+        } else if (scrollProgress > 0.5) {
+            const opacity = 1 - ((scrollProgress - 0.5) * 2);
+            scrollIndicator.style.opacity = Math.max(0, opacity);
+            scrollIndicator.style.transform = `translateX(-50%) translateY(${scrollProgress * 20}px)`;
+        } else {
+            scrollIndicator.classList.remove('hide');
+            scrollIndicator.style.opacity = '';
+            scrollIndicator.style.transform = '';
+        }
+
+        ticking = false;
+    }
+
+    function requestScrollUpdate() {
+        if (!ticking) {
+            requestAnimationFrame(updateScrollIndicator);
+            ticking = true;
+        }
+    }
+
+    window.addEventListener('scroll', requestScrollUpdate, { passive: true });
+
+    if (window.ResizeObserver) {
+        const resizeObserver = new ResizeObserver(requestScrollUpdate);
+        resizeObserver.observe(heroSection);
+    }
+
+    // 3초 후 스크롤 인디케이터 표시
     setTimeout(function() {
-        document.querySelector(".scroll-indicator")?.classList.remove("hide");
-    }, 3000); // 10초(10000ms) 후 나타남
-});
-// 9. 리사이즈 핸들러
+        scrollIndicator.classList.remove('hide');
+    }, 3000);
+
+    console.log('✅ 스크롤 안내 표시판 설정 완료');
+}
+
+// 10. 리사이즈 핸들러
 function setupResizeHandler() {
     console.log('📏 리사이즈 핸들러 설정 중...');
-    
+
     let resizeTimer;
-    
+
     window.addEventListener('resize', function() {
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(function() {
-            // 모바일 메뉴가 열려있으면 닫기
             if (window.innerWidth > 768) {
                 closeMobileMenu();
             }
@@ -519,8 +375,43 @@ function setupResizeHandler() {
     }, { passive: true });
 }
 
+// 안전한 초기화 함수
+function safeInit() {
+    if (isInitialized) return;
+
+    console.log('안전한 초기화 시작...');
+
+    const navLinks = document.querySelectorAll('header nav ul li a');
+    console.log('네비게이션 링크 개수:', navLinks.length);
+
+    if (navLinks.length === 0) {
+        console.log('네비게이션 링크를 찾을 수 없음. 1초 후 재시도...');
+        setTimeout(safeInit, 1000);
+        return;
+    }
+
+    try {
+        setupSimpleNavigation();
+        setupMobileMenu();
+        setupHeaderScroll();
+        setupPortfolioFilter();
+        setupVideoModal();
+        renderPressBoard();
+        setupResizeHandler();
+        setupScrollIndicator();
+
+        isInitialized = true;
+        console.log('✅ 모든 기능 초기화 완료');
+    } catch (error) {
+        console.error('초기화 중 오류:', error);
+        setTimeout(() => {
+            isInitialized = false;
+            safeInit();
+        }, 3000);
+    }
+}
+
 // 초기화 실행
-// 다양한 시점에서 초기화 시도
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', safeInit);
 } else {

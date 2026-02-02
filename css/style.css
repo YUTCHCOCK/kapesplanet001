@@ -295,16 +295,13 @@ nav ul li a.active {
 }
 
 .scroll-indicator {
-    z-index: 10; /* 가장 높은 z-index로 설정 */
-    opacity: 1; /* 기본적으로 보이도록 */
-    position: absolute; /* 히어로 섹션 기준 */
-    bottom: 80px; 
-    left: 50%; /* 중앙 정렬 */
+    z-index: 10;
+    opacity: 1;
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
     transform: translateX(-50%);
-    position: absolute; /* 히어로 섹션 기준 */
-    bottom: 40px; /* 하단에서 40px */
-    left: 50%; /* 중앙 정렬 */
-    transform: translateX(-50%);
+    cursor: pointer;
 }
     
 .scroll-indicator.hide {
