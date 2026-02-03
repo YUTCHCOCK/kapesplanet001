@@ -213,6 +213,13 @@ function renderPressBoard() {
 
     const articles = [
         {
+            date: "2025-10-24",
+            media: "한국경제",
+            title: "'음악의 신' 돌아오나? 가수 이상민, K팝 혼성그룹 제작한다",
+            url: "https://www.hankyung.com/article/2025102411467",
+            summary: "룰라 출신 이상민, 20년 만에 프로듀서 복귀. 유튜브 예능 '프로듀서 이상민'으로 K팝 혼성그룹 제작. 케이프스플래닛 공동제작"
+        },
+        {
             date: "2025-05-28",
             media: "스포츠서울",
             title: "케이프스플래닛 '시크릿 아이돌' 원안자 + 공동제작자로 밝혀져",
