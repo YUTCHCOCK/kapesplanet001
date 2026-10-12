@@ -1,452 +1,324 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-17680231330"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'AW-17680231330');
-</script>
-
-    <!-- 성능 최적화 메타태그 -->
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FF5A00">
-    
-    <!-- CSP 정책 수정 (더 관대한 설정) -->
-    <meta http-equiv="Content-Security-Policy" content="
-        default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob:;
-        script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://www.youtube.com;
-        style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com;
-        img-src 'self' data: blob: https:;
-        frame-src 'self' https://www.youtube.com;
-        connect-src 'self' https:;
-        font-src 'self' https://cdnjs.cloudflare.com;
-    ">
-    
-    <!-- 프리로드 최적화 -->
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-    <link rel="preconnect" href="https://www.youtube.com">
-    <link rel="dns-prefetch" href="//www.googletagmanager.com">
-    
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SPSZWEVBWW"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-SPSZWEVBWW');
-    </script>
-    
+    <title>KapesPlanet - 원숭이행성</title>
+    <meta name="description" content="매일 진화하는 크리에이터 월드 원숭이행성. 영화부터 유튜브, 오디션부터 숏폼까지 — 케이프스플래닛 콘텐츠 프로덕션.">
+    <meta property="og:title" content="KapesPlanet - 원숭이행성">
+    <meta property="og:description" content="매일 진화하는 크리에이터 월드 원숭이행성">
+    <meta property="og:image" content="https://kapesplanet.com/img/kapes_logo_full.png">
+    <meta property="og:url" content="https://kapesplanet.com/">
+
     <!-- 파비콘 -->
-    <link rel="icon" href="img/favicon/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="img/favicon/favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon.png">
     <link rel="manifest" href="img/favicon/site.webmanifest">
-    
-    <title>KapesPlanet - 원숭이행성</title>
-    
-    <!-- Font Awesome - 즉시 로딩으로 변경 -->
+
+    <!-- 글꼴 · 아이콘 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- CSS -->
     <link rel="stylesheet" href="css/style.css">
+
+    <!-- Google 태그 (Analytics + Ads) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SPSZWEVBWW"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-SPSZWEVBWW');
+        gtag('config', 'AW-17680231330');
+    </script>
 </head>
-    
-   <body>
-    <!-- 헤더 -->
-    <header>
-        <div class="header-logo">
-            <img src="img/kapes_logo_circle_negative.png" alt="KAPES PLANET 원형 반전 로고" loading="eager">
-            <span>KAPES PLANET</span>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="#hero" class="active">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#work">Work</a></li>
-                <li><a href="#press">Press</a></li>
-                <li><a href="#creator">Creator</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-        <div class="mobile-menu-btn">
-            <i class="fas fa-bars"></i>
-        </div>
-    </header>
-    <!-- 히어로 섹션 -->
-    <section class="hero" id="hero">
-      <iframe 
-          src="https://www.youtube.com/embed/WDyN1_9HNto?autoplay=1&mute=1&controls=0&showinfo=0&loop=1&playlist=WDyN1_9HNto&modestbranding=1"
-          title="KAPES PLANET 메인 영상"
-          style="position:absolute; top:0; left:0; width:100%; height:100%; z-index:1; pointer-events:none; border:0;"
-          frameborder="0"
-          allow="autoplay; encrypted-media"
-          allowfullscreen>
-      </iframe> 
-        <div class="hero-mask hero-mask-top"></div>
-        <div class="hero-mask hero-mask-bottom"></div>
-        <div class="hero-overlay">
-            <div class="hero-tagline">매일 진화하는 크리에이터 월드</div>
-            <div class="hero-title">원숭이행성</div>
-        </div>
-          <!-- 스크롤 안내 표시판 -->
-        <div class="scroll-indicator">
-            <div class="scroll-icon">
-                <div class="scroll-chevrons">
-                    <div class="scroll-text">SCROLL</div>
-                    <div class="chevron chevron-1">∨</div>
-                    <div class="chevron chevron-2">∨</div>
+<body>
+
+<!-- ===== 헤더 ===== -->
+<header id="header">
+    <a href="#hero" class="header-logo">
+        <img src="img/kapes_logo_circle_negative.png" alt="KAPES PLANET 로고">
+        <span>KAPES PLANET</span>
+    </a>
+    <nav id="nav">
+        <a href="#hero">Home</a>
+        <a href="#about">About</a>
+        <a href="#work">Work</a>
+        <a href="#press">Press</a>
+        <a href="#creator">Creator</a>
+        <a href="#contact">Contact</a>
+    </nav>
+    <button class="menu-btn" id="menuBtn" aria-label="메뉴 열기">
+        <span></span><span></span><span></span>
+    </button>
+</header>
+
+<!-- ===== 히어로 ===== -->
+<section class="hero" id="hero">
+    <iframe class="hero-video"
+        src="https://www.youtube.com/embed/WDyN1_9HNto?autoplay=1&mute=1&controls=0&loop=1&playlist=WDyN1_9HNto&playsinline=1&modestbranding=1&rel=0"
+        title="KAPES PLANET 메인 영상" allow="autoplay; encrypted-media" tabindex="-1"></iframe>
+    <div class="hero-shade"></div>
+    <div class="hero-text">
+        <p class="hero-tagline">매일 진화하는 크리에이터 월드</p>
+        <h1 class="hero-title">원숭이행성</h1>
+    </div>
+    <a href="#about" class="scroll-indicator">
+        <span>SCROLL</span>
+        <i>∨</i>
+    </a>
+</section>
+
+<!-- ===== About ===== -->
+<section class="section" id="about">
+    <div class="section-header">
+        <h2 class="section-title">About</h2>
+        <p class="section-subtitle">매일 진화하는 크리에이터 월드 원숭이행성</p>
+    </div>
+    <div class="about-content">
+        <h3 class="about-title">새로운 IP가 탄생하는 곳</h3>
+        <p class="about-description">
+            2023년 8월, 혜성같이 등장한 원숭이행성은<br>
+            CJ ENM, dingo, hello82의 유일한(유치콕) 대표와<br>
+            스타 크리에이터들이 함께하는 영상 프로덕션입니다.<br>
+            영화부터 유튜브까지, 오디션부터 숏폼까지<br>
+            K-콘텐츠의 글로벌 침공에 함께하겠습니다.
+        </p>
+        <div class="about-stats">
+            <div class="stat">
+                <strong>AI POWERED</strong>
+                <span>AI로 빠르고 효율적인 창작</span>
+            </div>
+            <div class="stat">
+                <strong>TOP CREATOR</strong>
+                <span>검증된 실력의 작가, PD</span>
+            </div>
+            <div class="stat">
+                <strong>MIX &amp; MATCH</strong>
+                <span>숏폼부터 OTT까지 유연한 확장성</span>
             </div>
         </div>
     </div>
-        <!-- monkey 텍스트 로고 워터마크 -->
-        <img class="monkey-watermark" src="img/monkey_text_logo.png" alt="Monkey Text Logo Watermark">
-    </section>
+    <img class="watermark" src="img/monkey_text_logo.png" alt="" loading="lazy">
+</section>
 
-    <!-- About 섹션 -->
-    <section class="section about" id="about">
-        <div class="section-header">
-            <div class="section-title">About</div>
-            <div class="section-subtitle">매일 진화하는 크리에이터 월드 원숭이행성</div>
-        </div>
-        <div class="about-content">
-            <div class="about-text">
-                <div class="about-title">새로운 IP가 탄생하는 곳</div>
-                <div class="about-description">
-                    2023년 8월, 혜성같이 등장한 원숭이행성은<br>
-                    CJ ENM, dingo, hello82의 유일한(유치콕)대표와<br>
-                    스타 크리에이터들이 함께하는 영상 프로덕션입니다<br>
-                    영화부터 유튜브까지, 오디션부터 숏폼까지  <br>
-                    K-콘텐츠의 글로벌 침공에 함께하겠습니다. 
-                  <br>
-                </div>              
-                <div class="about-stats">
-                    <div class="stat-item">
-                        <div class="stat-value">AI POWERED</div>
-                        <div class="stat-label">AI로 빠르고 효율적인 창작</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value">TOP CREATOR</div>
-                        <div class="stat-label">검증된 실력의 작가, PD</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value">MIX & MATCH</div>
-                        <div class="stat-label">숏폼부터 OTT까지 유연한 확장성</div>
-                    </div>
-                </div>
-        </div>
-        </div>
-        <!-- monkey 텍스트 로고 워터마크 -->
-        <img class="monkey-watermark" src="img/monkey_text_logo.png" alt="Monkey Text Logo Watermark" loading="lazy">
-    </section>
+<!-- ===== Work =====
+     영상 추가 방법: 아래 <button class="video-card"> 한 덩어리를 복사해서
+     data-id 에 유튜브 영상 ID(주소 맨 끝 11자리)를 넣고,
+     data-category 는 film / branded / youtube 중 하나로 적으면 됩니다. -->
+<section class="section section-alt" id="work">
+    <div class="section-header">
+        <h2 class="section-title">Work</h2>
+        <p class="section-subtitle">원숭이행성이 제작한 콘텐츠를 감상하세요</p>
+    </div>
+    <div class="work-filter">
+        <button class="filter-btn active" data-filter="all">전체</button>
+        <button class="filter-btn" data-filter="film">디지털 필름</button>
+        <button class="filter-btn" data-filter="branded">브랜디드</button>
+        <button class="filter-btn" data-filter="youtube">유튜브 채널</button>
+    </div>
+    <div class="work-grid">
+        <button class="video-card" data-id="MVwP884gAtQ" data-category="film">
+            <span class="video-label"><b>디지털 필름</b><small>Digital Film</small></span>
+        </button>
+        <button class="video-card" data-id="pqDtXGHiqEE" data-category="film">
+            <span class="video-label"><b>디지털 필름</b><small>Digital Film</small></span>
+        </button>
+        <button class="video-card" data-id="-ZQ2FUDAZe0" data-category="branded">
+            <span class="video-label"><b>웹예능</b><small>Branded</small></span>
+        </button>
+        <button class="video-card" data-id="ReKv0Yf5v-g" data-category="branded">
+            <span class="video-label"><b>웹예능</b><small>Branded</small></span>
+        </button>
+        <button class="video-card" data-id="UGfz4VKEd9U" data-category="youtube">
+            <span class="video-label"><b>유튜브 채널</b><small>YouTube</small></span>
+        </button>
+        <button class="video-card" data-id="1yNyfxqeG9Q" data-category="youtube">
+            <span class="video-label"><b>유튜브 채널</b><small>YouTube</small></span>
+        </button>
+    </div>
+    <img class="watermark" src="img/monkey_text_logo.png" alt="" loading="lazy">
+</section>
 
-    <!-- work 섹션 -->
-    <section class="section work" id="work">
-        <div class="section-header">
-            <div class="section-title">Work</div>
-            <div class="section-subtitle">원숭이행성이 제작한 콘텐츠를 감상하세요</div>
-        </div>
-        <div class="work-filter">
-            <button class="filter-btn active" data-filter="all">전체</button>
-            <button class="filter-btn" data-filter="Digital Film">디지털 필름</button>
-            <button class="filter-btn" data-filter="Short Form">브랜디드</button>
-            <button class="filter-btn" data-filter="Youtube">유튜브 채널</button>
-        </div>
-        <div class="work-grid">
-            <div class="work-item" data-category="Digital Film">
-                <div class="work-thumbnail">
-                    <iframe 
-                        src="https://www.youtube.com/embed/MVwP884gAtQ?si"
-                        frameborder="0"
-                        allow="autoplay; encrypted-media"
-                        allowfullscreen>
-                    </iframe>
-                </div>
-                    <div class="work-overlay">
-                    <div class="work-title">디지털 필름</div>
-                    <div class="work-category">Digital Film</div>
-                </div>
-            </div>
-            <div class="work-item" data-category="Digital Film">
-                <div class="work-thumbnail">
-                    <iframe 
-                        src="https://www.youtube.com/embed/pqDtXGHiqEE"
-                        frameborder="0"
-                        allow="autoplay; encrypted-media"
-                        allowfullscreen>
-                    </iframe>
-                </div>
-                <div class="work-overlay">
-                    <div class="work-title">디지털 필름</div>
-                    <div class="work-category">Digital Film</div>
-                </div>
-            </div>
-            <div class="work-item" data-category="Short Form">
-                <div class="work-thumbnail">
-                    <iframe 
-                        src="https://www.youtube.com/embed/-ZQ2FUDAZe0"
-                        frameborder="0"
-                        allow="autoplay; encrypted-media"
-                        allowfullscreen>
-                    </iframe>
-                </div>
-                    <div class="work-overlay">
-                    <div class="work-title">웹예능</div>
-                    <div class="work-category">Short Form</div>
-                </div>
-            </div>
-            <div class="work-item" data-category="Short Form">
-                <div class="work-thumbnail">
-                    <iframe 
-                        src="https://www.youtube.com/embed/ReKv0Yf5v-g"
-                        frameborder="0"
-                        allow="autoplay; encrypted-media"
-                        allowfullscreen>
-                    </iframe>
-                </div>
-                <div class="work-overlay">
-                    <div class="work-title">웹예능</div>
-                    <div class="work-category">Short Form</div>
-                </div>
-            </div> 
-            <div class="work-item" data-category="Youtube">
-                <div class="work-thumbnail">
-                    <iframe 
-                        src="https://www.youtube.com/embed/UGfz4VKEd9U"
-                        frameborder="0"
-                        allow="autoplay; encrypted-media"
-                        allowfullscreen>
-                    </iframe>
-                </div> 
-                <div class="work-overlay">
-                    <div class="work-title">유튜브 채널</div>
-                    <div class="work-category">Youtube</div>
-                </div>
-            </div>    
-            <div class="work-item" data-category="Youtube">
-                <div class="work-thumbnail">
-                    <iframe 
-                        src="https://www.youtube.com/embed/1yNyfxqeG9Q"
-                        frameborder="0"
-                        allow="autoplay; encrypted-media"
-                        allowfullscreen>
-                    </iframe>
-                </div>
-                <div class="work-overlay">
-                    <div class="work-title">유튜브 채널</div>
-                    <div class="work-category">Youtube</div>
-                </div>
-            </div>
-        </div>
-        <!-- monkey 텍스트 로고 워터마크 -->
-        <img class="monkey-watermark" src="img/monkey_text_logo.png" alt="Monkey Text Logo Watermark" loading="lazy">
-    </section>
-
-<!-- 프레스 영역 -->
-<section class="section press" id="press">
+<!-- ===== Press =====
+     기사 추가 방법: <li> 한 덩어리를 복사해서 맨 위에 붙여넣고 내용만 바꾸면 됩니다. -->
+<section class="section" id="press">
     <div class="section-header">
         <h2 class="section-title">Press</h2>
-        <div class="section-subtitle">언론에 보도된 원숭이행성</div>
+        <p class="section-subtitle">언론에 보도된 원숭이행성</p>
     </div>
-        <div class="section-content">
-        <ul id="headlineBoard" class="headline-board"></ul>
-    </div>    
+    <ul class="press-list">
+        <li>
+            <time>2025-10-24</time>
+            <div>
+                <a href="https://www.hankyung.com/article/2025102411467" target="_blank" rel="noopener">'음악의 신' 돌아오나? 가수 이상민, K팝 혼성그룹 제작한다</a>
+                <p>룰라 출신 이상민, 20년 만에 프로듀서 복귀. 유튜브 예능 '프로듀서 이상민'으로 K팝 혼성그룹 제작. 케이프스플래닛 공동제작</p>
+            </div>
+            <span>한국경제</span>
+        </li>
+        <li>
+            <time>2025-05-28</time>
+            <div>
+                <a href="https://www.sportsseoul.com/news/read/1519235" target="_blank" rel="noopener">케이프스플래닛 '시크릿 아이돌' 원안자 + 공동제작자로 밝혀져</a>
+                <p>아티스트 스튜디오와 영국의 이매지너리움의 합작으로 기획개발중인 영화 '시크릿 아이돌'</p>
+            </div>
+            <span>스포츠서울</span>
+        </li>
+        <li>
+            <time>2025-05-08</time>
+            <div>
+                <a href="https://youtu.be/4D40Ldpxm5c" target="_blank" rel="noopener">숏폼에서 콘텐츠 비즈니스의 미래를 보다 | 케이프스플래닛 유일한 대표</a>
+                <p>유일한 대표 인터뷰 영상. 한국콘텐츠진흥원 발간 웹진 방송영상 OTT트렌드 2025 Vol.1</p>
+            </div>
+            <span>한국콘텐츠진흥원</span>
+        </li>
+        <li>
+            <time>2025-05-07</time>
+            <div>
+                <a href="https://www.kocca.kr/trendott/vol01/people_1.html" target="_blank" rel="noopener">KOCCA 트렌드 - 인물 인터뷰 케이프스플래닛 유일한 대표</a>
+                <p>숏폼의 시작과 변천사 / 글로벌 숏폼드라마 플랫폼은 미래? / 숏폼 IP 비즈니스의 전망</p>
+            </div>
+            <span>한국콘텐츠진흥원</span>
+        </li>
+        <li>
+            <time>2024-08-23</time>
+            <div>
+                <a href="https://sports.khan.co.kr/article/202408230804003" target="_blank" rel="noopener">'시방솔비' 솔비의 좌충우돌 B급 MC 성장기</a>
+                <p>김구라, 김종민, 퀸가비 등 초특급 게스트로 연일 화제몰이중인 유튜브 채널 시방솔비</p>
+            </div>
+            <span>스포츠경향</span>
+        </li>
+        <li>
+            <time>2023-11-29</time>
+            <div>
+                <a href="https://www.kocca.kr/n_content/vol30/sub02.html" target="_blank" rel="noopener">KOCCA 콘텐츠 뉴스 - 바야흐로 숏숏폼 시대</a>
+                <p>'틱톡'의 등장과 함께 바야흐로 '숏숏폼(1분 이하의 콘텐츠)' 전성시대가 열렸다.</p>
+            </div>
+            <span>한국콘텐츠진흥원</span>
+        </li>
+        <li>
+            <time>2023-11-08</time>
+            <div>
+                <a href="https://www.donga.com/news/article/all/20231108/122080292/1" target="_blank" rel="noopener">23년 서울 1인 창조기업 - 케이프스플래닛 창업진흥원장 표창</a>
+                <p>2023 서울권 1인 창조기업 성과발표회, 케이프스플래닛 창업진흥원장 표창</p>
+            </div>
+            <span>동아일보</span>
+        </li>
+    </ul>
 </section>
 
-<!-- Creator 섹션 (기존 People 섹션 대체) -->
-<section class="section creator" id="creator">
+<!-- ===== Creator ===== -->
+<section class="section section-alt" id="creator">
     <div class="section-header">
-        <div class="section-title">Creator</div>
-        <div class="section-subtitle">원숭이행성 크리에이터 소개</div>
+        <h2 class="section-title">Creator</h2>
+        <p class="section-subtitle">원숭이행성 크리에이터 소개</p>
     </div>
-    
     <div class="creator-content">
-        <div class="creator-photo-section">
-            <div class="creator-photo">
-                <img src="img/ceo.png" alt="유일한 CEO" loading="lazy">
-            </div>
-            <div class="creator-role">
-                <p class="role-title">FOUNDER & CEO</p>
-                <p class="role-name">유일한</p>
-            </div>
+        <div class="creator-profile">
+            <img src="img/ceo.png" alt="유일한 대표" loading="lazy">
+            <p class="role-title">FOUNDER &amp; CEO</p>
+            <p class="role-name">유일한</p>
         </div>
-        
-        <div class="creator-info-section">
-            <div class="career-timeline">
-                <div class="career-period">
-                    <div class="career-header">
-                        <span class="career-years">2023~ 현재</span>
-                        <span class="career-company">케이프스플래닛 (원숭이행성)</span>
-                        <span class="career-position">대표</span>
-                    </div>
-                    <div class="career-works">
-                        <div class="work-category">
-                            <span class="work-channel">OTT 드라마</span>
-                            <span class="work-title">시크릿 아이돌(가제), 모닝라이딩클럽(가제) 등 기획 중</span>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="career-period">
-                    <div class="career-header">
-                        <span class="career-years">2018~2023</span>
-                        <span class="career-company">카이미디어 hello82</span>
-                        <span class="career-position">설립 멤버 / 제작 이사</span>
-                    </div>
-                    <div class="career-works">
-                        <div class="work-category">
-                            <span class="work-channel">카카오TV</span>
-                            <span class="work-title">이효리의 페이스아이디, 야인이즈백</span>
-                        </div>
-                        <div class="work-category">
-                            <span class="work-channel">Facebook</span>
-                            <span class="work-title">Ateez's 82 Challenge (US Original Series)</span>
-                        </div>
-                    </div>
+        <div class="timeline">
+            <div class="career">
+                <div class="career-head">
+                    <span class="years">2023 ~ 현재</span>
+                    <strong>케이프스플래닛 (원숭이행성)</strong>
+                    <em>대표</em>
                 </div>
-
-                <div class="career-period">
-                    <div class="career-header">
-                        <span class="career-years">2015~2018</span>
-                        <span class="career-company">메이크어스 dingo</span>
-                        <span class="career-position">론칭 멤버 / 책임 프로듀서</span>
-                    </div>
-                    <div class="career-works">
-                        <div class="work-category">
-                            <span class="work-channel">웹드라마</span>
-                            <span class="work-title">썸남 (최우식, 장기용 주연) - 2017 서울 웹페스트 베스트 코미디 수상</span>
-                        </div>
-                        <div class="work-category">
-                            <span class="work-channel">웹예능</span>
-                            <span class="work-title">수고했어 오늘도, 세상의 온도, 썰스데이 등</span>
-                        </div>
-                        <div class="work-category">
-                            <span class="work-channel">Youtube</span>
-                            <span class="work-title">dingo STORY, dingo MOVIE, dingo HEALTH, 스낵비디오 등</span>
-                        </div>
-                    </div>
+                <dl>
+                    <dt>OTT 드라마</dt><dd>시크릿 아이돌(가제), 모닝라이딩클럽(가제) 등 기획 중</dd>
+                </dl>
+            </div>
+            <div class="career">
+                <div class="career-head">
+                    <span class="years">2018 ~ 2023</span>
+                    <strong>카이미디어 hello82</strong>
+                    <em>설립 멤버 / 제작 이사</em>
                 </div>
-
-                <div class="career-period">
-                    <div class="career-header">
-                        <span class="career-years">2006~2015</span>
-                        <span class="career-company">CJ ENM Mnet</span>
-                        <span class="career-position">PD</span>
-                    </div>
-                    <div class="career-works">
-                        <div class="work-category">
-                            <span class="work-channel">Mnet</span>
-                            <span class="work-title">쇼미더머니4, 슈퍼스타K3, MAMA, 노머시(몬스타엑스 데뷔 서바이벌),<br> 비틀즈코드2, 유세윤의 아트비디오, UV신드롬 등</span>
-                        </div>
-                        <div class="work-category">
-                            <span class="work-channel">뮤직비디오</span>
-                            <span class="work-title">이태원프리덤 feat. JYP, 쿨하지 못해 미안해 - UV</span>
-                        </div>
-                    </div>
+                <dl>
+                    <dt>카카오TV</dt><dd>이효리의 페이스아이디, 야인이즈백</dd>
+                    <dt>Facebook</dt><dd>Ateez's 82 Challenge (US Original Series)</dd>
+                </dl>
+            </div>
+            <div class="career">
+                <div class="career-head">
+                    <span class="years">2015 ~ 2018</span>
+                    <strong>메이크어스 dingo</strong>
+                    <em>론칭 멤버 / 책임 프로듀서</em>
                 </div>
+                <dl>
+                    <dt>웹드라마</dt><dd>썸남 (최우식, 장기용 주연) - 2017 서울 웹페스트 베스트 코미디 수상</dd>
+                    <dt>웹예능</dt><dd>수고했어 오늘도, 세상의 온도, 썰스데이 등</dd>
+                    <dt>YouTube</dt><dd>dingo STORY, dingo MOVIE, dingo HEALTH, 스낵비디오 등</dd>
+                </dl>
+            </div>
+            <div class="career">
+                <div class="career-head">
+                    <span class="years">2006 ~ 2015</span>
+                    <strong>CJ ENM Mnet</strong>
+                    <em>PD</em>
+                </div>
+                <dl>
+                    <dt>Mnet</dt><dd>쇼미더머니4, 슈퍼스타K3, MAMA, 노머시(몬스타엑스 데뷔 서바이벌), 비틀즈코드2, 유세윤의 아트비디오, UV신드롬 등</dd>
+                    <dt>뮤직비디오</dt><dd>이태원프리덤 feat. JYP, 쿨하지 못해 미안해 - UV</dd>
+                </dl>
             </div>
         </div>
     </div>
-    <img class="monkey-watermark" src="img/monkey_text_logo.png" alt="Monkey Text Logo Watermark" loading="lazy">
+    <img class="watermark" src="img/monkey_text_logo.png" alt="" loading="lazy">
 </section>
 
-    <!-- Contact 섹션 -->
-    <section class="section contact" id="contact">
-        <div class="section-header">
-            <div class="section-title">Contact</div>
-            <div class="section-subtitle">
-                원숭이행성과 함께 콘텐츠를 만드세요 <br>
-                기획, 섭외, 제작, 바이럴까지 모든 업무가 가능합니다. 
-            </div>
-        </div>
-        <div class="contact-content">
-            <div class="contact-info">
-                <ul class="contact-list">
-                    <li class="contact-item">
-                        <span class="contact-icon"><i class="fas fa-envelope"></i></span>
-                        <span class="contact-text">
-                            <div class="contact-label">Email</div>
-                            <div class="contact-value">
-                                <a href="mailto:official@kapesplanet.com">official@kapesplanet.com</a>
-                            </div>
-                        </span>
-                    </li>
-                    <li class="contact-item">
-                        <span class="contact-icon"><i class="fab fa-youtube"></i></span>
-                        <span class="contact-text">
-                            <div class="contact-label">Youtube 프로듀서 이상민 </div>
-                            <div class="contact-value">
-                                <a href="https://www.youtube.com/@kapes_planet" target="_blank" rel="noopener">youtube.com/@kapes_planet</a>
-                            </div>
-                        </span>
-                    </li>
-                    <li class="contact-item">
-                        <span class="contact-icon"><i class="fab fa-youtube"></i></span>
-                        <span class="contact-text">
-                            <div class="contact-label">Youtube 원숭이행성 </div>
-                            <div class="contact-value">
-                                <a href="https://www.youtube.com/@tlqkdSOLBI" target="_blank" rel="noopener">youtube.com/@tlqkdsolbi</a>
-                            </div>
-                        </span>
-                    </li>
-                    <li class="contact-item">
-                        <span class="contact-icon"><i class="fab fa-instagram"></i></span>
-                        <span class="contact-text">
-                            <div class="contact-label">Instagram</div>
-                            <div class="contact-value">
-                                <a href="https://instagram.com/kapesplanet" target="_blank" rel="noopener">instagram.com/kapesplanet</a>
-                            </div>
-                        </span>
-                    </li>
-                    <li class="contact-item">
-                        <span class="contact-icon"><i class="fas fa-map-marker-alt"></i></span>
-                        <span class="contact-text">
-                            <div class="contact-label">Address</div>
-                            <div class="contact-value">서울특별시 마포구 월드컵북로 402, KGIT빌딩 1601-1호</div>
-                        </span>
-                    </li>
-              </ul>
-          </div>
-          <div class="contact-logo">
-             <img src="img/kapes_logo_full.png" alt="KAPES PLANET 로고" loading="lazy">
-        </div>
+<!-- ===== Contact ===== -->
+<section class="section" id="contact">
+    <div class="section-header">
+        <h2 class="section-title">Contact</h2>
+        <p class="section-subtitle">원숭이행성과 함께 콘텐츠를 만드세요<br>기획, 섭외, 제작, 바이럴까지 모든 업무가 가능합니다.</p>
     </div>
-        <!-- monkey 텍스트 로고 워터마크 -->
-        <img class="monkey-watermark" src="img/monkey_text_logo.png" alt="Monkey Text Logo Watermark" loading="lazy">
-    </section>
+    <div class="contact-content">
+        <ul class="contact-list">
+            <li>
+                <i class="fas fa-envelope"></i>
+                <div><b>Email</b><a href="mailto:official@kapesplanet.com">official@kapesplanet.com</a></div>
+            </li>
+            <li>
+                <i class="fab fa-youtube"></i>
+                <div><b>YouTube 프로듀서 이상민</b><a href="https://www.youtube.com/@kapes_planet" target="_blank" rel="noopener">youtube.com/@kapes_planet</a></div>
+            </li>
+            <li>
+                <i class="fab fa-youtube"></i>
+                <div><b>YouTube 원숭이행성</b><a href="https://www.youtube.com/@tlqkdSOLBI" target="_blank" rel="noopener">youtube.com/@tlqkdsolbi</a></div>
+            </li>
+            <li>
+                <i class="fab fa-instagram"></i>
+                <div><b>Instagram</b><a href="https://instagram.com/kapesplanet" target="_blank" rel="noopener">instagram.com/kapesplanet</a></div>
+            </li>
+            <li>
+                <i class="fas fa-map-marker-alt"></i>
+                <div><b>Address</b><span>서울특별시 마포구 월드컵북로 402, KGIT빌딩 1601-1호</span></div>
+            </li>
+        </ul>
+        <img class="contact-logo" src="img/kapes_logo_full.png" alt="KAPES PLANET 로고" loading="lazy">
+    </div>
+    <img class="watermark" src="img/monkey_text_logo.png" alt="" loading="lazy">
+</section>
 
-    <!-- 푸터 -->
+<!-- ===== 푸터 ===== -->
 <footer>
-    <div class="footer-bottom">
-        <div class="company-info">
-            상호명: 케이프스플래닛 | 대표: 유일한 | 사업자등록번호: 160-81-02764<br>
-            주소: 서울특별시 마포구 월드컵북로 402, KGIT빌딩 1601-1호 <br>
-            이메일: <a href="mailto:official@kapesplanet.com">official@kapesplanet.com</a>
-        </div>
-        <span>© 2025 KAPES PLANET. All rights reserved.</span>
-        <span style="margin-left: 1em;">
-            <a href="#" class="bottom-link">Privacy Policy</a>
-            <a href="#" class="bottom-link">Terms of Service</a>
-        </span>
-    </div>
+    <p>상호명: 케이프스플래닛 | 대표: 유일한 | 사업자등록번호: 160-81-02764</p>
+    <p>주소: 서울특별시 마포구 월드컵북로 402, KGIT빌딩 1601-1호 | 이메일: <a href="mailto:official@kapesplanet.com">official@kapesplanet.com</a></p>
+    <p class="copyright">© <span id="year">2026</span> KAPES PLANET. All rights reserved.</p>
 </footer>
 
-<!-- 비디오 모달 -->
-<div id="video-modal" class="video-modal" style="display:none;">
-    <div class="modal-content">
-        <span class="close-button" aria-label="비디오 닫기">&times;</span>
-        <iframe id="modal-iframe" src="" frameborder="0" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+<!-- ===== 영상 팝업 ===== -->
+<div class="video-modal" id="videoModal" hidden>
+    <div class="modal-box">
+        <button class="modal-close" id="modalClose" aria-label="닫기">&times;</button>
+        <iframe id="modalFrame" title="영상" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>
     </div>
 </div>
 
-<!-- 매우 간단한 스크립트 로딩 -->
 <script src="js/main.js"></script>
-
 </body>
 </html>
